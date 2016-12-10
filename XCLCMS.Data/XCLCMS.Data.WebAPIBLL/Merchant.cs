@@ -10,6 +10,8 @@ namespace XCLCMS.Data.WebAPIBLL
 {
     public class Merchant : BaseInfo
     {
+        private XCLCMS.Data.WebAPIBLL.SysRole sysRoleWebAPIBLL = null;
+        private XCLCMS.Data.WebAPIBLL.SysFunction sysFunctionWebAPIBLL = null;
         private XCLCMS.Data.BLL.View.v_Merchant vMerchantBLL = new Data.BLL.View.v_Merchant();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
@@ -18,6 +20,8 @@ namespace XCLCMS.Data.WebAPIBLL
 
         public Merchant(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
         {
+            this.sysRoleWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysRole(contextModel);
+            this.sysFunctionWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysFunction(contextModel);
         }
 
         /// <summary>
@@ -187,23 +191,26 @@ namespace XCLCMS.Data.WebAPIBLL
             //添加商户默认角色
             if (response.IsSuccess)
             {
-                XCLCMS.Lib.WebAPI.Library.SysRoleAPI_Add(request.UserToken, new Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity()
+                this.sysRoleWebAPIBLL.Add(new APIRequestEntity<WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity>()
                 {
-                    SysRole = new Data.Model.SysRole()
+                    Body = new WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity()
                     {
-                        CreaterID = base.ContextInfo.UserInfoID,
-                        CreaterName = base.ContextInfo.UserName,
-                        FK_MerchantID = request.Body.MerchantID,
-                        ParentID = sysRoleId,
-                        RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
-                        CreateTime = DateTime.Now,
-                        RoleName = XCLCMS.Data.CommonHelper.SysRoleConst.DefaultRoleName,
-                        UpdaterID = base.ContextInfo.UserInfoID,
-                        UpdaterName = base.ContextInfo.UserName,
-                        UpdateTime = DateTime.Now,
-                        SysRoleID = subSysRoleId
-                    },
-                    FunctionIdList = request.Body.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString() ? XCLCMS.Lib.Permission.PerHelper.GetNormalMerchantFunctionIDList() : null
+                        SysRole = new Data.Model.SysRole()
+                        {
+                            CreaterID = base.ContextInfo.UserInfoID,
+                            CreaterName = base.ContextInfo.UserName,
+                            FK_MerchantID = request.Body.MerchantID,
+                            ParentID = sysRoleId,
+                            RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
+                            CreateTime = DateTime.Now,
+                            RoleName = XCLCMS.Data.CommonHelper.SysRoleConst.DefaultRoleName,
+                            UpdaterID = base.ContextInfo.UserInfoID,
+                            UpdaterName = base.ContextInfo.UserName,
+                            UpdateTime = DateTime.Now,
+                            SysRoleID = subSysRoleId
+                        },
+                        FunctionIdList = request.Body.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString() ? this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList() : null
+                    }
                 });
             }
 

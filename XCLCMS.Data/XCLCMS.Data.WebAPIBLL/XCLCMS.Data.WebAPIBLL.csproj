@@ -50,8 +50,11 @@
     <Compile Include="BaseInfo.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="FriendLinks.cs" />
+    <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysFunction.cs" />
+    <Compile Include="SysRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">

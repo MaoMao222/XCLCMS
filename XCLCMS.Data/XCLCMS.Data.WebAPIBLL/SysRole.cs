@@ -8,6 +8,7 @@ namespace XCLCMS.Data.WebAPIBLL
 {
     public class SysRole : BaseInfo
     {
+        private XCLCMS.Data.WebAPIBLL.SysFunction sysFunctionWebAPIBLL = null;
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new Data.BLL.SysRole();
         private XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new Data.BLL.View.v_SysRole();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
@@ -15,6 +16,7 @@ namespace XCLCMS.Data.WebAPIBLL
 
         public SysRole(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
         {
+            this.sysFunctionWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysFunction(contextModel);
         }
 
         /// <summary>
@@ -284,7 +286,7 @@ namespace XCLCMS.Data.WebAPIBLL
             //普通商户的权限是否已越界
             if (merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
             {
-                var normalFunIds = XCLCMS.Lib.Permission.PerHelper.GetNormalMerchantFunctionIDList();
+                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList();
                 if (request.Body.FunctionIdList.IsNotNullOrEmpty())
                 {
                     if (request.Body.FunctionIdList.Exists(k => !normalFunIds.Contains(k)))
@@ -403,7 +405,7 @@ namespace XCLCMS.Data.WebAPIBLL
             //普通商户的权限是否已越界
             if (merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
             {
-                var normalFunIds = XCLCMS.Lib.Permission.PerHelper.GetNormalMerchantFunctionIDList();
+                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList();
                 if (request.Body.FunctionIdList.IsNotNullOrEmpty())
                 {
                     if (request.Body.FunctionIdList.Exists(k => !normalFunIds.Contains(k)))
