@@ -18,11 +18,12 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 3. XCLCMS.Data.DAL：数据库访问层
 4. XCLCMS.Data.Model：数据实体层
 5. XCLCMS.Data.WebAPIEntity：Web Api数据实体层
-6. XCLCMS.Document：项目文档相关
-7. XCLCMS.FileManager：文件管理与上传
-8. XCLCMS.Lib：前台业务公共处理
-9. XCLCMS.View.AdminWeb：后台管理系统web站点（项目的入口）
-10. XCLCMS.WebAPI：Web Api提供层
+6. XCLCMS.Data.WebAPIBLL：Web Api业务逻辑层
+7. XCLCMS.Document：项目文档相关
+8. XCLCMS.FileManager：文件管理与上传
+9. XCLCMS.Lib：前台业务公共处理
+10. XCLCMS.View.AdminWeb：后台管理系统web站点（项目的入口） 
+11. XCLCMS.WebAPI：Web Api对外接口层
 
 ## 基本功能
 
