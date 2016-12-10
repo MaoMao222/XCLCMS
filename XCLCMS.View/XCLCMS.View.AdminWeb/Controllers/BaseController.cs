@@ -30,7 +30,7 @@ namespace XCLCMS.View.AdminWeb.Controllers
             var allMenuList = response.Body;
             if (allMenuList.IsNotNullOrEmpty())
             {
-                mainViewModel.MenuList = allMenuList.Where(k => k.FK_FunctionID == null || XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, (XCLCMS.Lib.Permission.Function.FunctionEnum)k.FK_FunctionID)).ToList();
+                mainViewModel.MenuList = allMenuList.Where(k => k.FK_FunctionID == null || XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, (XCLCMS.Data.CommonHelper.Function.FunctionEnum)k.FK_FunctionID)).ToList();
             }
             ViewBag.MainViewModel = mainViewModel;
         }

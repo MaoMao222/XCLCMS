@@ -22,7 +22,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询标签信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.Tags>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -46,7 +46,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询标签信息分页列表
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Tags>>> PageList([FromUri] APIRequestEntity<PageListConditionEntity> request)
         {
             return await Task.Run(() =>
@@ -125,7 +125,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增标签信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Add)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.Tags> request)
         {
             return await Task.Run(() =>
@@ -185,7 +185,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改标签信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Edit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.Model.Tags> request)
         {
             return await Task.Run(() =>
@@ -262,7 +262,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除标签信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Del)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Del)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

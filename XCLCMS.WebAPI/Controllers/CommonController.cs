@@ -36,7 +36,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 垃圾数据清理
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_ClearRubbishData)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_ClearRubbishData)]
         public async Task<APIResponseEntity<bool>> ClearRubbishData([FromUri] APIRequestEntity<object> request)
         {
             return await Task.Run(() =>

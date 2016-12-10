@@ -22,7 +22,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询角色信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleView)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.SysRole>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -122,7 +122,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询所有角色列表
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleView)]
         public async Task<APIResponseEntity<List<XCLCMS.Data.Model.View.v_SysRole>>> GetList([FromUri]  APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -251,7 +251,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 添加角色
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleAdd)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
@@ -286,7 +286,7 @@ namespace XCLCMS.WebAPI.Controllers
                 //追加默认的功能权限
                 if (string.Equals(request.Body.SysRole.Code, XCLCMS.Data.CommonHelper.SysRoleConst.SysRoleCodeEnum.MerchantMainRole.ToString(), StringComparison.OrdinalIgnoreCase) || merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
                 {
-                    request.Body.FunctionIdList.AddRange(XCLCMS.Lib.Permission.PerHelper.NormalMerchantFixedFunctionIDList);
+                    request.Body.FunctionIdList.AddRange(XCLCMS.Data.CommonHelper.Function.NormalMerchantFixedFunctionIDList);
                 }
                 request.Body.FunctionIdList = request.Body.FunctionIdList.Intersect(allLeafFunctionIds).Distinct().ToList();
 
@@ -394,7 +394,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改角色
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleEdit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
@@ -447,7 +447,7 @@ namespace XCLCMS.WebAPI.Controllers
                 //追加默认的功能权限
                 if (string.Equals(request.Body.SysRole.Code, XCLCMS.Data.CommonHelper.SysRoleConst.SysRoleCodeEnum.MerchantMainRole.ToString(), StringComparison.OrdinalIgnoreCase) || merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
                 {
-                    request.Body.FunctionIdList.AddRange(XCLCMS.Lib.Permission.PerHelper.NormalMerchantFixedFunctionIDList);
+                    request.Body.FunctionIdList.AddRange(XCLCMS.Data.CommonHelper.Function.NormalMerchantFixedFunctionIDList);
                 }
                 request.Body.FunctionIdList = request.Body.FunctionIdList.Intersect(allLeafFunctionIds).ToList();
 
@@ -536,7 +536,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除角色
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleDel)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

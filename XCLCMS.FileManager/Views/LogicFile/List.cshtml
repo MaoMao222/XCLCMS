@@ -13,7 +13,7 @@
     }
 
 
-    @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileDel))
+    @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel))
     {
         <button type="button" class="btn btn-danger" id="btnBatchDel">批量删除</button>
     }
@@ -91,15 +91,15 @@
                             <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
                             <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
                             <td class="text-center">
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileView))
+                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView))
                         {
                                     <a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">详情</a>
                                 }
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileUpdate))
+                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate))
                         {
                                     <a href="@Url.Action("Update", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">修改</a>
                                 }
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileDel))
+                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel))
                         {
                                     <a href="javascript:void(0);" onclick="app.LogicFile.List.DelSubmit(@m.AttachmentID); return false;">删除</a>
                                 }

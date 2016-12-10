@@ -11,7 +11,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 磁盘文件列表页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_DiskFileView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_DiskFileView)]
         public ActionResult List()
         {
             Models.FileInfo.ListVM viewModel = this.GetFormViewModel();
@@ -49,7 +49,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 查询磁盘文件列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_DiskFileView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_DiskFileView)]
         public JsonResult GetFileList()
         {
             var viewModel = this.GetFormViewModel();
@@ -69,7 +69,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 磁盘文件删除
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_DiskFileDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_DiskFileDel)]
         public override ActionResult DelSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();

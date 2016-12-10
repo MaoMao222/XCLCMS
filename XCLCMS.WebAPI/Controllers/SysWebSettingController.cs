@@ -23,7 +23,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询系统配置信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingView)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.SysWebSetting>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -121,7 +121,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增系统配置信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.SysWebSetting> request)
         {
             return await Task.Run(() =>
@@ -190,7 +190,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改系统配置信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.Model.SysWebSetting> request)
         {
             return await Task.Run(() =>
@@ -273,7 +273,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除系统配置信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingDel)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

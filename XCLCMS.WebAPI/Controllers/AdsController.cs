@@ -26,7 +26,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询广告信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.Ads>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -51,7 +51,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询广告信息分页列表
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Ads>>> PageList([FromUri] APIRequestEntity<PageListConditionEntity> request)
         {
             return await Task.Run(() =>
@@ -89,7 +89,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增广告信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Add)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.Ads> request)
         {
             return await Task.Run(() =>
@@ -114,7 +114,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改广告信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Edit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.Model.Ads> request)
         {
             return await Task.Run(() =>
@@ -139,7 +139,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除广告信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Del)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Del)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

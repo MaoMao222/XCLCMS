@@ -11,7 +11,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Common
         /// <summary>
         /// 清理缓存
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_ClearCache)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_ClearCache)]
         public JsonResult ClearCache()
         {
             XCLCMS.Lib.Common.Comm.ClearCache();
@@ -25,7 +25,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Common
         /// <summary>
         /// 垃圾数据清理
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_ClearRubbishData)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_ClearRubbishData)]
         public JsonResult ClearRubbishData()
         {
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<object>(base.UserToken);
@@ -38,7 +38,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Common
         /// 根据文件id查询文件详情
         /// </summary>
         /// <returns></returns>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView)]
         public JsonResult GetFileInfo()
         {
             var ids = (XCLNetTools.StringHander.FormHelper.GetString("FileID") ?? "").Split(',').ToList().ConvertAll(k => XCLNetTools.Common.DataTypeConvert.ToLong(k));

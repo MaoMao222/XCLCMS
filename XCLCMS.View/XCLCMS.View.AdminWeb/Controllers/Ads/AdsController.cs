@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
         /// <summary>
         /// 广告位列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_View)]
         public ActionResult Index()
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Ads.AdsListVM();
@@ -68,8 +68,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Add)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Edit)]
         public ActionResult Add()
         {
             long AdsID = XCLNetTools.StringHander.FormHelper.GetLong("AdsID");
@@ -149,7 +149,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
         /// <summary>
         /// 添加广告位
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Add)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
@@ -197,7 +197,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
         /// <summary>
         /// 修改广告位
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Ads_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Edit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();

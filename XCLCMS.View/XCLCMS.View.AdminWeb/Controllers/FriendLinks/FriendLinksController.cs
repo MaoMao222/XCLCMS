@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
         /// <summary>
         /// 友情链接列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_View)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksListVM viewModel = new XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksListVM();
@@ -61,8 +61,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Add)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Edit)]
         public ActionResult Add()
         {
             long friendLinkID = XCLNetTools.StringHander.FormHelper.GetLong("FriendLinkID");
@@ -123,7 +123,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
         /// <summary>
         /// 添加友情链接
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Add)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
@@ -164,7 +164,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
         /// <summary>
         /// 修改友情链接
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Edit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();

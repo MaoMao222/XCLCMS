@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         /// <summary>
         /// 标签列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_View)]
         public ActionResult Index()
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Tags.TagsListVM();
@@ -54,8 +54,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Add)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Edit)]
         public ActionResult Add()
         {
             long TagsID = XCLNetTools.StringHander.FormHelper.GetLong("TagsID");
@@ -109,7 +109,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         /// <summary>
         /// 添加标签
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Add)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
@@ -143,7 +143,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         /// <summary>
         /// 修改标签
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.Tags_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Edit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();

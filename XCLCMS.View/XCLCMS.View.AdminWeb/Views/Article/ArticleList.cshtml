@@ -8,15 +8,15 @@
 
     <div class="XCLPanel" style="margin-top:5px;">
         <div class="XCLPanelHeader">
-            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd))
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd))
             {
                 <a href="@(string.Format("{0}Article/Add",XCLNetTools.StringHander.Common.RootUri))" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
             }
-            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit))
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit))
             {
                 <a href="@(string.Format("{0}Article/Add",XCLNetTools.StringHander.Common.RootUri))" id="btnUpdate" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
             }
-            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleDel))
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleDel))
             {
                 <a href="javascript:void(0);" id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>
             }

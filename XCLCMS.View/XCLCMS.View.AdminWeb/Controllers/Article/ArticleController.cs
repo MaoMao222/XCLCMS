@@ -10,7 +10,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
     /// </summary>
     public class ArticleController : BaseController
     {
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleView)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.Article.ArticleListVM viewModel = new XCLCMS.View.AdminWeb.Models.Article.ArticleListVM();
@@ -56,8 +56,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
         /// <summary>
         /// 添加或编辑首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit)]
         public ActionResult Add()
         {
             long articleID = XCLNetTools.StringHander.FormHelper.GetLong("ArticleID");
@@ -141,7 +141,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
         /// <summary>
         /// 查看页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleView)]
         public ActionResult Show()
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Article.ArticleShowVM();
@@ -240,7 +240,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
         /// <summary>
         /// 添加文章信息
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
@@ -310,7 +310,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             return Json(response);
         }
 
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();

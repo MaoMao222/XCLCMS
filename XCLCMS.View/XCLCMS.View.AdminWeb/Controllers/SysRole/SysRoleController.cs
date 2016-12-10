@@ -18,8 +18,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleEdit)]
         public ActionResult Add()
         {
             long sysRoleID = XCLNetTools.StringHander.FormHelper.GetLong("SysRoleID");
@@ -81,7 +81,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             base.AddSubmit(fm);
@@ -117,7 +117,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_SysRoleEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

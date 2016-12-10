@@ -27,7 +27,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询友情链接信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.FriendLinks>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -52,7 +52,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询友情链接信息分页列表
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_View)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_View)]
         public async Task<APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_FriendLinks>>> PageList([FromUri] APIRequestEntity<PageListConditionEntity> request)
         {
             return await Task.Run(() =>
@@ -90,7 +90,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增友情链接信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Add)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.FriendLinks> request)
         {
             return await Task.Run(() =>
@@ -118,7 +118,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改友情链接信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Edit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Edit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.Model.FriendLinks> request)
         {
             return await Task.Run(() =>
@@ -146,7 +146,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除友情链接信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FriendLinks_Del)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Del)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

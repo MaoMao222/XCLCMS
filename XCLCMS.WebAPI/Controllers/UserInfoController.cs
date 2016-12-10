@@ -24,7 +24,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询用户信息实体
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
         public async Task<APIResponseEntity<XCLCMS.Data.Model.UserInfo>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
@@ -48,7 +48,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询用户信息分页列表
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
         public async Task<APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_UserInfo>>> PageList([FromUri] APIRequestEntity<PageListConditionEntity> request)
         {
             return await Task.Run(() =>
@@ -111,7 +111,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增用户信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
@@ -193,7 +193,7 @@ namespace XCLCMS.WebAPI.Controllers
                 XCLCMS.Data.BLL.Strategy.ExecuteStrategy strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
                 new XCLCMS.Data.BLL.Strategy.UserInfo.UserInfo()
             });
-                if (XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, Lib.Permission.Function.FunctionEnum.SysFun_SetUserRole))
+                if (XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SetUserRole))
                 {
                     strategy.StrategyList.Add(new XCLCMS.Data.BLL.Strategy.UserInfo.RoleInfo());
                 }
@@ -219,7 +219,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 修改用户信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
         public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
@@ -319,7 +319,7 @@ namespace XCLCMS.WebAPI.Controllers
                 XCLCMS.Data.BLL.Strategy.ExecuteStrategy strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
                 new XCLCMS.Data.BLL.Strategy.UserInfo.UserInfo()
             });
-                if (XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, Lib.Permission.Function.FunctionEnum.SysFun_SetUserRole))
+                if (XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SetUserRole))
                 {
                     strategy.StrategyList.Add(new XCLCMS.Data.BLL.Strategy.UserInfo.RoleInfo());
                 }
@@ -345,7 +345,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 删除用户信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserDel)]
         public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<List<long>> request)
         {
             return await Task.Run(() =>

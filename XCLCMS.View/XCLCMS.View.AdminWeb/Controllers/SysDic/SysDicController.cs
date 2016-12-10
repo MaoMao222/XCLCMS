@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
         /// <summary>
         /// 列表页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysDicView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysDicView)]
         public ActionResult Index()
         {
             return View("~/Views/SysDic/SysDicList.cshtml");
@@ -21,8 +21,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
         /// <summary>
         /// 添加或修改的页面
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysDicAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysDicEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysDicAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysDicEdit)]
         public ActionResult Add()
         {
             long sysDicId = XCLNetTools.StringHander.FormHelper.GetLong("sysDicId");
@@ -93,7 +93,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysDicAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysDicAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             base.AddSubmit(fm);
@@ -130,7 +130,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysDicEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysDicEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

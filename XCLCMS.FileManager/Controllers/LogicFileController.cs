@@ -10,7 +10,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 逻辑文件列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView)]
         public ActionResult List()
         {
             XCLCMS.FileManager.Models.LogicFile.ListVM viewModel = new Models.LogicFile.ListVM();
@@ -64,7 +64,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 查看文件详情
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView)]
         public ActionResult Show()
         {
             var bll = new XCLCMS.Data.BLL.Attachment();
@@ -89,7 +89,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 修改文件信息
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileUpdate)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate)]
         public ActionResult Update()
         {
             var vBll = new XCLCMS.Data.BLL.View.v_Attachment();
@@ -109,7 +109,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 修改文件信息 提交操作
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileUpdate)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();
@@ -152,7 +152,7 @@ namespace XCLCMS.FileManager.Controllers
         /// <summary>
         /// 文件删除操作
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.FileManager_LogicFileDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel)]
         public override ActionResult DelSubmit(FormCollection fm)
         {
             XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();

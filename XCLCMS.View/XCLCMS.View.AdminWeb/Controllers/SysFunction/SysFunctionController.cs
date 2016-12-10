@@ -8,7 +8,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
     /// </summary>
     public class SysFunctionController : BaseController
     {
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysFunctionView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionView)]
         public ActionResult Index()
         {
             return View("~/Views/SysFunction/SysFunctionList.cshtml");
@@ -17,8 +17,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysFunctionAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysFunctionEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionEdit)]
         public ActionResult Add()
         {
             long sysFunctionID = XCLNetTools.StringHander.FormHelper.GetLong("SysFunctionID");
@@ -71,7 +71,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysFunctionAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             base.AddSubmit(fm);
@@ -104,7 +104,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysFunctionEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

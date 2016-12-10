@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
         /// <summary>
         /// 配置列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingView)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.SysWebSetting.SysWebSettingListVM viewModel = new XCLCMS.View.AdminWeb.Models.SysWebSetting.SysWebSettingListVM();
@@ -63,8 +63,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
         /// <summary>
         /// 添加与编辑页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
         public ActionResult Add()
         {
             long sysWebSettingID = XCLNetTools.StringHander.FormHelper.GetLong("SysWebSettingID");
@@ -110,7 +110,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             base.AddSubmit(fm);
@@ -146,7 +146,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
         }
 
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

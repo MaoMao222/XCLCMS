@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         /// <summary>
         /// 商户应用信息列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppView)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppListVM viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppListVM();
@@ -60,8 +60,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         /// <summary>
         /// 添加与编辑商户应用页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppEdit)]
         public ActionResult Add()
         {
             long merchantAppId = XCLNetTools.StringHander.FormHelper.GetLong("merchantAppId");
@@ -124,7 +124,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         /// 添加商户应用信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             var viewModel = this.GetViewModel(fm);
@@ -163,7 +163,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         /// 更新商户应用信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

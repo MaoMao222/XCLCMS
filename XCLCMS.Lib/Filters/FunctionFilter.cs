@@ -11,6 +11,6 @@ namespace XCLCMS.Lib.Filters
         /// <summary>
         /// 当前功能标识组
         /// </summary>
-        public XCLCMS.Lib.Permission.Function.FunctionEnum Function { get; set; }
+        public XCLCMS.Data.CommonHelper.Function.FunctionEnum Function { get; set; }
     }
 }

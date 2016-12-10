@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysLog
         /// <summary>
         /// 日志列表
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysLogView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogView)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.SysLog.SysLogListVM viewModel = new XCLCMS.View.AdminWeb.Models.SysLog.SysLogListVM();
@@ -59,7 +59,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysLog
         /// 清空日志
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_Set_SysLogDel)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogDel)]
         public ActionResult ClearSubmit()
         {
             XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum dateType = XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum.SevenDay;

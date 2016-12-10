@@ -14,7 +14,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         /// <summary>
         /// 用户信息列表首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
         public ActionResult Index()
         {
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoListVM viewModel = new XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoListVM();
@@ -65,8 +65,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         /// <summary>
         /// 添加与编辑用户页面首页
         /// </summary>
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
         public ActionResult Add()
         {
             long userInfoId = XCLNetTools.StringHander.FormHelper.GetLong("userInfoId");
@@ -141,7 +141,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         /// 添加用户信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM viewModel = this.GetViewModel(fm);
@@ -189,7 +189,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         /// 更新用户信息
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);

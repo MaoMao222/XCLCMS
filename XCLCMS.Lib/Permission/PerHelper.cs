@@ -8,13 +8,6 @@ namespace XCLCMS.Lib.Permission
     /// </summary>
     public class PerHelper
     {
-        /// <summary>
-        /// 普通商户角色必须包含的权限功能ID列表
-        /// </summary>
-        public static List<long> NormalMerchantFixedFunctionIDList = new List<long>() {
-            (long)XCLCMS.Lib.Permission.Function.FunctionEnum.SysFun_DataFilter_OnlyCurrentMerchant
-        };
-
         #region 角色相关
 
         /// <summary>
@@ -60,7 +53,7 @@ namespace XCLCMS.Lib.Permission
         /// <summary>
         /// 判断指定用户是否至少拥有权限组中的某个权限
         /// </summary>
-        public static bool HasAnyPermission(long userId, List<XCLCMS.Lib.Permission.Function.FunctionEnum> functionList)
+        public static bool HasAnyPermission(long userId, List<XCLCMS.Data.CommonHelper.Function.FunctionEnum> functionList)
         {
             if (null == functionList || functionList.Count == 0)
             {
@@ -77,9 +70,9 @@ namespace XCLCMS.Lib.Permission
         /// <summary>
         /// 判断指定用户是否拥有某个权限
         /// </summary>
-        public static bool HasPermission(long userId, XCLCMS.Lib.Permission.Function.FunctionEnum funEm)
+        public static bool HasPermission(long userId, XCLCMS.Data.CommonHelper.Function.FunctionEnum funEm)
         {
-            return PerHelper.HasAnyPermission(userId, new List<Function.FunctionEnum>() {
+            return PerHelper.HasAnyPermission(userId, new List<Data.CommonHelper.Function.FunctionEnum>() {
                 funEm
             });
         }
@@ -93,7 +86,7 @@ namespace XCLCMS.Lib.Permission
         /// </summary>
         public static bool IsOnlyCurrentMerchant(long userId)
         {
-            return HasPermission(userId, Function.FunctionEnum.SysFun_DataFilter_OnlyCurrentMerchant);
+            return HasPermission(userId, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_OnlyCurrentMerchant);
         }
 
         #endregion 其它
