@@ -45,7 +45,11 @@
   <ItemGroup>
     <Compile Include="Ads.cs" />
     <Compile Include="Article.cs" />
+    <Compile Include="Attachment.cs" />
     <Compile Include="BaseInfo.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="FriendLinks.cs" />
+    <Compile Include="MerchantApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

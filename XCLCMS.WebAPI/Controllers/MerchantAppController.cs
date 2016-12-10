@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
-using XCLNetTools.Generic;
 
 namespace XCLCMS.WebAPI.Controllers
 {
@@ -14,9 +12,16 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class MerchantAppController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.View.v_MerchantApp vMerchantAppBLL = new Data.BLL.View.v_MerchantApp();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private XCLCMS.Data.WebAPIBLL.MerchantApp bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public MerchantAppController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.MerchantApp(base.ContextModel);
+        }
 
         /// <summary>
         /// 查询商户应用信息实体
@@ -27,16 +32,17 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<XCLCMS.Data.Model.MerchantApp>();
-                response.Body = merchantAppBLL.GetModel(request.Body);
-                response.IsSuccess = true;
+                var response = this.bll.Detail(request);
 
-                //限制商户
+                #region 限制商户
+
                 if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.Body = null;
                     response.IsSuccess = false;
                 }
+
+                #endregion 限制商户
 
                 return response;
             });
@@ -51,31 +57,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<XCLCMS.Data.Model.Custom.MerchantAppInfoModel>();
-
-                if (string.IsNullOrWhiteSpace(Convert.ToString(request.Body)))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供需要查询的AppKey！";
-                    return response;
-                }
-
-                response.Body = new Data.Model.Custom.MerchantAppInfoModel();
-                response.Body.MerchantApp = this.merchantAppBLL.GetModel(Convert.ToString(request.Body));
-                if (null != response.Body.MerchantApp)
-                {
-                    response.Body.Merchant = this.merchantBLL.GetModel(response.Body.MerchantApp.FK_MerchantID);
-                }
-
-                if (null == response.Body.Merchant || null == response.Body.MerchantApp)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供正确的AppKey！";
-                    return response;
-                }
-
-                response.IsSuccess = true;
-                return response;
+                return this.bll.DetailByAppKey(request);
             });
         }
 
@@ -88,11 +70,8 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var pager = request.Body.PagerInfoSimple.ToPagerInfo();
-                var response = new APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_MerchantApp>>();
-                response.Body = new Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<Data.Model.View.v_MerchantApp>();
+                #region 限制商户
 
-                //限制商户
                 if (base.IsOnlyCurrentMerchant)
                 {
                     request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
@@ -101,14 +80,9 @@ namespace XCLCMS.WebAPI.Controllers
                 });
                 }
 
-                response.Body.ResultList = vMerchantAppBLL.GetPageList(pager, new XCLNetTools.Entity.SqlPagerConditionEntity()
-                {
-                    OrderBy = "[MerchantAppID] desc",
-                    Where = request.Body.Where
-                });
-                response.Body.PagerInfo = pager;
-                response.IsSuccess = true;
-                return response;
+                #endregion 限制商户
+
+                return this.bll.PageList(request);
             });
         }
 
@@ -121,35 +95,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
-                response.IsSuccess = true;
-                response.Message = "该商户应用名可以使用！";
-
-                request.Body.MerchantAppName = (request.Body.MerchantAppName ?? "").Trim();
-
-                if (request.Body.MerchantAppID > 0)
-                {
-                    var model = merchantAppBLL.GetModel(request.Body.MerchantAppID);
-                    if (null != model)
-                    {
-                        if (string.Equals(request.Body.MerchantAppName, model.MerchantAppName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            return response;
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(request.Body.MerchantAppName))
-                {
-                    bool isExist = merchantAppBLL.IsExistMerchantAppName(request.Body.MerchantAppName);
-                    if (isExist)
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "该商户应用名已被占用！";
-                    }
-                }
-
-                return response;
+                return this.bll.IsExistMerchantAppName(request);
             });
         }
 
@@ -164,65 +110,19 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                #region 数据校验
+                #region 限制商户
 
-                request.Body.MerchantAppName = (request.Body.MerchantAppName ?? "").Trim();
-                request.Body.AppKey = (request.Body.AppKey ?? "").Trim().ToUpper();
-
-                if (string.IsNullOrWhiteSpace(request.Body.MerchantAppName))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供商户应用名！";
-                    return response;
-                }
-
-                if (!XCLNetTools.Common.Consts.RegMD5_32Uppercase.IsMatch(request.Body.AppKey))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供有效的AppKey（32位大写MD5值）！";
-                    return response;
-                }
-
-                if (null != this.merchantAppBLL.GetModel(request.Body.AppKey))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("AppKey：{0}，已经被占用了！", request.Body.AppKey);
-                    return response;
-                }
-
-                if (null == merchantBLL.GetModel(request.Body.FK_MerchantID))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("您指定的商户ID【{0}】不存在！", request.Body.FK_MerchantID);
-                    return response;
-                }
-
-                if (this.merchantAppBLL.IsExistMerchantAppName(request.Body.MerchantAppName))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("商户应用名【{0}】已存在！", request.Body.MerchantAppName);
-                    return response;
-                }
-
-                //限制商户
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                if (base.IsOnlyCurrentMerchant && null != request.Body && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
                     response.Message = "只能在自己所属的商户下面添加应用信息！";
                     return response;
                 }
 
-                #endregion 数据校验
+                #endregion 限制商户
 
-                response.IsSuccess = this.merchantAppBLL.Add(request.Body);
-                if (response.Body)
-                {
-                    response.Message = "商户应用信息添加成功！";
-                }
-                else
-                {
-                    response.Message = "商户应用信息添加失败！";
-                }
+                response = this.bll.Add(request);
+
                 return response;
             });
         }
@@ -238,76 +138,19 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                request.Body.AppKey = (request.Body.AppKey ?? "").Trim().ToUpper();
+                #region 限制商户
 
-                #region 数据校验
-
-                var model = merchantAppBLL.GetModel(request.Body.MerchantAppID);
-                if (null == model)
+                if (base.IsOnlyCurrentMerchant && null != request.Body && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
-                    response.Message = "请指定有效的商户应用信息！";
+                    response.Message = "只能在自己所属的商户下面添加应用信息！";
                     return response;
                 }
 
-                if (!XCLNetTools.Common.Consts.RegMD5_32Uppercase.IsMatch(request.Body.AppKey))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供有效的AppKey（32位大写MD5值）！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                if (!string.Equals(request.Body.AppKey, model.AppKey, StringComparison.OrdinalIgnoreCase) && null != this.merchantAppBLL.GetModel(request.Body.AppKey))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("AppKey：{0}，已经被占用了！", request.Body.AppKey);
-                    return response;
-                }
+                response = this.bll.Update(request);
 
-                if (!string.Equals(model.MerchantAppName, request.Body.MerchantAppName))
-                {
-                    if (this.merchantAppBLL.IsExistMerchantAppName(request.Body.MerchantAppName))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = string.Format("商户应用名【{0}】已存在！", request.Body.MerchantAppName);
-                        return response;
-                    }
-                }
-
-                //限制商户
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "只能在自己所属的商户下面修改应用信息！";
-                    return response;
-                }
-
-                #endregion 数据校验
-
-                model.AppKey = request.Body.AppKey;
-                model.RecordState = request.Body.RecordState;
-                model.CopyRight = request.Body.CopyRight;
-                model.MerchantAppName = request.Body.MerchantAppName;
-                model.MetaDescription = request.Body.MetaDescription;
-                model.MetaKeyWords = request.Body.MetaKeyWords;
-                model.MetaTitle = request.Body.MetaTitle;
-                model.ResourceVersion = request.Body.ResourceVersion;
-                model.WebURL = request.Body.WebURL;
-                model.Email = request.Body.Email;
-                model.Remark = request.Body.Remark;
-                model.UpdaterID = base.CurrentUserModel.UserInfoID;
-                model.UpdaterName = base.CurrentUserModel.UserName;
-                model.UpdateTime = DateTime.Now;
-
-                response.IsSuccess = this.merchantAppBLL.Update(model);
-                if (response.IsSuccess)
-                {
-                    response.Message = "商户应用信息修改成功！";
-                }
-                else
-                {
-                    response.Message = "商户应用信息修改失败！";
-                }
                 return response;
             });
         }
@@ -321,56 +164,28 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
+                #region 限制商户
 
-                if (request.Body.IsNotNullOrEmpty())
+                if (null != request.Body && request.Body.Count > 0)
                 {
-                    request.Body = request.Body.Where(k => k > 0).Distinct().ToList();
+                    request.Body = request.Body.Where(k =>
+                    {
+                        var model = this.merchantAppBLL.GetModel(k);
+                        if (null == model)
+                        {
+                            return false;
+                        }
+                        if (base.IsOnlyCurrentMerchant && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }).ToList();
                 }
 
-                if (request.Body.IsNullOrEmpty())
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请指定要删除的商户应用ID！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                foreach (var k in request.Body)
-                {
-                    var merchantAppModel = merchantAppBLL.GetModel(k);
-                    if (null == merchantAppModel)
-                    {
-                        continue;
-                    }
-                    //限制商户
-                    if (base.IsOnlyCurrentMerchant && merchantAppModel.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                    {
-                        continue;
-                    }
-                    var merchantModel = this.merchantBLL.GetModel(merchantAppModel.FK_MerchantID);
-                    if (null != merchantModel && merchantModel.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.SYS.ToString())
-                    {
-                        response.IsSuccess = false;
-                        response.Message = string.Format("不可以删除系统内置商户的应用【{0}】！", merchantAppModel.MerchantAppName);
-                        return response;
-                    }
-                    merchantAppModel.UpdaterID = base.CurrentUserModel.UserInfoID;
-                    merchantAppModel.UpdaterName = base.CurrentUserModel.UserName;
-                    merchantAppModel.UpdateTime = DateTime.Now;
-                    merchantAppModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
-                    if (!merchantAppBLL.Update(merchantAppModel))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "删除失败！";
-                        return response;
-                    }
-                }
-
-                response.IsSuccess = true;
-                response.Message = "已成功删除商户应用信息！";
-                response.IsRefresh = true;
-
-                return response;
+                return this.bll.Delete(request);
             });
         }
     }

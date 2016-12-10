@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace XCLCMS.WebAPI.Controllers
 {
-    public class HomeController:Controller
+    /// <summary>
+    /// api
+    /// </summary>
+    public class HomeController : Controller
     {
+        /// <summary>
+        /// api契约首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return Redirect("~/Help/");

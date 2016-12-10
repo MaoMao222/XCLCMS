@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
@@ -12,8 +10,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AttachmentController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.Attachment attachmentBLL = new XCLCMS.Data.BLL.Attachment();
-        private XCLCMS.Data.BLL.ObjectAttachment objectAttachmentBLL = new XCLCMS.Data.BLL.ObjectAttachment();
+        private XCLCMS.Data.WebAPIBLL.Attachment bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public AttachmentController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.Attachment(base.ContextModel);
+        }
 
         /// <summary>
         /// 查询附件信息实体
@@ -24,16 +29,17 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<XCLCMS.Data.Model.Attachment>();
-                response.Body = attachmentBLL.GetModel(request.Body);
-                response.IsSuccess = true;
+                var response = this.bll.Detail(request);
 
-                //限制商户
+                #region 限制商户
+
                 if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.Body = null;
                     response.IsSuccess = false;
                 }
+
+                #endregion 限制商户
 
                 return response;
             });
@@ -48,16 +54,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<List<XCLCMS.Data.Model.Attachment>>();
-                var lst = this.objectAttachmentBLL.GetModelList((XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum)Enum.Parse(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), request.Body.ObjectType), request.Body.ObjectID);
-                List<long> ids = new List<long>();
-                if (null != lst && lst.Count > 0)
-                {
-                    ids = lst.Select(k => k.FK_AttachmentID).ToList();
-                }
-                response.Body = this.attachmentBLL.GetList(ids);
-                response.IsSuccess = true;
-                return response;
+                return this.bll.GetObjectAttachmentList(request);
             });
         }
 
@@ -70,10 +67,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<List<XCLCMS.Data.Model.Attachment>>();
-                response.Body = this.attachmentBLL.GetList(request.Body.AttachmentIDList);
-                response.IsSuccess = true;
-                return response;
+                return this.bll.GetAttachmentListByIDList(request);
             });
         }
     }

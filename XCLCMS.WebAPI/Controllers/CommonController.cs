@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 
@@ -10,6 +9,16 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class CommonController : BaseAPIController
     {
+        private XCLCMS.Data.WebAPIBLL.Common bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public CommonController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.Common(base.ContextModel);
+        }
+
         /// <summary>
         /// 生成ID号
         /// </summary>
@@ -19,20 +28,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<long>();
-                response.Body = XCLCMS.Data.BLL.Common.Common.GenerateID((Data.CommonHelper.EnumType.IDTypeEnum)Enum.Parse(typeof(Data.CommonHelper.EnumType.IDTypeEnum), request.Body.IDType), request.Body.Remark);
-                if (response.Body > 0)
-                {
-                    response.IsSuccess = true;
-                    response.Message = "生成ID成功！";
-                }
-                else
-                {
-                    response.IsSuccess = false;
-                    response.Message = "生成ID失败！";
-                }
-
-                return response;
+                return this.bll.GenerateID(request);
             });
         }
 
@@ -45,11 +41,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
-                XCLCMS.Data.BLL.Common.Common.ClearRubbishData();
-                response.IsSuccess = true;
-                response.Message = "垃圾数据清理成功！";
-                return response;
+                return this.bll.ClearRubbishData(request);
             });
         }
     }
