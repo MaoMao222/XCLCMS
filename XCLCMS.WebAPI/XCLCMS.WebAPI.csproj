@@ -224,6 +224,10 @@
       <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
       <Name>XCLCMS.Data.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.WebAPIBLL\XCLCMS.Data.WebAPIBLL.csproj">
+      <Project>{a981085c-5c30-44a4-a944-30af4c3f31a0}</Project>
+      <Name>XCLCMS.Data.WebAPIBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
       <Project>{df6f982f-2be8-4a93-b835-79629c487a5e}</Project>
       <Name>XCLCMS.Data.WebAPIEntity</Name>

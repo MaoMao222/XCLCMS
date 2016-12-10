@@ -6,9 +6,9 @@
     public class BaseContext
     {
         /// <summary>
-        /// 当前用户信息
+        /// 当前上下文信息
         /// </summary>
-        public XCLCMS.Data.Model.UserInfo CurrentUserInfo { get; set; }
+        public XCLCMS.Data.Model.Custom.ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 操作类型枚举

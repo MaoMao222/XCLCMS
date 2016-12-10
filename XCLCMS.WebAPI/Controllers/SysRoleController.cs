@@ -363,7 +363,7 @@ namespace XCLCMS.WebAPI.Controllers
                 #endregion 数据校验
 
                 XCLCMS.Data.BLL.Strategy.SysRole.SysRoleContext sysRoleContext = new Data.BLL.Strategy.SysRole.SysRoleContext();
-                sysRoleContext.CurrentUserInfo = base.CurrentUserModel;
+                sysRoleContext.ContextInfo = base.ContextModel;
                 sysRoleContext.SysRole = request.Body.SysRole;
                 sysRoleContext.FunctionIdList = request.Body.FunctionIdList;
                 sysRoleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
@@ -505,7 +505,7 @@ namespace XCLCMS.WebAPI.Controllers
                 model.Weight = request.Body.SysRole.Weight;
 
                 XCLCMS.Data.BLL.Strategy.SysRole.SysRoleContext sysRoleContext = new Data.BLL.Strategy.SysRole.SysRoleContext();
-                sysRoleContext.CurrentUserInfo = base.CurrentUserModel;
+                sysRoleContext.ContextInfo = base.ContextModel;
                 sysRoleContext.SysRole = model;
                 sysRoleContext.FunctionIdList = request.Body.FunctionIdList;
                 sysRoleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;

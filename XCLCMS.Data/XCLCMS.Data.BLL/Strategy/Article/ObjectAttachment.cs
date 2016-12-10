@@ -35,8 +35,8 @@ namespace XCLCMS.Data.BLL.Strategy.Article
                 //添加附件关系
                 flag = bll.Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART, articleContext.Article.ArticleID, articleContext.ArticleAttachmentIDList, new Model.Custom.ContextModel()
                 {
-                    UserInfoID = articleContext.CurrentUserInfo.UserInfoID,
-                    UserName= articleContext.CurrentUserInfo.UserName
+                    UserInfoID = articleContext.ContextInfo.UserInfoID,
+                    UserName= articleContext.ContextInfo.UserName
                 });
             }
             catch (Exception ex)

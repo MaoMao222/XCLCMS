@@ -26,8 +26,8 @@ namespace XCLCMS.Data.BLL.Strategy.SysRole
             XCLCMS.Data.BLL.SysRoleFunction bll = new XCLCMS.Data.BLL.SysRoleFunction();
 
             XCLCMS.Data.Model.SysRoleFunction model = new XCLCMS.Data.Model.SysRoleFunction();
-            model.CreaterID = sysRoleContext.CurrentUserInfo.UserInfoID;
-            model.CreaterName = sysRoleContext.CurrentUserInfo.UserName;
+            model.CreaterID = sysRoleContext.ContextInfo.UserInfoID;
+            model.CreaterName = sysRoleContext.ContextInfo.UserName;
             model.CreateTime = DateTime.Now;
             model.UpdaterID = model.CreaterID;
             model.UpdaterName = model.CreaterName;

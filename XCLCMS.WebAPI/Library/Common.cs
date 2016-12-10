@@ -29,7 +29,7 @@ namespace XCLCMS.WebAPI.Library
         /// </summary>
         public static XCLCMS.WebAPI.Model.ActionContextInfoEntity GetInfoFromActionContext(HttpActionContext actionContext)
         {
-            if (null == actionContext)
+            if (null == actionContext || null == actionContext.Request)
             {
                 return null;
             }

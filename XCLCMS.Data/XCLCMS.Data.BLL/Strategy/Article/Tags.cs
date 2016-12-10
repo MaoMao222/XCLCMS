@@ -44,17 +44,17 @@ namespace XCLCMS.Data.BLL.Strategy.Article
             {
                 tagLst.Add(new Model.Tags()
                 {
-                    CreaterID = articleContext.CurrentUserInfo.UserInfoID,
+                    CreaterID = articleContext.ContextInfo.UserInfoID,
                     CreateTime = dtNow,
-                    CreaterName = articleContext.CurrentUserInfo.UserName,
+                    CreaterName = articleContext.ContextInfo.UserName,
                     Description = null,
                     FK_MerchantAppID = articleContext.Article.FK_MerchantAppID,
                     FK_MerchantID = articleContext.Article.FK_MerchantID,
                     RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
                     TagName = k,
                     TagsID = XCLCMS.Data.BLL.Common.Common.GenerateID(CommonHelper.EnumType.IDTypeEnum.TAG),
-                    UpdaterID = articleContext.CurrentUserInfo.UserInfoID,
-                    UpdaterName = articleContext.CurrentUserInfo.UserName,
+                    UpdaterID = articleContext.ContextInfo.UserInfoID,
+                    UpdaterName = articleContext.ContextInfo.UserName,
                     UpdateTime = dtNow
                 });
             });
@@ -72,8 +72,8 @@ namespace XCLCMS.Data.BLL.Strategy.Article
                 {
                     objTagBLL.Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART, articleContext.Article.ArticleID, addResult.Result.TagIdList, new Model.Custom.ContextModel()
                     {
-                        UserInfoID = articleContext.CurrentUserInfo.UserInfoID,
-                        UserName = articleContext.CurrentUserInfo.UserName
+                        UserInfoID = articleContext.ContextInfo.UserInfoID,
+                        UserName = articleContext.ContextInfo.UserName
                     });
                 }
 

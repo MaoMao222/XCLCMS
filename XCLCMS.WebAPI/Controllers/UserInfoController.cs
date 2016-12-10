@@ -185,7 +185,7 @@ namespace XCLCMS.WebAPI.Controllers
                 #endregion 数据校验
 
                 XCLCMS.Data.BLL.Strategy.UserInfo.UserInfoContext userInfoContext = new Data.BLL.Strategy.UserInfo.UserInfoContext();
-                userInfoContext.CurrentUserInfo = base.CurrentUserModel;
+                userInfoContext.ContextInfo = base.ContextModel;
                 userInfoContext.UserInfo = request.Body.UserInfo;
                 userInfoContext.UserRoleIDs = request.Body.RoleIdList;
                 userInfoContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
@@ -311,7 +311,7 @@ namespace XCLCMS.WebAPI.Controllers
                 model.UpdateTime = DateTime.Now;
 
                 XCLCMS.Data.BLL.Strategy.UserInfo.UserInfoContext userInfoContext = new Data.BLL.Strategy.UserInfo.UserInfoContext();
-                userInfoContext.CurrentUserInfo = base.CurrentUserModel;
+                userInfoContext.ContextInfo = base.ContextModel;
                 userInfoContext.UserInfo = model;
                 userInfoContext.UserRoleIDs = request.Body.RoleIdList;
                 userInfoContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;

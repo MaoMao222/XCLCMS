@@ -79,11 +79,13 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     return this._contextModel;
                 }
-                return new Data.Model.Custom.ContextModel()
+                this._contextModel = new Data.Model.Custom.ContextModel();
+                if (null != this.CurrentUserModel)
                 {
-                    UserInfoID = this.CurrentUserModel.UserInfoID,
-                    UserName = this.CurrentUserModel.UserName
-                };
+                    this._contextModel.UserInfoID = this.CurrentUserModel.UserInfoID;
+                    this._contextModel.UserName = this.CurrentUserModel.UserName;
+                }
+                return this._contextModel;
             }
         }
 
