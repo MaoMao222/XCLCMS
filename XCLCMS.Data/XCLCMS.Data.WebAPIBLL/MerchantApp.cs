@@ -9,13 +9,13 @@ namespace XCLCMS.Data.WebAPIBLL
 {
     public class MerchantApp : BaseInfo
     {
-        public MerchantApp(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
-
         private XCLCMS.Data.BLL.View.v_MerchantApp vMerchantAppBLL = new Data.BLL.View.v_MerchantApp();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+
+        public MerchantApp(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
+        {
+        }
 
         /// <summary>
         /// 查询商户应用信息实体

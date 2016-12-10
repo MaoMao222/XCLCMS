@@ -9,14 +9,14 @@ namespace XCLCMS.Data.WebAPIBLL
 {
     public class Article : BaseInfo
     {
-        public Article(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
-
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
         private XCLCMS.Data.BLL.View.v_Article vArticleBLL = new XCLCMS.Data.BLL.View.v_Article();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+
+        public Article(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
+        {
+        }
 
         /// <summary>
         /// 查询文章信息实体
