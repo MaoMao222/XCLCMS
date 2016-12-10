@@ -7,6 +7,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 广告
+    /// </summary>
     public class Ads : BaseInfo
     {
         private XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();

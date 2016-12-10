@@ -1,4 +1,4 @@
-﻿namespace XCLCMS.WebAPI.Library
+﻿namespace XCLCMS.Data.CommonHelper
 {
     /// <summary>
     /// 加密解密相关
@@ -64,7 +64,7 @@
             {
                 return null;
             }
-            return XCLCMS.WebAPI.Library.EncryptHelper.EncryptStringDES(string.Format("{0}^{1}", model.UserName, model.Pwd));
+            return EncryptHelper.EncryptStringDES(string.Format("{0}^{1}", model.UserName, model.Pwd));
         }
 
         /// <summary>
@@ -77,7 +77,7 @@
             {
                 return model;
             }
-            var ut = XCLCMS.WebAPI.Library.EncryptHelper.DecryptStringDES(token);//解密为：admin^21232F297A57A5A743894A0E4A801FC3
+            var ut = EncryptHelper.DecryptStringDES(token);//解密为：admin^21232F297A57A5A743894A0E4A801FC3
             string[] strSplit = ut.Split('^');
             if (strSplit.Length == 2)
             {

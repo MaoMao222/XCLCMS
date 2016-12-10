@@ -6,6 +6,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 权限功能
+    /// </summary>
     public class SysFunction : BaseInfo
     {
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();

@@ -6,6 +6,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 角色
+    /// </summary>
     public class SysRole : BaseInfo
     {
         private XCLCMS.Data.WebAPIBLL.SysFunction sysFunctionWebAPIBLL = null;

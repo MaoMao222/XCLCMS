@@ -27,7 +27,7 @@ namespace XCLCMS.WebAPI.Controllers
                 if (string.IsNullOrWhiteSpace(request.Body.UserToken))
                 {
                     //用户名和密码登录
-                    userModel = userInfoBLL.GetModel(request.Body.UserName, XCLCMS.WebAPI.Library.EncryptHelper.EncryptStringMD5(request.Body.Pwd));
+                    userModel = userInfoBLL.GetModel(request.Body.UserName, XCLCMS.Data.CommonHelper.EncryptHelper.EncryptStringMD5(request.Body.Pwd));
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace XCLCMS.WebAPI.Controllers
                     //用户基本信息
                     response.Body.UserInfo = userModel;
                     //登录令牌
-                    response.Body.Token = XCLCMS.WebAPI.Library.EncryptHelper.CreateToken(new Data.Model.Custom.UserNamePwd()
+                    response.Body.Token = XCLCMS.Data.CommonHelper.EncryptHelper.CreateToken(new Data.Model.Custom.UserNamePwd()
                     {
                         UserName = userModel.UserName,
                         Pwd = userModel.Pwd
@@ -85,7 +85,7 @@ namespace XCLCMS.WebAPI.Controllers
             return await Task.Run(() =>
             {
                 var response = new APIResponseEntity<object>();
-                response.Body = XCLCMS.WebAPI.Library.EncryptHelper.CreateToken(request.Body);
+                response.Body = XCLCMS.Data.CommonHelper.EncryptHelper.CreateToken(request.Body);
                 response.IsSuccess = true;
                 return response;
             });

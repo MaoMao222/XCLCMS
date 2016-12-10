@@ -3,6 +3,9 @@ using XCLCMS.Data.WebAPIEntity;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 公共
+    /// </summary>
     public class Common : BaseInfo
     {
         public Common(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)

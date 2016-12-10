@@ -7,6 +7,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 文章
+    /// </summary>
     public class Article : BaseInfo
     {
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();

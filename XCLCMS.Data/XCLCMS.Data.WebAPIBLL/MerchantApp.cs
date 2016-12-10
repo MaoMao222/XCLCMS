@@ -7,6 +7,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 商户应用信息
+    /// </summary>
     public class MerchantApp : BaseInfo
     {
         private XCLCMS.Data.BLL.View.v_MerchantApp vMerchantAppBLL = new Data.BLL.View.v_MerchantApp();

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
-using XCLNetTools.Generic;
 
 namespace XCLCMS.WebAPI.Controllers
 {
@@ -14,10 +12,16 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysWebSettingController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.View.v_SysWebSetting vSysWebSettingBLL = new Data.BLL.View.v_SysWebSetting();
         private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private XCLCMS.Data.WebAPIBLL.SysWebSetting bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public SysWebSettingController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.SysWebSetting(base.ContextModel);
+        }
 
         /// <summary>
         /// 查询系统配置信息实体
@@ -28,16 +32,17 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<XCLCMS.Data.Model.SysWebSetting>();
-                response.Body = sysWebSettingBLL.GetModel(request.Body);
-                response.IsSuccess = true;
+                var response = this.bll.Detail(request);
 
-                //限制商户
+                #region 限制商户
+
                 if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.Body = null;
                     response.IsSuccess = false;
                 }
+
+                #endregion 限制商户
 
                 return response;
             });
@@ -52,11 +57,8 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var pager = request.Body.PagerInfoSimple.ToPagerInfo();
-                var response = new APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_SysWebSetting>>();
-                response.Body = new Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<Data.Model.View.v_SysWebSetting>();
+                #region 限制商户
 
-                //限制商户
                 if (base.IsOnlyCurrentMerchant)
                 {
                     request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
@@ -65,14 +67,9 @@ namespace XCLCMS.WebAPI.Controllers
                     });
                 }
 
-                response.Body.ResultList = vSysWebSettingBLL.GetPageList(pager, new XCLNetTools.Entity.SqlPagerConditionEntity()
-                {
-                    OrderBy = "[KeyName] asc",
-                    Where = request.Body.Where
-                });
-                response.Body.PagerInfo = pager;
-                response.IsSuccess = true;
-                return response;
+                #endregion 限制商户
+
+                return this.bll.PageList(request);
             });
         }
 
@@ -85,35 +82,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
-                response.IsSuccess = true;
-                response.Message = "该配置名可以使用！";
-
-                request.Body.KeyName = (request.Body.KeyName ?? "").Trim();
-
-                if (request.Body.SysWebSettingID > 0)
-                {
-                    var model = this.sysWebSettingBLL.GetModel(request.Body.SysWebSettingID);
-                    if (null != model)
-                    {
-                        if (string.Equals(request.Body.KeyName, model.KeyName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            return response;
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(request.Body.KeyName))
-                {
-                    bool isExist = this.sysWebSettingBLL.IsExistKeyName(request.Body.KeyName);
-                    if (isExist)
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "该配置名已被占用！";
-                    }
-                }
-
-                return response;
+                return this.bll.IsExistKeyName(request);
             });
         }
 
@@ -128,34 +97,8 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                #region 数据校验
+                #region 限制商户
 
-                request.Body.KeyName = (request.Body.KeyName ?? "").Trim();
-
-                //商户必须存在
-                var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
-                if (null == merchant)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "无效的商户号！";
-                    return response;
-                }
-
-                if (string.IsNullOrWhiteSpace(request.Body.KeyName))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供配置名！";
-                    return response;
-                }
-
-                if (this.sysWebSettingBLL.IsExistKeyName(request.Body.KeyName))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("配置名【{0}】已存在！", request.Body.KeyName);
-                    return response;
-                }
-
-                //限制商户
                 if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
@@ -163,25 +106,10 @@ namespace XCLCMS.WebAPI.Controllers
                     return response;
                 }
 
-                //应用号与商户一致
-                if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "商户号与应用号不匹配，请核对后再试！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                #endregion 数据校验
+                response = this.bll.Add(request);
 
-                response.IsSuccess = this.sysWebSettingBLL.Add(request.Body);
-                if (response.Body)
-                {
-                    response.Message = "系统配置信息添加成功！";
-                }
-                else
-                {
-                    response.Message = "系统配置信息添加失败！";
-                }
                 return response;
             });
         }
@@ -197,36 +125,8 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                #region 数据校验
+                #region 限制商户
 
-                var model = this.sysWebSettingBLL.GetModel(request.Body.SysWebSettingID);
-                if (null == model)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请指定有效的配置信息！";
-                    return response;
-                }
-
-                //商户必须存在
-                var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
-                if (null == merchant)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "无效的商户号！";
-                    return response;
-                }
-
-                if (!string.Equals(model.KeyName, request.Body.KeyName))
-                {
-                    if (this.sysWebSettingBLL.IsExistKeyName(request.Body.KeyName))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = string.Format("配置名【{0}】已存在！", request.Body.KeyName);
-                        return response;
-                    }
-                }
-
-                //限制商户
                 if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
@@ -234,37 +134,10 @@ namespace XCLCMS.WebAPI.Controllers
                     return response;
                 }
 
-                //应用号与商户一致
-                if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "商户号与应用号不匹配，请核对后再试！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                #endregion 数据校验
+                response = this.bll.Update(request);
 
-                model.FK_MerchantAppID = request.Body.FK_MerchantAppID;
-                model.FK_MerchantID = request.Body.FK_MerchantID;
-                model.KeyName = request.Body.KeyName;
-                model.KeyValue = request.Body.KeyValue;
-                model.TestKeyValue = request.Body.TestKeyValue;
-                model.UATKeyValue = request.Body.UATKeyValue;
-                model.PrdKeyValue = request.Body.PrdKeyValue;
-                model.Remark = request.Body.Remark;
-                model.UpdaterID = base.CurrentUserModel.UserInfoID;
-                model.UpdaterName = base.CurrentUserModel.UserName;
-                model.UpdateTime = DateTime.Now;
-
-                response.IsSuccess = this.sysWebSettingBLL.Update(model);
-                if (response.IsSuccess)
-                {
-                    response.Message = "系统配置信息修改成功！";
-                }
-                else
-                {
-                    response.Message = "系统配置信息修改失败！";
-                }
                 return response;
             });
         }
@@ -278,60 +151,28 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
+                #region 限制商户
 
-                if (request.Body.IsNotNullOrEmpty())
+                if (null != request.Body && request.Body.Count > 0)
                 {
-                    request.Body = request.Body.Where(k => k > 0).Distinct().ToList();
+                    request.Body = request.Body.Where(k =>
+                    {
+                        var model = this.sysWebSettingBLL.GetModel(k);
+                        if (null == model)
+                        {
+                            return false;
+                        }
+                        if (base.IsOnlyCurrentMerchant && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }).ToList();
                 }
 
-                if (request.Body.IsNullOrEmpty())
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请指定要删除的系统配置ID！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                //限制商户
-                if (base.IsOnlyCurrentMerchant)
-                {
-                    if (request.Body.Exists(id =>
-                    {
-                        var settingModel = this.sysWebSettingBLL.GetModel(id);
-                        return null != settingModel && settingModel.FK_MerchantID != base.CurrentUserModel.FK_MerchantID;
-                    }))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "只能删除属于自己的商户节点！";
-                        return response;
-                    }
-                }
-
-                foreach (var k in request.Body)
-                {
-                    var model = this.sysWebSettingBLL.GetModel(k);
-                    if (null == model)
-                    {
-                        continue;
-                    }
-
-                    model.UpdaterID = base.CurrentUserModel.UserInfoID;
-                    model.UpdaterName = base.CurrentUserModel.UserName;
-                    model.UpdateTime = DateTime.Now;
-                    model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
-                    if (!this.sysWebSettingBLL.Update(model))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "系统配置删除失败！";
-                        return response;
-                    }
-                }
-
-                response.IsSuccess = true;
-                response.Message = "已成功删除系统配置！";
-                response.IsRefresh = true;
-
-                return response;
+                return this.bll.Delete(request);
             });
         }
     }

@@ -16,7 +16,7 @@ namespace XCLCMS.WebAPI.Library
         /// </summary>
         public static XCLCMS.Data.Model.UserInfo GetUserInfoByUserToken(string token)
         {
-            var tokenModel = XCLCMS.WebAPI.Library.EncryptHelper.GetUserNamePwdByToken(token);
+            var tokenModel = XCLCMS.Data.CommonHelper.EncryptHelper.GetUserNamePwdByToken(token);
             if (null != tokenModel)
             {
                 return new XCLCMS.Data.BLL.UserInfo().GetModel(tokenModel.UserName, tokenModel.Pwd);

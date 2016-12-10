@@ -11,7 +11,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysLogController : BaseAPIController
     {
-        public XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
+        private XCLCMS.Data.WebAPIBLL.SysLog bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public SysLogController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.SysLog(base.ContextModel);
+        }
 
         /// <summary>
         /// 查询系统日志信息分页列表
@@ -22,11 +30,8 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var pager = request.Body.PagerInfoSimple.ToPagerInfo();
-                var response = new APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.SysLog>>();
-                response.Body = new Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<Data.Model.SysLog>();
+                #region 限制商户
 
-                //限制商户
                 if (base.IsOnlyCurrentMerchant)
                 {
                     request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
@@ -35,14 +40,9 @@ namespace XCLCMS.WebAPI.Controllers
                 });
                 }
 
-                response.Body.ResultList = sysLogBLL.GetPageList(pager, new XCLNetTools.Entity.SqlPagerConditionEntity()
-                {
-                    OrderBy = "[SysLogID] desc",
-                    Where = request.Body.Where
-                });
-                response.Body.PagerInfo = pager;
-                response.IsSuccess = true;
-                return response;
+                #endregion 限制商户
+
+                return this.bll.PageList(request);
             });
         }
 
@@ -55,19 +55,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
-                if (this.sysLogBLL.ClearListByDateTime(request.Body.StartTime, request.Body.EndTime, base.IsOnlyCurrentMerchant ? base.CurrentUserModel.FK_MerchantID : 0))
-                {
-                    response.IsSuccess = true;
-                    response.IsRefresh = true;
-                    response.Message = "删除成功！";
-                }
-                else
-                {
-                    response.IsSuccess = false;
-                    response.Message = "删除失败！";
-                }
-                return response;
+                return this.bll.Delete(request, base.IsOnlyCurrentMerchant ? base.CurrentUserModel.FK_MerchantID : 0);
             });
         }
     }

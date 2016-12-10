@@ -8,6 +8,9 @@ using XCLNetTools.Generic;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 商户信息
+    /// </summary>
     public class Merchant : BaseInfo
     {
         private XCLCMS.Data.WebAPIBLL.SysRole sysRoleWebAPIBLL = null;

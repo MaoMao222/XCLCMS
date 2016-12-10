@@ -5,6 +5,9 @@ using XCLCMS.Data.WebAPIEntity;
 
 namespace XCLCMS.Data.WebAPIBLL
 {
+    /// <summary>
+    /// 附件
+    /// </summary>
     public class Attachment : BaseInfo
     {
         private XCLCMS.Data.BLL.Attachment attachmentBLL = new XCLCMS.Data.BLL.Attachment();

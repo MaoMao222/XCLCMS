@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
-using XCLNetTools.Generic;
 
 namespace XCLCMS.WebAPI.Controllers
 {
@@ -15,8 +13,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class TagsController : BaseAPIController
     {
         public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
-        public XCLCMS.Data.BLL.View.v_Tags vtagsBLL = new XCLCMS.Data.BLL.View.v_Tags();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private XCLCMS.Data.WebAPIBLL.Tags bll = null;
+
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public TagsController()
+        {
+            this.bll = new XCLCMS.Data.WebAPIBLL.Tags(base.ContextModel);
+        }
 
         /// <summary>
         /// 查询标签信息实体
@@ -27,16 +32,17 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<XCLCMS.Data.Model.Tags>();
-                response.Body = tagsBLL.GetModel(request.Body);
-                response.IsSuccess = true;
+                var response = this.bll.Detail(request);
 
-                //限制商户
+                #region 限制商户
+
                 if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.Body = null;
                     response.IsSuccess = false;
                 }
+
+                #endregion 限制商户
 
                 return response;
             });
@@ -51,11 +57,8 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var pager = request.Body.PagerInfoSimple.ToPagerInfo();
-                var response = new APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Tags>>();
-                response.Body = new Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<Data.Model.View.v_Tags>();
+                #region 限制商户
 
-                //限制商户
                 if (base.IsOnlyCurrentMerchant)
                 {
                     request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
@@ -64,14 +67,9 @@ namespace XCLCMS.WebAPI.Controllers
                 });
                 }
 
-                response.Body.ResultList = vtagsBLL.GetPageList(pager, new XCLNetTools.Entity.SqlPagerConditionEntity()
-                {
-                    OrderBy = "[TagsID] desc",
-                    Where = request.Body.Where
-                });
-                response.Body.PagerInfo = pager;
-                response.IsSuccess = true;
-                return response;
+                #endregion 限制商户
+
+                return this.bll.PageList(request);
             });
         }
 
@@ -84,40 +82,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
-                response.IsSuccess = true;
-                response.Message = "该标签可以使用！";
-
-                request.Body.TagName = (request.Body.TagName ?? "").Trim();
-
-                if (request.Body.TagsID > 0)
-                {
-                    var model = tagsBLL.GetModel(request.Body.TagsID);
-                    if (null != model)
-                    {
-                        if (string.Equals(request.Body.TagName, model.TagName, StringComparison.OrdinalIgnoreCase) && request.Body.MerchantAppID == model.FK_MerchantAppID && request.Body.MerchantID == model.FK_MerchantID)
-                        {
-                            return response;
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(request.Body.TagName))
-                {
-                    bool isExist = tagsBLL.IsExist(new Data.Model.Custom.Tags_NameCondition()
-                    {
-                        TagName = request.Body.TagName,
-                        FK_MerchantAppID = request.Body.MerchantAppID,
-                        FK_MerchantID = request.Body.MerchantID
-                    });
-                    if (isExist)
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "该标签已被占用！";
-                    }
-                }
-
-                return response;
+                return this.bll.IsExistTagName(request);
             });
         }
 
@@ -132,50 +97,18 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                #region 数据校验
+                #region 限制商户
 
-                request.Body.TagName = (request.Body.TagName ?? "").Trim();
-
-                //商户必须存在
-                var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
-                if (null == merchant)
+                if (base.IsOnlyCurrentMerchant && null != request.Body && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
-                    response.Message = "无效的商户号！";
+                    response.Message = "只能在自己所属的商户下面添加标签信息！";
                     return response;
                 }
 
-                if (string.IsNullOrWhiteSpace(request.Body.TagName))
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请提供标签名称！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                if (this.tagsBLL.IsExist(new Data.Model.Custom.Tags_NameCondition()
-                {
-                    TagName = request.Body.TagName,
-                    FK_MerchantAppID = request.Body.FK_MerchantAppID,
-                    FK_MerchantID = request.Body.FK_MerchantID
-                }))
-                {
-                    response.IsSuccess = false;
-                    response.Message = string.Format("标签名称【{0}】已存在！", request.Body.TagName);
-                    return response;
-                }
-
-                #endregion 数据校验
-
-                response.IsSuccess = this.tagsBLL.Add(request.Body);
-
-                if (response.IsSuccess)
-                {
-                    response.Message = "标签信息添加成功！";
-                }
-                else
-                {
-                    response.Message = "标签信息添加失败！";
-                }
+                response = this.bll.Add(request);
 
                 return response;
             });
@@ -192,68 +125,19 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 var response = new APIResponseEntity<bool>();
 
-                #region 数据校验
+                #region 限制商户
 
-                var model = tagsBLL.GetModel(request.Body.TagsID);
-                if (null == model)
+                if (base.IsOnlyCurrentMerchant && null != request.Body && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
-                    response.Message = "请指定有效的标签信息！";
+                    response.Message = "只能在自己所属的商户下面修改标签信息！";
                     return response;
                 }
 
-                //商户必须存在
-                var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
-                if (null == merchant)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "无效的商户号！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                if (!string.Equals(model.TagName, request.Body.TagName))
-                {
-                    if (this.tagsBLL.IsExist(new Data.Model.Custom.Tags_NameCondition()
-                    {
-                        TagName = request.Body.TagName,
-                        FK_MerchantAppID = request.Body.FK_MerchantAppID,
-                        FK_MerchantID = request.Body.FK_MerchantID
-                    }))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = string.Format("标签名称【{0}】已存在！", request.Body.TagName);
-                        return response;
-                    }
-                }
+                response = this.bll.Update(request);
 
-                //限制商户
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "只能修改自己的商户信息！";
-                    return response;
-                }
-
-                #endregion 数据校验
-
-                model.TagName = request.Body.TagName;
-                model.Description = request.Body.Description;
-                model.FK_MerchantID = request.Body.FK_MerchantID;
-                model.FK_MerchantAppID = request.Body.FK_MerchantAppID;
-                model.RecordState = request.Body.RecordState;
-                model.UpdaterID = base.CurrentUserModel.UserInfoID;
-                model.UpdaterName = base.CurrentUserModel.UserName;
-                model.UpdateTime = DateTime.Now;
-
-                response.IsSuccess = this.tagsBLL.Update(model);
-                if (response.IsSuccess)
-                {
-                    response.Message = "标签信息修改成功！";
-                }
-                else
-                {
-                    response.Message = "标签信息修改失败！";
-                }
                 return response;
             });
         }
@@ -267,60 +151,28 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = new APIResponseEntity<bool>();
+                #region 限制商户
 
-                if (request.Body.IsNotNullOrEmpty())
+                if (null != request.Body && request.Body.Count > 0)
                 {
-                    request.Body = request.Body.Where(k => k > 0).Distinct().ToList();
+                    request.Body = request.Body.Where(k =>
+                    {
+                        var model = this.tagsBLL.GetModel(k);
+                        if (null == model)
+                        {
+                            return false;
+                        }
+                        if (base.IsOnlyCurrentMerchant && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }).ToList();
                 }
 
-                if (request.Body.IsNullOrEmpty())
-                {
-                    response.IsSuccess = false;
-                    response.Message = "请指定要删除的标签ID！";
-                    return response;
-                }
+                #endregion 限制商户
 
-                //限制商户
-                if (base.IsOnlyCurrentMerchant)
-                {
-                    if (request.Body.Exists(id =>
-                    {
-                        var settingModel = this.tagsBLL.GetModel(id);
-                        return null != settingModel && settingModel.FK_MerchantID != base.CurrentUserModel.FK_MerchantID;
-                    }))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "只能删除属于自己的商户数据！";
-                        return response;
-                    }
-                }
-
-                foreach (var k in request.Body)
-                {
-                    var model = this.tagsBLL.GetModel(k);
-                    if (null == model)
-                    {
-                        continue;
-                    }
-
-                    model.UpdaterID = base.CurrentUserModel.UserInfoID;
-                    model.UpdaterName = base.CurrentUserModel.UserName;
-                    model.UpdateTime = DateTime.Now;
-                    model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
-                    if (!this.tagsBLL.Update(model))
-                    {
-                        response.IsSuccess = false;
-                        response.Message = "标签删除失败！";
-                        return response;
-                    }
-                }
-
-                response.IsSuccess = true;
-                response.Message = "已成功删除标签！";
-                response.IsRefresh = true;
-
-                return response;
+                return this.bll.Delete(request);
             });
         }
     }
