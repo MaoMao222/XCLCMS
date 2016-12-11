@@ -40,6 +40,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     response.Body = null;
                     response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                 }
 
                 #endregion 限制商户
@@ -219,7 +220,7 @@ namespace XCLCMS.WebAPI.Controllers
                 if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
-                    response.Message = "只能在自己所属的商户下面添加字典信息！";
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                     return response;
                 }
 
@@ -247,7 +248,7 @@ namespace XCLCMS.WebAPI.Controllers
                 if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     response.IsSuccess = false;
-                    response.Message = "只能在自己所属的商户下面修改字典信息！";
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                     return response;
                 }
 

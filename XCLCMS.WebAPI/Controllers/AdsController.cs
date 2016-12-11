@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
@@ -39,6 +40,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     response.Body = null;
                     response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                 }
 
                 #endregion 限制商户
@@ -100,7 +102,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     var response = new APIResponseEntity<bool>();
                     response.IsSuccess = false;
-                    response.Message = "只能新增自己的商户信息！";
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                     return response;
                 }
 
@@ -125,7 +127,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     var response = new APIResponseEntity<bool>();
                     response.IsSuccess = false;
-                    response.Message = "只能修改自己的商户信息！";
+                    response.Message = "只能操作属于自己商户下的数据信息！";
                     return response;
                 }
 
@@ -146,19 +148,21 @@ namespace XCLCMS.WebAPI.Controllers
             {
                 #region 限制商户
 
-                if (base.IsOnlyCurrentMerchant)
+                if (null != request.Body && request.Body.Count > 0)
                 {
-                    if (request.Body.Exists(id =>
+                    request.Body = request.Body.Where(k =>
                     {
-                        var model = this.adsBLL.GetModel(id);
-                        return null != model && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID;
-                    }))
-                    {
-                        var response = new APIResponseEntity<bool>();
-                        response.IsSuccess = false;
-                        response.Message = "只能删除属于自己的商户数据！";
-                        return response;
-                    }
+                        var model = this.adsBLL.GetModel(k);
+                        if (null == model)
+                        {
+                            return false;
+                        }
+                        if (base.IsOnlyCurrentMerchant && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }).ToList();
                 }
 
                 #endregion 限制商户
