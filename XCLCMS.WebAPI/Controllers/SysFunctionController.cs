@@ -76,7 +76,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 获取easyui tree格式的所有功能json
         /// </summary>
         [HttpGet]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionView)]
+        [XCLCMS.WebAPI.Filters.APIOpenPermissionFilter]
         public async Task<APIResponseEntity<List<XCLNetTools.Entity.EasyUI.TreeItem>>> GetAllJsonForEasyUITree([FromUri] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.GetAllJsonForEasyUITreeEntity> request)
         {
             return await Task.Run(() =>
