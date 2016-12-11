@@ -40,8 +40,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 if (string.IsNullOrWhiteSpace(bodyModel.UserToken))
                 {
-                    //如果当前是匿名用户，则使用内置用户作为当前接口的登录用户
-                    this._currentUserModel = this.userInfoBLL.GetModel(XCLCMS.Data.CommonHelper.SystemDataConst.XInnerUserName);
+                    //匿名用户访问
                 }
                 else
                 {
@@ -96,7 +95,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             get
             {
-                return Lib.Permission.PerHelper.IsOnlyCurrentMerchant(this.CurrentUserModel.UserInfoID);
+                return Lib.Permission.PerHelper.IsOnlyCurrentMerchant(null == this.CurrentUserModel ? 0 : this.CurrentUserModel.UserInfoID);
             }
         }
 

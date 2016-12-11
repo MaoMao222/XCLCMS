@@ -28,6 +28,13 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     //用户名和密码登录
                     userModel = userInfoBLL.GetModel(request.Body.UserName, XCLCMS.Data.CommonHelper.EncryptHelper.EncryptStringMD5(request.Body.Pwd));
+                    //写入日志
+                    XCLNetLogger.Log.WriteLog(new XCLNetLogger.Model.LogModel()
+                    {
+                        LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
+                        LogLevel = XCLNetLogger.Config.LogConfig.LogLevel.INFO,
+                        Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")
+                    });
                 }
                 else
                 {
@@ -62,14 +69,6 @@ namespace XCLCMS.WebAPI.Controllers
                     //所在商户应用
                     response.Body.MerchantApp = this.merchantAppBLL.GetModel(userModel.FK_MerchantAppID);
                 }
-
-                //写入日志
-                XCLNetLogger.Log.WriteLog(new XCLNetLogger.Model.LogModel()
-                {
-                    LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
-                    LogLevel = XCLNetLogger.Config.LogConfig.LogLevel.INFO,
-                    Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")
-                });
 
                 return response;
             });
