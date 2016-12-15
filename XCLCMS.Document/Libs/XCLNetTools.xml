@@ -1958,6 +1958,25 @@
             Redis帮助类
             </summary>
         </member>
+        <member name="T:XCLNetTools.DataSource.DataReaderHelper">
+            <summary>
+            DataReader帮助类
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataReaderHelper.DataReaderToList``1(System.Data.IDataReader)">
+            <summary>
+            将DataReader转为list
+            </summary>
+            <param name="dr">要转换的数据</param>
+            <returns>list</returns>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity``1(System.Data.IDataReader)">
+            <summary>
+            将DataReader转为实体
+            </summary>
+            <param name="dr">要转换的数据</param>
+            <returns>list</returns>
+        </member>
         <member name="T:XCLNetTools.DataSource.DataSetHelper">
             <summary>
             dataset相关

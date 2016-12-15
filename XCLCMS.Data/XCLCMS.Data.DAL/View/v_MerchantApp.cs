@@ -54,8 +54,7 @@ namespace XCLCMS.Data.DAL.View
         public List<XCLCMS.Data.Model.View.v_MerchantApp> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "v_MerchantApp";
-            DataTable dt = XCLCMS.Data.DAL.Common.Common.GetPageList(pageInfo, condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_MerchantApp>(dt) as List<XCLCMS.Data.Model.View.v_MerchantApp>;
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_MerchantApp>(pageInfo, condition);
         }
 
         #endregion Extend Method

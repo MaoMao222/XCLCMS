@@ -44,8 +44,7 @@ namespace XCLCMS.Data.DAL
         public List<XCLCMS.Data.Model.SysLog> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "SysLog";
-            DataTable dt = XCLCMS.Data.DAL.Common.Common.GetPageList( pageInfo,condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysLog>(dt) as List<XCLCMS.Data.Model.SysLog>;
+            return  XCLCMS.Data.DAL.Common.Common.GetPageList< XCLCMS.Data.Model.SysLog>( pageInfo,condition);
         }
 
         /// <summary>

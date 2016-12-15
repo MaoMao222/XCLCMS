@@ -58,8 +58,7 @@ namespace XCLCMS.Data.DAL.View
         public List<XCLCMS.Data.Model.View.v_Tags> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "v_Tags";
-            DataTable dt = XCLCMS.Data.DAL.Common.Common.GetPageList(pageInfo, condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Tags>(dt) as List<XCLCMS.Data.Model.View.v_Tags>;
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_Tags>(pageInfo, condition);
         }
 
         #endregion Extend Method

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 
@@ -13,7 +14,7 @@ namespace XCLCMS.Data.DAL.Common
         /// <summary>
         /// 分页
         /// </summary>
-        public static DataTable GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
+        public static List<T> GetPageList<T>(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition) where T : new()
         {
             condition.PageIndex = pageInfo.PageIndex;
             condition.PageSize = pageInfo.PageSize;
@@ -23,9 +24,12 @@ namespace XCLCMS.Data.DAL.Common
             var dbCommand = db.GetSqlStringCommand(strSql);
             db.AddOutParameter(dbCommand, "TotalCount", DbType.Int32, 4);
 
-            var ds = db.ExecuteDataSet(dbCommand);
-            pageInfo.RecordCount = XCLNetTools.Common.DataTypeConvert.ToInt(dbCommand.Parameters["@TotalCount"].Value);
-            return null != ds && ds.Tables.Count > 0 ? ds.Tables[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<T>(dr) as List<T>;
+                pageInfo.RecordCount = XCLNetTools.Common.DataTypeConvert.ToInt(dbCommand.Parameters["@TotalCount"].Value);
+                return lst;
+            }
         }
 
         /// <summary>

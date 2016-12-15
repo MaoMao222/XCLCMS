@@ -189,8 +189,7 @@ namespace XCLCMS.Data.DAL
         public List<XCLCMS.Data.Model.Article> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "Article";
-            DataTable dt = XCLCMS.Data.DAL.Common.Common.GetPageList(pageInfo, condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Article>(dt) as List<XCLCMS.Data.Model.Article>;
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.Article>(pageInfo, condition);
         }
 
         /// <summary>
@@ -216,7 +215,7 @@ namespace XCLCMS.Data.DAL
                 ArticleRecordState = null == condition.ArticleRecordState ? string.Empty : " and tb_Article.RecordState=@ArticleRecordState",
                 MerchantID = condition.MerchantID.HasValue ? " and tb_Article.MerchantID=@MerchantID " : string.Empty,
                 MerchantAppID = condition.MerchantAppID.HasValue ? " and tb_Article.MerchantAppID=@MerchantAppID " : string.Empty,
-                IsASC=condition.IsASC
+                IsASC = condition.IsASC
             });
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
             db.AddInParameter(dbCommand, "ArticleID", DbType.Int64, condition.ArticleID);

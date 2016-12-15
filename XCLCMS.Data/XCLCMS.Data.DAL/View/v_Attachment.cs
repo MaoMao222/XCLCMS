@@ -24,8 +24,7 @@ namespace XCLCMS.Data.DAL.View
         public List<XCLCMS.Data.Model.View.v_Attachment> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "v_Attachment";
-            var dt = XCLCMS.Data.DAL.Common.Common.GetPageList(pageInfo, condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Attachment>(dt) as List<XCLCMS.Data.Model.View.v_Attachment>;
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_Attachment>(pageInfo, condition);
         }
     }
 }

@@ -57,8 +57,7 @@ namespace XCLCMS.Data.DAL
         public List<XCLCMS.Data.Model.UserInfo> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "UserInfo";
-            DataTable dt = XCLCMS.Data.DAL.Common.Common.GetPageList(pageInfo, condition);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.UserInfo>(dt) as List<XCLCMS.Data.Model.UserInfo>;
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.UserInfo>(pageInfo, condition);
         }
 
         /// <summary>
