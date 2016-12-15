@@ -30,8 +30,10 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysLog>(ds) as List<XCLCMS.Data.Model.SysLog>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysLog>(dr);
+            }
         }
 
         #endregion Method
@@ -44,7 +46,7 @@ namespace XCLCMS.Data.DAL
         public List<XCLCMS.Data.Model.SysLog> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             condition.TableName = "SysLog";
-            return  XCLCMS.Data.DAL.Common.Common.GetPageList< XCLCMS.Data.Model.SysLog>( pageInfo,condition);
+            return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.SysLog>(pageInfo, condition);
         }
 
         /// <summary>

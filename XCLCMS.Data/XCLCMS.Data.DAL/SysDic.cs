@@ -25,9 +25,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from SysDic  WITH(NOLOCK)  where SysDicID=@SysDicID");
             db.AddInParameter(dbCommand, "SysDicID", DbType.Int64, SysDicID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysDic>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -43,8 +44,10 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysDic>(ds) as List<XCLCMS.Data.Model.SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysDic>(dr);
+            }
         }
 
         #endregion Method
@@ -58,8 +61,11 @@ namespace XCLCMS.Data.DAL
         {
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(string.Format("select * from fun_SysDic_GetLayerListByID({0})", sysDicID));
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Custom.SysDicSimple>(ds) as List<XCLCMS.Data.Model.Custom.SysDicSimple>;
+            List<XCLCMS.Data.Model.Custom.SysDicSimple> lst = null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Custom.SysDicSimple>(dr);
+            }
             if (null != lst)
             {
                 lst.Reverse();
@@ -103,7 +109,7 @@ namespace XCLCMS.Data.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT
                                         b.*
-                                        FROM dbo.SysDic AS a WITH(NOLOCK)  
+                                        FROM dbo.SysDic AS a WITH(NOLOCK)
                                         INNER JOIN dbo.SysDic AS b  WITH(NOLOCK)  ON a.Code=@Code AND a.SysDicID=b.ParentID
                                         where b.RecordState='N'
                                         ");
@@ -112,8 +118,10 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysDic>(ds) as List<XCLCMS.Data.Model.SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -124,7 +132,7 @@ namespace XCLCMS.Data.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT
                                         a.*
-                                        FROM dbo.SysDic AS a WITH(NOLOCK)  
+                                        FROM dbo.SysDic AS a WITH(NOLOCK)
                                         where ParentID=@ParentID and RecordState='N'
                                         ");
 
@@ -132,8 +140,10 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, sysDicID);
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysDic>(ds) as List<XCLCMS.Data.Model.SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -225,17 +235,17 @@ namespace XCLCMS.Data.DAL
             strSql.Append(@"SELECT
                                         top 1
                                         a.*
-                                        FROM dbo.SysDic AS a WITH(NOLOCK)  
+                                        FROM dbo.SysDic AS a WITH(NOLOCK)
                                         where a.RecordState='N' and a.Code=@Code
                                         ");
 
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysDic>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysDic>(dr);
+            }
         }
 
         #endregion MethodEx

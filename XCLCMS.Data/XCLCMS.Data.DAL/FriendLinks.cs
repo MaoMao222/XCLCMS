@@ -109,10 +109,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from FriendLinks WITH(NOLOCK)   where FriendLinkID=@FriendLinkID");
             db.AddInParameter(dbCommand, "FriendLinkID", DbType.Int64, FriendLinkID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.FriendLinks>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.FriendLinks>(dr);
+            }
         }
 
         #endregion Method
@@ -137,9 +137,10 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "Title", DbType.String, condition.Title);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.FriendLinks>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.FriendLinks>(dr);
+            }
         }
 
         #endregion MethodEx

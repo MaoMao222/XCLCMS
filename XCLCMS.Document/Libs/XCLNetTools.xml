@@ -1963,6 +1963,13 @@
             DataReader帮助类
             </summary>
         </member>
+        <member name="M:XCLNetTools.DataSource.DataReaderHelper.DataReaderToIList``1(System.Data.IDataReader)">
+            <summary>
+            将DataReader转为list
+            </summary>
+            <param name="dr">要转换的数据</param>
+            <returns>list</returns>
+        </member>
         <member name="M:XCLNetTools.DataSource.DataReaderHelper.DataReaderToList``1(System.Data.IDataReader)">
             <summary>
             将DataReader转为list
@@ -1981,6 +1988,34 @@
             <summary>
             dataset相关
             </summary>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataSetToIList``1(System.Data.DataSet)">
+            <summary>
+            将dataset的第一个datatable转为list
+            </summary>
+            <param name="ds">要转换的数据</param>
+            <returns>list</returns>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataTableToIList``1(System.Data.DataTable)">
+            <summary>
+            将dataTable转为list
+            </summary>
+            <param name="dt">要转换的数据</param>
+            <returns>list</returns>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataSetToList``1(System.Data.DataSet)">
+            <summary>
+            将dataset的第一个datatable转为list
+            </summary>
+            <param name="ds">要转换的数据</param>
+            <returns>list</returns>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataTableToList``1(System.Data.DataTable)">
+            <summary>
+            将dataTable转为list
+            </summary>
+            <param name="dt">要转换的数据</param>
+            <returns>list</returns>
         </member>
         <member name="T:XCLNetTools.DataSource.DataTableHelper">
             <summary>

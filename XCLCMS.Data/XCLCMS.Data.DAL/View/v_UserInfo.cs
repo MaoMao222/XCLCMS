@@ -25,9 +25,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "UserInfoID", DbType.Int64, UserInfoID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_UserInfo>(ds);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_UserInfo>(dr);
+            }
         }
 
         /// <summary>
@@ -42,8 +43,10 @@ namespace XCLCMS.Data.DAL.View
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_UserInfo>(ds) as List<XCLCMS.Data.Model.View.v_UserInfo>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_UserInfo>(dr);
+            }
         }
 
         #endregion Method

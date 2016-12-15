@@ -24,10 +24,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Article WITH(NOLOCK)   where ArticleID=@ArticleID");
             db.AddInParameter(dbCommand, "ArticleID", DbType.Int64, ArticleID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Article>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_Article>(dr);
+            }
         }
 
         /// <summary>
@@ -43,8 +43,10 @@ namespace XCLCMS.Data.DAL.View
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_Article>(ds) as List<XCLCMS.Data.Model.View.v_Article>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Article>(dr);
+            }
         }
 
         #endregion Method
@@ -160,9 +162,12 @@ namespace XCLCMS.Data.DAL.View
             }
             dbCommand.CommandText = strSql.Replace("#where#", string.Join(" and ", where.ToArray())).Replace("#join_ArticleType#", join_ArticleType);
 
-            var ds = db.ExecuteDataSet(dbCommand);
-            pageInfo.RecordCount = XCLNetTools.Common.DataTypeConvert.ToInt(dbCommand.Parameters["@TotalCount"].Value);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_Article>(ds) as List<XCLCMS.Data.Model.View.v_Article>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Article>(dr);
+                pageInfo.RecordCount = XCLNetTools.Common.DataTypeConvert.ToInt(dbCommand.Parameters["@TotalCount"].Value);
+                return lst;
+            }
         }
 
         #endregion Extend Method

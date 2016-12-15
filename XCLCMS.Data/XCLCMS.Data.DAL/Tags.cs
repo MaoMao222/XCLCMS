@@ -96,9 +96,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Tags  WITH(NOLOCK)  where TagsID=@TagsID");
             db.AddInParameter(dbCommand, "TagsID", DbType.Int64, TagsID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Tags>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Tags>(dr);
+            }
         }
 
         #endregion Method
@@ -123,9 +124,10 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "TagName", DbType.String, condition.TagName);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Tags>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Tags>(dr);
+            }
         }
 
         /// <summary>

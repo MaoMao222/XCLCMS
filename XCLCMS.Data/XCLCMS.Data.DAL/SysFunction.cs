@@ -97,9 +97,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from SysFunction  WITH(NOLOCK)  where SysFunctionID=@SysFunctionID");
             db.AddInParameter(dbCommand, "SysFunctionID", DbType.Int64, SysFunctionID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysFunction>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysFunction>(dr);
+            }
         }
 
         /// <summary>
@@ -116,8 +117,10 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysFunction>(ds) as List<XCLCMS.Data.Model.SysFunction>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysFunction>(dr);
+            }
         }
 
         #endregion Method
@@ -147,7 +150,7 @@ namespace XCLCMS.Data.DAL
 
             dbCommand.Parameters.Add(new SqlParameter("@FunctionListTable", SqlDbType.Structured)
             {
-                TypeName= "TVP_IDTable",
+                TypeName = "TVP_IDTable",
                 Direction = ParameterDirection.Input,
                 Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(functionList)
             });
@@ -167,14 +170,16 @@ namespace XCLCMS.Data.DAL
                                     )
                                     SELECT
                                     a.*
-                                    FROM dbo.SysFunction AS a WITH(NOLOCK)  
+                                    FROM dbo.SysFunction AS a WITH(NOLOCK)
                                     INNER JOIN Info1 AS b ON a.SysFunctionID=b.FK_SysFunctionID AND a.RecordState='N'
                                     ";
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysRoleID", DbType.Int64, sysRoleID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysFunction>(ds) as List<XCLCMS.Data.Model.SysFunction>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysFunction>(dr);
+            }
         }
 
         /// <summary>
@@ -185,8 +190,11 @@ namespace XCLCMS.Data.DAL
             string str = string.Format("select * from fun_SysFunction_GetLayerListByID({0})", sysFunctionID);
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(str.ToString());
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Custom.SysFunctionSimple>(ds) as List<XCLCMS.Data.Model.Custom.SysFunctionSimple>;
+            List<XCLCMS.Data.Model.Custom.SysFunctionSimple> lst = null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Custom.SysFunctionSimple>(dr);
+            }
             if (null != lst)
             {
                 lst.Reverse();
@@ -219,14 +227,16 @@ namespace XCLCMS.Data.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT
                                         a.*
-                                        FROM dbo.SysFunction AS a WITH(NOLOCK)  
+                                        FROM dbo.SysFunction AS a WITH(NOLOCK)
                                         where ParentID=@ParentID and RecordState='N'
                                         ");
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, sysFunctionID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysFunction>(ds) as List<XCLCMS.Data.Model.SysFunction>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysFunction>(dr);
+            }
         }
 
         #endregion MethodEx

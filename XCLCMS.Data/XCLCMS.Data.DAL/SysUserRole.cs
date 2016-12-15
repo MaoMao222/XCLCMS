@@ -32,8 +32,10 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysUserRole>(ds) as List<XCLCMS.Data.Model.SysUserRole>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysUserRole>(dr);
+            }
         }
 
         #endregion Method
@@ -69,7 +71,7 @@ namespace XCLCMS.Data.DAL
 
             dbCommand.Parameters.Add(new SqlParameter("@FK_SysRoleIDTable", SqlDbType.Structured)
             {
-                TypeName= "TVP_IDTable",
+                TypeName = "TVP_IDTable",
                 Direction = ParameterDirection.Input,
                 Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(roleIdList)
             });

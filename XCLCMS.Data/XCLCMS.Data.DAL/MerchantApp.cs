@@ -109,9 +109,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from MerchantApp  WITH(NOLOCK)  where MerchantAppID=@MerchantAppID");
             db.AddInParameter(dbCommand, "MerchantAppID", DbType.Int64, MerchantAppID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.MerchantApp>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.MerchantApp>(dr);
+            }
         }
 
         /// <summary>
@@ -126,8 +127,10 @@ namespace XCLCMS.Data.DAL
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.MerchantApp>(ds) as List<XCLCMS.Data.Model.MerchantApp>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.MerchantApp>(dr);
+            }
         }
 
         #endregion Method
@@ -142,8 +145,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from MerchantApp  WITH(NOLOCK)  where FK_MerchantID=@FK_MerchantID");
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, merchantID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.MerchantApp>(ds.Tables[0]) as List<XCLCMS.Data.Model.MerchantApp>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.MerchantApp>(dr);
+            }
         }
 
         /// <summary>
@@ -165,9 +170,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from MerchantApp  WITH(NOLOCK)  where AppKey=@AppKey");
             db.AddInParameter(dbCommand, "AppKey", DbType.AnsiString, appKey);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.MerchantApp>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.MerchantApp>(dr);
+            }
         }
 
         /// <summary>
@@ -179,9 +185,10 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from MerchantApp  WITH(NOLOCK)  where MerchantAppID=@MerchantAppID and AppKey=@AppKey");
             db.AddInParameter(dbCommand, "MerchantAppID", DbType.Int64, appID);
             db.AddInParameter(dbCommand, "AppKey", DbType.AnsiString, appKey);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.MerchantApp>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.MerchantApp>(dr);
+            }
         }
 
         #endregion Extend Method

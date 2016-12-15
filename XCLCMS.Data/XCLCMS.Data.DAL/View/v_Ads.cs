@@ -22,10 +22,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Ads WITH(NOLOCK)   where AdsID=@AdsID");
             db.AddInParameter(dbCommand, "AdsID", DbType.Int64, AdsID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Ads>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_Ads>(dr);
+            }
         }
 
         /// <summary>
@@ -41,8 +41,10 @@ namespace XCLCMS.Data.DAL.View
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_Ads>(ds) as List<XCLCMS.Data.Model.View.v_Ads>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Ads>(dr);
+            }
         }
 
         #endregion Method

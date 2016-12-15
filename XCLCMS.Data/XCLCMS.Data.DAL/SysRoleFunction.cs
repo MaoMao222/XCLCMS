@@ -46,7 +46,7 @@ namespace XCLCMS.Data.DAL
 
             dbCommand.Parameters.Add(new SqlParameter("@FK_SysFunctionIDTable", SqlDbType.Structured)
             {
-                TypeName= "TVP_IDTable",
+                TypeName = "TVP_IDTable",
                 Direction = ParameterDirection.Input,
                 Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(functionIdList)
             });

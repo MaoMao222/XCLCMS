@@ -103,9 +103,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from SysRole  WITH(NOLOCK)  where SysRoleID=@SysRoleID");
             db.AddInParameter(dbCommand, "SysRoleID", DbType.Int64, SysRoleID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysRole>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         /// <summary>
@@ -120,8 +121,10 @@ namespace XCLCMS.Data.DAL
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysRole>(ds) as List<XCLCMS.Data.Model.SysRole>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         #endregion Method
@@ -135,13 +138,15 @@ namespace XCLCMS.Data.DAL
         {
             string strSql = @"SELECT
                                         a.*
-                                        FROM dbo.SysRole AS a WITH(NOLOCK)  
+                                        FROM dbo.SysRole AS a WITH(NOLOCK)
                                         INNER JOIN dbo.SysUserRole AS b  WITH(NOLOCK)  ON b.FK_UserInfoID=@FK_UserInfoID AND b.RecordState='N' AND a.RecordState='N' and a.SysRoleID=b.FK_SysRoleID";
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "FK_UserInfoID", DbType.Int64, userId);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysRole>(ds) as List<XCLCMS.Data.Model.SysRole>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         /// <summary>
@@ -163,8 +168,11 @@ namespace XCLCMS.Data.DAL
             string str = string.Format("select * from fun_SysRole_GetLayerListByID({0})", sysRoleID);
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(str.ToString());
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Custom.SysRoleSimple>(ds) as List<XCLCMS.Data.Model.Custom.SysRoleSimple>;
+            List<XCLCMS.Data.Model.Custom.SysRoleSimple> lst = null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Custom.SysRoleSimple>(dr);
+            }
             if (null != lst)
             {
                 lst.Reverse();
@@ -197,14 +205,16 @@ namespace XCLCMS.Data.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT
                                         a.*
-                                        FROM dbo.SysRole AS a WITH(NOLOCK)  
+                                        FROM dbo.SysRole AS a WITH(NOLOCK)
                                         where ParentID=@ParentID and RecordState='N'
                                         ");
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, sysRoleID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysRole>(ds) as List<XCLCMS.Data.Model.SysRole>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         /// <summary>
@@ -216,17 +226,17 @@ namespace XCLCMS.Data.DAL
             strSql.Append(@"SELECT
                                         top 1
                                         a.*
-                                        FROM dbo.SysRole AS a WITH(NOLOCK)  
+                                        FROM dbo.SysRole AS a WITH(NOLOCK)
                                         where a.RecordState='N' and a.Code=@Code
                                         ");
 
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.SysRole>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         /// <summary>
@@ -240,17 +250,19 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(@"
-                                                                                                        SELECT a.* FROM dbo.SysRole AS a WITH(NOLOCK)  
+                                                                                                        SELECT a.* FROM dbo.SysRole AS a WITH(NOLOCK)
                                                                                                         INNER JOIN @TVP_RoleID AS b ON a.SysRoleID=b.ID
                                                                                                     ");
             dbCommand.Parameters.Add(new SqlParameter("@TVP_RoleID", SqlDbType.Structured)
             {
-                TypeName= "TVP_IDTable",
+                TypeName = "TVP_IDTable",
                 Direction = ParameterDirection.Input,
                 Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(roleIdList)
             });
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.SysRole>(ds) as List<XCLCMS.Data.Model.SysRole>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
+            }
         }
 
         #endregion MethodEx

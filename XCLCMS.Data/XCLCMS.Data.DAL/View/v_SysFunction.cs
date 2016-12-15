@@ -28,9 +28,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysFunctionID", DbType.Int64, SysFunctionID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysFunction>(ds);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_SysFunction>(dr);
+            }
         }
 
         /// <summary>
@@ -46,8 +47,10 @@ namespace XCLCMS.Data.DAL.View
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysFunction>(ds) as List<XCLCMS.Data.Model.View.v_SysFunction>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysFunction>(dr);
+            }
         }
 
         #endregion Method
@@ -64,8 +67,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, parentID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysFunction>(ds) as List<XCLCMS.Data.Model.View.v_SysFunction>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysFunction>(dr);
+            }
         }
 
         #endregion MethodEx

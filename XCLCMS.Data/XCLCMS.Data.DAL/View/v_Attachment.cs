@@ -13,9 +13,10 @@ namespace XCLCMS.Data.DAL.View
             var db = base.CreateDatabase();
             var dbCommand = db.GetSqlStringCommand("select * from v_Attachment WITH(NOLOCK)   where AttachmentID=@AttachmentID");
             db.AddInParameter(dbCommand, "AttachmentID", DbType.Int64, AttachmentID);
-            var ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Attachment>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_Attachment>(dr);
+            }
         }
 
         /// <summary>

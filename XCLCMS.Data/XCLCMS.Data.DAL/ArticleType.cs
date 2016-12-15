@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
 namespace XCLCMS.Data.DAL
 {
@@ -49,23 +48,6 @@ namespace XCLCMS.Data.DAL
             {
                 throw new Exception(result.ResultMessage);
             }
-        }
-
-        /// <summary>
-        /// 获得数据列表
-        /// </summary>
-        public List<XCLCMS.Data.Model.ArticleType> GetModelList(string strWhere)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select FK_ArticleID,FK_TypeID,RecordState,CreateTime,CreaterID,CreaterName,UpdateTime,UpdaterID,UpdaterName ");
-            strSql.Append(" FROM ArticleType  WITH(NOLOCK)  ");
-            if (strWhere.Trim() != "")
-            {
-                strSql.Append(" where " + strWhere);
-            }
-            Database db = DatabaseFactory.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.ArticleType>(ds) as List<XCLCMS.Data.Model.ArticleType>;
         }
 
         #endregion Method

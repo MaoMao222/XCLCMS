@@ -25,10 +25,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Merchant  WITH(NOLOCK)  where MerchantID=@MerchantID");
             db.AddInParameter(dbCommand, "MerchantID", DbType.Int64, MerchantID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_Merchant>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_Merchant>(dr);
+            }
         }
 
         /// <summary>
@@ -40,8 +40,10 @@ namespace XCLCMS.Data.DAL.View
             strSql.Append("select * FROM v_Merchant WITH(NOLOCK)   ");
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_Merchant>(ds) as List<XCLCMS.Data.Model.View.v_Merchant>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Merchant>(dr);
+            }
         }
 
         #endregion Method

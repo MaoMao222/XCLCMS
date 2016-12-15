@@ -25,10 +25,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysDicID", DbType.Int64, SysDicID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysDic>(ds);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -44,8 +44,10 @@ namespace XCLCMS.Data.DAL.View
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysDic>(ds) as List<XCLCMS.Data.Model.View.v_SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         #endregion BasicMethod
@@ -60,8 +62,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_SysDic  WITH(NOLOCK)  where ParentID=@ParentID order by sort asc");
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, parentID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysDic>(ds) as List<XCLCMS.Data.Model.View.v_SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -72,8 +76,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from fun_SysDic_GetAllUnderListByCode(@Code)");
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysDic>(ds) as List<XCLCMS.Data.Model.View.v_SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -84,8 +90,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from fun_SysDic_GetAllUnderListByID(@sysDicID)");
             db.AddInParameter(dbCommand, "sysDicID", DbType.AnsiString, sysDicID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysDic>(ds) as List<XCLCMS.Data.Model.View.v_SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         /// <summary>
@@ -97,8 +105,10 @@ namespace XCLCMS.Data.DAL.View
             strSql.Append(@"SELECT * FROM dbo.fun_SysDic_GetAllUnderListByCode('SysMenu') order by sort asc");
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.View.v_SysDic>(ds.Tables[0]) as List<XCLCMS.Data.Model.View.v_SysDic>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
+            }
         }
 
         #endregion ExtensionMethod

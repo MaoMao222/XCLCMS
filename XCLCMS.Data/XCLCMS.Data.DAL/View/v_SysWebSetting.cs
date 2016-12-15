@@ -25,9 +25,10 @@ namespace XCLCMS.Data.DAL.View
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysWebSettingID", DbType.Int64, SysWebSettingID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysWebSetting>(ds);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_SysWebSetting>(dr);
+            }
         }
 
         /// <summary>
@@ -42,8 +43,10 @@ namespace XCLCMS.Data.DAL.View
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.View.v_SysWebSetting>(ds) as List<XCLCMS.Data.Model.View.v_SysWebSetting>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysWebSetting>(dr);
+            }
         }
 
         #endregion Method

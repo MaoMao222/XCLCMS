@@ -121,9 +121,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Attachment WITH(NOLOCK)   where AttachmentID=@AttachmentID");
             db.AddInParameter(dbCommand, "AttachmentID", DbType.Int64, AttachmentID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Attachment>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Attachment>(dr);
+            }
         }
 
         /// <summary>
@@ -138,8 +139,10 @@ namespace XCLCMS.Data.DAL
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Attachment>(ds) as List<XCLCMS.Data.Model.Attachment>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Attachment>(dr);
+            }
         }
 
         #endregion Method
@@ -154,8 +157,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Attachment  WITH(NOLOCK)  where ParentID=@ParentID");
             db.AddInParameter(dbCommand, "ParentID", DbType.Int64, parentId);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Attachment>(ds.Tables[0]) as List<XCLCMS.Data.Model.Attachment>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Attachment>(dr);
+            }
         }
 
         /// <summary>
@@ -276,8 +281,10 @@ namespace XCLCMS.Data.DAL
                 Direction = ParameterDirection.Input,
                 Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(ids)
             });
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Attachment>(ds.Tables[0]) as List<XCLCMS.Data.Model.Attachment>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Attachment>(dr);
+            }
         }
 
         #endregion MethodEx

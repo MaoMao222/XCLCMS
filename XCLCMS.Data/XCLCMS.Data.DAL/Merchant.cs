@@ -124,9 +124,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Merchant  WITH(NOLOCK)  where MerchantID=@MerchantID");
             db.AddInParameter(dbCommand, "MerchantID", DbType.Int64, MerchantID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.Merchant>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Merchant>(dr);
+            }
         }
 
         /// <summary>
@@ -141,8 +142,10 @@ namespace XCLCMS.Data.DAL
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Merchant>(ds) as List<XCLCMS.Data.Model.Merchant>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Merchant>(dr);
+            }
         }
 
         #endregion Method
@@ -172,7 +175,7 @@ namespace XCLCMS.Data.DAL
             {
                 TypeName = "TVP_IDTable",
                 Direction = ParameterDirection.Input,
-                Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long,long>(idLst)
+                Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(idLst)
             });
             dbCommand.Parameters.Add(new SqlParameter("@Context", SqlDbType.Structured)
             {

@@ -25,9 +25,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from UserInfo WITH(NOLOCK)   where UserInfoID=@UserInfoID");
             db.AddInParameter(dbCommand, "UserInfoID", DbType.Int64, UserInfoID);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.UserInfo>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.UserInfo>(dr);
+            }
         }
 
         /// <summary>
@@ -43,8 +44,10 @@ namespace XCLCMS.Data.DAL
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.UserInfo>(ds) as List<XCLCMS.Data.Model.UserInfo>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.UserInfo>(dr);
+            }
         }
 
         #endregion Method
@@ -80,9 +83,10 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from UserInfo  WITH(NOLOCK)  where UserName=@UserName and Pwd=@Pwd");
             db.AddInParameter(dbCommand, "UserName", DbType.AnsiString, userName);
             db.AddInParameter(dbCommand, "Pwd", DbType.AnsiString, pwd);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.UserInfo>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.UserInfo>(dr);
+            }
         }
 
         /// <summary>
@@ -93,9 +97,10 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from UserInfo WITH(NOLOCK)   where UserName=@UserName");
             db.AddInParameter(dbCommand, "UserName", DbType.AnsiString, userName);
-            DataSet ds = db.ExecuteDataSet(dbCommand);
-            var lst = XCLNetTools.Generic.ListHelper.DataTableToList<XCLCMS.Data.Model.UserInfo>(ds.Tables[0]);
-            return null != lst && lst.Count > 0 ? lst[0] : null;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.UserInfo>(dr);
+            }
         }
 
         /// <summary>

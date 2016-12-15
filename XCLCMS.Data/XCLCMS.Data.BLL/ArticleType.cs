@@ -22,14 +22,6 @@ namespace XCLCMS.Data.BLL
             return dal.Add(model);
         }
 
-        /// <summary>
-        /// 获得数据列表
-        /// </summary>
-        public List<XCLCMS.Data.Model.ArticleType> GetModelList(string strWhere)
-        {
-            return dal.GetModelList(strWhere);
-        }
-
         #endregion BasicMethod
 
         #region Extend Method

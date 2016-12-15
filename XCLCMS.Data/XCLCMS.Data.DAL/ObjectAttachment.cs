@@ -32,8 +32,10 @@ namespace XCLCMS.Data.DAL
                 strSql.Append(" where " + strWhere);
             }
             Database db = base.CreateDatabase();
-            var ds = db.ExecuteDataSet(CommandType.Text, strSql.ToString());
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.ObjectAttachment>(ds) as List<XCLCMS.Data.Model.ObjectAttachment>;
+            using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectAttachment>(dr);
+            }
         }
 
         #endregion Method
@@ -135,8 +137,10 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "ObjectType", DbType.String, objectType.ToString());
             db.AddInParameter(dbCommand, "FK_ObjectID", DbType.Int64, objectID);
 
-            var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.ObjectAttachment>(ds) as List<XCLCMS.Data.Model.ObjectAttachment>;
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectAttachment>(dr);
+            }
         }
 
         #endregion Extend Method
