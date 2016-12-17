@@ -1,4 +1,6 @@
-﻿namespace XCLCMS.Data.CommonHelper
+﻿using System;
+
+namespace XCLCMS.Data.CommonHelper
 {
     /// <summary>
     /// 加密解密相关
@@ -64,7 +66,7 @@
             {
                 return null;
             }
-            return EncryptHelper.EncryptStringDES(string.Format("{0}^{1}", model.UserName, model.Pwd));
+            return EncryptHelper.EncryptStringDES(string.Format("{0}^{1}^{2}", model.UserName, model.Pwd, DateTime.Now.AddDays(7).Ticks));
         }
 
         /// <summary>
@@ -77,14 +79,20 @@
             {
                 return model;
             }
-            var ut = EncryptHelper.DecryptStringDES(token);//解密为：admin^21232F297A57A5A743894A0E4A801FC3
+            var ut = EncryptHelper.DecryptStringDES(token) ?? string.Empty;//解密为：admin^21232F297A57A5A743894A0E4A801FC3^636176029022230294
             string[] strSplit = ut.Split('^');
-            if (strSplit.Length == 2)
+            if (strSplit.Length != 3)
             {
-                model = new Data.Model.Custom.UserNamePwd();
-                model.UserName = strSplit[0];
-                model.Pwd = strSplit[1];
+                return model;
             }
+            long ticks = XCLNetTools.Common.DataTypeConvert.ToLong(strSplit[2]);
+            if (DateTime.Now.Ticks > ticks)
+            {
+                return model;
+            }
+            model = new Data.Model.Custom.UserNamePwd();
+            model.UserName = strSplit[0];
+            model.Pwd = strSplit[1];
             return model;
         }
     }
