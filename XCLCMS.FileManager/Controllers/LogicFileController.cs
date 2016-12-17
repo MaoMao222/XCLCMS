@@ -58,7 +58,16 @@ namespace XCLCMS.FileManager.Controllers
                 Where = strWhere
             });
             viewModel.PagerModel = base.PageParamsInfo;
-            return View(viewModel);
+
+            if (viewModel.IsSelectFile)
+            {
+                ViewBag.IsShowNav = false;
+                return View("~/Views/LogicFile/Select.cshtml", viewModel);
+            }
+            else
+            {
+                return View(viewModel);
+            }
         }
 
         /// <summary>

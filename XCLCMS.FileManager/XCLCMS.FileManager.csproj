@@ -324,6 +324,7 @@
     <Content Include="Config\AppSettings.config.tpl" />
     <Content Include="Config\ConnectionStrings.config.tpl" />
     <Content Include="Config\XCLNetLogger.config.tpl" />
+    <Content Include="Views\LogicFile\Select.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Layout/Main.cshtml";
+}
+@model XCLCMS.FileManager.Models.LogicFile.ListVM
+
+<form>
+
+    <input type="hidden" name="IsSelectFile" value="@(Model.IsSelectFile?1:0)" />
+
+    <button type="button" class="btn btn-success" id="btnSelectFiles" callback="@Model.SelectFileCallBack">确认选择</button>
+
+    <div>
+        @Html.Raw(Model.Search.XCLNetSearchHTML())
+    </div>
+
+    @Html.Partial("~/views/UserControl/LogicFileListSimple.cshtml", Model)
+
+    @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        app.LogicFile.List.Init();
+    });
+</script>

@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 
-<html @Html.Raw(null==ViewBag.NgModule?"":string.Format("ng-app='{0}'",ViewBag.NgModule))>
+<html @Html.Raw(null == ViewBag.NgModule ? "" : string.Format("ng-app='{0}'", ViewBag.NgModule))>
 <head>
 
     @Html.Partial("~/Views/Layout/Header.cshtml")
@@ -18,45 +18,48 @@
     <style type="text/css">
         body {
             min-height: 900px;
-            padding-top: 70px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">@ViewBag.CurrentApplicationMerchantApp.MerchantAppName</a>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar">
-                <ul class="nav navbar-nav" id="ulMenu">
-                    @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_DiskFileView))
-                    {
-                        <li activeReg="/FileInfo/"><a href="@Url.Action("List","FileInfo")">磁盘文件信息</a></li>
-                    }
-                    @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView))
-                    {
-                        <li activeReg="/LogicFile/"><a href="@Url.Action("List","LogicFile")">文件数据信息</a></li>
-                    }
-                    @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_FileAdd))
-                    {
-                        <li activeReg="/Upload/"><a href="@Url.Action("Index","Upload")">上传新的文件</a></li>
-                    }
-                </ul>
 
-                @if (null != CurrentUserModel)
+    @if (null != ViewBag.IsShowNav && ViewBag.IsShowNav)
+    {
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">@ViewBag.CurrentApplicationMerchantApp.MerchantAppName</a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav" id="ulMenu">
+                        @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_DiskFileView))
+                        {
+                            <li activeReg="/FileInfo/"><a href="@Url.Action("List","FileInfo")">磁盘文件信息</a></li>
+                        }
+                        @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView))
+                        {
+                            <li activeReg="/LogicFile/"><a href="@Url.Action("List","LogicFile")">文件数据信息</a></li>
+                        }
+                        @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_FileAdd))
+                        {
+                            <li activeReg="/Upload/"><a href="@Url.Action("Index","Upload")">上传新的文件</a></li>
+                        }
+                    </ul>
+
+                    @if (null != CurrentUserModel)
                 {
-                    <p class="navbar-text" style="float:right;">
-                        您好，@(string.Format("{0}（{1}）", CurrentUserModel.UserName, CurrentUserModel.RoleName))
-                        <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOnURL)" target="_blank">后台管理</a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="@XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOutURL">安全退出</a>
-                    </p>
-                }
-
+                        <p class="navbar-text" style="float:right;">
+                            您好，@(string.Format("{0}（{1}）", CurrentUserModel.UserName, CurrentUserModel.RoleName))
+                            <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOnURL)" target="_blank">后台管理</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="@XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOutURL">安全退出</a>
+                        </p>
+                    }
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    }
+
     <div class="container-fluid">
         @RenderBody()
     </div>
@@ -73,6 +76,9 @@
                     $(this).addClass("active");
                 }
             });
+            if ($(".navbar").length > 0) {
+                $("body").css("padding-top", "70px");
+            }
         });
     </script>
 </body>

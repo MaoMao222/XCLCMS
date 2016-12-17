@@ -5,14 +5,6 @@
 
 <form>
 
-    <input type="hidden" name="IsSelectFile" value="@(Model.IsSelectFile?1:0)" />
-    
-    @if (Model.IsSelectFile)
-    {
-        <button type="button" class="btn btn-success" id="btnSelectFiles" callback="@Model.SelectFileCallBack">确认选择</button>
-    }
-
-
     @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel))
     {
         <button type="button" class="btn btn-danger" id="btnBatchDel">批量删除</button>
@@ -22,103 +14,95 @@
         @Html.Raw(Model.Search.XCLNetSearchHTML())
     </div>
 
-    @if (Model.IsSelectFile)
-    {
-        @Html.Partial("~/views/UserControl/LogicFileListSimple.cshtml", Model)
-    }
-    else
-    {
-        <table class="table table-bordered">
-            <tr class="active">
-                <th class="text-center">
-                    <input type="checkbox" class="xcheckgroup checkAllCurrent xcheckValue" value="" />
-                </th>
-                <th class="text-center">序号</th>
-                <th class="text-center">所属商户ID</th>
-                <th class="text-center">所属商户名</th>
-                <th class="text-center">文件ID</th>
-                <th class="text-center">主文件ID</th>
-                <th class="text-center">标题</th>
-                <th class="text-center">查看类型</th>
-                <th class="text-center">格式类型</th>
-                <th class="text-center">扩展名</th>
-                <th class="text-center">文件名</th>
-                <th class="text-center">描述信息</th>
-                <th class="text-center">下载数</th>
-                <th class="text-center">查看数</th>
-                <th class="text-center">大小（kb）</th>
-                <th class="text-center">记录状态</th>
-                <th class="text-center">创建时间</th>
-                <th class="text-center">更新时间</th>
-                <th class="text-center">操作</th>
-            </tr>
-            @{
-                if (Model.AttachmentList.IsNotNullOrEmpty())
+    <table class="table table-bordered">
+        <tr class="active">
+            <th class="text-center">
+                <input type="checkbox" class="xcheckgroup checkAllCurrent xcheckValue" value="" />
+            </th>
+            <th class="text-center">序号</th>
+            <th class="text-center">所属商户ID</th>
+            <th class="text-center">所属商户名</th>
+            <th class="text-center">文件ID</th>
+            <th class="text-center">主文件ID</th>
+            <th class="text-center">标题</th>
+            <th class="text-center">查看类型</th>
+            <th class="text-center">格式类型</th>
+            <th class="text-center">扩展名</th>
+            <th class="text-center">文件名</th>
+            <th class="text-center">描述信息</th>
+            <th class="text-center">下载数</th>
+            <th class="text-center">查看数</th>
+            <th class="text-center">大小（kb）</th>
+            <th class="text-center">记录状态</th>
+            <th class="text-center">创建时间</th>
+            <th class="text-center">更新时间</th>
+            <th class="text-center">操作</th>
+        </tr>
+        @{
+            if (Model.AttachmentList.IsNotNullOrEmpty())
+            {
+                for (int i = 0; i < Model.AttachmentList.Count; i++)
                 {
-                    for (int i = 0; i < Model.AttachmentList.Count; i++)
-                    {
-                        var m = Model.AttachmentList[i];
-                        <tr @Html.Raw(i % 2 == 0 ? "" : " class='active' ")>
-                            <td class="text-center"><input type="checkbox" value="@m.AttachmentID" class="xcheckgroup checkItem" /></td>
-                            <td class="text-center">
-                                @(Model.PagerModel.StartIndex + i)
-                            </td>
+                    var m = Model.AttachmentList[i];
+                    <tr @Html.Raw(i % 2 == 0 ? "" : " class='active' ")>
+                        <td class="text-center"><input type="checkbox" value="@m.AttachmentID" class="xcheckgroup checkItem" /></td>
+                        <td class="text-center">
+                            @(Model.PagerModel.StartIndex + i)
+                        </td>
 
-                            <td class="text-center">@m.FK_MerchantID</td>
-                            <td class="text-center">@m.MerchantName</td>
+                        <td class="text-center">@m.FK_MerchantID</td>
+                        <td class="text-center">@m.MerchantName</td>
 
-                            <td class="text-center"><a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">@m.AttachmentID</a></td>
-                            <td class="text-center">
-                                @if (m.ParentID > 0)
-                                {
-                                    <a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.ParentID })" target="_blank">@m.ParentID</a>
-                                }
-                                else
-                                {
-                                    @m.ParentID
-                                }
-                            </td>
-                            <td>@XCLNetTools.StringHander.Common.GetSubString(m.Title, 20, "...")</td>
-                            <td class="text-center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AttachmentViewTypeEnum), m.ViewType)</td>
-                            <td class="text-center">@m.FormatType</td>
-                            <td class="text-center">@m.Ext</td>
-                            <td><a href="@Url.Action("ShowAttachment","OpenApi",new { id=m.AttachmentID})" target="_blank">@m.OriginFileName</a></td>
-                            <td>@XCLNetTools.StringHander.Common.GetSubString(m.Description, 20, "...")</td>
-                            <td class="text-center">@m.DownLoadCount</td>
-                            <td class="text-center">@m.ViewCount</td>
-                            <td class="text-center">@m.FileSize</td>
-                            <td class="text-center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
-                            <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
-                            <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
-                            <td class="text-center">
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView))
-                        {
-                                    <a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">详情</a>
-                                }
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate))
-                        {
-                                    <a href="@Url.Action("Update", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">修改</a>
-                                }
-                                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel))
-                        {
-                                    <a href="javascript:void(0);" onclick="app.LogicFile.List.DelSubmit(@m.AttachmentID); return false;">删除</a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="100" class="text-center">
-                            暂无数据！
+                        <td class="text-center"><a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">@m.AttachmentID</a></td>
+                        <td class="text-center">
+                            @if (m.ParentID > 0)
+                            {
+                                <a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.ParentID })" target="_blank">@m.ParentID</a>
+                            }
+                            else
+                            {
+                                @m.ParentID
+                            }
+                        </td>
+                        <td>@XCLNetTools.StringHander.Common.GetSubString(m.Title, 20, "...")</td>
+                        <td class="text-center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AttachmentViewTypeEnum), m.ViewType)</td>
+                        <td class="text-center">@m.FormatType</td>
+                        <td class="text-center">@m.Ext</td>
+                        <td><a href="@Url.Action("ShowAttachment","OpenApi",new { id=m.AttachmentID})" target="_blank">@m.OriginFileName</a></td>
+                        <td>@XCLNetTools.StringHander.Common.GetSubString(m.Description, 20, "...")</td>
+                        <td class="text-center">@m.DownLoadCount</td>
+                        <td class="text-center">@m.ViewCount</td>
+                        <td class="text-center">@m.FileSize</td>
+                        <td class="text-center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
+                        <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
+                        <td class="text-center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
+                        <td class="text-center">
+                            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView))
+                            {
+                                <a href="@Url.Action("Show", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">详情</a>
+                            }
+                            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate))
+                            {
+                                <a href="@Url.Action("Update", "LogicFile", new { AttachmentID = m.AttachmentID })" target="_blank">修改</a>
+                            }
+                            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel))
+                            {
+                                <a href="javascript:void(0);" onclick="app.LogicFile.List.DelSubmit(@m.AttachmentID); return false;">删除</a>
+                            }
                         </td>
                     </tr>
                 }
             }
-        </table>
-
-                }
+            else
+            {
+                <tr>
+                    <td colspan="100" class="text-center">
+                        暂无数据！
+                    </td>
+                </tr>
+            }
+        }
+    </table>
 
     @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
 </form>
