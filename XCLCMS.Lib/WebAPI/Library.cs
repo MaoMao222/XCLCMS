@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using XCLCMS.Data.WebAPIEntity;
 
@@ -27,12 +28,13 @@ namespace XCLCMS.Lib.WebAPI
         public static APIResponseEntity<TResponse> Request<TRequest, TResponse>(APIRequestEntity<TRequest> request, string path, bool isGet = true)
         {
             APIResponseEntity<TResponse> response = new APIResponseEntity<TResponse>();
+
             try
             {
                 string requestURL = (XCLCMS.Lib.Common.Comm.WebAPIServiceURL.Trim().Trim('/') + '/' + path.Trim().Trim('/')).Trim('?');
-                var httpClient = new HttpClient();
                 var httpRequest = new HttpRequestMessage();
                 string requestJson = JsonConvert.SerializeObject(request);
+
                 if (isGet)
                 {
                     httpRequest.RequestUri = new Uri(requestURL + (requestURL.IndexOf('?') >= 0 ? "&" : "?") + XCLNetTools.Serialize.Lib.ConvertJsonToUrlParameters(requestJson));
@@ -46,14 +48,32 @@ namespace XCLCMS.Lib.WebAPI
                     httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 }
                 httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
-                if (!string.IsNullOrEmpty(res))
+                httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
+
+                using (var httpClient = new HttpClient())
                 {
-                    response = Newtonsoft.Json.JsonConvert.DeserializeObject<APIResponseEntity<TResponse>>(res);
+                    httpClient.Timeout = new TimeSpan(0, 0, 30);
+                    var res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
+                    if (!string.IsNullOrEmpty(res))
+                    {
+                        response = Newtonsoft.Json.JsonConvert.DeserializeObject<APIResponseEntity<TResponse>>(res);
+                    }
+                    if (null != response && response.IsException)
+                    {
+                        throw new Exception(response.Message);
+                    }
                 }
-                if (null != response && response.IsException)
+            }
+            catch (AggregateException ex)
+            {
+                if (null != ex.InnerExceptions && ex.InnerExceptions.Count > 0)
                 {
-                    throw new Exception(response.Message);
+                    var errorSB = new StringBuilder();
+                    foreach (var m in ex.InnerExceptions)
+                    {
+                        errorSB.Append(m.Message + Environment.NewLine);
+                    }
+                    XCLNetLogger.Log.WriteLog(XCLNetLogger.Config.LogConfig.LogLevel.ERROR, "webapi请求出错", errorSB.ToString());
                 }
             }
             catch (Exception ex)
