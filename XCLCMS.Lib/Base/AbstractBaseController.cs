@@ -300,14 +300,8 @@ namespace XCLCMS.Lib.Base
             pageConfig.WebAPIServiceURL = XCLCMS.Lib.Common.Comm.WebAPIServiceURL;
             pageConfig.EnumConfig = string.Empty;
             ViewBag.PageGlobalConfigJSON = string.Format("var XCLCMSPageGlobalConfig={0};XCLCMSPageGlobalConfig.EnumConfig={1};", Newtonsoft.Json.JsonConvert.SerializeObject(pageConfig), XCLCMS.Lib.Common.Comm.GetAllEnumJson);
-        }
 
-        /// <summary>
-        /// OnActionExecuted
-        /// </summary>
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            base.OnActionExecuted(filterContext);
+            #region meta信息设置
 
             //设置title
             if (string.IsNullOrWhiteSpace(ViewBag.Title))
@@ -336,6 +330,16 @@ namespace XCLCMS.Lib.Base
             {
                 ViewBag.Description = string.Format("{0}—{1}", ViewBag.Description, this.CurrentApplicationMerchantApp.MetaDescription);
             }
+
+            #endregion meta信息设置
+        }
+
+        /// <summary>
+        /// OnActionExecuted
+        /// </summary>
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
             //gzip压缩
             var acceptEncoding = (filterContext.HttpContext.Request.Headers["Accept-Encoding"] ?? "").ToLower();
             if (!string.IsNullOrEmpty(acceptEncoding))
