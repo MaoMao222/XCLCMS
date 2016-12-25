@@ -47,6 +47,8 @@
     <None Include="数据库文档\数据库说明.docx" />
     <None Include="数据库设计\Workspace.sws" />
     <None Include="数据库设计\XCLCMS.pdm" />
+    <None Include="软件著作权\XCLCMS后台管理系统v1.0\源代码.doc" />
+    <None Include="软件著作权\XCLCMS后台管理系统v1.0\用户手册.doc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript\Functions\dbo.fun_SysDic_GetAllUnderListByCode.sql" />
@@ -131,6 +133,7 @@
     <Content Include="Libs\XCLNetTools.dll" />
     <Content Include="Libs\XCLNetTools.xml" />
     <Content Include="数据库设计\XCLCMS.pdb" />
+    <Content Include="软件著作权\XCLCMS后台管理系统v1.0\软著登字第1554794号.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBScript\Assemblies\" />
