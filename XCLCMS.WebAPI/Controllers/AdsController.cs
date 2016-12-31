@@ -83,7 +83,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.IsExistCode(request);
+                return this.bll.IsExistCode(request);
             });
         }
 
