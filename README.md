@@ -8,7 +8,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 - 简单实用，适用于个人与中小企业（适合自己的，才是最好的）
 
 ## 软件架构
-1. 使用C# & ASP.NET MVC 5 构建（.Net Framework 4.5）
+1. 使用C# & ASP.NET MVC 5 构建（.Net Framework 4.6）
 2. 数据库使用MSSQL2012
 3. 界面框架使用jQuery easyUI
 

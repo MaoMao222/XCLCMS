@@ -13,7 +13,6 @@ namespace XCLCMS.WebAPI.Controllers
     public class AdsController : BaseAPIController
     {
         private XCLCMS.IService.WebAPI.IAdsService iAdsService = null;
-        private XCLCMS.Service.WebAPI.Ads bll = null;
         private XCLCMS.Data.BLL.Ads adsBLL = new Data.BLL.Ads();
 
         /// <summary>
@@ -23,7 +22,6 @@ namespace XCLCMS.WebAPI.Controllers
         {
             adsService.ContextInfo = base.ContextModel;
             this.iAdsService = adsService;
-            this.bll = new XCLCMS.Service.WebAPI.Ads();
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iAdsService.Detail(request);
 
                 #region 限制商户
 
@@ -73,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iAdsService.PageList(request);
             });
         }
 
@@ -111,7 +109,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Add(request);
+                return this.iAdsService.Add(request);
             });
         }
 
@@ -136,7 +134,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Update(request);
+                return this.iAdsService.Update(request);
             });
         }
 
@@ -170,7 +168,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iAdsService.Delete(request);
             });
         }
     }

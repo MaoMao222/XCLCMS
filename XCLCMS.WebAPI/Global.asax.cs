@@ -16,11 +16,13 @@ namespace XCLCMS.WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             //autofac配置
+            var webApiBaseType = typeof(XCLCMS.IService.WebAPI.IBaseInfo);
+            var assembly = Assembly.GetExecutingAssembly();
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterApiControllers(assembly);
             builder.RegisterWebApiFilterProvider(config);
-            builder.RegisterType<XCLCMS.Service.WebAPI.Ads>().As<XCLCMS.IService.WebAPI.IAdsService>();
+            builder.RegisterAssemblyTypes(Assembly.Load("XCLCMS.Service.WebAPI")).Where(k => webApiBaseType.IsAssignableFrom(k) && k != webApiBaseType).AsImplementedInterfaces().InstancePerLifetimeScope();
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
