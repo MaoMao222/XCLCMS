@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XCLCMS.WebAPI</RootNamespace>
     <AssemblyName>XCLCMS.WebAPI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -55,13 +64,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -82,7 +92,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -109,6 +118,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\XCLCMS.Document\Libs\XCLNetLogger.dll</HintPath>
@@ -226,17 +236,21 @@
       <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
       <Name>XCLCMS.Data.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.WebAPIBLL\XCLCMS.Data.WebAPIBLL.csproj">
-      <Project>{a981085c-5c30-44a4-a944-30af4c3f31a0}</Project>
-      <Name>XCLCMS.Data.WebAPIBLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
       <Project>{df6f982f-2be8-4a93-b835-79629c487a5e}</Project>
       <Name>XCLCMS.Data.WebAPIEntity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XCLCMS.IService\XCLCMS.IService.WebAPI\XCLCMS.IService.WebAPI.csproj">
+      <Project>{61eca097-bb37-4c8d-9284-fd7d8c564869}</Project>
+      <Name>XCLCMS.IService.WebAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XCLCMS.Lib\XCLCMS.Lib.csproj">
       <Project>{e2aa6c7f-5b46-4a4b-93e4-4ed457587c4e}</Project>
       <Name>XCLCMS.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCLCMS.Service\XCLCMS.Service.WebAPI\XCLCMS.Service.WebAPI.csproj">
+      <Project>{a981085c-5c30-44a4-a944-30af4c3f31a0}</Project>
+      <Name>XCLCMS.Service.WebAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

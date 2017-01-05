@@ -12,7 +12,7 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class MerchantController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.Merchant bll = null;
+        private XCLCMS.Service.WebAPI.Merchant bll = null;
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public MerchantController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.Merchant(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.Merchant(base.ContextModel);
         }
 
         /// <summary>

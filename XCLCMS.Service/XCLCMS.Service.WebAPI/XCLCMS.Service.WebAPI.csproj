@@ -1,20 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C3A4834-DE9B-4B4F-8378-084F83C58E90}</ProjectGuid>
+    <ProjectGuid>{A981085C-5C30-44A4-A944-30AF4C3F31A0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XCLCMS.Data.Model</RootNamespace>
-    <AssemblyName>XCLCMS.Data.Model</AssemblyName>
+    <RootNamespace>XCLCMS.Service.WebAPI</RootNamespace>
+    <AssemblyName>XCLCMS.Service.WebAPI</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -25,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\XCLCMS.Data.Model.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,65 +33,58 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="XCLNetTools">
+      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads.cs" />
     <Compile Include="Article.cs" />
-    <Compile Include="ArticleType.cs" />
     <Compile Include="Attachment.cs" />
-    <Compile Include="Custom\ArticleRelationDetailCondition.cs" />
-    <Compile Include="Custom\ArticleRelationDetailModel.cs" />
-    <Compile Include="Custom\ArticleSearchCondition.cs" />
-    <Compile Include="Custom\ContextModel.cs" />
-    <Compile Include="Custom\FriendLinks_TitleCondition.cs" />
-    <Compile Include="Custom\MerchantAppInfoModel.cs" />
-    <Compile Include="Custom\ProcedureResultModel.cs" />
-    <Compile Include="Custom\SysDicSimple.cs" />
-    <Compile Include="Custom\SysFunctionSimple.cs" />
-    <Compile Include="Custom\SysRoleSimple.cs" />
-    <Compile Include="Custom\Tags_AddMethodResult.cs" />
-    <Compile Include="Custom\Tags_NameCondition.cs" />
-    <Compile Include="Custom\UserInfoDetailModel.cs" />
-    <Compile Include="Custom\UserNamePwd.cs" />
+    <Compile Include="BaseInfo.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="FriendLinks.cs" />
-    <Compile Include="GenerateID.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
-    <Compile Include="ObjectAttachment.cs" />
-    <Compile Include="ObjectTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysDic.cs" />
     <Compile Include="SysFunction.cs" />
     <Compile Include="SysLog.cs" />
     <Compile Include="SysRole.cs" />
-    <Compile Include="SysRoleFunction.cs" />
-    <Compile Include="SysUserRole.cs" />
     <Compile Include="SysWebSetting.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="UserInfo.cs" />
-    <Compile Include="View\v_Ads.cs" />
-    <Compile Include="View\v_Article.cs" />
-    <Compile Include="View\v_Attachment.cs" />
-    <Compile Include="View\v_FriendLinks.cs" />
-    <Compile Include="View\v_Merchant.cs" />
-    <Compile Include="View\v_MerchantApp.cs" />
-    <Compile Include="View\v_SysDic.cs" />
-    <Compile Include="View\v_SysFunction.cs" />
-    <Compile Include="View\v_SysRole.cs" />
-    <Compile Include="View\v_SysWebSetting.cs" />
-    <Compile Include="View\v_Tags.cs" />
-    <Compile Include="View\v_UserInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">
+      <Project>{054ca0f2-19e8-4121-ab61-e89bb52c0b7c}</Project>
+      <Name>XCLCMS.Data.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.CommonHelper\XCLCMS.Data.CommonHelper.csproj">
+      <Project>{4f53bbd2-fcdc-403d-9546-281cda981cf8}</Project>
+      <Name>XCLCMS.Data.CommonHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.Model\XCLCMS.Data.Model.csproj">
+      <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
+      <Name>XCLCMS.Data.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
+      <Project>{DF6F982F-2BE8-4A93-B835-79629C487A5E}</Project>
+      <Name>XCLCMS.Data.WebAPIEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XCLCMS.IService\XCLCMS.IService.WebAPI\XCLCMS.IService.WebAPI.csproj">
+      <Project>{61eca097-bb37-4c8d-9284-fd7d8c564869}</Project>
+      <Name>XCLCMS.IService.WebAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

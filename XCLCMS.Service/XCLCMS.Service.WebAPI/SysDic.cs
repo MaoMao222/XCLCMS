@@ -4,7 +4,7 @@ using System.Linq;
 using XCLCMS.Data.WebAPIEntity;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 字典

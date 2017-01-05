@@ -11,14 +11,14 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysLogController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.SysLog bll = null;
+        private XCLCMS.Service.WebAPI.SysLog bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysLogController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.SysLog(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.SysLog(base.ContextModel);
         }
 
         /// <summary>

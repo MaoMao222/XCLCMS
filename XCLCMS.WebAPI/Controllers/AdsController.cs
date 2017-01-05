@@ -12,15 +12,18 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AdsController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.Ads bll = null;
+        private XCLCMS.IService.WebAPI.IAdsService iAdsService = null;
+        private XCLCMS.Service.WebAPI.Ads bll = null;
         private XCLCMS.Data.BLL.Ads adsBLL = new Data.BLL.Ads();
 
         /// <summary>
         /// 构造
         /// </summary>
-        public AdsController()
+        public AdsController(XCLCMS.IService.WebAPI.IAdsService adsService)
         {
-            this.bll = new Data.WebAPIBLL.Ads(base.ContextModel);
+            adsService.ContextInfo = base.ContextModel;
+            this.iAdsService = adsService;
+            this.bll = new XCLCMS.Service.WebAPI.Ads();
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistCode(request);
+                return this.iAdsService.IsExistCode(request);
             });
         }
 

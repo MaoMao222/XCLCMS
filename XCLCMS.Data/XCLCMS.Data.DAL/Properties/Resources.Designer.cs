@@ -61,28 +61,27 @@ namespace XCLCMS.Data.DAL.Properties {
         }
         
         /// <summary>
-        ///   查找类似 DECLARE @ArticleID BIGINT=0
-        ///DECLARE @IsASC TINYINT=0
-        ///DECLARE @TopCount INT=0
+        ///   查找类似 --DECLARE @@ArticleID BIGINT=0
+        ///--DECLARE @@IsASC TINYINT=0
+        ///--DECLARE @@TopCount INT=0
         ///
         ///--上一篇
-        ///IF(@IsASC=0)
+        ///IF(@@IsASC=0)
         ///BEGIN
-        /// SELECT TOP 1 * FROM dbo.Article WITH(NOLOCK) WHERE ArticleID&lt;@ArticleID ORDER BY ArticleID DESC
+        ///	 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
+        ///	 WHERE ArticleID&lt;@@ArticleID   
+        ///	 @(Model.ArticleRecordState)  
+        ///	 @(Model.MerchantID)  
+        ///	 @(Model.MerchantAppID)   
+        ///	 ORDER BY ArticleID DESC
         ///END
         ///ELSE
         ///BEGIN
-        ///	SELECT TOP 1 * FROM dbo.Article WITH(NOLOCK)  WHERE ArticleID&gt;@ArticleID ORDER BY ArticleID ASC
-        ///END
-        ///
-        ///--下一篇
-        ///IF(@IsASC=0)
-        ///BEGIN
-        /// SELECT TOP 1 * FROM dbo.Article WITH(NOLOCK)  WHERE ArticleID&gt;@ArticleID ORDER BY ArticleID DESC
-        ///END
-        ///ELSE
-        ///BEGIN
-        ///	SELECT TOP 1 * FROM dbo.Article WIT [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///	SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
+        ///	WHERE ArticleID&gt;@@ArticleID  
+        ///	@(Model.ArticleRecordState)  
+        ///	@(Model.MerchantID)  
+        ///	@(Model.Mer [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string Article_GetRelationDetail {
             get {

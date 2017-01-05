@@ -9,14 +9,14 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class CommonController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.Common bll = null;
+        private XCLCMS.Service.WebAPI.Common bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public CommonController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.Common(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.Common(base.ContextModel);
         }
 
         /// <summary>

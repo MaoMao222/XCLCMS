@@ -10,14 +10,14 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AttachmentController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.Attachment bll = null;
+        private XCLCMS.Service.WebAPI.Attachment bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public AttachmentController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.Attachment(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.Attachment(base.ContextModel);
         }
 
         /// <summary>

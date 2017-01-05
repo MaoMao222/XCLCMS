@@ -13,14 +13,14 @@ namespace XCLCMS.WebAPI.Controllers
     public class UserInfoController : BaseAPIController
     {
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
-        private XCLCMS.Data.WebAPIBLL.UserInfo bll = null;
+        private XCLCMS.Service.WebAPI.UserInfo bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public UserInfoController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.UserInfo(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.UserInfo(base.ContextModel);
         }
 
         /// <summary>

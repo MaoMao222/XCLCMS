@@ -5,7 +5,7 @@ using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 系统配置

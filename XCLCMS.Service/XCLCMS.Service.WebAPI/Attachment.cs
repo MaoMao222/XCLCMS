@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using XCLCMS.Data.WebAPIEntity;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 附件

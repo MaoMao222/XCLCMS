@@ -10,14 +10,14 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysFunctionController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.SysFunction bll = null;
+        private XCLCMS.Service.WebAPI.SysFunction bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysFunctionController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.SysFunction(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.SysFunction(base.ContextModel);
         }
 
         /// <summary>

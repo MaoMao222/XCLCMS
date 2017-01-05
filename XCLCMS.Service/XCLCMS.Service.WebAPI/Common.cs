@@ -1,7 +1,7 @@
 ﻿using System;
 using XCLCMS.Data.WebAPIEntity;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 公共

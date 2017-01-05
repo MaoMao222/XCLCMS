@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A981085C-5C30-44A4-A944-30AF4C3F31A0}</ProjectGuid>
+    <ProjectGuid>{61ECA097-BB37-4C8D-9284-FD7D8C564869}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XCLCMS.Data.WebAPIBLL</RootNamespace>
-    <AssemblyName>XCLCMS.Data.WebAPIBLL</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>XCLCMS.IService.WebAPI</RootNamespace>
+    <AssemblyName>XCLCMS.IService.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,49 +33,24 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetTools">
-      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ads.cs" />
-    <Compile Include="Article.cs" />
-    <Compile Include="Attachment.cs" />
-    <Compile Include="BaseInfo.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="FriendLinks.cs" />
-    <Compile Include="Merchant.cs" />
-    <Compile Include="MerchantApp.cs" />
+    <Compile Include="IAdsService.cs" />
+    <Compile Include="IBaseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysDic.cs" />
-    <Compile Include="SysFunction.cs" />
-    <Compile Include="SysLog.cs" />
-    <Compile Include="SysRole.cs" />
-    <Compile Include="SysWebSetting.cs" />
-    <Compile Include="Tags.cs" />
-    <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">
-      <Project>{054ca0f2-19e8-4121-ab61-e89bb52c0b7c}</Project>
-      <Name>XCLCMS.Data.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XCLCMS.Data.CommonHelper\XCLCMS.Data.CommonHelper.csproj">
-      <Project>{4f53bbd2-fcdc-403d-9546-281cda981cf8}</Project>
-      <Name>XCLCMS.Data.CommonHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XCLCMS.Data.Model\XCLCMS.Data.Model.csproj">
-      <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.Model\XCLCMS.Data.Model.csproj">
+      <Project>{1C3A4834-DE9B-4B4F-8378-084F83C58E90}</Project>
       <Name>XCLCMS.Data.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
       <Project>{DF6F982F-2BE8-4A93-B835-79629C487A5E}</Project>
       <Name>XCLCMS.Data.WebAPIEntity</Name>
     </ProjectReference>

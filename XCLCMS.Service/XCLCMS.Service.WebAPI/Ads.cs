@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 广告
     /// </summary>
-    public class Ads : BaseInfo
+    public class Ads : IAdsService
     {
         private XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();
         private XCLCMS.Data.BLL.View.v_Ads vAdsBLL = new Data.BLL.View.v_Ads();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
 
-        public Ads(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询广告信息实体
@@ -209,8 +209,8 @@ namespace XCLCMS.Data.WebAPIBLL
             model.FK_MerchantID = request.Body.FK_MerchantID;
             model.FK_MerchantAppID = request.Body.FK_MerchantAppID;
             model.RecordState = request.Body.RecordState;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.AdHeight = request.Body.AdHeight;
             model.AdWidth = request.Body.AdWidth;
@@ -260,8 +260,8 @@ namespace XCLCMS.Data.WebAPIBLL
                     continue;
                 }
 
-                model.UpdaterID = base.ContextInfo.UserInfoID;
-                model.UpdaterName = base.ContextInfo.UserName;
+                model.UpdaterID = this.ContextInfo.UserInfoID;
+                model.UpdaterName = this.ContextInfo.UserName;
                 model.UpdateTime = DateTime.Now;
                 model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
                 if (!this.adsBLL.Update(model))

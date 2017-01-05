@@ -13,14 +13,14 @@ namespace XCLCMS.WebAPI.Controllers
     public class TagsController : BaseAPIController
     {
         public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
-        private XCLCMS.Data.WebAPIBLL.Tags bll = null;
+        private XCLCMS.Service.WebAPI.Tags bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public TagsController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.Tags(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.Tags(base.ContextModel);
         }
 
         /// <summary>

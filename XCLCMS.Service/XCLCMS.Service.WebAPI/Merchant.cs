@@ -6,15 +6,15 @@ using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 商户信息
     /// </summary>
     public class Merchant : BaseInfo
     {
-        private XCLCMS.Data.WebAPIBLL.SysRole sysRoleWebAPIBLL = null;
-        private XCLCMS.Data.WebAPIBLL.SysFunction sysFunctionWebAPIBLL = null;
+        private XCLCMS.Service.WebAPI.SysRole sysRoleWebAPIBLL = null;
+        private XCLCMS.Service.WebAPI.SysFunction sysFunctionWebAPIBLL = null;
         private XCLCMS.Data.BLL.View.v_Merchant vMerchantBLL = new Data.BLL.View.v_Merchant();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
@@ -23,8 +23,8 @@ namespace XCLCMS.Data.WebAPIBLL
 
         public Merchant(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
         {
-            this.sysRoleWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysRole(contextModel);
-            this.sysFunctionWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysFunction(contextModel);
+            this.sysRoleWebAPIBLL = new XCLCMS.Service.WebAPI.SysRole(contextModel);
+            this.sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunction(contextModel);
         }
 
         /// <summary>
@@ -194,9 +194,9 @@ namespace XCLCMS.Data.WebAPIBLL
             //添加商户默认角色
             if (response.IsSuccess)
             {
-                this.sysRoleWebAPIBLL.Add(new APIRequestEntity<WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity>()
+                this.sysRoleWebAPIBLL.Add(new APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity>()
                 {
-                    Body = new WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity()
+                    Body = new XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity()
                     {
                         SysRole = new Data.Model.SysRole()
                         {

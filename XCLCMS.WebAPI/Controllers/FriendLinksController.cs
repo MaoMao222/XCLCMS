@@ -13,14 +13,14 @@ namespace XCLCMS.WebAPI.Controllers
     public class FriendLinksController : BaseAPIController
     {
         private XCLCMS.Data.BLL.FriendLinks friendLinksBLL = new Data.BLL.FriendLinks();
-        private XCLCMS.Data.WebAPIBLL.FriendLinks bll = null;
+        private XCLCMS.Service.WebAPI.FriendLinks bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public FriendLinksController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.FriendLinks(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.FriendLinks(base.ContextModel);
         }
 
         /// <summary>

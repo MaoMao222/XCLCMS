@@ -12,7 +12,7 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class ArticleController : BaseAPIController
     {
-        private XCLCMS.Data.WebAPIBLL.Article bll = null;
+        private XCLCMS.Service.WebAPI.Article bll = null;
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public ArticleController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.Article(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.Article(base.ContextModel);
         }
 
         /// <summary>

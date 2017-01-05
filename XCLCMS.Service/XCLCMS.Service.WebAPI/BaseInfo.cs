@@ -1,9 +1,11 @@
-﻿namespace XCLCMS.Data.WebAPIBLL
+﻿using XCLCMS.IService.WebAPI;
+
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 基类
     /// </summary>
-    public class BaseInfo
+    public class BaseInfo : IBaseInfo
     {
         private XCLCMS.Data.Model.Custom.ContextModel _contextModel = null;
 
@@ -22,22 +24,11 @@
         {
             get
             {
-                return this._contextModel ?? new Model.Custom.ContextModel();
+                return this._contextModel ?? new Data.Model.Custom.ContextModel();
             }
             set
             {
                 this._contextModel = value;
-            }
-        }
-
-        /// <summary>
-        /// 当前用户ID
-        /// </summary>
-        public long UserID
-        {
-            get
-            {
-                return this.ContextInfo.UserInfoID;
             }
         }
     }

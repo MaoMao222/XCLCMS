@@ -4,14 +4,14 @@ using System.Linq;
 using XCLCMS.Data.WebAPIEntity;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 角色
     /// </summary>
     public class SysRole : BaseInfo
     {
-        private XCLCMS.Data.WebAPIBLL.SysFunction sysFunctionWebAPIBLL = null;
+        private XCLCMS.Service.WebAPI.SysFunction sysFunctionWebAPIBLL = null;
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new Data.BLL.SysRole();
         private XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new Data.BLL.View.v_SysRole();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
@@ -19,7 +19,7 @@ namespace XCLCMS.Data.WebAPIBLL
 
         public SysRole(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
         {
-            this.sysFunctionWebAPIBLL = new XCLCMS.Data.WebAPIBLL.SysFunction(contextModel);
+            this.sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunction(contextModel);
         }
 
         /// <summary>

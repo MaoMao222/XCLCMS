@@ -13,14 +13,14 @@ namespace XCLCMS.WebAPI.Controllers
     {
         private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
 
-        private XCLCMS.Data.WebAPIBLL.SysDic bll = null;
+        private XCLCMS.Service.WebAPI.SysDic bll = null;
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysDicController()
         {
-            this.bll = new XCLCMS.Data.WebAPIBLL.SysDic(base.ContextModel);
+            this.bll = new XCLCMS.Service.WebAPI.SysDic(base.ContextModel);
         }
 
         /// <summary>

@@ -5,7 +5,7 @@ using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLNetTools.Generic;
 
-namespace XCLCMS.Data.WebAPIBLL
+namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 文章
@@ -418,7 +418,7 @@ namespace XCLCMS.Data.WebAPIBLL
             model.Title = request.Body.Article.Title;
             model.TopBeginTime = request.Body.Article.TopBeginTime;
             model.TopEndTime = request.Body.Article.TopEndTime;
-            model.UpdaterID = base.UserID;
+            model.UpdaterID = base.ContextInfo.UserInfoID;
             model.UpdaterName = base.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.URLOpenType = request.Body.Article.URLOpenType;
