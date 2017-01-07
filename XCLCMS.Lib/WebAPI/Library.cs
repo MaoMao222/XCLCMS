@@ -50,18 +50,29 @@ namespace XCLCMS.Lib.WebAPI
                 httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
 
+                string res = string.Empty;
                 using (var httpClient = new HttpClient())
                 {
                     httpClient.Timeout = new TimeSpan(0, 0, 30);
-                    var res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
-                    if (!string.IsNullOrEmpty(res))
+                    res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
+                }
+                if (!string.IsNullOrEmpty(res))
+                {
+                    try
                     {
                         response = Newtonsoft.Json.JsonConvert.DeserializeObject<APIResponseEntity<TResponse>>(res);
                     }
-                    if (null != response && response.IsException)
+                    catch
                     {
-                        throw new Exception(response.Message);
+                        response.IsException = true;
+                        response.IsSuccess = false;
+                        response.Message = "Api响应报文反序列化失败！";
+                        response.MessageMore = res;
                     }
+                }
+                if (null != response && response.IsException)
+                {
+                    throw new Exception(string.Format("{0}{1}{1}{2}", response.Message, Environment.NewLine, response.MessageMore));
                 }
             }
             catch (AggregateException ex)
