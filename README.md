@@ -3,7 +3,7 @@
 
 
 ## 简介
-XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**，使用asp.net mvc开发，提供简单易用的web api 接口，支持单个商户对应多个应用，您可以免费使用它构建属于自己的博客、分类信息、企业展示等网站或其它APP应用。
+XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**，使用asp.net mvc开发，提供简单易用的web api 接口，支持单个商户对应多个应用，您可以免费使用它构建属于自己的博客、分类信息、企业展示等网站或其它App应用。
 
 ## 特点
 - 一个后台，多个前台应用界面（根据应用号来区分，每个商户下可拥有多个应用，如：使用本系统来管理多个博客或企业站的内容）
@@ -27,7 +27,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 8. XCLCMS.Lib：前台公共处理库
 9. XCLCMS.View.AdminWeb：后台管理系统web站点（**项目的入口**） 
 10. XCLCMS.IService.WebAPI：Web Api服务定义层
-11. XCLCMS.Service.WebAPI：web api服务逻辑实现层
+11. XCLCMS.Service.WebAPI：Web Api服务逻辑实现层
 12. XCLCMS.WebAPI：Web Api http服务提供层
 
 ## 基本功能
