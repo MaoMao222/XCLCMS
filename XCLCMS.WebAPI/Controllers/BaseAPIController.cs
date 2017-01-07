@@ -13,6 +13,11 @@ namespace XCLCMS.WebAPI.Controllers
     [XCLCMS.WebAPI.Filters.APIExceptionFilter()]
     public class BaseAPIController : ApiController
     {
+        /// <summary>
+        /// log服务
+        /// </summary>
+        public XCLCMS.IService.Logger.ILogService iLogService { get; set; }
+
         #region 当前登录用户相关
 
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new Data.BLL.UserInfo();

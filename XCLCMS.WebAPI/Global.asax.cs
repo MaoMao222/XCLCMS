@@ -17,17 +17,18 @@ namespace XCLCMS.WebAPI
 
             //autofac配置
             var webApiBaseType = typeof(XCLCMS.IService.WebAPI.IBaseInfoService);
+            var loggerType = typeof(XCLCMS.IService.Logger.ILogService);
             var assembly = Assembly.GetExecutingAssembly();
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
-            builder.RegisterApiControllers(assembly);
+            builder.RegisterApiControllers(assembly).PropertiesAutowired();
             builder.RegisterWebApiFilterProvider(config);
+            //web api服务注册
             builder.RegisterAssemblyTypes(Assembly.Load("XCLCMS.Service.WebAPI")).Where(k => webApiBaseType.IsAssignableFrom(k) && k != webApiBaseType).AsImplementedInterfaces().InstancePerLifetimeScope();
+            //XCLNetLogger服务注册
+            builder.RegisterAssemblyTypes(Assembly.Load("XCLCMS.Service.Logger")).Where(k => loggerType.IsAssignableFrom(k) && k != loggerType).AsImplementedInterfaces().SingleInstance();
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
-            //XCLNetLogger配置信息
-            XCLNetLogger.Config.LogConfig.SetConfig(Server.MapPath("~/Config/XCLNetLogger.config"));
         }
     }
 }
