@@ -1,3 +1,7 @@
+
+[![](https://ci.appveyor.com/api/projects/status/xunqytmi7anspfih?svg=true)](https://ci.appveyor.com/project/xucongli1989/XCLCMS)
+
+
 ## 简介
 XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**，您可以免费使用它构建属于自己的博客、分类信息、企业展示等网站。
 
@@ -13,17 +17,18 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 3. 界面框架使用jQuery easyUI
 
 ## 项目结构
-1. XCLCMS.Data.BLL：业务层
+1. XCLCMS.Data.BLL：数据业务层
 2. XCLCMS.Data.CommonHelper：数据层公共处理
 3. XCLCMS.Data.DAL：数据库访问层
 4. XCLCMS.Data.Model：数据实体层
 5. XCLCMS.Data.WebAPIEntity：Web Api数据实体层
-6. XCLCMS.Data.WebAPIBLL：Web Api业务逻辑层
-7. XCLCMS.Document：项目文档相关
-8. XCLCMS.FileManager：文件管理与上传
-9. XCLCMS.Lib：前台业务公共处理
-10. XCLCMS.View.AdminWeb：后台管理系统web站点（项目的入口） 
-11. XCLCMS.WebAPI：Web Api对外接口层
+6. XCLCMS.Document：项目文档相关
+7. XCLCMS.FileManager：文件管理与上传web站点
+8. XCLCMS.Lib：前台公共处理库
+9. XCLCMS.View.AdminWeb：后台管理系统web站点（**项目的入口**） 
+10. XCLCMS.IService.WebAPI：Web Api服务定义层
+11. XCLCMS.Service.WebAPI：web api服务逻辑实现层
+12. XCLCMS.WebAPI：Web Api http服务提供层
 
 ## 基本功能
 
