@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -10,7 +12,7 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 用户
     /// </summary>
-    public class UserInfo : BaseInfo
+    public class UserInfoService : IUserInfoService
     {
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
         private XCLCMS.Data.BLL.View.v_UserInfo vUserInfoBLL = new XCLCMS.Data.BLL.View.v_UserInfo();
@@ -18,9 +20,7 @@ namespace XCLCMS.Service.WebAPI
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
 
-        public UserInfo(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询用户信息实体
@@ -142,7 +142,7 @@ namespace XCLCMS.Service.WebAPI
             #endregion 数据校验
 
             XCLCMS.Data.BLL.Strategy.UserInfo.UserInfoContext userInfoContext = new Data.BLL.Strategy.UserInfo.UserInfoContext();
-            userInfoContext.ContextInfo = base.ContextInfo;
+            userInfoContext.ContextInfo = this.ContextInfo;
             userInfoContext.UserInfo = request.Body.UserInfo;
             userInfoContext.UserRoleIDs = request.Body.RoleIdList;
             userInfoContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
@@ -249,12 +249,12 @@ namespace XCLCMS.Service.WebAPI
             model.Tel = request.Body.UserInfo.Tel;
             model.UserState = request.Body.UserInfo.UserState;
 
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
 
             XCLCMS.Data.BLL.Strategy.UserInfo.UserInfoContext userInfoContext = new Data.BLL.Strategy.UserInfo.UserInfoContext();
-            userInfoContext.ContextInfo = base.ContextInfo;
+            userInfoContext.ContextInfo = this.ContextInfo;
             userInfoContext.UserInfo = model;
             userInfoContext.UserRoleIDs = request.Body.RoleIdList;
             userInfoContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;
@@ -309,8 +309,8 @@ namespace XCLCMS.Service.WebAPI
                     continue;
                 }
 
-                userInfoModel.UpdaterID = base.ContextInfo.UserInfoID;
-                userInfoModel.UpdaterName = base.ContextInfo.UserName;
+                userInfoModel.UpdaterID = this.ContextInfo.UserInfoID;
+                userInfoModel.UpdaterName = this.ContextInfo.UserName;
                 userInfoModel.UpdateTime = DateTime.Now;
                 userInfoModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
                 userInfoModel.UserState = XCLCMS.Data.CommonHelper.EnumType.UserStateEnum.D.ToString();

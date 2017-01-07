@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.IService.WebAPI;
 
 namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 附件
     /// </summary>
-    public class Attachment : BaseInfo
+    public class AttachmentService : IAttachmentService
     {
         private XCLCMS.Data.BLL.Attachment attachmentBLL = new XCLCMS.Data.BLL.Attachment();
         private XCLCMS.Data.BLL.ObjectAttachment objectAttachmentBLL = new XCLCMS.Data.BLL.ObjectAttachment();
 
-        public Attachment(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询附件信息实体

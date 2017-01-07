@@ -10,14 +10,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AttachmentController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.Attachment bll = null;
+        private XCLCMS.IService.WebAPI.IAttachmentService iAttachmentService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public AttachmentController()
+        public AttachmentController(XCLCMS.IService.WebAPI.IAttachmentService attachmentService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.Attachment(base.ContextModel);
+            attachmentService.ContextInfo = base.ContextModel;
+            this.iAttachmentService = attachmentService;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iAttachmentService.Detail(request);
 
                 #region 限制商户
 
@@ -55,7 +56,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetObjectAttachmentList(request);
+                return this.iAttachmentService.GetObjectAttachmentList(request);
             });
         }
 
@@ -68,7 +69,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetAttachmentListByIDList(request);
+                return this.iAttachmentService.GetAttachmentListByIDList(request);
             });
         }
     }

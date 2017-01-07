@@ -13,14 +13,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysWebSettingController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
-        private XCLCMS.Service.WebAPI.SysWebSetting bll = null;
+        private XCLCMS.IService.WebAPI.ISysWebSettingService iSysWebSettingService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public SysWebSettingController()
+        public SysWebSettingController(XCLCMS.IService.WebAPI.ISysWebSettingService sysWebSettingService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.SysWebSetting(base.ContextModel);
+            sysWebSettingService.ContextInfo = base.ContextModel;
+            this.iSysWebSettingService = sysWebSettingService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iSysWebSettingService.Detail(request);
 
                 #region 限制商户
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iSysWebSettingService.PageList(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistKeyName(request);
+                return this.iSysWebSettingService.IsExistKeyName(request);
             });
         }
 
@@ -109,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Add(request);
+                response = this.iSysWebSettingService.Add(request);
 
                 return response;
             });
@@ -137,7 +138,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iSysWebSettingService.Update(request);
 
                 return response;
             });
@@ -173,7 +174,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iSysWebSettingService.Delete(request);
             });
         }
     }

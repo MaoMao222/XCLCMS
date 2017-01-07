@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -9,17 +11,19 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 角色
     /// </summary>
-    public class SysRole : BaseInfo
+    public class SysRoleService : ISysRoleService
     {
-        private XCLCMS.Service.WebAPI.SysFunction sysFunctionWebAPIBLL = null;
+        private XCLCMS.Service.WebAPI.SysFunctionService sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunctionService();
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new Data.BLL.SysRole();
         private XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new Data.BLL.View.v_SysRole();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
         private XCLCMS.Data.BLL.View.v_SysFunction vSysFunctionBLL = new XCLCMS.Data.BLL.View.v_SysFunction();
 
-        public SysRole(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
+        public ContextModel ContextInfo { get; set; }
+
+        public SysRoleService()
         {
-            this.sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunction(contextModel);
+            this.sysFunctionWebAPIBLL.ContextInfo = this.ContextInfo;
         }
 
         /// <summary>
@@ -304,7 +308,7 @@ namespace XCLCMS.Service.WebAPI
             #endregion 数据校验
 
             XCLCMS.Data.BLL.Strategy.SysRole.SysRoleContext sysRoleContext = new Data.BLL.Strategy.SysRole.SysRoleContext();
-            sysRoleContext.ContextInfo = base.ContextInfo;
+            sysRoleContext.ContextInfo = this.ContextInfo;
             sysRoleContext.SysRole = request.Body.SysRole;
             sysRoleContext.FunctionIdList = request.Body.FunctionIdList;
             sysRoleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
@@ -426,13 +430,13 @@ namespace XCLCMS.Service.WebAPI
             model.Remark = request.Body.SysRole.Remark;
             model.RoleName = request.Body.SysRole.RoleName;
             model.Sort = request.Body.SysRole.Sort;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.Weight = request.Body.SysRole.Weight;
 
             XCLCMS.Data.BLL.Strategy.SysRole.SysRoleContext sysRoleContext = new Data.BLL.Strategy.SysRole.SysRoleContext();
-            sysRoleContext.ContextInfo = base.ContextInfo;
+            sysRoleContext.ContextInfo = this.ContextInfo;
             sysRoleContext.SysRole = model;
             sysRoleContext.FunctionIdList = request.Body.FunctionIdList;
             sysRoleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;
@@ -508,8 +512,8 @@ namespace XCLCMS.Service.WebAPI
                     }
 
                     //删除
-                    sysRoleModel.UpdaterID = base.ContextInfo.UserInfoID;
-                    sysRoleModel.UpdaterName = base.ContextInfo.UserName;
+                    sysRoleModel.UpdaterID = this.ContextInfo.UserInfoID;
+                    sysRoleModel.UpdaterName = this.ContextInfo.UserName;
                     sysRoleModel.UpdateTime = DateTime.Now;
                     sysRoleModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.D.ToString();
                     if (this.sysRoleBLL.Update(sysRoleModel))

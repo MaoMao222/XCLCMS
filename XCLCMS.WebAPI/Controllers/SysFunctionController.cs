@@ -10,14 +10,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysFunctionController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.SysFunction bll = null;
+        private XCLCMS.IService.WebAPI.ISysFunctionService iSysFunctionService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public SysFunctionController()
+        public SysFunctionController(XCLCMS.IService.WebAPI.ISysFunctionService sysFunctionService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.SysFunction(base.ContextModel);
+            sysFunctionService.ContextInfo = base.ContextModel;
+            this.iSysFunctionService = sysFunctionService;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Detail(request);
+                return this.iSysFunctionService.Detail(request);
             });
         }
 
@@ -42,7 +43,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistCode(request);
+                return this.iSysFunctionService.IsExistCode(request);
             });
         }
 
@@ -55,7 +56,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistFunctionNameInSameLevel(request);
+                return this.iSysFunctionService.IsExistFunctionNameInSameLevel(request);
             });
         }
 
@@ -68,7 +69,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetList(request);
+                return this.iSysFunctionService.GetList(request);
             });
         }
 
@@ -81,7 +82,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetAllJsonForEasyUITree(request);
+                return this.iSysFunctionService.GetAllJsonForEasyUITree(request);
             });
         }
 
@@ -95,7 +96,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetLayerListBySysFunctionId(request);
+                return this.iSysFunctionService.GetLayerListBySysFunctionId(request);
             });
         }
 
@@ -108,7 +109,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetListByRoleID(request);
+                return this.iSysFunctionService.GetListByRoleID(request);
             });
         }
 
@@ -121,7 +122,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetNormalMerchantFunctionTreeList(request);
+                return this.iSysFunctionService.GetNormalMerchantFunctionTreeList(request);
             });
         }
 
@@ -134,7 +135,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.HasAnyPermission(request);
+                return this.iSysFunctionService.HasAnyPermission(request);
             });
         }
 
@@ -147,7 +148,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Add(request);
+                return this.iSysFunctionService.Add(request);
             });
         }
 
@@ -160,7 +161,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Update(request);
+                return this.iSysFunctionService.Update(request);
             });
         }
 
@@ -173,7 +174,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Delete(request);
+                return this.iSysFunctionService.Delete(request);
             });
         }
 
@@ -186,7 +187,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.DelChild(request);
+                return this.iSysFunctionService.DelChild(request);
             });
         }
     }

@@ -39,10 +39,27 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="XCLNetTools, Version=2.6.1.37356, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdsService.cs" />
-    <Compile Include="IBaseInfo.cs" />
+    <Compile Include="IArticleService.cs" />
+    <Compile Include="IAttachmentService.cs" />
+    <Compile Include="IBaseInfoService.cs" />
+    <Compile Include="ICommonService.cs" />
+    <Compile Include="IFriendLinksService.cs" />
+    <Compile Include="IMerchantService.cs" />
+    <Compile Include="IMerchantAppService.cs" />
+    <Compile Include="ISysDicService.cs" />
+    <Compile Include="ISysFunctionService.cs" />
+    <Compile Include="ISysLogService.cs" />
+    <Compile Include="ISysRoleService.cs" />
+    <Compile Include="ISysWebSettingService.cs" />
+    <Compile Include="ITagsService.cs" />
+    <Compile Include="IUserInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

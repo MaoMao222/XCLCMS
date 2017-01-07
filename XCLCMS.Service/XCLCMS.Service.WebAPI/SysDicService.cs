@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -9,16 +11,14 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 字典
     /// </summary>
-    public class SysDic : BaseInfo
+    public class SysDicService : ISysDicService
     {
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
         private XCLCMS.Data.BLL.View.v_SysDic vSysDicBLL = new Data.BLL.View.v_SysDic();
 
-        public SysDic(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询字典信息实体
@@ -465,8 +465,8 @@ namespace XCLCMS.Service.WebAPI
             model.FK_MerchantID = request.Body.FK_MerchantID;
             model.Remark = request.Body.Remark;
             model.Sort = request.Body.Sort;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
 
             if (this.sysDicBLL.Update(model))
@@ -518,8 +518,8 @@ namespace XCLCMS.Service.WebAPI
                 var sysDicModel = sysDicBLL.GetModel(id);
                 if (null != sysDicModel)
                 {
-                    sysDicModel.UpdaterID = base.ContextInfo.UserInfoID;
-                    sysDicModel.UpdaterName = base.ContextInfo.UserName;
+                    sysDicModel.UpdaterID = this.ContextInfo.UserInfoID;
+                    sysDicModel.UpdaterName = this.ContextInfo.UserName;
                     sysDicModel.UpdateTime = DateTime.Now;
                     sysDicModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.D.ToString();
                     if (sysDicBLL.Update(sysDicModel))

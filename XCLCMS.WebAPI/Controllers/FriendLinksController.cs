@@ -13,14 +13,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class FriendLinksController : BaseAPIController
     {
         private XCLCMS.Data.BLL.FriendLinks friendLinksBLL = new Data.BLL.FriendLinks();
-        private XCLCMS.Service.WebAPI.FriendLinks bll = null;
+        private XCLCMS.IService.WebAPI.IFriendLinksService iFriendLinksService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public FriendLinksController()
+        public FriendLinksController(XCLCMS.IService.WebAPI.IFriendLinksService friendLinksService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.FriendLinks(base.ContextModel);
+            friendLinksService.ContextInfo = base.ContextModel;
+            this.iFriendLinksService = friendLinksService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iFriendLinksService.Detail(request);
 
                 #region 限制商户
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iFriendLinksService.PageList(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistTitle(request);
+                return this.iFriendLinksService.IsExistTitle(request);
             });
         }
 
@@ -109,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Add(request);
+                response = this.iFriendLinksService.Add(request);
 
                 return response;
             });
@@ -137,7 +138,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iFriendLinksService.Update(request);
 
                 return response;
             });
@@ -173,7 +174,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iFriendLinksService.Delete(request);
             });
         }
     }

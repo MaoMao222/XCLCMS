@@ -13,14 +13,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class UserInfoController : BaseAPIController
     {
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
-        private XCLCMS.Service.WebAPI.UserInfo bll = null;
+        private XCLCMS.IService.WebAPI.IUserInfoService iUserInfoService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public UserInfoController()
+        public UserInfoController(XCLCMS.IService.WebAPI.IUserInfoService userInfoService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.UserInfo(base.ContextModel);
+            userInfoService.ContextInfo = base.ContextModel;
+            this.iUserInfoService = userInfoService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iUserInfoService.Detail(request);
 
                 #region 限制商户
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iUserInfoService.PageList(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistUserName(request);
+                return this.iUserInfoService.IsExistUserName(request);
             });
         }
 
@@ -118,7 +119,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制修改角色
 
-                response = this.bll.Add(request);
+                response = this.iUserInfoService.Add(request);
 
                 return response;
             });
@@ -155,7 +156,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制修改角色
 
-                response = this.bll.Update(request);
+                response = this.iUserInfoService.Update(request);
 
                 return response;
             });
@@ -191,7 +192,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iUserInfoService.Delete(request);
             });
         }
     }

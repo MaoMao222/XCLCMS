@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -11,20 +13,22 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 商户信息
     /// </summary>
-    public class Merchant : BaseInfo
+    public class MerchantService : IMerchantService
     {
-        private XCLCMS.Service.WebAPI.SysRole sysRoleWebAPIBLL = null;
-        private XCLCMS.Service.WebAPI.SysFunction sysFunctionWebAPIBLL = null;
+        private XCLCMS.Service.WebAPI.SysRoleService sysRoleWebAPIBLL = new XCLCMS.Service.WebAPI.SysRoleService();
+        private XCLCMS.Service.WebAPI.SysFunctionService sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunctionService();
         private XCLCMS.Data.BLL.View.v_Merchant vMerchantBLL = new Data.BLL.View.v_Merchant();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
         private XCLCMS.Data.BLL.SysDic sysDicBLL = new XCLCMS.Data.BLL.SysDic();
 
-        public Merchant(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
+        public ContextModel ContextInfo { get; set; }
+
+        public MerchantService()
         {
-            this.sysRoleWebAPIBLL = new XCLCMS.Service.WebAPI.SysRole(contextModel);
-            this.sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunction(contextModel);
+            this.sysRoleWebAPIBLL.ContextInfo = this.ContextInfo;
+            this.sysFunctionWebAPIBLL.ContextInfo = this.ContextInfo;
         }
 
         /// <summary>
@@ -150,15 +154,15 @@ namespace XCLCMS.Service.WebAPI
 
                     flag = sysRoleBLL.Add(new Data.Model.SysRole()
                     {
-                        CreaterID = base.ContextInfo.UserInfoID,
-                        CreaterName = base.ContextInfo.UserName,
+                        CreaterID = this.ContextInfo.UserInfoID,
+                        CreaterName = this.ContextInfo.UserName,
                         FK_MerchantID = request.Body.MerchantID,
                         ParentID = rootRole.SysRoleID,
                         RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
                         CreateTime = DateTime.Now,
                         RoleName = request.Body.MerchantName,
-                        UpdaterID = base.ContextInfo.UserInfoID,
-                        UpdaterName = base.ContextInfo.UserName,
+                        UpdaterID = this.ContextInfo.UserInfoID,
+                        UpdaterName = this.ContextInfo.UserName,
                         UpdateTime = DateTime.Now,
                         SysRoleID = sysRoleId
                     });
@@ -170,16 +174,16 @@ namespace XCLCMS.Service.WebAPI
                     var rootDic = this.sysDicBLL.GetRootModel();
                     flag = this.sysDicBLL.Add(new Data.Model.SysDic()
                     {
-                        CreaterID = base.ContextInfo.UserInfoID,
-                        CreaterName = base.ContextInfo.UserName,
+                        CreaterID = this.ContextInfo.UserInfoID,
+                        CreaterName = this.ContextInfo.UserName,
                         CreateTime = DateTime.Now,
                         DicName = request.Body.MerchantName,
                         FK_MerchantID = request.Body.MerchantID,
                         ParentID = rootDic.SysDicID,
                         RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
                         SysDicID = sysDicID,
-                        UpdaterID = base.ContextInfo.UserInfoID,
-                        UpdaterName = base.ContextInfo.UserName,
+                        UpdaterID = this.ContextInfo.UserInfoID,
+                        UpdaterName = this.ContextInfo.UserName,
                         UpdateTime = DateTime.Now
                     });
                 }
@@ -200,15 +204,15 @@ namespace XCLCMS.Service.WebAPI
                     {
                         SysRole = new Data.Model.SysRole()
                         {
-                            CreaterID = base.ContextInfo.UserInfoID,
-                            CreaterName = base.ContextInfo.UserName,
+                            CreaterID = this.ContextInfo.UserInfoID,
+                            CreaterName = this.ContextInfo.UserName,
                             FK_MerchantID = request.Body.MerchantID,
                             ParentID = sysRoleId,
                             RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
                             CreateTime = DateTime.Now,
                             RoleName = XCLCMS.Data.CommonHelper.SysRoleConst.DefaultRoleName,
-                            UpdaterID = base.ContextInfo.UserInfoID,
-                            UpdaterName = base.ContextInfo.UserName,
+                            UpdaterID = this.ContextInfo.UserInfoID,
+                            UpdaterName = this.ContextInfo.UserName,
                             UpdateTime = DateTime.Now,
                             SysRoleID = subSysRoleId
                         },
@@ -284,8 +288,8 @@ namespace XCLCMS.Service.WebAPI
             model.RegisterTime = request.Body.RegisterTime;
             model.Remark = request.Body.Remark;
             model.Tel = request.Body.Tel;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
 
             response.IsSuccess = this.merchantBLL.Update(model);
@@ -334,7 +338,7 @@ namespace XCLCMS.Service.WebAPI
                 }
             }
 
-            if (!this.merchantBLL.Delete(request.Body, base.ContextInfo))
+            if (!this.merchantBLL.Delete(request.Body, this.ContextInfo))
             {
                 response.IsSuccess = false;
                 response.Message = "删除失败！";

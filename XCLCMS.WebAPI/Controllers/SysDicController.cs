@@ -12,15 +12,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysDicController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
-
-        private XCLCMS.Service.WebAPI.SysDic bll = null;
+        private XCLCMS.IService.WebAPI.ISysDicService iSysDicService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public SysDicController()
+        public SysDicController(XCLCMS.IService.WebAPI.ISysDicService sysDicService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.SysDic(base.ContextModel);
+            sysDicService.ContextInfo = base.ContextModel;
+            this.iSysDicService = sysDicService;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iSysDicService.Detail(request);
 
                 #region 限制商户
 
@@ -58,7 +58,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetChildListByCode(request);
+                return this.iSysDicService.GetChildListByCode(request);
             });
         }
 
@@ -71,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistSysDicCode(request);
+                return this.iSysDicService.IsExistSysDicCode(request);
             });
         }
 
@@ -84,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistSysDicNameInSameLevel(request);
+                return this.iSysDicService.IsExistSysDicNameInSameLevel(request);
             });
         }
 
@@ -97,7 +97,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetEasyUITreeByCode(request);
+                return this.iSysDicService.GetEasyUITreeByCode(request);
             });
         }
 
@@ -110,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.GetList(request);
+                var response = this.iSysDicService.GetList(request);
 
                 #region 限制商户
 
@@ -134,7 +134,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetEasyUITreeByCondition(request);
+                return this.iSysDicService.GetEasyUITreeByCondition(request);
             });
         }
 
@@ -147,7 +147,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetSystemMenuModelList(request);
+                return this.iSysDicService.GetSystemMenuModelList(request);
             });
         }
 
@@ -160,7 +160,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetChildListByID(request);
+                return this.iSysDicService.GetChildListByID(request);
             });
         }
 
@@ -174,7 +174,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetLayerListBySysDicID(request);
+                return this.iSysDicService.GetLayerListBySysDicID(request);
             });
         }
 
@@ -187,7 +187,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetPassTypeDic(request);
+                return this.iSysDicService.GetPassTypeDic(request);
             });
         }
 
@@ -200,7 +200,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetAllUnderListByID(request);
+                return this.iSysDicService.GetAllUnderListByID(request);
             });
         }
 
@@ -226,7 +226,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Add(request);
+                response = this.iSysDicService.Add(request);
 
                 return response;
             });
@@ -254,7 +254,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iSysDicService.Update(request);
 
                 return response;
             });
@@ -290,7 +290,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iSysDicService.Delete(request);
             });
         }
     }

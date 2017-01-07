@@ -7,7 +7,7 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
-    public interface IAdsService : IBaseInfo
+    public interface IAdsService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.Ads> request);
 

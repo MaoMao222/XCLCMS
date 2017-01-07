@@ -12,15 +12,16 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class ArticleController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.Article bll = null;
+        private XCLCMS.IService.WebAPI.IArticleService iArticleService = null;
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
 
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticleController()
+        public ArticleController(XCLCMS.IService.WebAPI.IArticleService articleService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.Article(base.ContextModel);
+            articleService.ContextInfo = base.ContextModel;
+            this.iArticleService = articleService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iArticleService.Detail(request);
 
                 #region 限制商户
 
@@ -58,7 +59,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.RelationDetail(request);
+                return this.iArticleService.RelationDetail(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iArticleService.PageList(request);
             });
         }
 
@@ -96,7 +97,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.SimplePageList(request);
+                return this.iArticleService.SimplePageList(request);
             });
         }
 
@@ -109,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistCode(request);
+                return this.iArticleService.IsExistCode(request);
             });
         }
 
@@ -134,7 +135,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Add(request);
+                return this.iArticleService.Add(request);
             });
         }
 
@@ -159,7 +160,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Update(request);
+                return this.iArticleService.Update(request);
             });
         }
 
@@ -193,7 +194,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iArticleService.Delete(request);
             });
         }
     }

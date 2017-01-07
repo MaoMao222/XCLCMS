@@ -11,14 +11,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysLogController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.SysLog bll = null;
+        private XCLCMS.IService.WebAPI.ISysLogService iSysLogService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public SysLogController()
+        public SysLogController(XCLCMS.IService.WebAPI.ISysLogService sysLogService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.SysLog(base.ContextModel);
+            sysLogService.ContextInfo = base.ContextModel;
+            this.iSysLogService = sysLogService;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iSysLogService.PageList(request);
             });
         }
 
@@ -55,7 +56,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Delete(request, base.IsOnlyCurrentMerchant ? base.CurrentUserModel.FK_MerchantID : 0);
+                return this.iSysLogService.Delete(request, base.IsOnlyCurrentMerchant ? base.CurrentUserModel.FK_MerchantID : 0);
             });
         }
     }

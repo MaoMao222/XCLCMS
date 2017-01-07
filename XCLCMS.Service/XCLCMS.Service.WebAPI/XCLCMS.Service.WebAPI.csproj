@@ -45,22 +45,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ads.cs" />
-    <Compile Include="Article.cs" />
-    <Compile Include="Attachment.cs" />
-    <Compile Include="BaseInfo.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="FriendLinks.cs" />
-    <Compile Include="Merchant.cs" />
-    <Compile Include="MerchantApp.cs" />
+    <Compile Include="AdsService.cs" />
+    <Compile Include="ArticleService.cs" />
+    <Compile Include="AttachmentService.cs" />
+    <Compile Include="CommonService.cs" />
+    <Compile Include="FriendLinksService.cs" />
+    <Compile Include="MerchantService.cs" />
+    <Compile Include="MerchantAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysDic.cs" />
-    <Compile Include="SysFunction.cs" />
-    <Compile Include="SysLog.cs" />
-    <Compile Include="SysRole.cs" />
-    <Compile Include="SysWebSetting.cs" />
-    <Compile Include="Tags.cs" />
-    <Compile Include="UserInfo.cs" />
+    <Compile Include="SysDicService.cs" />
+    <Compile Include="SysFunctionService.cs" />
+    <Compile Include="SysLogService.cs" />
+    <Compile Include="SysRoleService.cs" />
+    <Compile Include="SysWebSettingService.cs" />
+    <Compile Include="TagsService.cs" />
+    <Compile Include="UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">

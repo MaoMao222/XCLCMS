@@ -12,15 +12,16 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class MerchantController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.Merchant bll = null;
+        private XCLCMS.IService.WebAPI.IMerchantService iMerchantService = null;
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
 
         /// <summary>
         /// 构造
         /// </summary>
-        public MerchantController()
+        public MerchantController(XCLCMS.IService.WebAPI.IMerchantService merchantService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.Merchant(base.ContextModel);
+            merchantService.ContextInfo = base.ContextModel;
+            this.iMerchantService = merchantService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iMerchantService.Detail(request);
 
                 #region 限制商户
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iMerchantService.PageList(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetMerchantTypeDic(request);
+                return this.iMerchantService.GetMerchantTypeDic(request);
             });
         }
 
@@ -96,7 +97,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistMerchantName(request);
+                return this.iMerchantService.IsExistMerchantName(request);
             });
         }
 
@@ -109,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.Add(request);
+                return this.iMerchantService.Add(request);
             });
         }
 
@@ -135,7 +136,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iMerchantService.Update(request);
 
                 return response;
             });
@@ -171,7 +172,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iMerchantService.Delete(request);
             });
         }
     }

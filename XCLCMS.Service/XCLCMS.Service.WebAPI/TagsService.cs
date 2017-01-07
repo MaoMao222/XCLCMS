@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -10,15 +12,13 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 标签
     /// </summary>
-    public class Tags : BaseInfo
+    public class TagsService : ITagsService
     {
         public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
         public XCLCMS.Data.BLL.View.v_Tags vtagsBLL = new XCLCMS.Data.BLL.View.v_Tags();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
 
-        public Tags(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询标签信息实体
@@ -194,8 +194,8 @@ namespace XCLCMS.Service.WebAPI
             model.FK_MerchantID = request.Body.FK_MerchantID;
             model.FK_MerchantAppID = request.Body.FK_MerchantAppID;
             model.RecordState = request.Body.RecordState;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
 
             response.IsSuccess = this.tagsBLL.Update(model);
@@ -237,8 +237,8 @@ namespace XCLCMS.Service.WebAPI
                     continue;
                 }
 
-                model.UpdaterID = base.ContextInfo.UserInfoID;
-                model.UpdaterName = base.ContextInfo.UserName;
+                model.UpdaterID = this.ContextInfo.UserInfoID;
+                model.UpdaterName = this.ContextInfo.UserName;
                 model.UpdateTime = DateTime.Now;
                 model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
                 if (!this.tagsBLL.Update(model))

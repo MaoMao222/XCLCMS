@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -10,16 +12,14 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 文章
     /// </summary>
-    public class Article : BaseInfo
+    public class ArticleService : IArticleService
     {
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
         private XCLCMS.Data.BLL.View.v_Article vArticleBLL = new XCLCMS.Data.BLL.View.v_Article();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
-        public Article(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询文章信息实体
@@ -239,7 +239,7 @@ namespace XCLCMS.Service.WebAPI
             #endregion 数据校验
 
             var articleContext = new Data.BLL.Strategy.Article.ArticleContext();
-            articleContext.ContextInfo = base.ContextInfo;
+            articleContext.ContextInfo = this.ContextInfo;
             articleContext.Article = request.Body.Article;
             articleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
             articleContext.ArticleTypeIDList = request.Body.ArticleTypeIDList;
@@ -418,8 +418,8 @@ namespace XCLCMS.Service.WebAPI
             model.Title = request.Body.Article.Title;
             model.TopBeginTime = request.Body.Article.TopBeginTime;
             model.TopEndTime = request.Body.Article.TopEndTime;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.URLOpenType = request.Body.Article.URLOpenType;
             model.VerifyState = request.Body.Article.VerifyState;
@@ -428,7 +428,7 @@ namespace XCLCMS.Service.WebAPI
             model.FK_MerchantID = request.Body.Article.FK_MerchantID;
 
             var articleContext = new Data.BLL.Strategy.Article.ArticleContext();
-            articleContext.ContextInfo = base.ContextInfo;
+            articleContext.ContextInfo = this.ContextInfo;
             articleContext.Article = model;
             articleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;
             articleContext.ArticleTypeIDList = request.Body.ArticleTypeIDList;
@@ -483,8 +483,8 @@ namespace XCLCMS.Service.WebAPI
                     continue;
                 }
 
-                articleModel.UpdaterID = base.ContextInfo.UserInfoID;
-                articleModel.UpdaterName = base.ContextInfo.UserName;
+                articleModel.UpdaterID = this.ContextInfo.UserInfoID;
+                articleModel.UpdaterName = this.ContextInfo.UserName;
                 articleModel.UpdateTime = DateTime.Now;
                 articleModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
                 this.articleBLL.Update(articleModel);

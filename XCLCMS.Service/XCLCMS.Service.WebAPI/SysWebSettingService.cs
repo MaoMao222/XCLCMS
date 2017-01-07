@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -10,16 +12,14 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 系统配置
     /// </summary>
-    public class SysWebSetting : BaseInfo
+    public class SysWebSettingService : ISysWebSettingService
     {
         private XCLCMS.Data.BLL.View.v_SysWebSetting vSysWebSettingBLL = new Data.BLL.View.v_SysWebSetting();
         private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
 
-        public SysWebSetting(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询系统配置信息实体
@@ -197,8 +197,8 @@ namespace XCLCMS.Service.WebAPI
             model.UATKeyValue = request.Body.UATKeyValue;
             model.PrdKeyValue = request.Body.PrdKeyValue;
             model.Remark = request.Body.Remark;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
 
             response.IsSuccess = this.sysWebSettingBLL.Update(model);
@@ -240,8 +240,8 @@ namespace XCLCMS.Service.WebAPI
                     continue;
                 }
 
-                model.UpdaterID = base.ContextInfo.UserInfoID;
-                model.UpdaterName = base.ContextInfo.UserName;
+                model.UpdaterID = this.ContextInfo.UserInfoID;
+                model.UpdaterName = this.ContextInfo.UserName;
                 model.UpdateTime = DateTime.Now;
                 model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.R.ToString();
                 if (!this.sysWebSettingBLL.Update(model))

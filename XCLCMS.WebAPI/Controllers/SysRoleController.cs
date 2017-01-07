@@ -12,14 +12,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysRoleController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
-        private XCLCMS.Service.WebAPI.SysRole bll = null;
+        private XCLCMS.IService.WebAPI.ISysRoleService iSysRoleService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public SysRoleController()
+        public SysRoleController(XCLCMS.IService.WebAPI.ISysRoleService sysRoleService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.SysRole(base.ContextModel);
+            sysRoleService.ContextInfo = base.ContextModel;
+            this.iSysRoleService = sysRoleService;
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iSysRoleService.Detail(request);
 
                 #region 限制商户
 
@@ -57,7 +58,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistCode(request);
+                return this.iSysRoleService.IsExistCode(request);
             });
         }
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistRoleNameInSameLevel(request);
+                return this.iSysRoleService.IsExistRoleNameInSameLevel(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.GetList(request);
+                var response = this.iSysRoleService.GetList(request);
 
                 #region 限制商户
 
@@ -107,7 +108,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetAllJsonForEasyUITree(request);
+                return this.iSysRoleService.GetAllJsonForEasyUITree(request);
             });
         }
 
@@ -121,7 +122,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetLayerListBySysRoleID(request);
+                return this.iSysRoleService.GetLayerListBySysRoleID(request);
             });
         }
 
@@ -134,7 +135,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GetRoleByUserID(request);
+                return this.iSysRoleService.GetRoleByUserID(request);
             });
         }
 
@@ -160,7 +161,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Add(request);
+                response = this.iSysRoleService.Add(request);
 
                 return response;
             });
@@ -188,7 +189,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iSysRoleService.Update(request);
 
                 return response;
             });
@@ -224,7 +225,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iSysRoleService.Delete(request);
             });
         }
     }

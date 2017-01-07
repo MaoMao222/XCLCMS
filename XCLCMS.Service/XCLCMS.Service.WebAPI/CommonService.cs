@@ -1,16 +1,16 @@
 ﻿using System;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.IService.WebAPI;
 
 namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 公共
     /// </summary>
-    public class Common : BaseInfo
+    public class CommonService : ICommonService
     {
-        public Common(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 生成ID号

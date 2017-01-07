@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -9,16 +11,14 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 权限功能
     /// </summary>
-    public class SysFunction : BaseInfo
+    public class SysFunctionService : ISysFunctionService
     {
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.SysFunction sysFunctionBLL = new Data.BLL.SysFunction();
         private XCLCMS.Data.BLL.View.v_SysFunction vSysFunctionBLL = new Data.BLL.View.v_SysFunction();
         private XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new XCLCMS.Data.BLL.View.v_SysRole();
 
-        public SysFunction(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询功能信息实体
@@ -336,8 +336,8 @@ namespace XCLCMS.Service.WebAPI
 
             model.Code = request.Body.Code;
             model.Remark = request.Body.Remark;
-            model.UpdaterID = base.ContextInfo.UserInfoID;
-            model.UpdaterName = base.ContextInfo.UserName;
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.FunctionName = request.Body.FunctionName;
 
@@ -378,8 +378,8 @@ namespace XCLCMS.Service.WebAPI
                 var sysDicModel = this.sysFunctionBLL.GetModel(id);
                 if (null != sysDicModel)
                 {
-                    sysDicModel.UpdaterID = base.ContextInfo.UserInfoID;
-                    sysDicModel.UpdaterName = base.ContextInfo.UserName;
+                    sysDicModel.UpdaterID = this.ContextInfo.UserInfoID;
+                    sysDicModel.UpdaterName = this.ContextInfo.UserName;
                     sysDicModel.UpdateTime = DateTime.Now;
                     sysDicModel.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.D.ToString();
                     if (this.sysFunctionBLL.Update(sysDicModel))
@@ -412,8 +412,8 @@ namespace XCLCMS.Service.WebAPI
             response.IsSuccess = this.sysFunctionBLL.DelChild(new Data.Model.SysFunction()
             {
                 SysFunctionID = request.Body,
-                UpdaterID = base.ContextInfo.UserInfoID,
-                UpdaterName = base.ContextInfo.UserName,
+                UpdaterID = this.ContextInfo.UserInfoID,
+                UpdaterName = this.ContextInfo.UserName,
                 UpdateTime = DateTime.Now
             });
 

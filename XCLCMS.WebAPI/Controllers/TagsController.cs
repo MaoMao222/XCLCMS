@@ -13,14 +13,15 @@ namespace XCLCMS.WebAPI.Controllers
     public class TagsController : BaseAPIController
     {
         public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
-        private XCLCMS.Service.WebAPI.Tags bll = null;
+        private XCLCMS.IService.WebAPI.ITagsService iTagsService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public TagsController()
+        public TagsController(XCLCMS.IService.WebAPI.ITagsService tagsService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.Tags(base.ContextModel);
+            tagsService.ContextInfo = base.ContextModel;
+            this.iTagsService = tagsService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.bll.Detail(request);
+                var response = this.iTagsService.Detail(request);
 
                 #region 限制商户
 
@@ -70,7 +71,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.PageList(request);
+                return this.iTagsService.PageList(request);
             });
         }
 
@@ -83,7 +84,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.IsExistTagName(request);
+                return this.iTagsService.IsExistTagName(request);
             });
         }
 
@@ -109,7 +110,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Add(request);
+                response = this.iTagsService.Add(request);
 
                 return response;
             });
@@ -137,7 +138,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                response = this.bll.Update(request);
+                response = this.iTagsService.Update(request);
 
                 return response;
             });
@@ -173,7 +174,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                return this.bll.Delete(request);
+                return this.iTagsService.Delete(request);
             });
         }
     }

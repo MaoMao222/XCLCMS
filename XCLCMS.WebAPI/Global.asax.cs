@@ -16,7 +16,7 @@ namespace XCLCMS.WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             //autofac配置
-            var webApiBaseType = typeof(XCLCMS.IService.WebAPI.IBaseInfo);
+            var webApiBaseType = typeof(XCLCMS.IService.WebAPI.IBaseInfoService);
             var assembly = Assembly.GetExecutingAssembly();
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;

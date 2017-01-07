@@ -1,18 +1,19 @@
-﻿using XCLCMS.Data.WebAPIEntity;
+﻿using System;
+using XCLCMS.Data.Model.Custom;
+using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.IService.WebAPI;
 
 namespace XCLCMS.Service.WebAPI
 {
     /// <summary>
     /// 日志
     /// </summary>
-    public class SysLog : BaseInfo
+    public class SysLogService : ISysLogService
     {
         public XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
 
-        public SysLog(XCLCMS.Data.Model.Custom.ContextModel contextModel) : base(contextModel)
-        {
-        }
+        public ContextModel ContextInfo { get; set; }
 
         /// <summary>
         /// 查询系统日志信息分页列表

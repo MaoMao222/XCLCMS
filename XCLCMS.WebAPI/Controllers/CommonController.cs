@@ -9,14 +9,15 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class CommonController : BaseAPIController
     {
-        private XCLCMS.Service.WebAPI.Common bll = null;
+        private XCLCMS.IService.WebAPI.ICommonService iCommonService = null;
 
         /// <summary>
         /// 构造
         /// </summary>
-        public CommonController()
+        public CommonController(XCLCMS.IService.WebAPI.ICommonService commonService)
         {
-            this.bll = new XCLCMS.Service.WebAPI.Common(base.ContextModel);
+            commonService.ContextInfo = base.ContextModel;
+            this.iCommonService = commonService;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.GenerateID(request);
+                return this.iCommonService.GenerateID(request);
             });
         }
 
@@ -41,7 +42,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
-                return this.bll.ClearRubbishData(request);
+                return this.iCommonService.ClearRubbishData(request);
             });
         }
     }

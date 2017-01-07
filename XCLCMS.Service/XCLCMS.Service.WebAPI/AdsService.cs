@@ -12,7 +12,7 @@ namespace XCLCMS.Service.WebAPI
     /// <summary>
     /// 广告
     /// </summary>
-    public class Ads : IAdsService
+    public class AdsService : IAdsService
     {
         private XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();
         private XCLCMS.Data.BLL.View.v_Ads vAdsBLL = new Data.BLL.View.v_Ads();

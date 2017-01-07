@@ -1,6 +1,6 @@
 ﻿namespace XCLCMS.IService.WebAPI
 {
-    public interface IBaseInfo
+    public interface IBaseInfoService
     {
         /// <summary>
         /// 当前上下文信息
