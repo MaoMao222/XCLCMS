@@ -8,6 +8,9 @@ using XCLNetTools.Entity.EasyUI;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 系统字典服务
+    /// </summary>
     public interface ISysDicService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.SysDic> request);

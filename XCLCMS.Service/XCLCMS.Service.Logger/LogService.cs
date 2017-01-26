@@ -4,6 +4,9 @@ using XCLCMS.IService.Logger;
 
 namespace XCLCMS.Service.Logger
 {
+    /// <summary>
+    /// XCLNetLogger 服务
+    /// </summary>
     public class LogService : ILogService
     {
         static LogService()

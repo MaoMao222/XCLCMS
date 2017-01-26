@@ -5,6 +5,9 @@ using XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 附件服务
+    /// </summary>
     public interface IAttachmentService : IBaseInfoService
     {
         APIResponseEntity<Data.Model.Attachment> Detail(APIRequestEntity<long> request);

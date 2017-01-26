@@ -8,6 +8,9 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 用户信息服务
+    /// </summary>
     public interface IUserInfoService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<AddOrUpdateEntity> request);

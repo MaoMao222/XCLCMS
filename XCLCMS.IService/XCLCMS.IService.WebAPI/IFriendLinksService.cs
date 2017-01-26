@@ -8,6 +8,9 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 友情链接服务
+    /// </summary>
     public interface IFriendLinksService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.FriendLinks> request);

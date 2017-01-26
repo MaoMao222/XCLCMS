@@ -8,6 +8,9 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 商户服务
+    /// </summary>
     public interface IMerchantService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.Merchant> request);

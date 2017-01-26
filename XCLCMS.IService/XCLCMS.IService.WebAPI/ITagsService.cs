@@ -8,6 +8,9 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 标签服务
+    /// </summary>
     public interface ITagsService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.Tags> request);

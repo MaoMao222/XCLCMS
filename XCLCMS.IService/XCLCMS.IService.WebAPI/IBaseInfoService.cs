@@ -1,5 +1,8 @@
 ﻿namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 父接口
+    /// </summary>
     public interface IBaseInfoService
     {
         /// <summary>

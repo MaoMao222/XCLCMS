@@ -7,8 +7,14 @@ using System.Web.Routing;
 
 namespace XCLCMS.WebAPI
 {
+    /// <summary>
+    /// 路由配置
+    /// </summary>
     public class RouteConfig
     {
+        /// <summary>
+        /// 注册路由
+        /// </summary>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

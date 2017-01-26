@@ -3,8 +3,14 @@ using System.Web.Http;
 
 namespace XCLCMS.WebAPI
 {
+    /// <summary>
+    /// web api配置
+    /// </summary>
     public static class WebApiConfig
     {
+        /// <summary>
+        /// 注册
+        /// </summary>
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(

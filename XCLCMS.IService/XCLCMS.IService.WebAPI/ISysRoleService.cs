@@ -8,6 +8,9 @@ using XCLNetTools.Entity.EasyUI;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 角色服务
+    /// </summary>
     public interface ISysRoleService : IBaseInfoService
     {
         APIResponseEntity<bool> Add(APIRequestEntity<AddOrUpdateEntity> request);

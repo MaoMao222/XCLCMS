@@ -6,6 +6,9 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.IService.WebAPI
 {
+    /// <summary>
+    /// 系统日志服务
+    /// </summary>
     public interface ISysLogService : IBaseInfoService
     {
         APIResponseEntity<bool> Delete(APIRequestEntity<ClearConditionEntity> request, long merchantID = 0);
