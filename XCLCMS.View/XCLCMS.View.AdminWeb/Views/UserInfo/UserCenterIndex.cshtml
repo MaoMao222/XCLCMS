@@ -8,96 +8,187 @@
         <div title="个人资料" style="padding:10px">
 
             <table class="XCLTableEdit">
-                <tbody>
-                    <tr>
-                        <td class="XCLTitle">用户名：</td>
-                        <td>
-                            @Model.UserBaseInfo.UserName
-                        </td>
-                        <td class="XCLTitle">所属商户：</td>
-                        <td>
-                            @Model.UserBaseInfo.MerchantName
-                        </td>
-                        <td class="XCLTitle">所属应用：</td>
-                        <td>@Model.UserBaseInfo.MerchantAppName</td>
-                    </tr>
-                    <tr>
-                        <td class="XCLTitle">真实姓名：</td>
-                        <td>
-                            <input type="text" id="txtRealName" name="txtRealName" value="@Model.UserBaseInfo.RealName"/>
-                        </td>
-                        <td class="XCLTitle">昵称：</td>
-                        <td><input type="text" id="txtNickName" name="txtNickName" value="@Model.UserBaseInfo.NickName"/></td>
-                        <td class="XCLTitle"><span class="XCLRedBolder">*</span>性别：</td>
-                        <td>
-                            <select id="selSexType" name="selSexType">
-                                @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserSexTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
-                                   {
-                                       DefaultValue = Model.UserBaseInfo.SexType
-                                   }))
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="XCLTitle">出生日期：</td>
-                        <td>
-                            <input type="text" id="txtBirthday" name="txtBirthday" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' }); return false;" value="@string.Format("{0:yyyy-MM-dd}", Model.UserBaseInfo.Birthday)">
-                        </td>
-                        <td class="XCLTitle">年龄：</td>
-                        <td>
-                            <input type="text" id="txtAge" name="txtAge" class="easyui-numberbox" value="@Model.UserBaseInfo.Age" style="height:25px;" />
-                        </td>
-                        <td class="XCLTitle">手机号：</td>
-                        <td>
-                            <input type="text" id="txtTel" name="txtTel" value="@Model.UserBaseInfo.Tel"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="XCLTitle">QQ：</td>
-                        <td>
-                            <input type="text" id="txtQQ" name="txtQQ" value="@Model.UserBaseInfo.QQ"/>
-                        </td>
-                        <td class="XCLTitle">电子邮件：</td>
-                        <td>
-                            <input type="text" id="txtEmail" name="txtEmail" value="@Model.UserBaseInfo.Email"/>
-                        </td>
-                        <td class="XCLTitle">其它联系方式：</td>
-                        <td>
-                            <input type="text" id="txtOtherContact" name="txtOtherContact" value="@Model.UserBaseInfo.OtherContact"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="XCLTitle">用户状态：</td>
-                        <td>
-                            @Model.UserBaseInfo.UserStateName
-                        </td>
-                        <td class="XCLTitle"></td>
-                        <td>
-                        </td>
-                        <td class="XCLTitle"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td class="XCLTitle">用户名：</td>
+                    <td>
+                        @Model.UserBaseInfo.UserName
+                    </td>
+                    <td class="XCLTitle">所属商户：</td>
+                    <td>
+                        @Model.UserBaseInfo.MerchantName
+                    </td>
+                    <td class="XCLTitle">所属应用：</td>
+                    <td>@Model.UserBaseInfo.MerchantAppName</td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">真实姓名：</td>
+                    <td>
+                        <input type="text" id="txtRealName" name="txtRealName" value="@Model.UserBaseInfo.RealName" />
+                    </td>
+                    <td class="XCLTitle">昵称：</td>
+                    <td><input type="text" id="txtNickName" name="txtNickName" value="@Model.UserBaseInfo.NickName" /></td>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>性别：</td>
+                    <td>
+                        <select id="selSexType" name="selSexType">
+                            @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserSexTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+                       {
+                           DefaultValue = Model.UserBaseInfo.SexType
+                       }))
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">出生日期：</td>
+                    <td>
+                        <input type="text" id="txtBirthday" name="txtBirthday" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' }); return false;" value="@string.Format("{0:yyyy-MM-dd}", Model.UserBaseInfo.Birthday)">
+                    </td>
+                    <td class="XCLTitle">年龄：</td>
+                    <td>
+                        <input type="text" id="txtAge" name="txtAge" class="easyui-numberbox" value="@Model.UserBaseInfo.Age" style="height:25px;" />
+                    </td>
+                    <td class="XCLTitle">手机号：</td>
+                    <td>
+                        <input type="text" id="txtTel" name="txtTel" value="@Model.UserBaseInfo.Tel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">QQ：</td>
+                    <td>
+                        <input type="text" id="txtQQ" name="txtQQ" value="@Model.UserBaseInfo.QQ" />
+                    </td>
+                    <td class="XCLTitle">电子邮件：</td>
+                    <td>
+                        <input type="text" id="txtEmail" name="txtEmail" value="@Model.UserBaseInfo.Email" />
+                    </td>
+                    <td class="XCLTitle">其它联系方式：</td>
+                    <td>
+                        <input type="text" id="txtOtherContact" name="txtOtherContact" value="@Model.UserBaseInfo.OtherContact" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">用户状态：</td>
+                    <td>
+                        @Model.UserBaseInfo.UserStateName
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
             </table>
 
             <div class="XCLHandBar">
-                <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                <a id="btnSaveUserInfo" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
             </div>
-
         </div>
         <div title="商户资料" style="padding:10px">
-            <ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true"></ul>
+            <table class="XCLTableEdit">
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>商户名：</td>
+                    <td>
+                        <input type="text" id="txtMerchantName" name="txtMerchantName">
+                    </td>
+                    <td class="XCLTitle">商户类型：</td>
+                    <td>
+                        <select id="selMerchantType" name="selMerchantType">
+                            <option value="">--请选择--</option>
+                            <option value="300220">个人</option>
+                            <option value="300221">公司</option>
+                        </select>
+                    </td>
+                    <td class="XCLTitle">域名：</td>
+                    <td>
+                        <input type="text" id="txtDomain" name="txtDomain">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">联系人：</td>
+                    <td>
+                        <input type="text" id="txtContactName" name="txtContactName">
+                    </td>
+                    <td class="XCLTitle">手机：</td>
+                    <td>
+                        <input type="text" id="txtTel" name="txtTel">
+                    </td>
+                    <td class="XCLTitle">固话：</td>
+                    <td>
+                        <input type="text" id="txtLandline" name="txtLandline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">电子邮件：</td>
+                    <td>
+                        <input type="text" id="txtEmail" name="txtEmail">
+                    </td>
+                    <td class="XCLTitle">QQ：</td>
+                    <td>
+                        <input type="text" id="txtQQ" name="txtQQ">
+                    </td>
+                    <td class="XCLTitle" rowspan="2">证件信息：</td>
+                    <td>
+                        证件类型：
+                        <select id="selPassType" name="selPassType">
+                            <option value="">--请选择--</option>
+                            <option value="300224">身份证</option>
+                            <option value="300225">护照</option>
+                            <option value="300226">学生证</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">地址：</td>
+                    <td>
+                        <input type="text" id="txtAddress" name="txtAddress">
+                    </td>
+                    <td class="XCLTitle">注册时间：</td>
+                    <td>
+                        <input type="text" id="txtRegisterTime" name="txtRegisterTime" value="">
+                    </td>
+                    <td>
+                        证件号：<input type="text" id="txtPassNumber" name="txtPassNumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">其它联系信息：</td>
+                    <td>
+                        <textarea id="txtOtherContact" name="txtOtherContact"></textarea>
+                    </td>
+                    <td class="XCLTitle">商户状态：</td>
+                    <td>
+                        
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+            </table>
+            <div class="XCLHandBar">
+                <a id="btnSaveMerchant" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+            </div>
         </div>
         <div title="密码修改" style="padding:10px">
-            <p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
-            <ul>
-                <li>easyui is a collection of user-interface plugin based on jQuery.</li>
-                <li>easyui provides essential functionality for building modem, interactive, javascript applications.</li>
-                <li>using easyui you don't need to write many javascript code, you usually defines user-interface by writing some HTML markup.</li>
-                <li>complete framework for HTML5 web page.</li>
-                <li>easyui save your time and scales while developing your products.</li>
-                <li>easyui is very easy but powerful.</li>
-            </ul>
+            <table class="XCLTableEdit">
+                <tr>
+                    <td class="XCLTitle">原密码：</td>
+                    <td>
+                        <input type="password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">新密码：</td>
+                    <td>
+                        <input type="password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">确认新密码：</td>
+                    <td>
+                        <input type="password" />
+                    </td>
+                </tr>
+            </table>
+            <div class="XCLHandBar">
+                <a id="btnSavePassword" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+            </div>
         </div>
     </div>
 </div>
