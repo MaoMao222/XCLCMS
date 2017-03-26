@@ -159,7 +159,7 @@ namespace XCLCMS.Data.Model
         }
 
         /// <summary>
-        /// 其实联系方式
+        /// 其它联系方式
         /// </summary>
         public string OtherContact
         {

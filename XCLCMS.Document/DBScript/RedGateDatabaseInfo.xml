@@ -51,9 +51,11 @@
       <Data>Data</Data>
       <Sequence>Sequences</Sequence>
       <SearchPropertyList>Search Property Lists</SearchPropertyList>
+      <SecurityPolicy>Security Policies</SecurityPolicy>
     </Prefixes>
     <DataWriteAllFilesInOneDirectory>True</DataWriteAllFilesInOneDirectory>
   </WriteToFileOptions>
+  <IsAzure>False</IsAzure>
   <DataFileSet>
     <Count>0</Count>
   </DataFileSet>

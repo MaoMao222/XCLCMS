@@ -8788,13 +8788,13 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o318">
 <a:ObjectID>76896B89-E0D6-4132-9E5E-DBE51526EDA5</a:ObjectID>
-<a:Name>其实联系方式</a:Name>
+<a:Name>其它联系方式</a:Name>
 <a:Code>OtherContact</a:Code>
 <a:CreationDate>1414212033</a:CreationDate>
 <a:Creator>XCL</a:Creator>
 <a:ModificationDate>1414212697</a:ModificationDate>
 <a:Modifier>XCL</a:Modifier>
-<a:Comment>其实联系方式</a:Comment>
+<a:Comment>其它联系方式</a:Comment>
 <a:DataType>nvarchar(500)</a:DataType>
 <a:Length>500</a:Length>
 </o:Column>

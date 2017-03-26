@@ -78,8 +78,9 @@ GO
 EXEC sp_addextendedproperty N'MS_Description', '昵称', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'NickName'
 GO
 
-EXEC sp_addextendedproperty N'MS_Description', '其实联系方式', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'OtherContact'
+EXEC sp_addextendedproperty N'MS_Description', N'其它联系方式', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'OtherContact'
 GO
+
 
 EXEC sp_addextendedproperty N'MS_Description', '密码', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'Pwd'
 GO

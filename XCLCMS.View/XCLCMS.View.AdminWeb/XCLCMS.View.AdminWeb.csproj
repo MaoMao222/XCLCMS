@@ -166,6 +166,7 @@
     <Compile Include="Controllers\SysRole\SysRoleController.cs" />
     <Compile Include="Controllers\SysWebSetting\SysWebSettingController.cs" />
     <Compile Include="Controllers\Tags\TagsController.cs" />
+    <Compile Include="Controllers\UserInfo\UserCenterController.cs" />
     <Compile Include="Controllers\UserInfo\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +192,7 @@
     <Compile Include="Models\Tags\TagsAddVM.cs" />
     <Compile Include="Models\Tags\TagsListVM.cs" />
     <Compile Include="Models\UserControl\FileSelectVM.cs" />
+    <Compile Include="Models\UserInfo\UserCenterEditVM.cs" />
     <Compile Include="Models\UserInfo\UserInfoAddVM.cs" />
     <Compile Include="Models\UserInfo\UserInfoListVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -721,6 +723,7 @@
     </Content>
     <Content Include="Config\XConfigGen.bat" />
     <Content Include="Config\XCLNetLogger.config.tpl" />
+    <Content Include="Views\UserInfo\UserCenterIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
