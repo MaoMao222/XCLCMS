@@ -10,14 +10,29 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysFunctionController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.ISysFunctionService iSysFunctionService = null;
+        private XCLCMS.IService.WebAPI.ISysFunctionService _iSysFunctionService = null;
+
+        private XCLCMS.IService.WebAPI.ISysFunctionService iSysFunctionService
+        {
+            get
+            {
+                if (null != this._iSysFunctionService && null == this._iSysFunctionService.ContextInfo)
+                {
+                    this._iSysFunctionService.ContextInfo = base.ContextModel;
+                }
+                return this._iSysFunctionService;
+            }
+            set
+            {
+                this._iSysFunctionService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysFunctionController(XCLCMS.IService.WebAPI.ISysFunctionService sysFunctionService)
         {
-            sysFunctionService.ContextInfo = base.ContextModel;
             this.iSysFunctionService = sysFunctionService;
         }
 

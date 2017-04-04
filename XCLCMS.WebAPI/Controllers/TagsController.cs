@@ -12,15 +12,30 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class TagsController : BaseAPIController
     {
-        public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
-        private XCLCMS.IService.WebAPI.ITagsService iTagsService = null;
+        private XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
+        private XCLCMS.IService.WebAPI.ITagsService _iTagsService = null;
+
+        private XCLCMS.IService.WebAPI.ITagsService iTagsService
+        {
+            get
+            {
+                if (null != this._iTagsService && null == this._iTagsService.ContextInfo)
+                {
+                    this._iTagsService.ContextInfo = base.ContextModel;
+                }
+                return this._iTagsService;
+            }
+            set
+            {
+                this._iTagsService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public TagsController(XCLCMS.IService.WebAPI.ITagsService tagsService)
         {
-            tagsService.ContextInfo = base.ContextModel;
             this.iTagsService = tagsService;
         }
 

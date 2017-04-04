@@ -12,14 +12,29 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysDicController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
-        private XCLCMS.IService.WebAPI.ISysDicService iSysDicService = null;
+        private XCLCMS.IService.WebAPI.ISysDicService _iSysDicService = null;
+
+        private XCLCMS.IService.WebAPI.ISysDicService iSysDicService
+        {
+            get
+            {
+                if (null != this._iSysDicService && null == this._iSysDicService.ContextInfo)
+                {
+                    this._iSysDicService.ContextInfo = base.ContextModel;
+                }
+                return this._iSysDicService;
+            }
+            set
+            {
+                this._iSysDicService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysDicController(XCLCMS.IService.WebAPI.ISysDicService sysDicService)
         {
-            sysDicService.ContextInfo = base.ContextModel;
             this.iSysDicService = sysDicService;
         }
 

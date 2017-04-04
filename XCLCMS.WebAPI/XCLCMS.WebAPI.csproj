@@ -171,6 +171,7 @@
     <Compile Include="Controllers\SysRoleController.cs" />
     <Compile Include="Controllers\SysWebSettingController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Filters\APIExceptionFilter.cs" />
     <Compile Include="Filters\APIOpenPermissionFilter.cs" />

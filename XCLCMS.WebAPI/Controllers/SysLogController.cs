@@ -11,14 +11,29 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysLogController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.ISysLogService iSysLogService = null;
+        private XCLCMS.IService.WebAPI.ISysLogService _iSysLogService = null;
+
+        private XCLCMS.IService.WebAPI.ISysLogService iSysLogService
+        {
+            get
+            {
+                if (null != this._iSysLogService && null == this._iSysLogService.ContextInfo)
+                {
+                    this._iSysLogService.ContextInfo = base.ContextModel;
+                }
+                return this._iSysLogService;
+            }
+            set
+            {
+                this._iSysLogService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysLogController(XCLCMS.IService.WebAPI.ISysLogService sysLogService)
         {
-            sysLogService.ContextInfo = base.ContextModel;
             this.iSysLogService = sysLogService;
         }
 

@@ -72,15 +72,16 @@ namespace XCLCMS.Lib.Common
             {
                 XCLCMS.Lib.Model.SettingModel model = null;
 
-                //先从缓存读取
-                if (XCLNetTools.Cache.CacheClass.Exists(Lib.Common.Comm.SettingCacheName))
-                {
-                    model = XCLNetTools.Cache.CacheClass.GetCache(Lib.Common.Comm.SettingCacheName) as XCLCMS.Lib.Model.SettingModel;
-                    if (null != model)
-                    {
-                        return model;
-                    }
-                }
+                //后期优化，需要刷新多台应用服务器的缓存
+                ////先从缓存读取
+                //if (XCLNetTools.Cache.CacheClass.Exists(Lib.Common.Comm.SettingCacheName))
+                //{
+                //    model = XCLNetTools.Cache.CacheClass.GetCache(Lib.Common.Comm.SettingCacheName) as XCLCMS.Lib.Model.SettingModel;
+                //    if (null != model)
+                //    {
+                //        return model;
+                //    }
+                //}
 
                 //若缓存中没有，从数据库中读取
                 var all = Setting.GetAllSettings();
@@ -106,7 +107,7 @@ namespace XCLCMS.Lib.Common
                         props[i].SetValue(model, tempKeyModel.Value);
                     }
                 }
-                XCLNetTools.Cache.CacheClass.SetCache(Lib.Common.Comm.SettingCacheName, model);
+                //XCLNetTools.Cache.CacheClass.SetCache(Lib.Common.Comm.SettingCacheName, model);
 
                 return model;
             }

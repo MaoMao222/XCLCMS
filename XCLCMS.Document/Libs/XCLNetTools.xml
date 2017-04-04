@@ -3620,6 +3620,11 @@
             <param name="key">key</param>
             <returns>是否匹配</returns>
         </member>
+        <member name="M:XCLNetTools.Encrypt.MD5.Is32MD5(System.String)">
+            <summary>
+            判断字符串是否为32位md5（不区分大小写）
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Encrypt.AESEncrypt">
             <summary>
             AES加密解密类

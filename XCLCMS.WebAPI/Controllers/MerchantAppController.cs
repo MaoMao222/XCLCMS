@@ -13,14 +13,29 @@ namespace XCLCMS.WebAPI.Controllers
     public class MerchantAppController : BaseAPIController
     {
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.IService.WebAPI.IMerchantAppService iMerchantAppService = null;
+        private XCLCMS.IService.WebAPI.IMerchantAppService _iMerchantAppService = null;
+
+        private XCLCMS.IService.WebAPI.IMerchantAppService iMerchantAppService
+        {
+            get
+            {
+                if (null != this._iMerchantAppService && null == this._iMerchantAppService.ContextInfo)
+                {
+                    this._iMerchantAppService.ContextInfo = base.ContextModel;
+                }
+                return this._iMerchantAppService;
+            }
+            set
+            {
+                this._iMerchantAppService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public MerchantAppController(XCLCMS.IService.WebAPI.IMerchantAppService merchantAppService)
         {
-            merchantAppService.ContextInfo = base.ContextModel;
             this.iMerchantAppService = merchantAppService;
         }
 

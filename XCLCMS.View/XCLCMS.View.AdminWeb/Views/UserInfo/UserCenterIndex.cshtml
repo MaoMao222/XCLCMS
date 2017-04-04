@@ -6,80 +6,82 @@
 <div style="width:100%;height:100%;">
     <div id="tt" class="easyui-tabs" data-options="tabPosition:'left'" style="width:100%;height:100%">
         <div title="个人资料" style="padding:10px">
+            <form id="userBaseInfoForm" action="@Model.UserBaseInfoFormAction" method="post">
 
-            <table class="XCLTableEdit">
-                <tr>
-                    <td class="XCLTitle">用户名：</td>
-                    <td>
-                        @Model.UserBaseInfo.UserName
-                    </td>
-                    <td class="XCLTitle">所属商户：</td>
-                    <td>
-                        @Model.UserBaseInfo.MerchantName
-                    </td>
-                    <td class="XCLTitle">所属应用：</td>
-                    <td>@Model.UserBaseInfo.MerchantAppName</td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">真实姓名：</td>
-                    <td>
-                        <input type="text" id="txtRealName" name="txtRealName" value="@Model.UserBaseInfo.RealName" />
-                    </td>
-                    <td class="XCLTitle">昵称：</td>
-                    <td><input type="text" id="txtNickName" name="txtNickName" value="@Model.UserBaseInfo.NickName" /></td>
-                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>性别：</td>
-                    <td>
-                        <select id="selSexType" name="selSexType">
-                            @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserSexTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
-                       {
-                           DefaultValue = Model.UserBaseInfo.SexType
-                       }))
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">出生日期：</td>
-                    <td>
-                        <input type="text" id="txtBirthday" name="txtBirthday" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' }); return false;" value="@string.Format("{0:yyyy-MM-dd}", Model.UserBaseInfo.Birthday)">
-                    </td>
-                    <td class="XCLTitle">年龄：</td>
-                    <td>
-                        <input type="text" id="txtAge" name="txtAge" class="easyui-numberbox" value="@Model.UserBaseInfo.Age" style="height:25px;" />
-                    </td>
-                    <td class="XCLTitle">手机号：</td>
-                    <td>
-                        <input type="text" id="txtTel" name="txtTel" value="@Model.UserBaseInfo.Tel" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">QQ：</td>
-                    <td>
-                        <input type="text" id="txtQQ" name="txtQQ" value="@Model.UserBaseInfo.QQ" />
-                    </td>
-                    <td class="XCLTitle">电子邮件：</td>
-                    <td>
-                        <input type="text" id="txtEmail" name="txtEmail" value="@Model.UserBaseInfo.Email" />
-                    </td>
-                    <td class="XCLTitle">其它联系方式：</td>
-                    <td>
-                        <input type="text" id="txtOtherContact" name="txtOtherContact" value="@Model.UserBaseInfo.OtherContact" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">用户状态：</td>
-                    <td>
-                        @Model.UserBaseInfo.UserStateName
-                    </td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                </tr>
-            </table>
+                <table class="XCLTableEdit">
+                    <tr>
+                        <td class="XCLTitle">用户名：</td>
+                        <td>
+                            @Model.UserBaseInfo.UserName
+                        </td>
+                        <td class="XCLTitle">所属商户：</td>
+                        <td>
+                            @Model.UserBaseInfo.MerchantName
+                        </td>
+                        <td class="XCLTitle">所属应用：</td>
+                        <td>@Model.UserBaseInfo.MerchantAppName</td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">真实姓名：</td>
+                        <td>
+                            <input type="text" id="txtRealName" name="txtRealName" value="@Model.UserBaseInfo.RealName" />
+                        </td>
+                        <td class="XCLTitle">昵称：</td>
+                        <td><input type="text" id="txtNickName" name="txtNickName" value="@Model.UserBaseInfo.NickName" /></td>
+                        <td class="XCLTitle"><span class="XCLRedBolder">*</span>性别：</td>
+                        <td>
+                            <select id="selSexType" name="selSexType">
+                                @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserSexTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+                           {
+                               DefaultValue = Model.UserBaseInfo.SexType
+                           }))
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">出生日期：</td>
+                        <td>
+                            <input type="text" id="txtBirthday" name="txtBirthday" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' }); return false;" value="@string.Format("{0:yyyy-MM-dd}", Model.UserBaseInfo.Birthday)">
+                        </td>
+                        <td class="XCLTitle">年龄：</td>
+                        <td>
+                            <input type="text" id="txtAge" name="txtAge" class="easyui-numberbox" value="@Model.UserBaseInfo.Age" style="height:25px;" />
+                        </td>
+                        <td class="XCLTitle">手机号：</td>
+                        <td>
+                            <input type="text" id="txtTel" name="txtTel" value="@Model.UserBaseInfo.Tel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">QQ：</td>
+                        <td>
+                            <input type="text" id="txtQQ" name="txtQQ" value="@Model.UserBaseInfo.QQ" />
+                        </td>
+                        <td class="XCLTitle">电子邮件：</td>
+                        <td>
+                            <input type="text" id="txtEmail" name="txtEmail" value="@Model.UserBaseInfo.Email" />
+                        </td>
+                        <td class="XCLTitle">其它联系方式：</td>
+                        <td>
+                            <input type="text" id="txtOtherContact" name="txtOtherContact" value="@Model.UserBaseInfo.OtherContact" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">用户状态：</td>
+                        <td>
+                            @Model.UserBaseInfo.UserStateName
+                        </td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                    </tr>
+                </table>
 
-            <div class="XCLHandBar">
-                <a id="btnSaveUserInfo" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
-            </div>
+                <div class="XCLHandBar">
+                    <a id="btnSaveUserInfo" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                </div>
+            </form>
         </div>
         <div title="商户资料" style="padding:10px">
             <table class="XCLTableEdit">
@@ -154,9 +156,7 @@
                         <textarea id="txtOtherContact" name="txtOtherContact"></textarea>
                     </td>
                     <td class="XCLTitle">商户状态：</td>
-                    <td>
-                        
-                    </td>
+                    <td></td>
                     <td class="XCLTitle"></td>
                     <td></td>
                 </tr>
@@ -192,3 +192,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    require(["Lib/UserCenter"], function (userCenter) {
+        $(function () {
+            userCenter.UserInfo.Init();
+        });
+    });
+</script>

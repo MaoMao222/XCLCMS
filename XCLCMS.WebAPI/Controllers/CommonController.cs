@@ -9,14 +9,29 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class CommonController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.ICommonService iCommonService = null;
+        private XCLCMS.IService.WebAPI.ICommonService _iCommonService = null;
+
+        private XCLCMS.IService.WebAPI.ICommonService iCommonService
+        {
+            get
+            {
+                if (null != this._iCommonService && null == this._iCommonService.ContextInfo)
+                {
+                    this._iCommonService.ContextInfo = base.ContextModel;
+                }
+                return this._iCommonService;
+            }
+            set
+            {
+                this._iCommonService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public CommonController(XCLCMS.IService.WebAPI.ICommonService commonService)
         {
-            commonService.ContextInfo = base.ContextModel;
             this.iCommonService = commonService;
         }
 

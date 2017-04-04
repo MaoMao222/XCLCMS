@@ -139,6 +139,7 @@
     <Compile Include="WebAPI\SysRoleAPI.cs" />
     <Compile Include="WebAPI\SysWebSettingAPI.cs" />
     <Compile Include="WebAPI\TagsAPI.cs" />
+    <Compile Include="WebAPI\UserCenterAPI.cs" />
     <Compile Include="WebAPI\UserInfoAPI.cs" />
   </ItemGroup>
   <ItemGroup>

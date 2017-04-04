@@ -59,6 +59,7 @@
     <Compile Include="SysRoleService.cs" />
     <Compile Include="SysWebSettingService.cs" />
     <Compile Include="TagsService.cs" />
+    <Compile Include="UserCenterService.cs" />
     <Compile Include="UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>

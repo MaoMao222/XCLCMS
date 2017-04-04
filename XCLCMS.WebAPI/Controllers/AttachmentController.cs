@@ -10,14 +10,29 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AttachmentController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.IAttachmentService iAttachmentService = null;
+        private XCLCMS.IService.WebAPI.IAttachmentService _iAttachmentService = null;
+
+        private XCLCMS.IService.WebAPI.IAttachmentService iAttachmentService
+        {
+            get
+            {
+                if (null != this._iAttachmentService && null == this._iAttachmentService.ContextInfo)
+                {
+                    this._iAttachmentService.ContextInfo = base.ContextModel;
+                }
+                return this._iAttachmentService;
+            }
+            set
+            {
+                this._iAttachmentService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public AttachmentController(XCLCMS.IService.WebAPI.IAttachmentService attachmentService)
         {
-            attachmentService.ContextInfo = base.ContextModel;
             this.iAttachmentService = attachmentService;
         }
 

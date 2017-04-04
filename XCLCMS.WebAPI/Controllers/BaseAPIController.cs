@@ -79,7 +79,7 @@ namespace XCLCMS.WebAPI.Controllers
         {
             get
             {
-                if (null != this._contextModel)
+                if (null != this._contextModel && this._contextModel.UserInfoID > 0)
                 {
                     return this._contextModel;
                 }

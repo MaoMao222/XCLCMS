@@ -59,6 +59,7 @@
     <Compile Include="ISysRoleService.cs" />
     <Compile Include="ISysWebSettingService.cs" />
     <Compile Include="ITagsService.cs" />
+    <Compile Include="IUserCenterService.cs" />
     <Compile Include="IUserInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

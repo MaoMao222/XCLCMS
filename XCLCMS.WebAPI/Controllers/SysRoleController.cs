@@ -12,14 +12,29 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysRoleController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
-        private XCLCMS.IService.WebAPI.ISysRoleService iSysRoleService = null;
+        private XCLCMS.IService.WebAPI.ISysRoleService _iSysRoleService = null;
+
+        private XCLCMS.IService.WebAPI.ISysRoleService iSysRoleService
+        {
+            get
+            {
+                if (null != this._iSysRoleService && null == this._iSysRoleService.ContextInfo)
+                {
+                    this._iSysRoleService.ContextInfo = base.ContextModel;
+                }
+                return this._iSysRoleService;
+            }
+            set
+            {
+                this._iSysRoleService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysRoleController(XCLCMS.IService.WebAPI.ISysRoleService sysRoleService)
         {
-            sysRoleService.ContextInfo = base.ContextModel;
             this.iSysRoleService = sysRoleService;
         }
 

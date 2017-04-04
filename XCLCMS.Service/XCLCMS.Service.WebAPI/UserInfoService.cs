@@ -195,7 +195,7 @@ namespace XCLCMS.Service.WebAPI
             }
 
             request.Body.UserInfo.UserName = (request.Body.UserInfo.UserName ?? "").Trim();
-            if (!string.IsNullOrWhiteSpace(request.Body.UserInfo.Pwd))
+            if (!string.IsNullOrWhiteSpace(request.Body.UserInfo.Pwd) && !XCLNetTools.Encrypt.MD5.Is32MD5(request.Body.UserInfo.Pwd))
             {
                 request.Body.UserInfo.Pwd = XCLCMS.Data.CommonHelper.EncryptHelper.EncryptStringMD5(request.Body.UserInfo.Pwd);
             }

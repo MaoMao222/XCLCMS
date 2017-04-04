@@ -13,14 +13,29 @@ namespace XCLCMS.WebAPI.Controllers
     public class SysWebSettingController : BaseAPIController
     {
         private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
-        private XCLCMS.IService.WebAPI.ISysWebSettingService iSysWebSettingService = null;
+        private XCLCMS.IService.WebAPI.ISysWebSettingService _iSysWebSettingService = null;
+
+        private XCLCMS.IService.WebAPI.ISysWebSettingService iSysWebSettingService
+        {
+            get
+            {
+                if (null != this._iSysWebSettingService && null == this._iSysWebSettingService.ContextInfo)
+                {
+                    this._iSysWebSettingService.ContextInfo = base.ContextModel;
+                }
+                return this._iSysWebSettingService;
+            }
+            set
+            {
+                this._iSysWebSettingService = value;
+            }
+        }
 
         /// <summary>
         /// 构造
         /// </summary>
         public SysWebSettingController(XCLCMS.IService.WebAPI.ISysWebSettingService sysWebSettingService)
         {
-            sysWebSettingService.ContextInfo = base.ContextModel;
             this.iSysWebSettingService = sysWebSettingService;
         }
 

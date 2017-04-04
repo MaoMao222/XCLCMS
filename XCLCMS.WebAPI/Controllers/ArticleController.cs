@@ -12,7 +12,24 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class ArticleController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.IArticleService iArticleService = null;
+        private XCLCMS.IService.WebAPI.IArticleService _iArticleService = null;
+
+        private XCLCMS.IService.WebAPI.IArticleService iArticleService
+        {
+            get
+            {
+                if (null != this._iArticleService && null == this._iArticleService.ContextInfo)
+                {
+                    this._iArticleService.ContextInfo = base.ContextModel;
+                }
+                return this._iArticleService;
+            }
+            set
+            {
+                this._iArticleService = value;
+            }
+        }
+
         private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
 
         /// <summary>
@@ -20,7 +37,6 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public ArticleController(XCLCMS.IService.WebAPI.IArticleService articleService)
         {
-            articleService.ContextInfo = base.ContextModel;
             this.iArticleService = articleService;
         }
 

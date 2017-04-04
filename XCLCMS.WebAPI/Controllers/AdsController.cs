@@ -12,7 +12,24 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class AdsController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.IAdsService iAdsService = null;
+        private XCLCMS.IService.WebAPI.IAdsService _iAdsService = null;
+
+        private XCLCMS.IService.WebAPI.IAdsService iAdsService
+        {
+            get
+            {
+                if (null != this._iAdsService && null == this._iAdsService.ContextInfo)
+                {
+                    this._iAdsService.ContextInfo = base.ContextModel;
+                }
+                return this._iAdsService;
+            }
+            set
+            {
+                this._iAdsService = value;
+            }
+        }
+
         private XCLCMS.Data.BLL.Ads adsBLL = new Data.BLL.Ads();
 
         /// <summary>
@@ -20,7 +37,6 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public AdsController(XCLCMS.IService.WebAPI.IAdsService adsService)
         {
-            adsService.ContextInfo = base.ContextModel;
             this.iAdsService = adsService;
         }
 

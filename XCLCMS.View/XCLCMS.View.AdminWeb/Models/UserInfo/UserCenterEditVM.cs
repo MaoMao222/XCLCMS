@@ -12,6 +12,11 @@ namespace XCLCMS.View.AdminWeb.Models.UserInfo
         /// 个人资料
         /// </summary>
         public UserCenterUserBaseInfo UserBaseInfo { get; set; }
+
+        /// <summary>
+        /// 个人资料的表单url
+        /// </summary>
+        public string UserBaseInfoFormAction { get; set; }
     }
 
     public class UserCenterUserBaseInfo

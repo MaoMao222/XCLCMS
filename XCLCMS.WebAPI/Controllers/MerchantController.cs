@@ -12,7 +12,24 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class MerchantController : BaseAPIController
     {
-        private XCLCMS.IService.WebAPI.IMerchantService iMerchantService = null;
+        private XCLCMS.IService.WebAPI.IMerchantService _iMerchantService = null;
+
+        private XCLCMS.IService.WebAPI.IMerchantService iMerchantService
+        {
+            get
+            {
+                if (null != this._iMerchantService && null == this._iMerchantService.ContextInfo)
+                {
+                    this._iMerchantService.ContextInfo = base.ContextModel;
+                }
+                return this._iMerchantService;
+            }
+            set
+            {
+                this._iMerchantService = value;
+            }
+        }
+
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
 
         /// <summary>
@@ -20,7 +37,6 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public MerchantController(XCLCMS.IService.WebAPI.IMerchantService merchantService)
         {
-            merchantService.ContextInfo = base.ContextModel;
             this.iMerchantService = merchantService;
         }
 
