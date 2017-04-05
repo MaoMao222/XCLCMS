@@ -1,5 +1,4 @@
 ﻿using System;
-using static XCLCMS.Data.CommonHelper.EnumType;
 
 namespace XCLCMS.View.AdminWeb.Models.UserInfo
 {
@@ -14,9 +13,19 @@ namespace XCLCMS.View.AdminWeb.Models.UserInfo
         public UserCenterUserBaseInfo UserBaseInfo { get; set; }
 
         /// <summary>
+        /// 密码
+        /// </summary>
+        public UserCenterPasswordInfo PasswordInfo { get; set; }
+
+        /// <summary>
         /// 个人资料的表单url
         /// </summary>
         public string UserBaseInfoFormAction { get; set; }
+
+        /// <summary>
+        /// 修改密码的表单url
+        /// </summary>
+        public string PasswordFormAction { get; set; }
     }
 
     public class UserCenterUserBaseInfo
@@ -34,5 +43,11 @@ namespace XCLCMS.View.AdminWeb.Models.UserInfo
         public string Email { get; set; }
         public string OtherContact { get; set; }
         public string UserStateName { get; set; }
+    }
+
+    public class UserCenterPasswordInfo
+    {
+        public string OldPwd { get; set; }
+        public string NewPwd { get; set; }
     }
 }

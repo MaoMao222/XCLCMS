@@ -166,29 +166,32 @@
             </div>
         </div>
         <div title="密码修改" style="padding:10px">
-            <table class="XCLTableEdit">
-                <tr>
-                    <td class="XCLTitle">原密码：</td>
-                    <td>
-                        <input type="password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">新密码：</td>
-                    <td>
-                        <input type="password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">确认新密码：</td>
-                    <td>
-                        <input type="password" />
-                    </td>
-                </tr>
-            </table>
-            <div class="XCLHandBar">
-                <a id="btnSavePassword" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
-            </div>
+
+            <form id="passwordForm" action="@Model.PasswordFormAction" met method="post">
+                <table class="XCLTableEdit">
+                    <tr>
+                        <td class="XCLTitle">原密码：</td>
+                        <td>
+                            <input type="password" name="txtOldPwd" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">新密码：</td>
+                        <td>
+                            <input type="password"  name="txtNewPwd" id="txtNewPwd" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">确认新密码：</td>
+                        <td>
+                            <input type="password"  name="txtNewPwd0"  />
+                        </td>
+                    </tr>
+                </table>
+                <div class="XCLHandBar">
+                    <a id="btnSavePassword" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -197,6 +200,7 @@
     require(["Lib/UserCenter"], function (userCenter) {
         $(function () {
             userCenter.UserInfo.Init();
+            userCenter.ChangePwd.Init();
         });
     });
 </script>

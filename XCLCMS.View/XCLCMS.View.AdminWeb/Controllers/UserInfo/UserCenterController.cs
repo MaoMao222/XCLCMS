@@ -27,6 +27,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             viewModel.UserBaseInfo.UserName = base.CurrentUserModel.UserName;
             viewModel.UserBaseInfo.UserStateName = XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(UserStateEnum), base.CurrentUserModel.UserState);
             viewModel.UserBaseInfoFormAction = Url.Action("UpdateUserBaseInfo", "UserCenter");
+            //修改密码
+            viewModel.PasswordFormAction = Url.Action("UpdatePassword", "UserCenter");
 
             return View("~/Views/UserInfo/UserCenterIndex.cshtml", viewModel);
         }
@@ -48,6 +50,11 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             viewModel.UserBaseInfo.SexType = (fm["selSexType"] ?? "").Trim();
             viewModel.UserBaseInfo.Tel = (fm["txtTel"] ?? "").Trim();
             viewModel.UserBaseInfo.UserName = base.CurrentUserModel.UserName;
+
+            viewModel.PasswordInfo = new Models.UserInfo.UserCenterPasswordInfo();
+            viewModel.PasswordInfo.OldPwd = fm["txtOldPwd"];
+            viewModel.PasswordInfo.NewPwd = fm["txtNewPwd"];
+
             return viewModel;
         }
 
@@ -71,6 +78,22 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             request.Body.Tel = viewModel.UserBaseInfo.Tel;
             request.Body.UserName = viewModel.UserBaseInfo.UserName;
             var response = XCLCMS.Lib.WebAPI.UserCenterAPI.UpdateUserInfo(request);
+            return Json(response);
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        [HttpPost]
+        public ActionResult UpdatePassword(FormCollection fm)
+        {
+            var viewModel = this.GetViewModel(fm);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.PasswordEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.UserCenter.PasswordEntity();
+            request.Body.NewPwd = viewModel.PasswordInfo.NewPwd;
+            request.Body.OldPwd = viewModel.PasswordInfo.OldPwd;
+            request.Body.UserInfoID = base.UserID;
+            var response = XCLCMS.Lib.WebAPI.UserCenterAPI.UpdatePassword(request);
             return Json(response);
         }
     }

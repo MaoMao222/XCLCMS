@@ -46,5 +46,17 @@ namespace XCLCMS.WebAPI.Controllers
                 return this.iUserCenterService.UpdateUserInfo(request);
             });
         }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        [HttpPost]
+        public async Task<APIResponseEntity<bool>> UpdatePassword([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.PasswordEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                return this.iUserCenterService.UpdatePassword(request);
+            });
+        }
     }
 }
