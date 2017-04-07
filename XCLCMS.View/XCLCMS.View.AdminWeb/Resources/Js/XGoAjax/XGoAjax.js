@@ -12,14 +12,14 @@
  *                      a：ajax回调信息提示响应处理，比如提示成功或失败等消息。
  *                      b：提交按钮需要在ajax请求中阻止提交（防止多次提交）
  *                      c：同时发起多次ajax请求
- * 当前版本：v1.0.4
- * 更新时间：2016-01-16
- * 更新内容：修复bug【自定义模板中的templateOption无效】
+ * 当前版本：v1.0.5
+ * 更新时间：2017-04-07
+ * 更新内容：默认的form改为先读取target同一容器中的form，若没有则取页面的第一个form
  */
 ; (function (win, doc, $, undefined) {
     "use strict";
 
-    var _version = "v1.0.4，https://github.com/xucongli1989/XGoAjax";
+    var _version = "v1.0.5，https://github.com/xucongli1989/XGoAjax";
 
     //全局设置
     var _globalSettings = {};
@@ -123,7 +123,13 @@
         ops = $.extend({}, defaults, ops || {});
         var dfd = null, isAllowRun = true;
         var tp = _templates[ops.templateName || "default"];//当前模板
-        var $form = $("form:first");
+        var $form = null;
+        if (ops.target) {
+            $form = $(ops.target).closest("form");
+        }
+        if (!$form || $form.length == 0) {
+            $form = $("form:first");
+        }
         var action = $form.attr("action"), data = $form.serialize(), method = $form.attr("method");
 
         if (!tp) {

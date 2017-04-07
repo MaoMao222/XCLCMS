@@ -29,11 +29,7 @@
                     return false;
                 }
                 $.XGoAjax({
-                    target: $("#btnSaveUserInfo")[0],
-                    ajax: {
-                        url: _this.Elements.userBaseInfoForm.attr("action"),
-                        data: _this.Elements.userBaseInfoForm.serialize()
-                    }
+                    target: $("#btnSaveUserInfo")[0]
                 });
             });
         }
@@ -68,11 +64,7 @@
                     return false;
                 }
                 $.XGoAjax({
-                    target: $("#btnSavePassword")[0],
-                    ajax: {
-                        url: _this.Elements.passwordForm.attr("action"),
-                        data: _this.Elements.passwordForm.serialize()
-                    }
+                    target: $("#btnSavePassword")[0]
                 });
             });
         }
