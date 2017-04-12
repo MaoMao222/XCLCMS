@@ -49,8 +49,8 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 
 [请参见部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
 
-## 前台案例
-- 博客站点：[我的ABC](http://www.wodeabc.com)
+## 案例
+- 博客站点前台：[我的ABC](http://www.wodeabc.com)
 - Web API文档：[http://cms.wodeabc.com/api/help](http://cms.wodeabc.com/api/help)
 
 ## 进度
