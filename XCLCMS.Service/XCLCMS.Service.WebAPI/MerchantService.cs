@@ -216,7 +216,7 @@ namespace XCLCMS.Service.WebAPI
                             UpdateTime = DateTime.Now,
                             SysRoleID = subSysRoleId
                         },
-                        FunctionIdList = request.Body.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString() ? this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList() : null
+                        FunctionIdList = request.Body.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString() ? this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList(new APIRequestEntity<object>()).Body : null
                     }
                 });
             }

@@ -293,7 +293,7 @@ namespace XCLCMS.Service.WebAPI
             //普通商户的权限是否已越界
             if (merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
             {
-                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList();
+                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList(new APIRequestEntity<object>()).Body;
                 if (request.Body.FunctionIdList.IsNotNullOrEmpty())
                 {
                     if (request.Body.FunctionIdList.Exists(k => !normalFunIds.Contains(k)))
@@ -412,7 +412,7 @@ namespace XCLCMS.Service.WebAPI
             //普通商户的权限是否已越界
             if (merchant.MerchantSystemType == XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum.NOR.ToString())
             {
-                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList();
+                var normalFunIds = this.sysFunctionWebAPIBLL.GetNormalMerchantFunctionIDList(new APIRequestEntity<object>()).Body;
                 if (request.Body.FunctionIdList.IsNotNullOrEmpty())
                 {
                     if (request.Body.FunctionIdList.Exists(k => !normalFunIds.Contains(k)))

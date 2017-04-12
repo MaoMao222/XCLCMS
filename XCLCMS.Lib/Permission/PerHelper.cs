@@ -21,31 +21,6 @@ namespace XCLCMS.Lib.Permission
             return null == response ? null : response.Body;
         }
 
-        /// <summary>
-        /// 获取普通商户的所有功能数据源列表
-        /// </summary>
-        public static List<XCLCMS.Data.Model.View.v_SysFunction> GetNormalMerchantFunctionTreeList()
-        {
-            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<object>();
-            request.Body = new object();
-            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.GetNormalMerchantFunctionTreeList(request);
-            return null == response ? null : response.Body;
-        }
-
-        /// <summary>
-        /// 获取普通商户的所有功能id List
-        /// </summary>
-        public static List<long> GetNormalMerchantFunctionIDList()
-        {
-            List<long> result = null;
-            var lst = GetNormalMerchantFunctionTreeList();
-            if (null != lst && lst.Count > 0)
-            {
-                result = lst.Where(k => k.IsLeaf == 1).Select(k => (long)k.SysFunctionID).ToList();
-            }
-            return result ?? new List<long>();
-        }
-
         #endregion 角色相关
 
         #region 权限功能相关
@@ -55,7 +30,7 @@ namespace XCLCMS.Lib.Permission
         /// </summary>
         public static bool HasAnyPermission(long userId, List<XCLCMS.Data.CommonHelper.Function.FunctionEnum> functionList)
         {
-            if (userId<=0 || null == functionList || functionList.Count == 0)
+            if (userId <= 0 || null == functionList || functionList.Count == 0)
             {
                 return false;
             }

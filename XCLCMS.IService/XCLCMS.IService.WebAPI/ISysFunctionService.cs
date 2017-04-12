@@ -29,7 +29,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<List<Data.Model.SysFunction>> GetListByRoleID(APIRequestEntity<long> request);
 
-        List<long> GetNormalMerchantFunctionIDList();
+        APIResponseEntity<List<long>> GetNormalMerchantFunctionIDList(APIRequestEntity<object> request);
 
         APIResponseEntity<List<v_SysFunction>> GetNormalMerchantFunctionTreeList(APIRequestEntity<object> request);
 

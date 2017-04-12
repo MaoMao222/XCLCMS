@@ -432,15 +432,20 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 获取普通商户的所有功能id List
         /// </summary>
-        public List<long> GetNormalMerchantFunctionIDList()
+        public APIResponseEntity<List<long>> GetNormalMerchantFunctionIDList(APIRequestEntity<object> request)
         {
-            List<long> result = null;
+            var response = new APIResponseEntity<List<long>>();
+            response.IsSuccess = true;
             var lst = this.GetNormalMerchantFunctionTreeList(new APIRequestEntity<object>()).Body;
             if (null != lst && lst.Count > 0)
             {
-                result = lst.Where(k => k.IsLeaf == 1).Select(k => (long)k.SysFunctionID).ToList();
+                response.Body = lst.Where(k => k.IsLeaf == 1).Select(k => (long)k.SysFunctionID).ToList();
             }
-            return result ?? new List<long>();
+            if (null == response.Body)
+            {
+                response.Body = new List<long>();
+            }
+            return response;
         }
     }
 }
