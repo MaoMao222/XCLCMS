@@ -25,10 +25,12 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 6. XCLCMS.Document：项目文档相关
 7. XCLCMS.FileManager：文件管理与上传web站点
 8. XCLCMS.Lib：前台公共处理库
-9. XCLCMS.View.AdminWeb：后台管理系统web站点（**项目的入口**） 
+9. XCLCMS.View.AdminWeb：后台管理系统web站点（**管理后台站点入口**） 
 10. XCLCMS.IService.WebAPI：Web Api服务定义层
-11. XCLCMS.Service.WebAPI：Web Api服务逻辑实现层
-12. XCLCMS.WebAPI：Web Api http服务提供层
+11. XCLCMS.IService.Logger：日志记录服务定义层
+12. XCLCMS.Service.WebAPI：Web Api服务逻辑实现层
+13. XCLCMS.Service.Logger：日志记录服务实现层
+14. XCLCMS.WebAPI：Web Api http服务提供层（**Web API站点入口**）
 
 ## 基本功能
 
@@ -47,8 +49,9 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 
 [请参见部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
 
-## 案例
-[我的ABC](http://www.wodeabc.com)
+## 前台案例
+- 博客站点：[我的ABC](http://www.wodeabc.com)
+- Web API文档：[http://cms.wodeabc.com/api/help](http://cms.wodeabc.com/api/help)
 
 ## 进度
 - 开始编码于：2014年10月
