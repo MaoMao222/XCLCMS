@@ -35,7 +35,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public MerchantController(XCLCMS.IService.WebAPI.IMerchantService merchantService)
+        public MerchantController(XCLCMS.IService.WebAPI.IMerchantService merchantService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iMerchantService = merchantService;
         }

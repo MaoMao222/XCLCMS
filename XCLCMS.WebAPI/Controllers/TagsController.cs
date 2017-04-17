@@ -34,7 +34,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public TagsController(XCLCMS.IService.WebAPI.ITagsService tagsService)
+        public TagsController(XCLCMS.IService.WebAPI.ITagsService tagsService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iTagsService = tagsService;
         }

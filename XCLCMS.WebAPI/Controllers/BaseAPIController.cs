@@ -18,6 +18,14 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         public XCLCMS.IService.Logger.ILogService iLogService { get; set; }
 
+        /// <summary>
+        /// 构造
+        /// </summary>
+        public BaseAPIController(XCLCMS.IService.Logger.ILogService logService)
+        {
+            this.iLogService = logService;
+        }
+
         #region 当前登录用户相关
 
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new Data.BLL.UserInfo();

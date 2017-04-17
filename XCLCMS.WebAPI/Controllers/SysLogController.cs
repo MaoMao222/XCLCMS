@@ -32,7 +32,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public SysLogController(XCLCMS.IService.WebAPI.ISysLogService sysLogService)
+        public SysLogController(XCLCMS.IService.WebAPI.ISysLogService sysLogService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iSysLogService = sysLogService;
         }

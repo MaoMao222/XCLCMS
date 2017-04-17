@@ -33,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public SysRoleController(XCLCMS.IService.WebAPI.ISysRoleService sysRoleService)
+        public SysRoleController(XCLCMS.IService.WebAPI.ISysRoleService sysRoleService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iSysRoleService = sysRoleService;
         }

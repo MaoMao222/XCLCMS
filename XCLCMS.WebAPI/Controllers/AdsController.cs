@@ -35,7 +35,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public AdsController(XCLCMS.IService.WebAPI.IAdsService adsService)
+        public AdsController(XCLCMS.IService.WebAPI.IAdsService adsService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iAdsService = adsService;
         }

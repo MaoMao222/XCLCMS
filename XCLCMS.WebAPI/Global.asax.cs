@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using System;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -18,10 +19,9 @@ namespace XCLCMS.WebAPI
             //autofac配置
             var webApiBaseType = typeof(XCLCMS.IService.WebAPI.IBaseInfoService);
             var loggerType = typeof(XCLCMS.IService.Logger.ILogService);
-            var assembly = Assembly.GetExecutingAssembly();
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
-            builder.RegisterApiControllers(assembly).PropertiesAutowired();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterWebApiFilterProvider(config);
             //web api服务注册
             builder.RegisterAssemblyTypes(Assembly.Load("XCLCMS.Service.WebAPI")).Where(k => webApiBaseType.IsAssignableFrom(k) && k != webApiBaseType).AsImplementedInterfaces().InstancePerLifetimeScope();

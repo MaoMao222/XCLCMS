@@ -35,7 +35,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public ArticleController(XCLCMS.IService.WebAPI.IArticleService articleService)
+        public ArticleController(XCLCMS.IService.WebAPI.IArticleService articleService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iArticleService = articleService;
         }

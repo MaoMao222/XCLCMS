@@ -44,15 +44,15 @@ namespace XCLCMS.Lib.WebAPI
                 {
                     httpRequest.RequestUri = new Uri(requestURL);
                     httpRequest.Method = HttpMethod.Post;
-                    httpRequest.Content = new StringContent(requestJson);
-                    httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    httpRequest.Content = new StringContent(requestJson, System.Text.Encoding.UTF8, "application/json");
                 }
                 httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
+                //httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
 
                 string res = string.Empty;
                 using (var httpClient = new HttpClient())
                 {
+                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
                     httpClient.Timeout = new TimeSpan(0, 0, 30);
                     res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
                 }

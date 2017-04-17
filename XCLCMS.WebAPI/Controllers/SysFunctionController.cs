@@ -31,7 +31,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public SysFunctionController(XCLCMS.IService.WebAPI.ISysFunctionService sysFunctionService)
+        public SysFunctionController(XCLCMS.IService.WebAPI.ISysFunctionService sysFunctionService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iSysFunctionService = sysFunctionService;
         }

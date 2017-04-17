@@ -31,7 +31,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public AttachmentController(XCLCMS.IService.WebAPI.IAttachmentService attachmentService)
+        public AttachmentController(XCLCMS.IService.WebAPI.IAttachmentService attachmentService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iAttachmentService = attachmentService;
         }

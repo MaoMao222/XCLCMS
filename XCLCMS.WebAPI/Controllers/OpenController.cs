@@ -13,6 +13,10 @@ namespace XCLCMS.WebAPI.Controllers
         private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
 
+        public OpenController(XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        {
+        }
+
         /// <summary>
         /// 登录
         /// </summary>

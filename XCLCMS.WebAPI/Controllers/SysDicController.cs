@@ -33,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public SysDicController(XCLCMS.IService.WebAPI.ISysDicService sysDicService)
+        public SysDicController(XCLCMS.IService.WebAPI.ISysDicService sysDicService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iSysDicService = sysDicService;
         }

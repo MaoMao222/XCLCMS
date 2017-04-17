@@ -34,7 +34,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public FriendLinksController(XCLCMS.IService.WebAPI.IFriendLinksService friendLinksService)
+        public FriendLinksController(XCLCMS.IService.WebAPI.IFriendLinksService friendLinksService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
         {
             this.iFriendLinksService = friendLinksService;
         }
