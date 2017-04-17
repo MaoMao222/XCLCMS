@@ -47,7 +47,7 @@ namespace XCLCMS.Lib.WebAPI
                     httpRequest.Content = new StringContent(requestJson, System.Text.Encoding.UTF8, "application/json");
                 }
                 httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
+                httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
 
                 string res = string.Empty;
                 using (var httpClient = new HttpClient())
