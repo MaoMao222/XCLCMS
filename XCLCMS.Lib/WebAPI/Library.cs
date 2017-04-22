@@ -217,21 +217,6 @@ namespace XCLCMS.Lib.WebAPI
             return response.Body;
         }
 
-        /// <summary>
-        /// 递归获取指定SysDicID下的所有列表（不包含该SysDicID的记录）
-        /// </summary>
-        public static List<XCLCMS.Data.Model.View.v_SysDic> SysDicAPI_GetAllUnderListByID(string userToken, long sysDicID)
-        {
-            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(userToken);
-            request.Body = sysDicID;
-            var response = XCLCMS.Lib.WebAPI.SysDicAPI.GetAllUnderListByID(request);
-            if (null == response)
-            {
-                return null;
-            }
-            return response.Body;
-        }
-
         #endregion SysDicAPI相关
 
         #region SysFunctionAPI相关
@@ -283,21 +268,6 @@ namespace XCLCMS.Lib.WebAPI
             if (null == response)
             {
                 return null;
-            }
-            return response.Body;
-        }
-
-        /// <summary>
-        /// 添加角色
-        /// </summary>
-        public static bool SysRoleAPI_Add(string userToken, XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity entity)
-        {
-            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.AddOrUpdateEntity>(userToken);
-            request.Body = entity;
-            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.Add(request);
-            if (null == response)
-            {
-                return false;
             }
             return response.Body;
         }
