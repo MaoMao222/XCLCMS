@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using XCLCMS.Data.WebAPIEntity;
@@ -27,36 +26,38 @@ namespace XCLCMS.Lib.WebAPI
         /// <returns>请求结果</returns>
         public static APIResponseEntity<TResponse> Request<TRequest, TResponse>(APIRequestEntity<TRequest> request, string path, bool isGet = true)
         {
-            APIResponseEntity<TResponse> response = new APIResponseEntity<TResponse>();
+            var response = new APIResponseEntity<TResponse>();
+            string requestJson = JsonConvert.SerializeObject(request);
+            string requestURL = (XCLCMS.Lib.Common.Comm.WebAPIServiceURL.Trim().Trim('/') + '/' + path.Trim().Trim('/')).Trim('?');
+            RestRequest httpRequest = null;
+            IRestResponse httpResponse = null;
+            string res = string.Empty;
+            var client = new RestClient(requestURL);
+
+            if (isGet)
+            {
+                client = new RestClient(requestURL + (requestURL.IndexOf('?') >= 0 ? "&" : "?") + XCLNetTools.Serialize.Lib.ConvertJsonToUrlParameters(requestJson));
+                httpRequest = new RestRequest(Method.GET);
+            }
+            else
+            {
+                client = new RestClient(requestURL);
+                httpRequest = new RestRequest(Method.POST);
+                httpRequest.RequestFormat = DataFormat.Json;
+                httpRequest.AddParameter("application/json", requestJson, ParameterType.RequestBody);
+            }
+
+            httpRequest.AddHeader("Accept", "application/json");
+            httpRequest.AddHeader("Accept-Encoding", "GZIP");
+            httpRequest.AddHeader("Content-Type", "application/json");
+            client.Timeout = 30000;
+            client.Encoding = System.Text.Encoding.UTF8;
 
             try
             {
-                string requestURL = (XCLCMS.Lib.Common.Comm.WebAPIServiceURL.Trim().Trim('/') + '/' + path.Trim().Trim('/')).Trim('?');
-                var httpRequest = new HttpRequestMessage();
-                string requestJson = JsonConvert.SerializeObject(request);
-
-                if (isGet)
-                {
-                    httpRequest.RequestUri = new Uri(requestURL + (requestURL.IndexOf('?') >= 0 ? "&" : "?") + XCLNetTools.Serialize.Lib.ConvertJsonToUrlParameters(requestJson));
-                    httpRequest.Method = HttpMethod.Get;
-                }
-                else
-                {
-                    httpRequest.RequestUri = new Uri(requestURL);
-                    httpRequest.Method = HttpMethod.Post;
-                    httpRequest.Content = new StringContent(requestJson, System.Text.Encoding.UTF8, "application/json");
-                }
-                httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                httpRequest.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("GZIP"));
-
-                string res = string.Empty;
-                using (var httpClient = new HttpClient())
-                {
-                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
-                    httpClient.Timeout = new TimeSpan(0, 0, 30);
-                    res = httpClient.SendAsync(httpRequest).Result.Content.ReadAsStringAsync().Result;
-                }
-                if (!string.IsNullOrEmpty(res))
+                httpResponse = client.Execute(httpRequest);
+                res = httpResponse.Content;
+                if (!string.IsNullOrWhiteSpace(res))
                 {
                     try
                     {
