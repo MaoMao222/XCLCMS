@@ -84,90 +84,83 @@
             </form>
         </div>
         <div title="商户资料" style="padding:10px">
-            <table class="XCLTableEdit">
-                <tr>
-                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>商户名：</td>
-                    <td>
-                        <input type="text" id="txtMerchantName" name="txtMerchantName">
-                    </td>
-                    <td class="XCLTitle">商户类型：</td>
-                    <td>
-                        <select id="selMerchantType" name="selMerchantType">
-                            <option value="">--请选择--</option>
-                            <option value="300220">个人</option>
-                            <option value="300221">公司</option>
-                        </select>
-                    </td>
-                    <td class="XCLTitle">域名：</td>
-                    <td>
-                        <input type="text" id="txtDomain" name="txtDomain">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">联系人：</td>
-                    <td>
-                        <input type="text" id="txtContactName" name="txtContactName">
-                    </td>
-                    <td class="XCLTitle">手机：</td>
-                    <td>
-                        <input type="text" id="txtTel" name="txtTel">
-                    </td>
-                    <td class="XCLTitle">固话：</td>
-                    <td>
-                        <input type="text" id="txtLandline" name="txtLandline">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">电子邮件：</td>
-                    <td>
-                        <input type="text" id="txtEmail" name="txtEmail">
-                    </td>
-                    <td class="XCLTitle">QQ：</td>
-                    <td>
-                        <input type="text" id="txtQQ" name="txtQQ">
-                    </td>
-                    <td class="XCLTitle" rowspan="2">证件信息：</td>
-                    <td>
-                        证件类型：
-                        <select id="selPassType" name="selPassType">
-                            <option value="">--请选择--</option>
-                            <option value="300224">身份证</option>
-                            <option value="300225">护照</option>
-                            <option value="300226">学生证</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">地址：</td>
-                    <td>
-                        <input type="text" id="txtAddress" name="txtAddress">
-                    </td>
-                    <td class="XCLTitle">注册时间：</td>
-                    <td>
-                        <input type="text" id="txtRegisterTime" name="txtRegisterTime" value="">
-                    </td>
-                    <td>
-                        证件号：<input type="text" id="txtPassNumber" name="txtPassNumber">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">其它联系信息：</td>
-                    <td>
-                        <textarea id="txtOtherContact" name="txtOtherContact"></textarea>
-                    </td>
-                    <td class="XCLTitle">商户状态：</td>
-                    <td></td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                </tr>
-            </table>
-            <div class="XCLHandBar">
-                <a id="btnSaveMerchant" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
-            </div>
+            <form id="merchantInfoForm" action="@Model.MerchantInfoFormAction" method="post">
+                <table class="XCLTableEdit">
+                    <tr>
+                        <td class="XCLTitle">商户名：</td>
+                        <td>
+                            @Model.MerchantInfo.MerchantName
+                        </td>
+                        <td class="XCLTitle">商户类型：</td>
+                        <td>
+                            @Model.MerchantInfo.MerchantTypeName
+                        </td>
+                        <td class="XCLTitle">域名：</td>
+                        <td>
+                            <input type="text" id="txtDomain" name="txtDomain" value="@(Model.MerchantInfo.Domain)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">联系人：</td>
+                        <td>
+                            <input type="text" id="txtContactName" name="txtContactName" value="@(Model.MerchantInfo.ContactName)" />
+                        </td>
+                        <td class="XCLTitle">手机：</td>
+                        <td>
+                            <input type="text" id="txtTel" name="txtTel" value="@(Model.MerchantInfo.Tel)" />
+                        </td>
+                        <td class="XCLTitle">固话：</td>
+                        <td>
+                            <input type="text" id="txtLandline" name="txtLandline" value="@(Model.MerchantInfo.Landline)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">电子邮件：</td>
+                        <td>
+                            <input type="text" id="txtEmail" name="txtEmail" value="@(Model.MerchantInfo.Email)" />
+                        </td>
+                        <td class="XCLTitle">QQ：</td>
+                        <td>
+                            <input type="text" id="txtQQ" name="txtQQ" value="@(Model.MerchantInfo.QQ)" />
+                        </td>
+                        <td class="XCLTitle" rowspan="2">证件信息：</td>
+                        <td>
+                            证件类型：
+                            <select id="selPassType" name="selPassType">
+                                @Html.Raw(Model.MerchantInfo.PassTypeOptions)
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">地址：</td>
+                        <td>
+                            <input type="text" id="txtAddress" name="txtAddress" value="@(Model.MerchantInfo.Address)" />
+                        </td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                        <td>
+                            证件号：<input type="text" id="txtPassNumber" name="txtPassNumber" value="@(Model.MerchantInfo.PassNumber)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="XCLTitle">其它联系信息：</td>
+                        <td>
+                            <textarea id="txtOtherContact" name="txtOtherContact">@(Model.MerchantInfo.OtherContact)</textarea>
+                        </td>
+                        <td class="XCLTitle">商户状态：</td>
+                        <td>@(Model.MerchantInfo.MerchantStateName)</td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="XCLHandBar">
+                    <a id="btnSaveMerchant" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                </div>
+            </form>
         </div>
         <div title="密码修改" style="padding:10px">
 
-            <form id="passwordForm" action="@Model.PasswordFormAction" met method="post">
+            <form id="passwordForm" action="@Model.PasswordFormAction" method="post">
                 <table class="XCLTableEdit">
                     <tr>
                         <td class="XCLTitle">原密码：</td>
@@ -178,13 +171,13 @@
                     <tr>
                         <td class="XCLTitle">新密码：</td>
                         <td>
-                            <input type="password"  name="txtNewPwd" id="txtNewPwd" />
+                            <input type="password" name="txtNewPwd" id="txtNewPwd" />
                         </td>
                     </tr>
                     <tr>
                         <td class="XCLTitle">确认新密码：</td>
                         <td>
-                            <input type="password"  name="txtNewPwd0"  />
+                            <input type="password" name="txtNewPwd0" />
                         </td>
                     </tr>
                 </table>
@@ -201,6 +194,7 @@
         $(function () {
             userCenter.UserInfo.Init();
             userCenter.ChangePwd.Init();
+            userCenter.ChangeMerchant.Init();
         });
     });
 </script>

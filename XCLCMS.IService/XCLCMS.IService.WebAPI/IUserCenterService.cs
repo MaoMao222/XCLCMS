@@ -10,5 +10,7 @@ namespace XCLCMS.IService.WebAPI
         APIResponseEntity<bool> UpdateUserInfo(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.UserBaseInfoEntity> request);
 
         APIResponseEntity<bool> UpdatePassword(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.PasswordEntity> request);
+
+        APIResponseEntity<bool> UpdateMerchantInfo(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.MerchantInfoEntity> request);
     }
 }

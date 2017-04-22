@@ -22,5 +22,13 @@ namespace XCLCMS.Lib.WebAPI
         {
             return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.PasswordEntity, bool>(request, "UserCenter/UpdatePassword", false);
         }
+
+        /// <summary>
+        /// 修改商户资料
+        /// </summary>
+        public static APIResponseEntity<bool> UpdateMerchantInfo(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.MerchantInfoEntity> request)
+        {
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.MerchantInfoEntity, bool>(request, "UserCenter/UpdateMerchantInfo", false);
+        }
     }
 }

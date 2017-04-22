@@ -58,5 +58,17 @@ namespace XCLCMS.WebAPI.Controllers
                 return this.iUserCenterService.UpdatePassword(request);
             });
         }
+
+        /// <summary>
+        /// 修改商户信息
+        /// </summary>
+        [HttpPost]
+        public async Task<APIResponseEntity<bool>> UpdateMerchantInfo([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserCenter.MerchantInfoEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                return this.iUserCenterService.UpdateMerchantInfo(request);
+            });
+        }
     }
 }

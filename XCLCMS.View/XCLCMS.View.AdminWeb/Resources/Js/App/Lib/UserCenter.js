@@ -70,5 +70,38 @@
         }
     };
 
+    /**
+     * 修改商户信息
+     */
+    app.ChangeMerchant = {
+        Elements: {
+            merchantInfoForm: null,
+            Init: function () {
+                this.merchantInfoForm = $("#merchantInfoForm");
+            }
+        },
+        Init: function () {
+            var _this = this;
+            _this.Elements.Init();
+            _this.InitValidator();
+        },
+        InitValidator: function () {
+            var _this = this;
+            var validator = this.Elements.merchantInfoForm.validate({
+                rules: {
+                    txtEmail: "email"
+                }
+            });
+            common.BindLinkButtonEvent("click", $("#btnSaveMerchant"), function () {
+                if (!common.CommonFormValid(validator)) {
+                    return false;
+                }
+                $.XGoAjax({
+                    target: $("#btnSaveMerchant")[0]
+                });
+            });
+        }
+    };
+
     return app;
 });

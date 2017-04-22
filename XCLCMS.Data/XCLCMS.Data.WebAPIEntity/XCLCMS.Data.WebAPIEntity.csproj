@@ -84,6 +84,7 @@
     <Compile Include="RequestEntity\SysRole\AddOrUpdateEntity.cs" />
     <Compile Include="RequestEntity\SysWebSetting\IsExistKeyNameEntity.cs" />
     <Compile Include="RequestEntity\Tags\IsExistTagNameEntity.cs" />
+    <Compile Include="RequestEntity\UserCenter\MerchantInfoEntity.cs" />
     <Compile Include="RequestEntity\UserCenter\PasswordEntity.cs" />
     <Compile Include="RequestEntity\UserCenter\UserBaseInfoEntity.cs" />
     <Compile Include="RequestEntity\UserInfo\AddOrUpdateEntity.cs" />

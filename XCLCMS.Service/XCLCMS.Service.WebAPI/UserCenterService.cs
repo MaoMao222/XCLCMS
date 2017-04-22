@@ -12,7 +12,9 @@ namespace XCLCMS.Service.WebAPI
     public class UserCenterService : IUserCenterService
     {
         private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
+        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private IUserInfoService iUserInfoService = new UserInfoService();
+        private IMerchantService iMerchantService = new MerchantService();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -119,6 +121,49 @@ namespace XCLCMS.Service.WebAPI
                 {
                     UserInfo = model
                 }
+            });
+
+            return response;
+        }
+
+        /// <summary>
+        /// 修改商户资料
+        /// </summary>
+        public APIResponseEntity<bool> UpdateMerchantInfo(APIRequestEntity<MerchantInfoEntity> request)
+        {
+            var response = new APIResponseEntity<bool>();
+            var userInfo = this.userInfoBLL.GetModel(this.ContextInfo.UserInfoID);
+
+            if (userInfo.FK_MerchantID != request.Body.MerchantID)
+            {
+                response.IsSuccess = false;
+                response.Message = "您要修改的商户信息与当前的操作用户所属的商户信息不一致！";
+                return response;
+            }
+
+            var model = this.merchantBLL.GetModel(request.Body.MerchantID);
+            if (null == model)
+            {
+                response.IsSuccess = false;
+                response.Message = "请指定有效的商户信息！";
+                return response;
+            }
+            
+            model.Domain = request.Body.Domain;
+            model.ContactName = request.Body.ContactName;
+            model.Tel = request.Body.Tel;
+            model.Landline = request.Body.Landline;
+            model.Email = request.Body.Email;
+            model.QQ = request.Body.QQ;
+            model.FK_PassType = request.Body.FK_PassType;
+            model.PassNumber = request.Body.PassNumber;
+            model.Address = request.Body.Address;
+            model.OtherContact = request.Body.OtherContact;
+
+            this.iMerchantService.ContextInfo = this.ContextInfo;
+            response = this.iMerchantService.Update(new APIRequestEntity<XCLCMS.Data.Model.Merchant>()
+            {
+                Body = model
             });
 
             return response;
