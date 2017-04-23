@@ -148,7 +148,14 @@ namespace XCLCMS.Service.WebAPI
                 response.Message = "请指定有效的商户信息！";
                 return response;
             }
-            
+
+            if (!string.Equals(userInfo.UserType, XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum.MAI.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                response.IsSuccess = false;
+                response.Message = "必须为商户主账号才可以修改商户资料！";
+                return response;
+            }
+
             model.Domain = request.Body.Domain;
             model.ContactName = request.Body.ContactName;
             model.Tel = request.Body.Tel;

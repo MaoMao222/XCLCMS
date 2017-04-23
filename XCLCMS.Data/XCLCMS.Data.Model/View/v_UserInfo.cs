@@ -30,6 +30,7 @@ namespace XCLCMS.Data.Model.View
         private string _accesstype;
         private string _accesstoken;
         private string _userstate;
+        private string _usertype;
         private string _remark;
         private string _rolename;
         private int? _rolemaxweight;
@@ -195,6 +196,15 @@ namespace XCLCMS.Data.Model.View
         {
             set { _userstate = value; }
             get { return _userstate; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string UserType
+        {
+            set { _usertype = value; }
+            get { return _usertype; }
         }
 
         /// <summary>

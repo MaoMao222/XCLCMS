@@ -127,6 +127,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "AccessType", DbType.AnsiString, model.AccessType);
             db.AddInParameter(dbCommand, "AccessToken", DbType.AnsiString, model.AccessToken);
             db.AddInParameter(dbCommand, "UserState", DbType.AnsiString, model.UserState);
+            db.AddInParameter(dbCommand, "UserType", DbType.AnsiString, model.UserType);
             db.AddInParameter(dbCommand, "Remark", DbType.String, model.Remark);
             db.AddInParameter(dbCommand, "RoleName", DbType.String, model.RoleName);
             db.AddInParameter(dbCommand, "RoleMaxWeight", DbType.Int32, model.RoleMaxWeight);
@@ -177,6 +178,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "AccessType", DbType.AnsiString, model.AccessType);
             db.AddInParameter(dbCommand, "AccessToken", DbType.AnsiString, model.AccessToken);
             db.AddInParameter(dbCommand, "UserState", DbType.AnsiString, model.UserState);
+            db.AddInParameter(dbCommand, "UserType", DbType.AnsiString, model.UserType);
             db.AddInParameter(dbCommand, "Remark", DbType.String, model.Remark);
             db.AddInParameter(dbCommand, "RoleName", DbType.String, model.RoleName);
             db.AddInParameter(dbCommand, "RoleMaxWeight", DbType.Int32, model.RoleMaxWeight);

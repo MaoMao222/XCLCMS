@@ -123,6 +123,21 @@
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>用户类别：</td>
+                    <td>
+                        <select id="selUserType" name="selUserType">
+                            @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+                               {
+                                   DefaultValue = Model.UserInfo.UserType
+                               }))
+                        </select>
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
             </table>
         </div>
 
@@ -169,6 +184,11 @@
         操作说明：
     </div>
     <div class="XCLPanelBody">
+        <ul>
+            <li>
+                1、【用户类别 】为"商户主账号"的用户，可以在个人中心修改商户基本资料
+            </li>
+        </ul>
     </div>
 </div>
 

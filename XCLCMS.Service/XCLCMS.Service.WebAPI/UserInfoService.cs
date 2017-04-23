@@ -248,6 +248,7 @@ namespace XCLCMS.Service.WebAPI
             model.SexType = request.Body.UserInfo.SexType;
             model.Tel = request.Body.UserInfo.Tel;
             model.UserState = request.Body.UserInfo.UserState;
+            model.UserType = request.Body.UserInfo.UserType;
 
             model.UpdaterID = this.ContextInfo.UserInfoID;
             model.UpdaterName = this.ContextInfo.UserName;

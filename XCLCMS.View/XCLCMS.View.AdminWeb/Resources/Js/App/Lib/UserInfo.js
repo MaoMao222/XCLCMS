@@ -165,7 +165,8 @@
                     txtEmail: "email",
                     txtPwd1: { equalTo: "#txtPwd" },
                     selUserState: { required: true },
-                    selSexType: { required: true }
+                    selSexType: { required: true },
+                    selUserType: { required: true }
                 }
             });
             common.BindLinkButtonEvent("click", $("#btnSave"), function () {

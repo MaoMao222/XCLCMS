@@ -30,6 +30,7 @@ namespace XCLCMS.Data.Model
         private string _accesstype;
         private string _accesstoken;
         private string _userstate;
+        private string _usertype = "NON";
         private string _remark;
         private string _rolename;
         private int? _rolemaxweight;
@@ -192,6 +193,15 @@ namespace XCLCMS.Data.Model
         {
             set { _userstate = value; }
             get { return _userstate; }
+        }
+
+        /// <summary>
+        /// 用户类型(UserTypeEnum)
+        /// </summary>
+        public string UserType
+        {
+            set { _usertype = value; }
+            get { return _usertype; }
         }
 
         /// <summary>

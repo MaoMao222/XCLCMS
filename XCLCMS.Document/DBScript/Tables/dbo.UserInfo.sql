@@ -2,8 +2,8 @@ CREATE TABLE [dbo].[UserInfo]
 (
 [UserInfoID] [bigint] NOT NULL,
 [UserName] [varchar] (50) COLLATE Chinese_PRC_CI_AS NOT NULL,
-[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__45544755] DEFAULT ((0)),
-[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__46486B8E] DEFAULT ((0)),
+[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__0E591826] DEFAULT ((0)),
+[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__0F4D3C5F] DEFAULT ((0)),
 [RealName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
 [NickName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
 [Pwd] [varchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[UserInfo]
 [AccessType] [varchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
 [AccessToken] [varchar] (100) COLLATE Chinese_PRC_CI_AS NULL,
 [UserState] [char] (1) COLLATE Chinese_PRC_CI_AS NULL,
+[UserType] [char] (3) COLLATE Chinese_PRC_CI_AS NOT NULL CONSTRAINT [DF__tmp_ms_xx__UserT__10416098] DEFAULT ('NON'),
 [Remark] [nvarchar] (1000) COLLATE Chinese_PRC_CI_AS NULL,
 [RoleName] [nvarchar] (100) COLLATE Chinese_PRC_CI_AS NULL,
 [RoleMaxWeight] [int] NULL,
@@ -78,9 +79,8 @@ GO
 EXEC sp_addextendedproperty N'MS_Description', '昵称', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'NickName'
 GO
 
-EXEC sp_addextendedproperty N'MS_Description', N'其它联系方式', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'OtherContact'
+EXEC sp_addextendedproperty N'MS_Description', '其它联系方式', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'OtherContact'
 GO
-
 
 EXEC sp_addextendedproperty N'MS_Description', '密码', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'Pwd'
 GO
@@ -125,4 +125,7 @@ EXEC sp_addextendedproperty N'MS_Description', '用户名', 'SCHEMA', N'dbo', 'T
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '用户状态(UserStateEnum)', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'UserState'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '用户类型(UserTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'UserInfo', 'COLUMN', N'UserType'
 GO

@@ -270,6 +270,7 @@ namespace XCLCMS.Lib.Base
                 ViewBag.CurrentUserMerchantApp = this.CurrentUserMerchantApp;
                 ViewBag.CurrentUserMerchant = this.CurrentUserMerchant;
                 ViewBag.UserToken = this.UserToken;
+                ViewBag.IsMainUserForMerchant = this.CurrentUserModel.UserType == XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum.MAI.ToString();
             }
 
             //公共信息

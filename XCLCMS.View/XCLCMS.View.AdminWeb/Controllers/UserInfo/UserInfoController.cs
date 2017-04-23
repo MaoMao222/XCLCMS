@@ -39,6 +39,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
                 new XCLNetSearch.SearchFieldInfo("备注","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("角色","RoleName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("用户状态","UserState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserStateEnum))),
+                new XCLNetSearch.SearchFieldInfo("用户类别","UserType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum))),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("创建时间","CreateTime|dateTime|text",""),
                 new XCLNetSearch.SearchFieldInfo("创建者名","CreaterName|string|text",""),
@@ -130,6 +131,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             viewModel.UserInfo.Tel = (fm["txtTel"] ?? "").Trim();
             viewModel.UserInfo.UserName = (fm["txtUserName"] ?? "").Trim();
             viewModel.UserInfo.UserState = (fm["selUserState"] ?? "").Trim();
+            viewModel.UserInfo.UserType = (fm["selUserType"] ?? "").Trim();
             viewModel.UserInfo.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
             viewModel.UserInfo.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
             viewModel.UserInfo.RecordState = XCLNetTools.StringHander.FormHelper.GetString("selRecordState");
@@ -173,6 +175,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             model.Tel = viewModel.UserInfo.Tel;
             model.UserName = viewModel.UserInfo.UserName;
             model.UserState = viewModel.UserInfo.UserState;
+            model.UserType = viewModel.UserInfo.UserType;
             model.FK_MerchantID = viewModel.UserInfo.FK_MerchantID;
             model.FK_MerchantAppID = viewModel.UserInfo.FK_MerchantAppID;
 
@@ -218,6 +221,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             model.SexType = viewModel.UserInfo.SexType;
             model.Tel = viewModel.UserInfo.Tel;
             model.UserState = viewModel.UserInfo.UserState;
+            model.UserType = viewModel.UserInfo.UserType;
             model.FK_MerchantID = viewModel.UserInfo.FK_MerchantID;
             model.FK_MerchantAppID = viewModel.UserInfo.FK_MerchantAppID;
 

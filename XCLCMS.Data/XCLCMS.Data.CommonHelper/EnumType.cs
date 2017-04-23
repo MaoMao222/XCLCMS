@@ -328,6 +328,24 @@ namespace XCLCMS.Data.CommonHelper
             D
         }
 
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public enum UserTypeEnum
+        {
+            /// <summary>
+            /// 默认
+            /// </summary>
+            [Description("默认")]
+            NON,
+
+            /// <summary>
+            /// 商户主账号
+            /// </summary>
+            [Description("商户主账号")]
+            MAI
+        }
+
         #endregion 用户
 
         #region 日志
