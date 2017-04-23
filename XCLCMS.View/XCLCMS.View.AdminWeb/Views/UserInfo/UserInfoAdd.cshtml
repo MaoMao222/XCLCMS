@@ -123,21 +123,25 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>用户类别：</td>
-                    <td>
-                        <select id="selUserType" name="selUserType">
-                            @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
-                               {
-                                   DefaultValue = Model.UserInfo.UserType
-                               }))
-                        </select>
-                    </td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                </tr>
+
+                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SetUserType))
+                {
+                    <tr>
+                        <td class="XCLTitle"><span class="XCLRedBolder">*</span>用户类别：</td>
+                        <td>
+                            <select id="selUserType" name="selUserType">
+                                @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+                       {
+                           DefaultValue = Model.UserInfo.UserType
+                       }))
+                            </select>
+                        </td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                        <td class="XCLTitle"></td>
+                        <td></td>
+                    </tr>
+                }
             </table>
         </div>
 

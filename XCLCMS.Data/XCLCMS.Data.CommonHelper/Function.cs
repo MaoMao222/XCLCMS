@@ -20,6 +20,12 @@ namespace XCLCMS.Data.CommonHelper
             SysFun_SetUserRole = 400165,
 
             /// <summary>
+            ///用户管理-用户类别修改
+            /// </summary>
+            [Description("用户管理-用户类别修改")]
+            SysFun_SetUserType = 400204,
+
+            /// <summary>
             ///用户基本信息-用户基本信息添加
             /// </summary>
             [Description("用户基本信息-用户基本信息添加")]

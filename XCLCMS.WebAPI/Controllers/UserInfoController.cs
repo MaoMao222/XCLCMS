@@ -134,6 +134,15 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制修改角色
 
+                #region 限制修改用户类别
+
+                if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SetUserType))
+                {
+                    request.Body.UserInfo.UserType = null;
+                }
+
+                #endregion 限制修改用户类别
+
                 response = this.iUserInfoService.Add(request);
 
                 return response;
@@ -170,6 +179,15 @@ namespace XCLCMS.WebAPI.Controllers
                 }
 
                 #endregion 限制修改角色
+
+                #region 限制修改用户类别
+
+                if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.CurrentUserModel.UserInfoID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SetUserType))
+                {
+                    request.Body.UserInfo.UserType = null;
+                }
+
+                #endregion 限制修改用户类别
 
                 response = this.iUserInfoService.Update(request);
 

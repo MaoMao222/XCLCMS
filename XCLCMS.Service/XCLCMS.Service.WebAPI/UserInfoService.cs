@@ -97,6 +97,11 @@ namespace XCLCMS.Service.WebAPI
                 request.Body.UserInfo.Pwd = XCLCMS.Data.CommonHelper.EncryptHelper.EncryptStringMD5(request.Body.UserInfo.Pwd);
             }
 
+            if (string.IsNullOrWhiteSpace(request.Body.UserInfo.UserType))
+            {
+                request.Body.UserInfo.UserType = XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum.NON.ToString();
+            }
+
             //商户必须存在
             var merchant = this.merchantBLL.GetModel(request.Body.UserInfo.FK_MerchantID);
             if (null == merchant)
@@ -248,7 +253,11 @@ namespace XCLCMS.Service.WebAPI
             model.SexType = request.Body.UserInfo.SexType;
             model.Tel = request.Body.UserInfo.Tel;
             model.UserState = request.Body.UserInfo.UserState;
-            model.UserType = request.Body.UserInfo.UserType;
+
+            if (!string.IsNullOrWhiteSpace(request.Body.UserInfo.UserType))
+            {
+                model.UserType = request.Body.UserInfo.UserType;
+            }
 
             model.UpdaterID = this.ContextInfo.UserInfoID;
             model.UpdaterName = this.ContextInfo.UserName;
