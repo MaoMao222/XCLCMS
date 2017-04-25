@@ -16,7 +16,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             viewModel.UserBaseInfo.Age = base.CurrentUserModel.Age;
             viewModel.UserBaseInfo.Birthday = base.CurrentUserModel.Birthday;
             viewModel.UserBaseInfo.Email = base.CurrentUserModel.Email;
-            viewModel.UserBaseInfo.MerchantAppName = base.CurrentUserMerchantApp?.MerchantAppName;
+            viewModel.UserBaseInfo.MerchantAppName = base.CurrentUserMerchantApp?.MerchantAppName ?? "暂无";
             viewModel.UserBaseInfo.MerchantName = base.CurrentUserMerchant.MerchantName;
             viewModel.UserBaseInfo.NickName = base.CurrentUserModel.NickName;
             viewModel.UserBaseInfo.OtherContact = base.CurrentUserModel.OtherContact;
