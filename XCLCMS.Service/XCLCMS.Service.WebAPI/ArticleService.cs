@@ -18,6 +18,7 @@ namespace XCLCMS.Service.WebAPI
         private XCLCMS.Data.BLL.View.v_Article vArticleBLL = new XCLCMS.Data.BLL.View.v_Article();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -236,6 +237,16 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            //过滤非法文章分类
+            if (request.Body.ArticleTypeIDList.IsNotNullOrEmpty())
+            {
+                request.Body.ArticleTypeIDList = request.Body.ArticleTypeIDList.Where(k =>
+                {
+                    var typeModel = this.sysDicBLL.GetModel(k);
+                    return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                }).ToList();
+            }
+
             #endregion 数据校验
 
             var articleContext = new Data.BLL.Strategy.Article.ArticleContext();
@@ -378,6 +389,16 @@ namespace XCLCMS.Service.WebAPI
                 response.IsSuccess = false;
                 response.Message = "商户号与应用号不匹配，请核对后再试！";
                 return response;
+            }
+
+            //过滤非法文章分类
+            if (request.Body.ArticleTypeIDList.IsNotNullOrEmpty())
+            {
+                request.Body.ArticleTypeIDList = request.Body.ArticleTypeIDList.Where(k =>
+                {
+                    var typeModel = this.sysDicBLL.GetModel(k);
+                    return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                }).ToList();
             }
 
             #endregion 数据校验

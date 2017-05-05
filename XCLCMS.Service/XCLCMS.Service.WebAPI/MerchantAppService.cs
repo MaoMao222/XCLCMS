@@ -5,6 +5,7 @@ using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLCMS.IService.WebAPI;
+using XCLNetTools.Entity;
 using XCLNetTools.Generic;
 
 namespace XCLCMS.Service.WebAPI
@@ -78,6 +79,34 @@ namespace XCLCMS.Service.WebAPI
             });
             response.Body.PagerInfo = pager;
             response.IsSuccess = true;
+            return response;
+        }
+
+
+        /// <summary>
+        /// 查询所有商户应用键值形式的列表
+        /// </summary>
+        public APIResponseEntity<List<TextValue>> AllTextValueList(APIRequestEntity<PageListConditionEntity> request)
+        {
+            var response = new APIResponseEntity<List<TextValue>>();
+            response.Body = new List<TextValue>();
+            response.IsSuccess = true;
+            request.Body.PagerInfoSimple = new PagerInfoSimple()
+            {
+                PageSize = Int32.MaxValue - 1
+            };
+            var res = this.PageList(request);
+            if (null != res && null != res.Body && null != res.Body.ResultList)
+            {
+                res.Body.ResultList.ForEach(k =>
+                {
+                    response.Body.Add(new TextValue()
+                    {
+                        Text = k.MerchantAppName,
+                        Value = k.MerchantAppID.ToString()
+                    });
+                });
+            }
             return response;
         }
 

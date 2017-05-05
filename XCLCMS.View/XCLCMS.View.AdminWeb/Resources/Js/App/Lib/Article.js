@@ -1,4 +1,4 @@
-﻿define(["ckeditorCN", "Lib/Common"], function (ckeditorCN, common) {
+﻿define(["ckeditorCN", "Lib/Common", "Lib/UserControl"], function (ckeditorCN, common, userControl) {
     /**
     * 文章
     */
@@ -122,7 +122,7 @@
             var initArticleTypeTree = function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = {};
-                request.Body.MerchantID = $("#txtMerchantID").val();
+                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
                 _this.Elements.selArticleType.combotree({
                     url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/GetEasyUITreeByCondition",
                     queryParams: request,
@@ -137,11 +137,6 @@
                 });
             };
             initArticleTypeTree();
-            $("#txtMerchantID").numberbox({
-                onChange: function () {
-                    initArticleTypeTree();
-                }
-            });
 
             //combox初始值
             var defaultValue = this.Elements.selAuthorName.attr("defaultValue");
@@ -152,6 +147,15 @@
             if (!XJ.Data.IsUndefined(defaultValue)) {
                 this.Elements.selFromInfo.combobox('setValue', defaultValue);
             }
+
+            //商户号下拉框初始化
+            userControl.MerchantSelect.Init({
+                merchantIDObj: $("#txtMerchantID"),
+                merchantAppIDObj: $("#txtMerchantAppID"),
+                merchantIDSelectCallback: function () {
+                    initArticleTypeTree();
+                }
+            });
 
             $("#btnDel").on("click", function () {
                 return _this.Del();

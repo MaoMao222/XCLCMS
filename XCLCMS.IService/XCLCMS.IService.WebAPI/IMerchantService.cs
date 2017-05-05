@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using XCLCMS.Data.Model;
 using XCLCMS.Data.Model.View;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
@@ -24,6 +23,8 @@ namespace XCLCMS.IService.WebAPI
         APIResponseEntity<bool> IsExistMerchantName(APIRequestEntity<IsExistMerchantNameEntity> request);
 
         APIResponseEntity<PageListResponseEntity<v_Merchant>> PageList(APIRequestEntity<PageListConditionEntity> request);
+
+        APIResponseEntity<List<XCLNetTools.Entity.TextValue>> AllTextValueList(APIRequestEntity<PageListConditionEntity> request);
 
         APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.Merchant> request);
     }

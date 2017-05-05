@@ -240,6 +240,7 @@
     <Content Include="Resources\Js\App\Lib\SysWebSetting.js" />
     <Content Include="Resources\Js\App\Lib\Tags.js" />
     <Content Include="Resources\Js\App\Lib\UserCenter.js" />
+    <Content Include="Resources\Js\App\Lib\UserControl.js" />
     <Content Include="Resources\Js\App\Lib\UserInfo.js" />
     <Content Include="Resources\Js\App\main.js" />
     <Content Include="Resources\Js\App\require.js" />

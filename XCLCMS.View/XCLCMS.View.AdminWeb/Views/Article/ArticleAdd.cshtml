@@ -63,10 +63,10 @@
                 <tr>
                     <td class="XCLTitle">所属商户号：</td>
                     <td>
-                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Article.FK_MerchantID" />
+                        <input type="text" class="easyui-combobox" id="txtMerchantID" name="txtMerchantID" value="@Model.Article.FK_MerchantID"/>
                     </td>
                     <td class="XCLTitle">所属应用号：</td>
-                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Article.FK_MerchantAppID" /></td>
+                    <td><input type="text" class="easyui-combobox" id="txtMerchantAppID" name="txtMerchantAppID" value="@(Model.Article.FK_MerchantAppID>0?Model.Article.FK_MerchantAppID.ToString():"")" /></td>
                     <td class="XCLTitle">唯一标识：</td>
                     <td>
                         <input type="text" id="txtCode" name="txtCode" value="@Model.Article.Code" />

@@ -92,6 +92,33 @@ namespace XCLCMS.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 查询所有商户键值形式的列表
+        /// </summary>
+        [HttpGet]
+        public async Task<APIResponseEntity<List<XCLNetTools.Entity.TextValue>>> AllTextValueList([FromUri] APIRequestEntity<XCLCMS.Data.Model.Merchant> request)
+        {
+            return await Task.Run(() =>
+            {
+                var req = new APIRequestEntity<PageListConditionEntity>();
+                req.Body = new PageListConditionEntity();
+
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant)
+                {
+                    req.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                        req.Body.Where,
+                        string.Format("MerchantID={0}",base.CurrentUserModel.FK_MerchantID)
+                    });
+                }
+
+                #endregion 限制商户
+
+                return this.iMerchantService.AllTextValueList(req);
+            });
+        }
+
+        /// <summary>
         /// 获取商户类型
         /// </summary>
         [HttpGet]
