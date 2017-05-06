@@ -17,6 +17,7 @@ namespace XCLCMS.Service.WebAPI
         public XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
         public XCLCMS.Data.BLL.View.v_Tags vtagsBLL = new XCLCMS.Data.BLL.View.v_Tags();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -130,6 +131,14 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            //应用号与商户一致
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            {
+                response.IsSuccess = false;
+                response.Message = "商户号与应用号不匹配，请核对后再试！";
+                return response;
+            }
+
             #endregion 数据校验
 
             response.IsSuccess = this.tagsBLL.Add(request.Body);
@@ -185,6 +194,14 @@ namespace XCLCMS.Service.WebAPI
                     response.Message = string.Format("标签名称【{0}】已存在！", request.Body.TagName);
                     return response;
                 }
+            }
+
+            //应用号与商户一致
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            {
+                response.IsSuccess = false;
+                response.Message = "商户号与应用号不匹配，请核对后再试！";
+                return response;
             }
 
             #endregion 数据校验

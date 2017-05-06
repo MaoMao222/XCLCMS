@@ -17,6 +17,7 @@ namespace XCLCMS.Service.WebAPI
         private XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();
         private XCLCMS.Data.BLL.View.v_Ads vAdsBLL = new Data.BLL.View.v_Ads();
         private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -138,6 +139,14 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            //应用号与商户一致
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            {
+                response.IsSuccess = false;
+                response.Message = "商户号与应用号不匹配，请核对后再试！";
+                return response;
+            }
+
             #endregion 数据校验
 
             response.IsSuccess = this.adsBLL.Add(request.Body);
@@ -192,6 +201,14 @@ namespace XCLCMS.Service.WebAPI
             {
                 response.IsSuccess = false;
                 response.Message = "标识Code被占用，请重新指定！";
+                return response;
+            }
+
+            //应用号与商户一致
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            {
+                response.IsSuccess = false;
+                response.Message = "商户号与应用号不匹配，请核对后再试！";
                 return response;
             }
 
