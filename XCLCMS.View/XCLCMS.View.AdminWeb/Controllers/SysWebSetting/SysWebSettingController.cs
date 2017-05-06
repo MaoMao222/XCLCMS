@@ -75,6 +75,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
                     viewModel.SysWebSetting = new Data.Model.SysWebSetting();
+                    viewModel.SysWebSetting.FK_MerchantID = base.CurrentUserMerchant.MerchantID;
                     viewModel.FormAction = Url.Action("AddSubmit", "SysWebSetting");
                     break;
 
