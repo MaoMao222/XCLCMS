@@ -73,6 +73,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
                     viewModel.MerchantApp = new Data.Model.MerchantApp();
+                    viewModel.MerchantApp.FK_MerchantID = base.CurrentUserMerchant.MerchantID;
                     viewModel.MerchantApp.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
                     viewModel.MerchantApp.AppKey = Guid.NewGuid().ToString("N").ToUpper();
                     viewModel.FormAction = Url.Action("AddSubmit", "MerchantApp");
