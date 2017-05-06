@@ -1,4 +1,4 @@
-﻿define(["Lib/Common"], function (common) {
+﻿define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
     var app = {};
     app.SysWebSettingList = {
         Init: function () {
@@ -73,6 +73,12 @@
         Init: function () {
             var _this = this;
             _this.InitValidator();
+
+            //商户号下拉框初始化
+            userControl.MerchantSelect.Init({
+                merchantIDObj: $("#txtMerchantID"),
+                merchantAppIDObj: $("#txtMerchantAppID")
+            });
 
             $("#btnDel").on("click", function () {
                 return _this.Del();

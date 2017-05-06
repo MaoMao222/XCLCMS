@@ -1,4 +1,4 @@
-﻿define(["Lib/Common", "Lib/EasyUI"], function (common, easyUI) {
+﻿define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI, userControl) {
     /**
       * 系统字典库
       */
@@ -227,6 +227,15 @@
             _this.InitValidator();
 
             _this.CreateFunctionTree(_this.Elements.txtFunctionID);
+
+            //商户号下拉框初始化
+            userControl.MerchantSelect.Init({
+                merchantIDObj: $("#txtMerchantID"),
+                merchantAppIDObj: $("#txtMerchantAppID"),
+                merchantIDSelectCallback: function () {
+                    _this.CreateFunctionTree(_this.Elements.txtFunctionID);
+                }
+            });
         },
         /**
         * 创建功能模块的combotree
@@ -240,7 +249,7 @@
 
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
-            request.Body.MerchantID = $("#txtMerchantID").val();
+            request.Body.MerchantID = $("input[name='txtMerchantID']").val();
 
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',

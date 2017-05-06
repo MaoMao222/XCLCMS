@@ -1,4 +1,4 @@
-﻿define(["Lib/Common"], function (common) {
+﻿define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
     /**
      * 用户管理
      * @type type
@@ -90,10 +90,8 @@
         Elements: {
             //用户所属于的角色输入框对象
             txtUserRoleIDs: null,
-            txtMerchantID: null,
             Init: function () {
                 this.txtUserRoleIDs = $("#txtUserRoleIDs");
-                this.txtMerchantID = $("#txtMerchantID");
             }
         },
         Init: function () {
@@ -105,12 +103,18 @@
                 return _this.Del();
             });
 
+            //初始化角色选择框
             _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
-            _this.Elements.txtMerchantID.numberbox({
-                onChange: function () {
+
+            //初始化商户选择框
+            userControl.MerchantSelect.Init({
+                merchantIDObj: $("#txtMerchantID"),
+                merchantAppIDObj: $("#txtMerchantAppID"),
+                merchantIDSelectCallback: function () {
                     _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
                 }
             });
+
         },
         /**
         * 创建选择角色的combotree
@@ -123,7 +127,7 @@
 
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
-            request.Body.MerchantID = $("#txtMerchantID").val();
+            request.Body.MerchantID = $("input[name='txtMerchantID']").val();
 
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysRole/GetAllJsonForEasyUITree',

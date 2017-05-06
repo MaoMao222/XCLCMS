@@ -41,19 +41,8 @@
                                 <textarea id="txtCode" name="txtCode">@Model.SysDic.Code</textarea>
                             </td>
                             <td class="XCLTitle"></td>
-                            <td>
-                            </td>
+                            <td></td>
                         </tr>
-
-                        @if(Model.SysDicCategory==XCLCMS.View.AdminWeb.Models.SysDic.SysDicCategoryEnum.SysMenu)
-                        {
-                            <tr>
-                                <td class="XCLTitle">所属功能模块：</td>
-                                <td colspan="3">
-                                     <input id="txtFunctionID" name="txtFunctionID" style="width:300px;height:25px;" value="@Model.SysDic.FK_FunctionID" multiple />
-                                </td>
-                            </tr>
-                        }
 
                         <tr>
                             <td class="XCLTitle">所属商户号：</td>
@@ -65,6 +54,16 @@
                                 <input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.SysDic.FK_MerchantAppID" style="height:25px;" />
                             </td>
                         </tr>
+
+                        @if(Model.SysDicCategory==XCLCMS.View.AdminWeb.Models.SysDic.SysDicCategoryEnum.SysMenu)
+                        {
+                            <tr>
+                                <td class="XCLTitle">所属功能模块：</td>
+                                <td colspan="3">
+                                    <input id="txtFunctionID" name="txtFunctionID" style="width:300px;height:25px;" value="@Model.SysDic.FK_FunctionID" multiple />
+                                </td>
+                            </tr>
+                        }
 
                         <tr>
                             <td class="XCLTitle">排序号：</td>
