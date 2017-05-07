@@ -162,6 +162,7 @@ namespace XCLCMS.Lib.Common
             }
             XCLCMS.Data.Model.View.v_Attachment model = null;
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>();
+            request.Body = new Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity();
             request.Body.AttachmentID = id;
             var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Detail(request);
             if (null != response)
