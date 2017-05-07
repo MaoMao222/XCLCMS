@@ -1,8 +1,11 @@
-﻿namespace XCLCMS.Data.Model.Custom
+﻿using System;
+
+namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 存储过程执行结果model
     /// </summary>
+    [Serializable]
     public class ProcedureResultModel
     {
         /// <summary>

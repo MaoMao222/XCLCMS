@@ -144,34 +144,38 @@ namespace XCLCMS.FileManager.Controllers
         /// <returns>记录主键ID</returns>
         private long SaveFileInfoToDB(long parentId, XCLCMS.FileManager.Models.Uploader.FileSetting settingModel, string relativePath, int width, int height)
         {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Attachment>(base.UserToken);
+            request.Body = new Data.Model.Attachment();
             System.IO.FileInfo info = new System.IO.FileInfo(Server.MapPath(relativePath));
             DateTime dtNow = DateTime.Now;
-            XCLCMS.Data.BLL.Attachment bll = new Data.BLL.Attachment();
-            XCLCMS.Data.Model.Attachment model = new Data.Model.Attachment();
-            model.AttachmentID = XCLCMS.Data.BLL.Common.Common.GenerateID(Data.CommonHelper.EnumType.IDTypeEnum.ATT);
-            model.FileName = info.Name;
-            model.CreaterID = base.UserID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = dtNow;
-            model.Description = settingModel.Description;
-            model.DownLoadCount = settingModel.DownloadCount;
-            model.Ext = (info.Extension ?? "").Trim('.');
-            model.FileSize = (decimal)(info.Length / 1024);
-            model.FormatType = "";
-            model.ImgHeight = height;
-            model.ImgWidth = width;
-            model.ParentID = parentId;
-            model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
-            model.Title = settingModel.Title;
-            model.OriginFileName = settingModel.Name;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = dtNow;
-            model.URL = relativePath;
-            model.ViewCount = settingModel.ViewCount;
-            model.ViewType = settingModel.ViewType;
-            model.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
-            return bll.Add(model) ? model.AttachmentID : 0;
+            request.Body.AttachmentID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            {
+                IDType = Data.CommonHelper.EnumType.IDTypeEnum.ATT.ToString()
+            });
+            request.Body.FileName = info.Name;
+            request.Body.CreaterID = base.UserID;
+            request.Body.CreaterName = base.CurrentUserModel.UserName;
+            request.Body.CreateTime = dtNow;
+            request.Body.Description = settingModel.Description;
+            request.Body.DownLoadCount = settingModel.DownloadCount;
+            request.Body.Ext = (info.Extension ?? "").Trim('.');
+            request.Body.FileSize = (decimal)(info.Length / 1024);
+            request.Body.FormatType = "";
+            request.Body.ImgHeight = height;
+            request.Body.ImgWidth = width;
+            request.Body.ParentID = parentId;
+            request.Body.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
+            request.Body.Title = settingModel.Title;
+            request.Body.OriginFileName = settingModel.Name;
+            request.Body.UpdaterID = base.UserID;
+            request.Body.UpdaterName = base.CurrentUserModel.UserName;
+            request.Body.UpdateTime = dtNow;
+            request.Body.URL = relativePath;
+            request.Body.ViewCount = settingModel.ViewCount;
+            request.Body.ViewType = settingModel.ViewType;
+            request.Body.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Add(request);
+            return response.IsSuccess ? request.Body.AttachmentID : 0;
         }
     }
 }

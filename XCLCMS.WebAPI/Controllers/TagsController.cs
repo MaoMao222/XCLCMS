@@ -12,7 +12,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class TagsController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.Tags tagsBLL = new XCLCMS.Data.BLL.Tags();
         private XCLCMS.IService.WebAPI.ITagsService _iTagsService = null;
 
         private XCLCMS.IService.WebAPI.ITagsService iTagsService
@@ -174,7 +173,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.tagsBLL.GetModel(k);
+                        var model = this.iTagsService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

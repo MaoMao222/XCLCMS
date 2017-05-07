@@ -12,7 +12,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class UserInfoController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
         private XCLCMS.IService.WebAPI.IUserInfoService _iUserInfoService = null;
 
         private XCLCMS.IService.WebAPI.IUserInfoService iUserInfoService
@@ -210,7 +209,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.userInfoBLL.GetModel(k);
+                        var model = this.iUserInfoService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

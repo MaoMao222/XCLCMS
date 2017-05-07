@@ -160,13 +160,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.ADS.ToString()
             });
-            model.CreaterID = base.UserID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.RecordState = viewModel.Ads.RecordState;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.Ads.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.Ads.FK_MerchantID;
             model.AdHeight = viewModel.Ads.AdHeight;
@@ -207,9 +201,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
             model.AdsID = viewModel.Ads.AdsID;
 
             model.RecordState = viewModel.Ads.RecordState;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.Ads.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.Ads.FK_MerchantID;
 

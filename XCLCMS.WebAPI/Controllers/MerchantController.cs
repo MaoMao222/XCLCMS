@@ -30,8 +30,6 @@ namespace XCLCMS.WebAPI.Controllers
             }
         }
 
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
-
         /// <summary>
         /// 构造
         /// </summary>
@@ -200,7 +198,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.merchantBLL.GetModel(k);
+                        var model = this.iMerchantService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

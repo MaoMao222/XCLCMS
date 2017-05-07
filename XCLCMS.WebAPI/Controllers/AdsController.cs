@@ -30,8 +30,6 @@ namespace XCLCMS.WebAPI.Controllers
             }
         }
 
-        private XCLCMS.Data.BLL.Ads adsBLL = new Data.BLL.Ads();
-
         /// <summary>
         /// 构造
         /// </summary>
@@ -169,7 +167,11 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.adsBLL.GetModel(k);
+                        var model = this.iAdsService.Detail(new APIRequestEntity<long>()
+                        {
+                            Body = k
+                        }).Body;
+
                         if (null == model)
                         {
                             return false;

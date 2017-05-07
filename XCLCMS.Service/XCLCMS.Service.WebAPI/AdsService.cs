@@ -149,6 +149,12 @@ namespace XCLCMS.Service.WebAPI
 
             #endregion 数据校验
 
+            request.Body.CreaterID = this.ContextInfo.UserInfoID;
+            request.Body.CreaterName = this.ContextInfo.UserName;
+            request.Body.CreateTime = DateTime.Now;
+            request.Body.UpdaterID = request.Body.CreaterID;
+            request.Body.UpdaterName = request.Body.CreaterName;
+            request.Body.UpdateTime = request.Body.CreateTime;
             response.IsSuccess = this.adsBLL.Add(request.Body);
 
             if (response.IsSuccess)

@@ -30,8 +30,6 @@ namespace XCLCMS.WebAPI.Controllers
             }
         }
 
-        private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
-
         /// <summary>
         /// 构造
         /// </summary>
@@ -195,7 +193,11 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var articleModel = articleBLL.GetModel(k);
+                        var articleModel = this.iArticleService.Detail(new APIRequestEntity<long>()
+                        {
+                            Body = k
+                        }).Body;
+
                         if (null == articleModel)
                         {
                             return false;

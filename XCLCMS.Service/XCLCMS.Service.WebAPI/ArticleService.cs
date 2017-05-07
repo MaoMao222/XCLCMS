@@ -439,9 +439,6 @@ namespace XCLCMS.Service.WebAPI
             model.Title = request.Body.Article.Title;
             model.TopBeginTime = request.Body.Article.TopBeginTime;
             model.TopEndTime = request.Body.Article.TopEndTime;
-            model.UpdaterID = this.ContextInfo.UserInfoID;
-            model.UpdaterName = this.ContextInfo.UserName;
-            model.UpdateTime = DateTime.Now;
             model.URLOpenType = request.Body.Article.URLOpenType;
             model.VerifyState = request.Body.Article.VerifyState;
             model.ViewCount = request.Body.Article.ViewCount;

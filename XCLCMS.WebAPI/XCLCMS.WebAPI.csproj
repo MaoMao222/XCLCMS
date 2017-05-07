@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseAPIController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\FileInfoController.cs" />
     <Compile Include="Controllers\FriendLinksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MerchantAppController.cs" />
@@ -219,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FileInfo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">

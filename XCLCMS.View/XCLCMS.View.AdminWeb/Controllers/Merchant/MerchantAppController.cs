@@ -136,14 +136,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             });
             model.FK_MerchantID = viewModel.MerchantApp.FK_MerchantID;
             model.MerchantAppName = viewModel.MerchantApp.MerchantAppName;
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.RecordState = viewModel.MerchantApp.RecordState;
             model.Remark = viewModel.MerchantApp.Remark;
-            model.UpdaterID = model.CreaterID;
-            model.UpdaterName = model.CreaterName;
-            model.UpdateTime = model.CreateTime;
             model.ResourceVersion = viewModel.MerchantApp.ResourceVersion;
             model.Email = viewModel.MerchantApp.Email;
             model.CopyRight = viewModel.MerchantApp.CopyRight;
@@ -175,9 +169,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             model.FK_MerchantID = viewModel.MerchantApp.FK_MerchantID;
             model.MerchantAppName = viewModel.MerchantApp.MerchantAppName;
             model.Remark = viewModel.MerchantApp.Remark;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.ResourceVersion = viewModel.MerchantApp.ResourceVersion;
             model.Email = viewModel.MerchantApp.Email;
             model.CopyRight = viewModel.MerchantApp.CopyRight;

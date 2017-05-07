@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace XCLCMS.Data.Model.Custom
 {
+    [Serializable]
     public class Tags_AddMethodResult
     {
         /// <summary>

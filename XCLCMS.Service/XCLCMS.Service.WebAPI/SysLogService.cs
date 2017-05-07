@@ -1,5 +1,4 @@
-﻿using System;
-using XCLCMS.Data.Model.Custom;
+﻿using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLCMS.IService.WebAPI;

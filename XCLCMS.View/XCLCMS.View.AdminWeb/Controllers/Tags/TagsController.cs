@@ -120,14 +120,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.LIK.ToString()
             });
-            model.CreaterID = base.UserID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.RecordState = viewModel.Tags.RecordState;
             model.TagName = viewModel.Tags.TagName;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.Tags.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.Tags.FK_MerchantID;
             model.Description = viewModel.Tags.Description;
@@ -154,9 +148,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
 
             model.RecordState = viewModel.Tags.RecordState;
             model.TagName = viewModel.Tags.TagName;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.Tags.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.Tags.FK_MerchantID;
             model.Description = viewModel.Tags.Description;

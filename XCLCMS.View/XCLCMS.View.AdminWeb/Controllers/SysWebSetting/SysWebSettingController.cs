@@ -119,12 +119,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
 
             XCLCMS.Data.Model.SysWebSetting model = null;
             model = new Data.Model.SysWebSetting();
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.KeyName = viewModel.SysWebSetting.KeyName;
             model.KeyValue = viewModel.SysWebSetting.KeyValue;
             model.TestKeyValue = viewModel.SysWebSetting.TestKeyValue;
@@ -160,9 +154,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             model.TestKeyValue = viewModel.SysWebSetting.TestKeyValue;
             model.UATKeyValue = viewModel.SysWebSetting.UATKeyValue;
             model.PrdKeyValue = viewModel.SysWebSetting.PrdKeyValue;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Remark = viewModel.SysWebSetting.Remark;
             model.FK_MerchantAppID = viewModel.SysWebSetting.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.SysWebSetting.FK_MerchantID;

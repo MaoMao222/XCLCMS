@@ -332,14 +332,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Views\OpenApi\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">
-      <Project>{054ca0f2-19e8-4121-ab61-e89bb52c0b7c}</Project>
-      <Name>XCLCMS.Data.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.CommonHelper\XCLCMS.Data.CommonHelper.csproj">
       <Project>{4f53bbd2-fcdc-403d-9546-281cda981cf8}</Project>
       <Name>XCLCMS.Data.CommonHelper</Name>
@@ -347,6 +341,10 @@
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.Model\XCLCMS.Data.Model.csproj">
       <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
       <Name>XCLCMS.Data.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.WebAPIEntity\XCLCMS.Data.WebAPIEntity.csproj">
+      <Project>{df6f982f-2be8-4a93-b835-79629c487a5e}</Project>
+      <Name>XCLCMS.Data.WebAPIEntity</Name>
     </ProjectReference>
     <ProjectReference Include="..\XCLCMS.Lib\XCLCMS.Lib.csproj">
       <Project>{e2aa6c7f-5b46-4a4b-93e4-4ed457587c4e}</Project>

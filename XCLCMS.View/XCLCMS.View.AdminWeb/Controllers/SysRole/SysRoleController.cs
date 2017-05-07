@@ -89,12 +89,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
 
             XCLCMS.Data.Model.SysRole model = null;
             model = new Data.Model.SysRole();
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.ParentID = viewModel.ParentID;
             model.RoleName = viewModel.SysRole.RoleName;
             model.Remark = viewModel.SysRole.Remark;
@@ -125,9 +119,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
             XCLCMS.Data.Model.SysRole model = new Data.Model.SysRole();
             model.SysRoleID = viewModel.SysRoleID;
             model.RoleName = viewModel.SysRole.RoleName;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Remark = viewModel.SysRole.Remark;
             model.Code = viewModel.SysRole.Code;
             model.Weight = viewModel.SysRole.Weight;

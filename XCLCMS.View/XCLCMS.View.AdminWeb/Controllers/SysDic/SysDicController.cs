@@ -102,12 +102,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
             XCLCMS.Data.Model.SysDic sysDicModel = new Data.Model.SysDic();
 
             sysDicModel.Code = viewModel.SysDic.Code;
-            sysDicModel.CreaterID = base.CurrentUserModel.UserInfoID;
-            sysDicModel.CreaterName = base.CurrentUserModel.UserName;
-            sysDicModel.CreateTime = DateTime.Now;
-            sysDicModel.UpdaterID = base.CurrentUserModel.UserInfoID;
-            sysDicModel.UpdaterName = base.CurrentUserModel.UserName;
-            sysDicModel.UpdateTime = DateTime.Now;
             sysDicModel.DicName = viewModel.SysDic.DicName;
             sysDicModel.DicValue = viewModel.SysDic.DicValue;
             sysDicModel.ParentID = viewModel.ParentID;
@@ -139,9 +133,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
             XCLCMS.Data.Model.SysDic sysDicModel = new Data.Model.SysDic();
             sysDicModel.SysDicID = viewModel.SysDicID;
             sysDicModel.Code = viewModel.SysDic.Code;
-            sysDicModel.UpdaterID = base.CurrentUserModel.UserInfoID;
-            sysDicModel.UpdaterName = base.CurrentUserModel.UserName;
-            sysDicModel.UpdateTime = DateTime.Now;
             sysDicModel.DicName = viewModel.SysDic.DicName;
             sysDicModel.DicValue = viewModel.SysDic.DicValue;
             sysDicModel.Sort = viewModel.SysDic.Sort;

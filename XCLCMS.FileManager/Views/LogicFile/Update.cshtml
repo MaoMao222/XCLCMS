@@ -6,6 +6,7 @@
 <form action="@Url.Action("UpdateSubmit","LogicFile")" method="post">
 
     <input type="hidden" name="AttachmentID" value="@Model.Attachment.AttachmentID" />
+    <input type="hidden" name="FK_MerchantID" value="@Model.Attachment.FK_MerchantID" />
 
     <fieldset>
         <legend>基本信息</legend>

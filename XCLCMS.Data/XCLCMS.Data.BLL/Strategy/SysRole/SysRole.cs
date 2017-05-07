@@ -35,10 +35,19 @@ namespace XCLCMS.Data.BLL.Strategy.SysRole
                 switch (sysRoleContext.HandleType)
                 {
                     case StrategyLib.HandleType.ADD:
+                        sysRoleContext.SysRole.CreaterID = sysRoleContext.ContextInfo.UserInfoID;
+                        sysRoleContext.SysRole.CreaterName = sysRoleContext.ContextInfo.UserName;
+                        sysRoleContext.SysRole.CreateTime = DateTime.Now;
+                        sysRoleContext.SysRole.UpdaterID = sysRoleContext.SysRole.CreaterID;
+                        sysRoleContext.SysRole.UpdaterName = sysRoleContext.SysRole.CreaterName;
+                        sysRoleContext.SysRole.UpdateTime = sysRoleContext.SysRole.CreateTime;
                         flag = bll.Add(sysRoleContext.SysRole);
                         break;
 
                     case StrategyLib.HandleType.UPDATE:
+                        sysRoleContext.SysRole.UpdaterID = sysRoleContext.ContextInfo.UserInfoID;
+                        sysRoleContext.SysRole.UpdaterName = sysRoleContext.ContextInfo.UserName;
+                        sysRoleContext.SysRole.UpdateTime = DateTime.Now;
                         flag = bll.Update(sysRoleContext.SysRole);
                         break;
                 }

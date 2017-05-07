@@ -80,12 +80,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
             XCLCMS.Data.Model.SysFunction model = null;
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
             model = new Data.Model.SysFunction();
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.ParentID = viewModel.ParentID;
             model.FunctionName = viewModel.SysFunction.FunctionName;
             model.Remark = viewModel.SysFunction.Remark;
@@ -112,9 +106,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
             XCLCMS.Data.Model.SysFunction model = new Data.Model.SysFunction();
             model.SysFunctionID = viewModel.SysFunctionID;
             model.FunctionName = viewModel.SysFunction.FunctionName;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Remark = viewModel.SysFunction.Remark;
             model.Code = viewModel.SysFunction.Code;
 

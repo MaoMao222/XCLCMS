@@ -1,8 +1,11 @@
-﻿namespace XCLCMS.Data.Model.Custom
+﻿using System;
+
+namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 【获取指定文章的相关联的其它文章信息】的查询条件model
     /// </summary>
+    [Serializable]
     public class ArticleRelationDetailCondition
     {
         /// <summary>

@@ -430,9 +430,6 @@ namespace XCLCMS.Service.WebAPI
             model.Remark = request.Body.SysRole.Remark;
             model.RoleName = request.Body.SysRole.RoleName;
             model.Sort = request.Body.SysRole.Sort;
-            model.UpdaterID = this.ContextInfo.UserInfoID;
-            model.UpdaterName = this.ContextInfo.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Weight = request.Body.SysRole.Weight;
 
             XCLCMS.Data.BLL.Strategy.SysRole.SysRoleContext sysRoleContext = new Data.BLL.Strategy.SysRole.SysRoleContext();

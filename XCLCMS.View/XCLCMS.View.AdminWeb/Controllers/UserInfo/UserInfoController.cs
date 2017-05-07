@@ -157,12 +157,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             model.AccessType = viewModel.UserInfo.AccessType;
             model.Age = viewModel.UserInfo.Age;
             model.Birthday = viewModel.UserInfo.Birthday;
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Email = viewModel.UserInfo.Email;
             model.NickName = viewModel.UserInfo.NickName;
             model.OtherContact = viewModel.UserInfo.OtherContact;
@@ -205,9 +199,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             model.AccessType = viewModel.UserInfo.AccessType;
             model.Age = viewModel.UserInfo.Age;
             model.Birthday = viewModel.UserInfo.Birthday;
-            model.UpdaterID = base.CurrentUserModel.UserInfoID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.Email = viewModel.UserInfo.Email;
             model.NickName = viewModel.UserInfo.NickName;
             model.OtherContact = viewModel.UserInfo.OtherContact;

@@ -12,7 +12,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class MerchantAppController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private XCLCMS.IService.WebAPI.IMerchantAppService _iMerchantAppService = null;
 
         private XCLCMS.IService.WebAPI.IMerchantAppService iMerchantAppService
@@ -222,7 +221,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.merchantAppBLL.GetModel(k);
+                        var model = this.iMerchantAppService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

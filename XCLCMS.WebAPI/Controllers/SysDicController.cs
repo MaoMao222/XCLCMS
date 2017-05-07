@@ -11,7 +11,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysDicController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
         private XCLCMS.IService.WebAPI.ISysDicService _iSysDicService = null;
 
         private XCLCMS.IService.WebAPI.ISysDicService iSysDicService
@@ -290,7 +289,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.sysDicBLL.GetModel(k);
+                        var model = this.iSysDicService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

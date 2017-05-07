@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 文章查询条件
     /// </summary>
+    [Serializable]
     public class ArticleSearchCondition
     {
         /// <summary>

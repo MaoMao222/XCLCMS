@@ -259,10 +259,6 @@ namespace XCLCMS.Service.WebAPI
                 model.UserType = request.Body.UserInfo.UserType;
             }
 
-            model.UpdaterID = this.ContextInfo.UserInfoID;
-            model.UpdaterName = this.ContextInfo.UserName;
-            model.UpdateTime = DateTime.Now;
-
             XCLCMS.Data.BLL.Strategy.UserInfo.UserInfoContext userInfoContext = new Data.BLL.Strategy.UserInfo.UserInfoContext();
             userInfoContext.ContextInfo = this.ContextInfo;
             userInfoContext.UserInfo = model;

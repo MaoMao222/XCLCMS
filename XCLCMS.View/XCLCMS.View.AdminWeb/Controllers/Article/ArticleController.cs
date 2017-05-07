@@ -267,9 +267,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             model.CommentCount = viewModel.Article.CommentCount;
             model.Comments = viewModel.Article.Comments;
             model.Contents = viewModel.Article.Contents;
-            model.CreaterID = base.UserID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.FromInfo = viewModel.Article.FromInfo;
             model.GoodCount = viewModel.Article.GoodCount;
             model.HotCount = viewModel.Article.HotCount;
@@ -291,9 +288,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             model.Title = viewModel.Article.Title;
             model.TopBeginTime = viewModel.Article.TopBeginTime;
             model.TopEndTime = viewModel.Article.TopEndTime;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.URLOpenType = viewModel.Article.URLOpenType;
             model.VerifyState = viewModel.Article.VerifyState;
             model.ViewCount = viewModel.Article.ViewCount;
@@ -356,9 +350,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             model.Title = viewModel.Article.Title;
             model.TopBeginTime = viewModel.Article.TopBeginTime;
             model.TopEndTime = viewModel.Article.TopEndTime;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.URLOpenType = viewModel.Article.URLOpenType;
             model.VerifyState = viewModel.Article.VerifyState;
             model.ViewCount = viewModel.Article.ViewCount;

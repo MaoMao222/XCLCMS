@@ -1,8 +1,11 @@
-﻿namespace XCLCMS.Data.Model.Custom
+﻿using System;
+
+namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 用户信息详情 实体
     /// </summary>
+    [Serializable]
     public class UserInfoDetailModel
     {
         /// <summary>

@@ -12,7 +12,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysWebSettingController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
         private XCLCMS.IService.WebAPI.ISysWebSettingService _iSysWebSettingService = null;
 
         private XCLCMS.IService.WebAPI.ISysWebSettingService iSysWebSettingService
@@ -174,7 +173,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.sysWebSettingBLL.GetModel(k);
+                        var model = this.iSysWebSettingService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

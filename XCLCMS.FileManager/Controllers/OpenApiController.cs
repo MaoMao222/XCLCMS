@@ -7,8 +7,6 @@ namespace XCLCMS.FileManager.Controllers
     /// </summary>
     public class OpenApiController : Controller
     {
-        private XCLCMS.Data.BLL.Attachment attachmentBLL = new Data.BLL.Attachment();
-
         /// <summary>
         /// 查看附件
         /// </summary>
@@ -20,14 +18,18 @@ namespace XCLCMS.FileManager.Controllers
                 return null;
             }
 
-            string path = string.Empty;
-            var model = attachmentBLL.GetModel(id.Value);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>();
+            request.Body = new Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity();
+            request.Body.AttachmentID = id.Value;
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Detail(request);
+            var model = response.Body.Attachment;
+
             if (null == model)
             {
                 XCLNetTools.StringHander.Common.ResponseClearWrite("文件不存在，或已被删除！");
                 return null;
             }
-            path = model.URL;
+            var path = model.URL;
             if (string.IsNullOrWhiteSpace(path))
             {
                 XCLNetTools.StringHander.Common.ResponseClearWrite("文件路径不存在！");

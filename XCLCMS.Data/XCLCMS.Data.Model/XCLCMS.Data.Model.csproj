@@ -52,6 +52,7 @@
     <Compile Include="Custom\ArticleRelationDetailCondition.cs" />
     <Compile Include="Custom\ArticleRelationDetailModel.cs" />
     <Compile Include="Custom\ArticleSearchCondition.cs" />
+    <Compile Include="Custom\AttachmentWithSubModel.cs" />
     <Compile Include="Custom\ContextModel.cs" />
     <Compile Include="Custom\FriendLinks_TitleCondition.cs" />
     <Compile Include="Custom\MerchantAppInfoModel.cs" />

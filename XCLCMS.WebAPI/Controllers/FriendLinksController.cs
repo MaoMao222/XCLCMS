@@ -12,7 +12,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class FriendLinksController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.FriendLinks friendLinksBLL = new Data.BLL.FriendLinks();
         private XCLCMS.IService.WebAPI.IFriendLinksService _iFriendLinksService = null;
 
         private XCLCMS.IService.WebAPI.IFriendLinksService iFriendLinksService
@@ -174,7 +173,8 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.friendLinksBLL.GetModel(k);
+                        var model = this.iFriendLinksService.Detail(new APIRequestEntity<long>() { Body=k }).Body;
+
                         if (null == model)
                         {
                             return false;

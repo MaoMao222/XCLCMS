@@ -132,6 +132,7 @@
     <Compile Include="WebAPI\ArticleAPI.cs" />
     <Compile Include="WebAPI\AttachmentAPI.cs" />
     <Compile Include="WebAPI\CommonAPI.cs" />
+    <Compile Include="WebAPI\FileInfoAPI.cs" />
     <Compile Include="WebAPI\FriendLinksAPI.cs" />
     <Compile Include="WebAPI\Library.cs" />
     <Compile Include="WebAPI\MerchantAPI.cs" />

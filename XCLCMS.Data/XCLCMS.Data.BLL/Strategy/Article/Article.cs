@@ -35,10 +35,19 @@ namespace XCLCMS.Data.BLL.Strategy.Article
                 switch (articleContext.HandleType)
                 {
                     case StrategyLib.HandleType.ADD:
+                        articleContext.Article.CreaterID = articleContext.ContextInfo.UserInfoID;
+                        articleContext.Article.CreaterName = articleContext.ContextInfo.UserName;
+                        articleContext.Article.CreateTime = DateTime.Now;
+                        articleContext.Article.UpdaterID = articleContext.Article.CreaterID;
+                        articleContext.Article.UpdaterName = articleContext.Article.CreaterName;
+                        articleContext.Article.UpdateTime = articleContext.Article.CreateTime;
                         flag = bll.Add(articleContext.Article);
                         break;
 
                     case StrategyLib.HandleType.UPDATE:
+                        articleContext.Article.UpdaterID = articleContext.ContextInfo.UserInfoID;
+                        articleContext.Article.UpdaterName = articleContext.ContextInfo.UserName;
+                        articleContext.Article.UpdateTime = DateTime.Now;
                         flag = bll.Update(articleContext.Article);
                         break;
                 }

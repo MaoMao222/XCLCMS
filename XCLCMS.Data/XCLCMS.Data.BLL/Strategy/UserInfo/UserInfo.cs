@@ -35,10 +35,19 @@ namespace XCLCMS.Data.BLL.Strategy.UserInfo
                 switch (userInfoContext.HandleType)
                 {
                     case StrategyLib.HandleType.ADD:
+                        userInfoContext.UserInfo.CreaterID = userInfoContext.ContextInfo.UserInfoID;
+                        userInfoContext.UserInfo.CreaterName = userInfoContext.ContextInfo.UserName;
+                        userInfoContext.UserInfo.CreateTime = DateTime.Now;
+                        userInfoContext.UserInfo.UpdaterID = userInfoContext.UserInfo.CreaterID;
+                        userInfoContext.UserInfo.UpdaterName = userInfoContext.UserInfo.CreaterName;
+                        userInfoContext.UserInfo.UpdateTime = userInfoContext.UserInfo.CreateTime;
                         flag = bll.Add(userInfoContext.UserInfo);
                         break;
 
                     case StrategyLib.HandleType.UPDATE:
+                        userInfoContext.UserInfo.UpdaterID = userInfoContext.ContextInfo.UserInfoID;
+                        userInfoContext.UserInfo.UpdaterName = userInfoContext.ContextInfo.UserName;
+                        userInfoContext.UserInfo.UpdateTime = DateTime.Now;
                         flag = bll.Update(userInfoContext.UserInfo);
                         break;
                 }

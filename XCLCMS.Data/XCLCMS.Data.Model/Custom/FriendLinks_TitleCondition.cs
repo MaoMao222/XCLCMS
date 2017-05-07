@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace XCLCMS.Data.Model.Custom
 {
+    [Serializable]
     public class FriendLinks_TitleCondition
     {
         public string Title { get; set; }

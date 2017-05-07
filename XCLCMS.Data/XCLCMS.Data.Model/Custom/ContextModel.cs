@@ -1,8 +1,11 @@
-﻿namespace XCLCMS.Data.Model.Custom
+﻿using System;
+
+namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 上下文
     /// </summary>
+    [Serializable]
     public class ContextModel
     {
         /// <summary>

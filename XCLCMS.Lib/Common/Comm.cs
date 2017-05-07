@@ -160,13 +160,13 @@ namespace XCLCMS.Lib.Common
             {
                 return null;
             }
-            XCLCMS.Data.Model.Attachment model = null;
-            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>();
-            request.Body = id;
+            XCLCMS.Data.Model.View.v_Attachment model = null;
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>();
+            request.Body.AttachmentID = id;
             var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Detail(request);
             if (null != response)
             {
-                model = response.Body;
+                model = response.Body.Attachment;
             }
             return null != model ? GetAttachmentAbsoluteURL(model.URL) : null;
         }

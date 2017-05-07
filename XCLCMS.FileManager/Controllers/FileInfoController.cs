@@ -15,7 +15,6 @@ namespace XCLCMS.FileManager.Controllers
         public ActionResult List()
         {
             Models.FileInfo.ListVM viewModel = this.GetFormViewModel();
-            viewModel.CurrentDirectory = HttpUtility.UrlDecode(XCLNetTools.StringHander.FormHelper.GetString("dir"));
             if (string.IsNullOrEmpty(viewModel.CurrentDirectory))
             {
                 viewModel.CurrentDirectory = XCLCMS.FileManager.Common.Library.FileManager_UploadPath;
@@ -55,9 +54,15 @@ namespace XCLCMS.FileManager.Controllers
             var viewModel = this.GetFormViewModel();
 
             XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();
-
-            msg.CustomObject = XCLNetTools.FileHandler.FileDirectory.GetFileList(viewModel.CurrentDirectory, XCLCMS.FileManager.Common.Library.FileManager_UploadPath, XCLCMS.FileManager.Common.Library.FileManager_UploadPath.Replace("~/", XCLNetTools.StringHander.Common.RootUri));
             msg.IsSuccess = true;
+
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.FileInfo.DiskFileListEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.FileInfo.DiskFileListEntity();
+            request.Body.CurrentDirectory = XCLNetTools.FileHandler.ComFile.MapPath(viewModel.CurrentDirectory);
+            request.Body.RootPath = XCLNetTools.FileHandler.ComFile.MapPath(XCLCMS.FileManager.Common.Library.FileManager_UploadPath);
+            request.Body.WebRootPath = XCLCMS.FileManager.Common.Library.FileManager_UploadPath.Replace("~/", XCLNetTools.StringHander.Common.RootUri);
+            var response = XCLCMS.Lib.WebAPI.FileInfoAPI.DiskFileList(request);
+            msg.CustomObject = response.Body;
 
             return new XCLNetTools.MVC.JsonResultFormat()
             {

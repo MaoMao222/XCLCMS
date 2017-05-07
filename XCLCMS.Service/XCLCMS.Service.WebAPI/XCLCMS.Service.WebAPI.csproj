@@ -49,6 +49,7 @@
     <Compile Include="ArticleService.cs" />
     <Compile Include="AttachmentService.cs" />
     <Compile Include="CommonService.cs" />
+    <Compile Include="FileInfoService.cs" />
     <Compile Include="FriendLinksService.cs" />
     <Compile Include="MerchantService.cs" />
     <Compile Include="MerchantAppService.cs" />

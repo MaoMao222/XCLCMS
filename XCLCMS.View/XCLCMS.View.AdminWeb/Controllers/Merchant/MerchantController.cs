@@ -182,9 +182,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             }); 
             model.Address = viewModel.Merchant.Address;
             model.ContactName = viewModel.Merchant.ContactName;
-            model.CreaterID = base.CurrentUserModel.UserInfoID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.Domain = viewModel.Merchant.Domain;
             model.Email = viewModel.Merchant.Email;
             model.Landline = viewModel.Merchant.Landline;
@@ -201,9 +198,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             model.RegisterTime = viewModel.Merchant.RegisterTime;
             model.Remark = viewModel.Merchant.Remark;
             model.Tel = viewModel.Merchant.Tel;
-            model.UpdaterID = model.CreaterID;
-            model.UpdaterName = model.CreaterName;
-            model.UpdateTime = model.CreateTime;
             model.MerchantSystemType = viewModel.Merchant.MerchantSystemType;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Merchant>(base.UserToken);
@@ -242,9 +236,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             model.RegisterTime = viewModel.Merchant.RegisterTime;
             model.Remark = viewModel.Merchant.Remark;
             model.Tel = viewModel.Merchant.Tel;
-            model.UpdaterID = model.CreaterID;
-            model.UpdaterName = model.CreaterName;
-            model.UpdateTime = model.CreateTime;
             model.MerchantSystemType = viewModel.Merchant.MerchantSystemType;
             model.RecordState = viewModel.Merchant.RecordState;
 

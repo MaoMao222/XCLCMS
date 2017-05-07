@@ -50,6 +50,7 @@
     <Compile Include="IAttachmentService.cs" />
     <Compile Include="IBaseInfoService.cs" />
     <Compile Include="ICommonService.cs" />
+    <Compile Include="IFileInfoService.cs" />
     <Compile Include="IFriendLinksService.cs" />
     <Compile Include="IMerchantService.cs" />
     <Compile Include="IMerchantAppService.cs" />

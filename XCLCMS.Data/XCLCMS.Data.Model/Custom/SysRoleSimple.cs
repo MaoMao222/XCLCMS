@@ -1,8 +1,11 @@
-﻿namespace XCLCMS.Data.Model.Custom
+﻿using System;
+
+namespace XCLCMS.Data.Model.Custom
 {
     /// <summary>
     /// 角色简版实体
     /// </summary>
+    [Serializable]
     public class SysRoleSimple
     {
         /// <summary>

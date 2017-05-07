@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
+using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 
 namespace XCLCMS.WebAPI.Controllers
 {
@@ -41,23 +44,11 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.WebAPI.Filters.APIOpenPermissionFilter]
-        public async Task<APIResponseEntity<XCLCMS.Data.Model.Attachment>> Detail([FromUri] APIRequestEntity<long> request)
+        public async Task<APIResponseEntity<XCLCMS.Data.Model.Custom.AttachmentWithSubModel>> Detail([FromUri] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity> request)
         {
             return await Task.Run(() =>
             {
                 var response = this.iAttachmentService.Detail(request);
-
-                #region 限制商户
-
-                if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    response.Body = null;
-                    response.IsSuccess = false;
-                    response.Message = "只能操作属于自己商户下的数据信息！";
-                }
-
-                #endregion 限制商户
-
                 return response;
             });
         }
@@ -85,6 +76,121 @@ namespace XCLCMS.WebAPI.Controllers
             return await Task.Run(() =>
             {
                 return this.iAttachmentService.GetAttachmentListByIDList(request);
+            });
+        }
+
+        /// <summary>
+        /// 附件分页列表
+        /// </summary>
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView)]
+        public async Task<APIResponseEntity<PageListResponseEntity<XCLCMS.Data.Model.View.v_Attachment>>> PageList([FromUri]   APIRequestEntity<PageListConditionEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant)
+                {
+                    request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                        request.Body.Where,
+                        string.Format("FK_MerchantID={0}",base.CurrentUserModel.FK_MerchantID)
+                    });
+                }
+
+                #endregion 限制商户
+
+                return this.iAttachmentService.PageList(request);
+            });
+        }
+
+        /// <summary>
+        /// 添加附件信息
+        /// </summary>
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_FileAdd)]
+        public async Task<APIResponseEntity<bool>> Add([FromBody]  APIRequestEntity<Data.Model.Attachment> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                {
+                    var response = new APIResponseEntity<bool>();
+                    response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
+                    return response;
+                }
+
+                #endregion 限制商户
+
+                return this.iAttachmentService.Add(request);
+            });
+        }
+
+        /// <summary>
+        /// 修改附件信息
+        /// </summary>
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate)]
+        public async Task<APIResponseEntity<bool>> Update([FromBody]  APIRequestEntity<Data.Model.Attachment> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                {
+                    var response = new APIResponseEntity<bool>();
+                    response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
+                    return response;
+                }
+
+                #endregion 限制商户
+
+                return this.iAttachmentService.Update(request);
+            });
+        }
+
+        /// <summary>
+        /// 删除附件信息
+        /// </summary>
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel)]
+        public async Task<APIResponseEntity<bool>> Delete([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.FileInfo.DeleteEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (null != request.Body && request.Body.IDList.Count > 0)
+                {
+                    request.Body.IDList = request.Body.IDList.Where(k =>
+                    {
+                        var model = this.iAttachmentService.Detail(new APIRequestEntity<Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>()
+                        {
+                            Body = new Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity()
+                            {
+                                AttachmentID = k
+                            }
+                        }).Body.Attachment;
+                        if (null == model)
+                        {
+                            return false;
+                        }
+                        if (base.IsOnlyCurrentMerchant && model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }).ToList();
+                }
+
+                #endregion 限制商户
+
+                return this.iAttachmentService.Delete(request);
             });
         }
     }

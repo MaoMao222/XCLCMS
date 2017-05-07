@@ -82,7 +82,6 @@ namespace XCLCMS.Service.WebAPI
             return response;
         }
 
-
         /// <summary>
         /// 查询所有商户应用键值形式的列表
         /// </summary>
@@ -194,6 +193,13 @@ namespace XCLCMS.Service.WebAPI
             }
 
             #endregion 数据校验
+
+            request.Body.CreaterID = this.ContextInfo.UserInfoID;
+            request.Body.CreaterName = this.ContextInfo.UserName;
+            request.Body.CreateTime = DateTime.Now;
+            request.Body.UpdaterID = request.Body.CreaterID;
+            request.Body.UpdaterName = request.Body.CreaterName;
+            request.Body.UpdateTime = request.Body.CreateTime;
 
             response.IsSuccess = this.merchantAppBLL.Add(request.Body);
             if (response.Body)

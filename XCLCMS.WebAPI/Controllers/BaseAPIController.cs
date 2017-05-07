@@ -28,7 +28,6 @@ namespace XCLCMS.WebAPI.Controllers
 
         #region 当前登录用户相关
 
-        private XCLCMS.Data.BLL.UserInfo userInfoBLL = new Data.BLL.UserInfo();
         private XCLCMS.Data.Model.UserInfo _currentUserModel = null;
         private XCLCMS.Data.Model.Custom.ContextModel _contextModel = null;
 

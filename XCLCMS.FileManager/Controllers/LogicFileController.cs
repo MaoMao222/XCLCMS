@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -44,20 +43,21 @@ namespace XCLCMS.FileManager.Controllers
             };
             string strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
                      string.Format("RecordState='{0}'", XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString()),
-                     viewModel.Search.StrSQL,
-                     XCLCMS.Lib.Permission.PerHelper.IsOnlyCurrentMerchant(base.UserID)?string.Format("FK_MerchantID={0}",base.CurrentUserModel.FK_MerchantID):string.Empty
+                     viewModel.Search.StrSQL
                  });
 
             #endregion 初始化查询条件
 
-            XCLCMS.Data.BLL.View.v_Attachment vBll = new Data.BLL.View.v_Attachment();
             base.PageParamsInfo.PageSize = 15;
-            viewModel.AttachmentList = vBll.GetPageList(base.PageParamsInfo, new XCLNetTools.Entity.SqlPagerConditionEntity()
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.PageListConditionEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.PageListConditionEntity()
             {
-                OrderBy = "[AttachmentID] desc",
+                PagerInfoSimple = base.PageParamsInfo.ToPagerInfoSimple(),
                 Where = strWhere
-            });
-            viewModel.PagerModel = base.PageParamsInfo;
+            };
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.PageList(request).Body;
+            viewModel.AttachmentList = response.ResultList;
+            viewModel.PagerModel = response.PagerInfo;
 
             if (viewModel.IsSelectFile)
             {
@@ -76,22 +76,17 @@ namespace XCLCMS.FileManager.Controllers
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileView)]
         public ActionResult Show()
         {
-            var bll = new XCLCMS.Data.BLL.Attachment();
-            var vBll = new XCLCMS.Data.BLL.View.v_Attachment();
             XCLCMS.FileManager.Models.LogicFile.ShowVM viewModel = new Models.LogicFile.ShowVM();
             viewModel.AttachmentID = XCLNetTools.StringHander.FormHelper.GetLong("AttachmentID");
-            viewModel.Attachment = vBll.GetModel(viewModel.AttachmentID) ?? new Data.Model.View.v_Attachment();
-            if (XCLCMS.Lib.Permission.PerHelper.IsOnlyCurrentMerchant(base.UserID))
-            {
-                if (viewModel.Attachment.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    throw new Exception("只能查看自己的商户数据！");
-                }
-            }
-            if (viewModel.Attachment.AttachmentID > 0)
-            {
-                viewModel.SubAttachmentList = bll.GetCorrelativeList(viewModel.Attachment.AttachmentID);
-            }
+
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity();
+            request.Body.AttachmentID = viewModel.AttachmentID;
+            request.Body.IsContainsSubAttachmentList = true;
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Detail(request);
+            viewModel.Attachment = response.Body.Attachment ?? new Data.Model.View.v_Attachment();
+            viewModel.SubAttachmentList = response.Body.SubAttachmentList;
+
             return View(viewModel);
         }
 
@@ -101,17 +96,15 @@ namespace XCLCMS.FileManager.Controllers
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate)]
         public ActionResult Update()
         {
-            var vBll = new XCLCMS.Data.BLL.View.v_Attachment();
             XCLCMS.FileManager.Models.LogicFile.UpdateVM viewModel = new Models.LogicFile.UpdateVM();
             viewModel.AttachmentID = XCLNetTools.StringHander.FormHelper.GetLong("AttachmentID");
-            viewModel.Attachment = vBll.GetModel(viewModel.AttachmentID) ?? new Data.Model.View.v_Attachment();
-            if (XCLCMS.Lib.Permission.PerHelper.IsOnlyCurrentMerchant(base.UserID))
-            {
-                if (viewModel.Attachment.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    throw new Exception("只能查看自己的商户数据！");
-                }
-            }
+
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.Attachment.DetailEntity();
+            request.Body.AttachmentID = viewModel.AttachmentID;
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Detail(request);
+            viewModel.Attachment = response.Body.Attachment ?? new Data.Model.View.v_Attachment();
+
             return View(viewModel);
         }
 
@@ -121,41 +114,14 @@ namespace XCLCMS.FileManager.Controllers
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileUpdate)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();
-            var bll = new XCLCMS.Data.BLL.Attachment();
-            long attachmentID = XCLNetTools.StringHander.FormHelper.GetLong("AttachmentID");
-            var model = bll.GetModel(attachmentID);
-            if (null == model)
-            {
-                msg.IsSuccess = false;
-                msg.Message = "未找到该记录！";
-                return Json(msg);
-            }
-            if (XCLCMS.Lib.Permission.PerHelper.IsOnlyCurrentMerchant(base.UserID))
-            {
-                if (model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    msg.IsSuccess = false;
-                    msg.Message = "只能操作自己商户的数据！";
-                    return Json(msg);
-                }
-            }
-            model.Title = XCLNetTools.StringHander.FormHelper.GetString("Title");
-            model.Description = XCLNetTools.StringHander.FormHelper.GetString("Description");
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
-            if (bll.Update(model))
-            {
-                msg.IsSuccess = true;
-                msg.Message = "更新成功！";
-            }
-            else
-            {
-                msg.IsSuccess = false;
-                msg.Message = "更新失败！";
-            }
-            return Json(msg);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Attachment>(base.UserToken);
+            request.Body = new Data.Model.Attachment();
+            request.Body.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("FK_MerchantID");
+            request.Body.AttachmentID = XCLNetTools.StringHander.FormHelper.GetLong("AttachmentID");
+            request.Body.Title = XCLNetTools.StringHander.FormHelper.GetString("Title");
+            request.Body.Description = XCLNetTools.StringHander.FormHelper.GetString("Description");
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Update(request);
+            return Json(response);
         }
 
         /// <summary>
@@ -164,59 +130,14 @@ namespace XCLCMS.FileManager.Controllers
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_LogicFileDel)]
         public override ActionResult DelSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msg = new XCLNetTools.Message.MessageModel();
-            var bll = new XCLCMS.Data.BLL.Attachment();
-            var ids = (XCLNetTools.StringHander.FormHelper.GetString("attachmentIDs") ?? "").Split(',').ToList().ConvertAll(k => XCLNetTools.Common.DataTypeConvert.ToLong(k));
-            if (null == ids || ids.Count == 0)
-            {
-                msg.IsSuccess = false;
-                msg.Message = "请指定要删除的记录！";
-                return Json(msg);
-            }
-
-            if (XCLCMS.Lib.Permission.PerHelper.IsOnlyCurrentMerchant(base.UserID))
-            {
-                foreach (var id in ids)
-                {
-                    var model = bll.GetModel(id);
-                    if (null == model)
-                    {
-                        continue;
-                    }
-                    if (model.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                    {
-                        throw new Exception("只能删除自己的商户数据！");
-                    }
-                }
-            }
-
-            if (bll.Delete(ids, base.ContextModel))
-            {
-                msg.IsSuccess = true;
-                msg.Message = "删除成功！";
-                msg.IsRefresh = true;
-
-                //删除物理文件
-                foreach (var id in ids)
-                {
-                    var model = bll.GetModel(id);
-                    if (null == model)
-                    {
-                        continue;
-                    }
-                    if (string.IsNullOrWhiteSpace(model.URL))
-                    {
-                        continue;
-                    }
-                    XCLNetTools.FileHandler.ComFile.DeleteFile(Server.MapPath(model.URL));
-                }
-            }
-            else
-            {
-                msg.IsSuccess = false;
-                msg.Message = "删除失败！";
-            }
-            return Json(msg);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.FileInfo.DeleteEntity>(base.UserToken);
+            request.Body = new Data.WebAPIEntity.RequestEntity.FileInfo.DeleteEntity();
+            request.Body.IDList = (XCLNetTools.StringHander.FormHelper.GetString("attachmentIDs") ?? "").Split(',').ToList().ConvertAll(k => XCLNetTools.Common.DataTypeConvert.ToLong(k));
+            request.Body.RootPath = XCLNetTools.FileHandler.ComFile.MapPath(XCLCMS.FileManager.Common.Library.FileManager_UploadPath);
+            request.Body.TopPath = XCLCMS.FileManager.Common.Library.FileManager_UploadPath;
+            var response = XCLCMS.Lib.WebAPI.AttachmentAPI.Delete(request);
+            response.IsRefresh = response.IsSuccess;
+            return Json(response);
         }
     }
 }

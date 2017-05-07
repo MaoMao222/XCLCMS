@@ -11,7 +11,6 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class SysRoleController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
         private XCLCMS.IService.WebAPI.ISysRoleService _iSysRoleService = null;
 
         private XCLCMS.IService.WebAPI.ISysRoleService iSysRoleService
@@ -225,7 +224,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.sysRoleBLL.GetModel(k);
+                        var model = this.iSysRoleService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
                         if (null == model)
                         {
                             return false;

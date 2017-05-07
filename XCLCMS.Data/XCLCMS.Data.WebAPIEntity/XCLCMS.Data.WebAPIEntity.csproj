@@ -57,9 +57,12 @@
     <Compile Include="RequestEntity\Article\IsExistCodeEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestEntity\Article\SimplePageListEntity.cs" />
+    <Compile Include="RequestEntity\Attachment\DetailEntity.cs" />
     <Compile Include="RequestEntity\Attachment\GetAttachmentListByIDListEntity.cs" />
     <Compile Include="RequestEntity\Attachment\GetObjectAttachmentListEntity.cs" />
     <Compile Include="RequestEntity\Common\GenerateIDEntity.cs" />
+    <Compile Include="RequestEntity\FileInfo\DeleteEntity.cs" />
+    <Compile Include="RequestEntity\FileInfo\DiskFileListEntity.cs" />
     <Compile Include="RequestEntity\FileManager\GetDiskFileListEntity.cs" />
     <Compile Include="RequestEntity\FriendLinks\IsExistTitleEntity.cs" />
     <Compile Include="RequestEntity\MerchantApp\IsExistMerchantAppNameEntity.cs" />

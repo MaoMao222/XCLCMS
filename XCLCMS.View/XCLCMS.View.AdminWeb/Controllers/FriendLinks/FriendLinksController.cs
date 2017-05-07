@@ -134,14 +134,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.LIK.ToString()
             });
-            model.CreaterID = base.UserID;
-            model.CreaterName = base.CurrentUserModel.UserName;
-            model.CreateTime = DateTime.Now;
             model.RecordState = viewModel.FriendLinks.RecordState;
             model.Title = viewModel.FriendLinks.Title;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.FriendLinks.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.FriendLinks.FK_MerchantID;
             model.ContactName = viewModel.FriendLinks.ContactName;
@@ -175,9 +169,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
 
             model.RecordState = viewModel.FriendLinks.RecordState;
             model.Title = viewModel.FriendLinks.Title;
-            model.UpdaterID = base.UserID;
-            model.UpdaterName = base.CurrentUserModel.UserName;
-            model.UpdateTime = DateTime.Now;
             model.FK_MerchantAppID = viewModel.FriendLinks.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.FriendLinks.FK_MerchantID;
             model.ContactName = viewModel.FriendLinks.ContactName;
