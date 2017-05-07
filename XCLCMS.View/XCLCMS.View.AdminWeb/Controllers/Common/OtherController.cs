@@ -12,7 +12,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Common
         /// </summary>
         public ActionResult FileManagerFileList()
         {
-            return Redirect(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_FileListURL);
+            return Redirect(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_LogicFileListURL);
         }
 
         /// <summary>
