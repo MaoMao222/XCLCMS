@@ -11,6 +11,17 @@
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
                 <tr>
+                    <td class="XCLTitle">所属商户号：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.UserInfo.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用号：</td>
+                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.UserInfo.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
                     <td class="XCLTitle">@Html.Raw(ViewBag.CurrentHandleType == XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD ? @"<span class=""XCLRedBolder"">*</span>" : "")用户名：</td>
                     <td>
                         @if (ViewBag.CurrentHandleType == XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD)
@@ -32,17 +43,6 @@
                     <td>
                         <input type="text" id="txtNickName" name="txtNickName" value="@Model.UserInfo.NickName" />
                     </td>
-                </tr>
-
-                <tr>
-                    <td class="XCLTitle">所属商户号：</td>
-                    <td>
-                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.UserInfo.FK_MerchantID" />
-                    </td>
-                    <td class="XCLTitle">所属应用号：</td>
-                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.UserInfo.FK_MerchantAppID" /></td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
                 </tr>
 
                 <tr>
@@ -131,9 +131,9 @@
                         <td>
                             <select id="selUserType" name="selUserType">
                                 @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.UserTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
-                       {
-                           DefaultValue = Model.UserInfo.UserType
-                       }))
+                           {
+                               DefaultValue = Model.UserInfo.UserType
+                           }))
                             </select>
                         </td>
                         <td class="XCLTitle"></td>

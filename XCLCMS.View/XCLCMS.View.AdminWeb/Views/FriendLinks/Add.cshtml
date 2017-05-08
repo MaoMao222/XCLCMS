@@ -10,20 +10,6 @@
         <div class="XCLAccordionHeader">1、基本信息：</div>
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
-                <tr>
-                    <td class="XCLTitle" ><span class="XCLRedBolder">*</span>标题：</td>
-                    <td >
-                        <input type="text" name="txtTitle" value="@Model.FriendLinks.Title" />
-                    </td>
-                    <td class="XCLTitle" >描述：</td>
-                    <td >
-                        <textarea name="txtDescription">@Model.FriendLinks.Description</textarea>
-                    </td>
-                    <td class="XCLTitle" >链接地址：</td>
-                    <td >
-                        <input type="text" name="txtURL" value="@Model.FriendLinks.URL" />
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="XCLTitle">所属商户号：</td>
@@ -34,6 +20,21 @@
                     <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.FriendLinks.FK_MerchantAppID" /></td>
                     <td class="XCLTitle"></td>
                     <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>标题：</td>
+                    <td>
+                        <input type="text" name="txtTitle" value="@Model.FriendLinks.Title" />
+                    </td>
+                    <td class="XCLTitle">描述：</td>
+                    <td>
+                        <textarea name="txtDescription">@Model.FriendLinks.Description</textarea>
+                    </td>
+                    <td class="XCLTitle">链接地址：</td>
+                    <td>
+                        <input type="text" name="txtURL" value="@Model.FriendLinks.URL" />
+                    </td>
                 </tr>
 
                 <tr>

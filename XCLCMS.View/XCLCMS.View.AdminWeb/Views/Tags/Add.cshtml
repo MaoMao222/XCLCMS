@@ -11,34 +11,39 @@
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
                 <tr>
-                    <td class="XCLTitle" ><span class="XCLRedBolder">*</span>标签名：</td>
-                    <td >
-                        <input type="text" name="txtTagName" value="@Model.Tags.TagName" />
-                    </td>
-                    <td class="XCLTitle" >描述：</td>
-                    <td >
-                        <textarea name="txtDescription">@Model.Tags.Description</textarea>
-                    </td>
-                    <td class="XCLTitle" ></td>
-                    <td >
-                    </td>
-                </tr>
-
-                <tr>
                     <td class="XCLTitle">所属商户号：</td>
                     <td>
                         <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Tags.FK_MerchantID" />
                     </td>
                     <td class="XCLTitle">所属应用号：</td>
                     <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Tags.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>标签名：</td>
+                    <td>
+                        <input type="text" name="txtTagName" value="@Model.Tags.TagName" />
+                    </td>
+                    <td class="XCLTitle">描述：</td>
+                    <td>
+                        <textarea name="txtDescription">@Model.Tags.Description</textarea>
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td class="XCLTitle">记录状态：</td>
                     <td>
                         <select name="selRecordState">
                             @Html.Raw(Model.RecordStateOptions)
                         </select>
                     </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
                 </tr>
-
             </table>
         </div>
 

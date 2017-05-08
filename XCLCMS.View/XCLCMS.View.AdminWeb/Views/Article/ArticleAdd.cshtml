@@ -10,20 +10,32 @@
         <div class="XCLAccordionHeader">1、基本信息：</div>
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
+
                 <tr>
-                    <td class="XCLTitle"  rowspan="2"><span class="XCLRedBolder">*</span>标题：</td>
-                    <td >
+                    <td class="XCLTitle">所属商户号：</td>
+                    <td>
+                        <input type="text" class="easyui-combobox" id="txtMerchantID" name="txtMerchantID" value="@Model.Article.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用号：</td>
+                    <td><input type="text" class="easyui-combobox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Article.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle" rowspan="2"><span class="XCLRedBolder">*</span>标题：</td>
+                    <td>
                         主标题：
                         <textarea id="txtTitle" name="txtTitle" style="height:40px;">@Model.Article.Title</textarea>
                     </td>
-                    <td class="XCLTitle" >作者：</td>
-                    <td >
+                    <td class="XCLTitle">作者：</td>
+                    <td>
                         <select id="selAuthorName" name="selAuthorName" class="easyui-combobox" defaultValue="@Model.Article.AuthorName" style="height:25px;width:200px;">
                             @Html.Raw(Model.AuthorNameOptions)
                         </select>
                     </td>
-                    <td class="XCLTitle" >来源：</td>
-                    <td >
+                    <td class="XCLTitle">来源：</td>
+                    <td>
                         <select id="selFromInfo" name="selFromInfo" class="easyui-combobox" defaultValue="@Model.Article.FromInfo" style="height:25px;width:200px;">
                             @Html.Raw(Model.FromInfoOptions)
                         </select>
@@ -61,16 +73,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="XCLTitle">所属商户号：</td>
-                    <td>
-                        <input type="text" class="easyui-combobox" id="txtMerchantID" name="txtMerchantID" value="@Model.Article.FK_MerchantID"/>
-                    </td>
-                    <td class="XCLTitle">所属应用号：</td>
-                    <td><input type="text" class="easyui-combobox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Article.FK_MerchantAppID" /></td>
                     <td class="XCLTitle">唯一标识：</td>
                     <td>
                         <input type="text" id="txtCode" name="txtCode" value="@Model.Article.Code" />
                     </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="XCLTitle">属性：</td>
@@ -245,13 +255,13 @@
             @switch ((XCLNetTools.Enum.CommonEnum.HandleTypeEnum)ViewBag.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-            <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存文章</a>
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存文章</a>
                     break;
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
-            <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
                     if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleDel))
                     {
-            <a id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删 除</a>
+                        <a id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删 除</a>
                     }
                     break;
             }

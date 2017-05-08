@@ -11,12 +11,25 @@
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
                 <tr>
-                    <td class="XCLTitle" ><span class="XCLRedBolder">*</span>名称：</td>
-                    <td >
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>所属商户：</td>
+                    <td>
+                        <input type="text" id="txtMerchantID" name="txtMerchantID" value="@Model.SysWebSetting.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用：</td>
+                    <td>
+                        <input type="text" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.SysWebSetting.FK_MerchantAppID" />
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>名称：</td>
+                    <td>
                         <textarea id="txtKeyName" name="txtKeyName">@Model.SysWebSetting.KeyName</textarea>
                     </td>
-                    <td class="XCLTitle" >值：</td>
-                    <td >
+                    <td class="XCLTitle">值：</td>
+                    <td>
                         开发环境：<br />
                         <textarea id="txtKeyValue" name="txtKeyValue" style="height:30px;">@Model.SysWebSetting.KeyValue</textarea>
                         <br />测试环境：<br />
@@ -25,19 +38,6 @@
                         <textarea id="txtUATKeyValue" name="txtUATKeyValue" style="height:30px;">@Model.SysWebSetting.UATKeyValue</textarea>
                         <br />生产环境：<br />
                         <textarea id="txtPrdKeyValue" name="txtPrdKeyValue" style="height:30px;">@Model.SysWebSetting.PrdKeyValue</textarea>
-                    </td>
-                    <td class="XCLTitle" ></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>所属商户：</td>
-                    <td>
-                        <input type="text" id="txtMerchantID" name="txtMerchantID" value="@Model.SysWebSetting.FK_MerchantID" />
-                    </td>
-                    <td class="XCLTitle">所属应用：</td>
-                    <td>
-                        <input type="text" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.SysWebSetting.FK_MerchantAppID" />
                     </td>
                     <td class="XCLTitle"></td>
                     <td></td>

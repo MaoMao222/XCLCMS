@@ -10,17 +10,29 @@
         <div class="XCLAccordionHeader">1、基本信息：</div>
         <div class="XCLAccordionBody">
             <table class="XCLTableEdit">
+
                 <tr>
-                    <td class="XCLTitle" ><span class="XCLRedBolder">*</span>标题：</td>
-                    <td >
+                    <td class="XCLTitle">所属商户号：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Ads.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用号：</td>
+                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Ads.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>标题：</td>
+                    <td>
                         <input type="text" name="txtTitle" value="@Model.Ads.Title" />
                     </td>
-                    <td class="XCLTitle" ><span class="XCLRedBolder">*</span>唯一标识：</td>
-                    <td >
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>唯一标识：</td>
+                    <td>
                         <input type="text" name="txtCode" value="@Model.Ads.Code" />
                     </td>
-                    <td class="XCLTitle" >类型：</td>
-                    <td >
+                    <td class="XCLTitle">类型：</td>
+                    <td>
                         <select name="selAdsType">@Html.Raw(Model.AdsTypeOptions)</select>
                     </td>
                 </tr>
@@ -32,11 +44,11 @@
                     </td>
                     <td class="XCLTitle">宽度：</td>
                     <td>
-                        <input type="text"  class="easyui-numberbox"  style="height:25px;" name="txtAdWidth" value="@Model.Ads.AdWidth" />
+                        <input type="text" class="easyui-numberbox" style="height:25px;" name="txtAdWidth" value="@Model.Ads.AdWidth" />
                     </td>
                     <td class="XCLTitle">高度：</td>
                     <td>
-                        <input type="text"  class="easyui-numberbox"  style="height:25px;" name="txtAdHeight" value="@Model.Ads.AdHeight" />
+                        <input type="text" class="easyui-numberbox" style="height:25px;" name="txtAdHeight" value="@Model.Ads.AdHeight" />
                     </td>
                 </tr>
 
@@ -51,9 +63,9 @@
                     </td>
                     <td class="XCLTitle">起止时间：</td>
                     <td>
-                        <input type="text" name="txtStartTime"  value="@string.Format("{0:yyyy-MM-dd HH:mm}",Model.Ads.StartTime)" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'}); return false;"  />
+                        <input type="text" name="txtStartTime" value="@string.Format("{0:yyyy-MM-dd HH:mm}",Model.Ads.StartTime)" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'}); return false;" />
                         ~
-                        <input type="text" name="txtEndTime" value="@string.Format("{0:yyyy-MM-dd HH:mm}",Model.Ads.EndTime)" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'}); return false;"  />
+                        <input type="text" name="txtEndTime" value="@string.Format("{0:yyyy-MM-dd HH:mm}",Model.Ads.EndTime)" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'}); return false;" />
                     </td>
                 </tr>
 
@@ -88,20 +100,17 @@
                 </tr>
 
                 <tr>
-                    <td class="XCLTitle">所属商户号：</td>
-                    <td>
-                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Ads.FK_MerchantID" />
-                    </td>
-                    <td class="XCLTitle">所属应用号：</td>
-                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Ads.FK_MerchantAppID" /></td>
                     <td class="XCLTitle">记录状态：</td>
                     <td>
                         <select name="selRecordState">
                             @Html.Raw(Model.RecordStateOptions)
                         </select>
                     </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
                 </tr>
-
             </table>
         </div>
 
