@@ -52,6 +52,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 ## 案例
 - 博客站点前台：[我的ABC](http://www.wodeabc.com)
 - Web API文档：[http://cms.wodeabc.com/api/help](http://cms.wodeabc.com/api/help)
+- 管理后台（[http://cms.wodeabc.com/admin](http://cms.wodeabc.com/admin)）,用户名：test，密码：123456
 
 ## 进度
 - 开始编码于：2014年10月
