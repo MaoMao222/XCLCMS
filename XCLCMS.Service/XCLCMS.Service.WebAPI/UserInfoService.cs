@@ -307,6 +307,13 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            if (request.Body.Contains(this.ContextInfo.UserInfoID))
+            {
+                response.IsSuccess = false;
+                response.Message = "不能删除自己！";
+                return response;
+            }
+
             foreach (var k in request.Body)
             {
                 var userInfoModel = userInfoBLL.GetModel(k);
