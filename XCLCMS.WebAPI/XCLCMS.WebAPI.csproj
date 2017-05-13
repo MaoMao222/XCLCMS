@@ -229,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FileInfo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">

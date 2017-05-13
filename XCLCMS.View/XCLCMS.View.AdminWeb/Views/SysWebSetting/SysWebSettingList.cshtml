@@ -36,6 +36,7 @@
                     <td>所属应用</td>
                     <td>名称</td>
                     <td>说明</td>
+                    <td>值类型</td>
                     <td>值</td>
                     <td>记录状态</td>
                     <td>创建时间</td>
@@ -59,6 +60,7 @@
                                 <td>@m.MerchantAppName</td>
                                 <td>@m.KeyName</td>
                                 <td>@m.Remark</td>
+                                <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), m.ValueType)</td>
                                 <td>
                                     @if (m.KeyValue == m.PrdKeyValue && m.KeyValue == m.TestKeyValue && m.KeyValue == m.UATKeyValue)
                                     {

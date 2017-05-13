@@ -19,6 +19,7 @@ namespace XCLCMS.Data.Model.View
         private string _testkeyvalue;
         private string _uatkeyvalue;
         private string _prdkeyvalue;
+        private string _valuetype;
         private string _remark;
         private long _fk_merchantid;
         private long _fk_merchantappid;
@@ -84,6 +85,15 @@ namespace XCLCMS.Data.Model.View
         {
             set { _prdkeyvalue = value; }
             get { return _prdkeyvalue; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string ValueType
+        {
+            set { _valuetype = value; }
+            get { return _valuetype; }
         }
 
         /// <summary>

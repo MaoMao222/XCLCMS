@@ -31,6 +31,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
                 new XCLNetSearch.SearchFieldInfo("测试环境值","TestKeyValue|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("UAT环境值","UATKeyValue|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("生产环境值","PrdKeyValue|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("值类型","ValueType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum))),
                 new XCLNetSearch.SearchFieldInfo("说明","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("创建时间","CreateTime|dateTime|text",""),
@@ -104,6 +105,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             viewModel.SysWebSetting.TestKeyValue = (fm["txtTestKeyValue"] ?? "").Trim();
             viewModel.SysWebSetting.UATKeyValue = (fm["txtUATKeyValue"] ?? "").Trim();
             viewModel.SysWebSetting.PrdKeyValue = (fm["txtPrdKeyValue"] ?? "").Trim();
+            viewModel.SysWebSetting.ValueType = (fm["selValueType"] ?? "").Trim();
             viewModel.SysWebSetting.Remark = (fm["txtRemark"] ?? "").Trim();
             viewModel.SysWebSetting.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
             viewModel.SysWebSetting.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
@@ -124,6 +126,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             model.TestKeyValue = viewModel.SysWebSetting.TestKeyValue;
             model.UATKeyValue = viewModel.SysWebSetting.UATKeyValue;
             model.PrdKeyValue = viewModel.SysWebSetting.PrdKeyValue;
+            model.ValueType = viewModel.SysWebSetting.ValueType;
             model.Remark = viewModel.SysWebSetting.Remark;
             model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
             model.SysWebSettingID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
@@ -154,6 +157,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             model.TestKeyValue = viewModel.SysWebSetting.TestKeyValue;
             model.UATKeyValue = viewModel.SysWebSetting.UATKeyValue;
             model.PrdKeyValue = viewModel.SysWebSetting.PrdKeyValue;
+            model.ValueType = viewModel.SysWebSetting.ValueType;
             model.Remark = viewModel.SysWebSetting.Remark;
             model.FK_MerchantAppID = viewModel.SysWebSetting.FK_MerchantAppID;
             model.FK_MerchantID = viewModel.SysWebSetting.FK_MerchantID;

@@ -30,6 +30,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "TestKeyValue", DbType.AnsiString, model.TestKeyValue);
             db.AddInParameter(dbCommand, "UATKeyValue", DbType.AnsiString, model.UATKeyValue);
             db.AddInParameter(dbCommand, "PrdKeyValue", DbType.AnsiString, model.PrdKeyValue);
+            db.AddInParameter(dbCommand, "ValueType", DbType.AnsiString, model.ValueType);
             db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
@@ -69,6 +70,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "TestKeyValue", DbType.AnsiString, model.TestKeyValue);
             db.AddInParameter(dbCommand, "UATKeyValue", DbType.AnsiString, model.UATKeyValue);
             db.AddInParameter(dbCommand, "PrdKeyValue", DbType.AnsiString, model.PrdKeyValue);
+            db.AddInParameter(dbCommand, "ValueType", DbType.AnsiString, model.ValueType);
             db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);

@@ -525,5 +525,33 @@ namespace XCLCMS.Data.CommonHelper
         }
 
         #endregion ID生成
+
+        #region 系统配置
+
+        /// <summary>
+        /// 配置值的类型
+        /// </summary>
+        public enum SysWebSettingValueTypeEnum
+        {
+            /// <summary>
+            /// 字符串 String
+            /// </summary>
+            [Description("字符串")]
+            STR,
+
+            /// <summary>
+            /// 数字 Number
+            /// </summary>
+            [Description("数字")]
+            NUM,
+
+            /// <summary>
+            /// Json
+            /// </summary>
+            [Description("JSON")]
+            JON
+        }
+
+        #endregion 系统配置
     }
 }

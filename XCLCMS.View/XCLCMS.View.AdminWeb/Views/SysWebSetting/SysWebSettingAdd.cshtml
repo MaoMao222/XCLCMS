@@ -30,6 +30,15 @@
                     </td>
                     <td class="XCLTitle">值：</td>
                     <td>
+                        值类型：
+                        <select name="selValueType">
+                            @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+                       {
+                           DefaultValue = Model.SysWebSetting.ValueType,
+                           IsNeedPleaseSelect=false
+                       }))
+                        </select>
+                        <br />
                         开发环境：<br />
                         <textarea id="txtKeyValue" name="txtKeyValue" style="height:30px;">@Model.SysWebSetting.KeyValue</textarea>
                         <br />测试环境：<br />

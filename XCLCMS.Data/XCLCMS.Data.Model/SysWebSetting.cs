@@ -19,6 +19,7 @@ namespace XCLCMS.Data.Model
         private string _testkeyvalue;
         private string _uatkeyvalue;
         private string _prdkeyvalue;
+        private string _valuetype = "STR";
         private string _remark;
         private long _fk_merchantid = 0;
         private long _fk_merchantappid = 0;
@@ -82,6 +83,15 @@ namespace XCLCMS.Data.Model
         {
             set { _prdkeyvalue = value; }
             get { return _prdkeyvalue; }
+        }
+
+        /// <summary>
+        /// 值类型（SysWebSettingValueTypeEnum）
+        /// </summary>
+        public string ValueType
+        {
+            set { _valuetype = value; }
+            get { return _valuetype; }
         }
 
         /// <summary>

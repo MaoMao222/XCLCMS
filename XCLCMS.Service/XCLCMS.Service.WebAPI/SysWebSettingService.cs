@@ -97,6 +97,7 @@ namespace XCLCMS.Service.WebAPI
             #region 数据校验
 
             request.Body.KeyName = (request.Body.KeyName ?? "").Trim();
+            request.Body.ValueType = (request.Body.ValueType ?? XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.STR.ToString()).Trim().ToUpper();
 
             //商户必须存在
             var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
@@ -119,6 +120,31 @@ namespace XCLCMS.Service.WebAPI
                 response.IsSuccess = false;
                 response.Message = string.Format("配置名【{0}】已存在！", request.Body.KeyName);
                 return response;
+            }
+
+            if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.JON.ToString())
+            {
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.PrdKeyValue)))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "配置值必须为JSON类型！";
+                    return response;
+                }
+            }
+            else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.NUM.ToString())
+            {
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.PrdKeyValue)))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "配置值必须为数字类型！";
+                    return response;
+                }
             }
 
             //应用号与商户一致
@@ -159,6 +185,8 @@ namespace XCLCMS.Service.WebAPI
 
             #region 数据校验
 
+            request.Body.ValueType = (request.Body.ValueType ?? XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.STR.ToString()).Trim().ToUpper();
+
             var model = this.sysWebSettingBLL.GetModel(request.Body.SysWebSettingID);
             if (null == model)
             {
@@ -182,6 +210,31 @@ namespace XCLCMS.Service.WebAPI
                 {
                     response.IsSuccess = false;
                     response.Message = string.Format("配置名【{0}】已存在！", request.Body.KeyName);
+                    return response;
+                }
+            }
+
+            if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.JON.ToString())
+            {
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.Serialize.JSON.IsJSON(request.Body.PrdKeyValue)))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "配置值必须为JSON类型！";
+                    return response;
+                }
+            }
+            else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.NUM.ToString())
+            {
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.PrdKeyValue)))
+                {
+                    response.IsSuccess = false;
+                    response.Message = "配置值必须为数字类型！";
                     return response;
                 }
             }
