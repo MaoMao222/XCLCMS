@@ -24,8 +24,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             viewModel.Search = new XCLNetSearch.Search();
             viewModel.Search.TypeList = new List<XCLNetSearch.SearchFieldInfo>() {
                 new XCLNetSearch.SearchFieldInfo("用户ID","UserInfoID|number|text",""),
-                new XCLNetSearch.SearchFieldInfo("所属商户","FK_MerchantID|number|text",""),
-                new XCLNetSearch.SearchFieldInfo("所属应用","FK_MerchantAppID|number|text",""),
+                new XCLNetSearch.SearchFieldInfo("所属商户ID","FK_MerchantID|number|text",""),
+                new XCLNetSearch.SearchFieldInfo("所属应用ID","FK_MerchantAppID|number|text",""),
+                new XCLNetSearch.SearchFieldInfo("所属商户名","MerchantName|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("所属应用名","MerchantAppName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("用户名","UserName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("真实姓名","RealName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("昵称","NickName|string|text",""),
