@@ -6,9 +6,10 @@ CREATE TABLE [dbo].[SysWebSetting]
 [TestKeyValue] [varchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
 [UATKeyValue] [varchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
 [PrdKeyValue] [varchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
+[ValueType] [char] (3) COLLATE Chinese_PRC_CI_AS NOT NULL CONSTRAINT [DF__tmp_ms_xx__Value__216BEC9A] DEFAULT ('STR'),
 [Remark] [varchar] (1000) COLLATE Chinese_PRC_CI_AS NULL,
-[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__08D548FA] DEFAULT ((0)),
-[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__09C96D33] DEFAULT ((0)),
+[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__226010D3] DEFAULT ((0)),
+[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__2354350C] DEFAULT ((0)),
 [RecordState] [char] (1) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [CreateTime] [datetime] NOT NULL,
 [CreaterID] [bigint] NOT NULL,
@@ -76,4 +77,7 @@ EXEC sp_addextendedproperty N'MS_Description', '更新人名', 'SCHEMA', N'dbo',
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '更新时间', 'SCHEMA', N'dbo', 'TABLE', N'SysWebSetting', 'COLUMN', N'UpdateTime'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '值类型（SysWebSettingValueTypeEnum）', 'SCHEMA', N'dbo', 'TABLE', N'SysWebSetting', 'COLUMN', N'ValueType'
 GO
