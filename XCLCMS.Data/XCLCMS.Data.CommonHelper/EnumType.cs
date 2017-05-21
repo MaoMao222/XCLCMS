@@ -549,7 +549,13 @@ namespace XCLCMS.Data.CommonHelper
             /// Json
             /// </summary>
             [Description("JSON")]
-            JON
+            JON,
+
+            /// <summary>
+            /// 开关 Switch
+            /// </summary>
+            [Description("开关")]
+            SWH
         }
 
         #endregion 系统配置

@@ -146,6 +146,37 @@ namespace XCLCMS.Service.WebAPI
                     return response;
                 }
             }
+            else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.SWH.ToString())
+            {
+                var switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.KeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.TestKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.UATKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.PrdKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+            }
 
             //应用号与商户一致
             if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
@@ -235,6 +266,37 @@ namespace XCLCMS.Service.WebAPI
                 {
                     response.IsSuccess = false;
                     response.Message = "配置值必须为数字类型！";
+                    return response;
+                }
+            }
+            else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.SWH.ToString())
+            {
+                var switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.KeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.TestKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.UATKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
+                    return response;
+                }
+                switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.PrdKeyValue);
+                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                {
+                    response.IsSuccess = false;
+                    response.Message = switchResult.Message;
                     return response;
                 }
             }

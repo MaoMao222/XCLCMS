@@ -170,6 +170,11 @@
             小写字母+数字
             </summary>
         </member>
+        <member name="F:XCLNetTools.Common.Consts.NumberEngLetterChar">
+            <summary>
+            数字+大写字母
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Common.DataTypeConvert">
             <summary>
             C#数据类型转换
@@ -498,6 +503,49 @@
             <summary>
             开关控制
             </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.SwitchControl.percentDic">
+            <summary>
+            百分比对应的匹配正则
+            </summary>
+        </member>
+        <member name="T:XCLNetTools.Common.SwitchControl.SwitchKeyTypeEnum">
+            <summary>
+            配置key类型枚举
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.SwitchControl.SwitchKeyTypeEnum.T">
+            <summary>
+            白名单（true）
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.SwitchControl.SwitchKeyTypeEnum.F">
+            <summary>
+            黑名单（false）
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.SwitchControl.SwitchKeyTypeEnum.V">
+            <summary>
+            既不是白名单也不在黑名单，最终的判断类型
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.Common.SwitchControl.IsOpen(System.String,System.String)">
+            <summary>
+            开关是否打开
+            如：IsOpen("T=admin,test&amp;F=user1,user2&amp;V=20","admin");
+            </summary>
+            <param name="str">
+            配置项的值，一般是从数据库的配置表中读取
+            格式："T=admin,test&amp;F=user1,user2&amp;V=20"
+            说明：
+            1、T后面的值为白名单，用英文,隔开，如果flag在此值中存在，则返回true
+            2、F后面的值为黑名单，用英文,隔开，如果flag在此值中存在，则返回false
+            3、当均不在黑白名单时，则使用V后面的值 ，该值为字符T或F或0~100之间的数字，当为T时，返回true；当为F时，返回false；当为数字时，即为百分比，由系统根据一定算法计算flag，并返回true或false
+            4、TFV之间用&amp;隔开，类似url查询字符串
+            5、当整个配置值为T，则返回true；当整个配置值为空、F或不符合格式要求时，则返回false
+            </param>
+            <param name="flag">百分比控制时的标志字符串，比如用户名："admin"</param>
+            <returns>.Result=true：开，.Result=false：关</returns>
         </member>
         <member name="M:XCLNetTools.Common.SwitchControl.TFToBool(System.String)">
             <summary>
@@ -4369,6 +4417,14 @@
             获取文件所在的文件夹【不带'\'】
             </summary>
         </member>
+        <member name="M:XCLNetTools.FileHandler.ComFile.ChangePathByFileName(System.String,System.String)">
+            <summary>
+            使用新的文件名，更新指定路径path中的文件名。如：（"C:\demo\a.txt","abcd.doc"）=>C:\demo\abcd.doc
+            </summary>
+            <param name="path">文件物理路径</param>
+            <param name="name">新的文件名（如：a.txt）</param>
+            <returns>新的文件物理路径</returns>
+        </member>
         <member name="M:XCLNetTools.FileHandler.ComFile.GetFileSize(System.String)">
             <summary>
             返回文件大小(字节)
@@ -4411,23 +4467,24 @@
             <summary>
             获取文件名
             </summary>
-            <param name="fileName">路径（相对或绝对均可）</param>
+            <param name="path">路径（相对或绝对均可）</param>
             <param name="isWithExt">是否包含扩展名</param>
             <returns>文件名</returns>
         </member>
         <member name="M:XCLNetTools.FileHandler.ComFile.GetRandomFileName(System.String)">
              <summary>
-            给上传的文件随机命名
+            返回随机的文件命名，如：（"C:\demo\a.exe"）=>"20170408090024LGP9JWOAO2.exe"
              </summary>
-             <param name="filename">文件名</param>
-             <returns>新的文件名</returns>
+             <param name="fileName">文件名或路径</param>
+             <returns>新的文件名（不含路径）</returns>
         </member>
-        <member name="M:XCLNetTools.FileHandler.ComFile.GetExtName(System.String)">
+        <member name="M:XCLNetTools.FileHandler.ComFile.GetExtName(System.String,System.Boolean)">
             <summary>
-            取得文件扩展名(不包含小圆点)【小写】
+            取得文件扩展名（默认不包含小圆点）【小写】
             </summary>
-            <param name="fileName">文件完整路径或文件名</param>
-            <returns>文件扩展名(不包含小圆点)</returns>
+            <param name="fileName">路径或文件名</param>
+            <param name="withDot">是否包含小圆点（默认：false）</param>
+            <returns>文件扩展名</returns>
         </member>
         <member name="T:XCLNetTools.FileHandler.FileDirectory">
             <summary>
