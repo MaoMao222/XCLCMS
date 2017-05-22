@@ -49,6 +49,7 @@
     <Compile Include="Article.cs" />
     <Compile Include="ArticleType.cs" />
     <Compile Include="Attachment.cs" />
+    <Compile Include="Comments.cs" />
     <Compile Include="Custom\ArticleRelationDetailCondition.cs" />
     <Compile Include="Custom\ArticleRelationDetailModel.cs" />
     <Compile Include="Custom\ArticleSearchCondition.cs" />

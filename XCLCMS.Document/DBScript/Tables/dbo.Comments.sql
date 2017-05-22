@@ -3,6 +3,8 @@ CREATE TABLE [dbo].[Comments]
 [CommentsID] [bigint] NOT NULL,
 [ObjectType] [char] (3) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [FK_ObjectID] [bigint] NULL,
+[UserName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
+[Email] [varchar] (100) COLLATE Chinese_PRC_CI_AS NULL,
 [ParentCommentID] [bigint] NOT NULL,
 [GoodCount] [int] NOT NULL,
 [MiddleCount] [int] NOT NULL,
@@ -10,8 +12,8 @@ CREATE TABLE [dbo].[Comments]
 [Contents] [nvarchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
 [VerifyState] [char] (3) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [Remark] [nvarchar] (200) COLLATE Chinese_PRC_CI_AS NULL,
-[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__22FF2F51] DEFAULT ((0)),
-[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__23F3538A] DEFAULT ((0)),
+[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__338A9CD5] DEFAULT ((0)),
+[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__347EC10E] DEFAULT ((0)),
 [RecordState] [char] (1) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [CreateTime] [datetime] NOT NULL,
 [CreaterID] [bigint] NOT NULL,
@@ -48,6 +50,9 @@ GO
 EXEC sp_addextendedproperty N'MS_Description', '创建时间', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'CreateTime'
 GO
 
+EXEC sp_addextendedproperty N'MS_Description', '评论者电子邮件', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'Email'
+GO
+
 EXEC sp_addextendedproperty N'MS_Description', '所属应用号', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'FK_MerchantAppID'
 GO
 
@@ -82,6 +87,9 @@ EXEC sp_addextendedproperty N'MS_Description', '更新人名', 'SCHEMA', N'dbo',
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '更新时间', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'UpdateTime'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '评论者名', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'UserName'
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '审核状态(VerifyStateEnum)', 'SCHEMA', N'dbo', 'TABLE', N'Comments', 'COLUMN', N'VerifyState'
