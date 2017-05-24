@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
@@ -150,6 +151,22 @@ namespace XCLCMS.Lib.Common
         #endregion 数据字典相关
 
         #region 文件管理相关
+
+        /// <summary>
+        /// 允许上传的附件扩展名信息（小写）
+        /// </summary>
+        public static List<string> AllowUploadExtInfo = new Func<List<string>>(() =>
+        {
+            return XCLNetTools.Enum.EnumHelper.GetEnumFieldModelList(typeof(XCLNetTools.Enum.CommonEnum.FileExtInfoEnum)).Where(k =>
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Txt.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Compress.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Image.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Music.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Office.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Pdf.ToString() ||
+                k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Video.ToString()
+            ).Select(k => k.Description).ToList();
+        }).Invoke();
 
         /// <summary>
         /// 根据文件id，返回用于网站上显示的文件地址

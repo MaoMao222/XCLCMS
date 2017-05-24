@@ -12,6 +12,11 @@
 
 <html @Html.Raw(null == ViewBag.NgModule ? "" : string.Format("ng-app='{0}'", ViewBag.NgModule))>
 <head>
+    <script type="text/javascript">
+        var pageConfig = {
+            AllowUploadExtInfo:"@(ViewBag.AllowUploadExtInfo)"
+        };
+    </script>
 
     @Html.Partial("~/Views/Layout/Header.cshtml")
 

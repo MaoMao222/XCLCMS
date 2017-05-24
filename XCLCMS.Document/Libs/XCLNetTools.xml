@@ -531,7 +531,7 @@
         </member>
         <member name="M:XCLNetTools.Common.SwitchControl.IsOpen(System.String,System.String)">
             <summary>
-            开关是否打开
+            开关是否打开（不区分大小写）
             如：IsOpen("T=admin,test&amp;F=user1,user2&amp;V=20","admin");
             </summary>
             <param name="str">
@@ -4028,6 +4028,46 @@
         <member name="F:XCLNetTools.Enum.CommonEnum.ThumbImageModeEnum.EqualRatioWH">
             <summary>
             指定宽高裁减（不变形）
+            </summary>
+        </member>
+        <member name="T:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum">
+            <summary>
+            文件扩展名枚举
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Txt">
+            <summary>
+            文本文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Office">
+            <summary>
+            office文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Pdf">
+            <summary>
+            pdf文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Compress">
+            <summary>
+            压缩包文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Image">
+            <summary>
+            图片文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Music">
+            <summary>
+            音乐文件
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Video">
+            <summary>
+            视频文件
             </summary>
         </member>
         <member name="T:XCLNetTools.Enum.CommonEnum.StaticResourceTypeEnum">

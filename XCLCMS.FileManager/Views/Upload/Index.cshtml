@@ -8,7 +8,7 @@
     <div id="tabFileUpload" class="easyui-tabs" style="width:100%;">
         <div title="选择文件">
             <div style="padding:5px" class="XCLUploadFile">
-                <div class="XCLNote">您当前已添加{{FileModelList.length}}个文件。</div>
+                <div class="XCLNote">您当前已添加{{FileModelList.length}}个文件。只允许上传这些格式的文件哦：@(ViewBag.AllowUploadExtInfo)</div>
                 <div class="UploadItemDiv">
                     <ul id="ItemsUL">
                         <li ng-repeat="m in FileModelList">

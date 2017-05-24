@@ -13,6 +13,7 @@ namespace XCLCMS.FileManager.Controllers
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FileManager_FileAdd)]
         public ActionResult Index()
         {
+            ViewBag.AllowUploadExtInfo = string.Join(",", XCLCMS.Lib.Common.Comm.AllowUploadExtInfo.ToArray());
             return View();
         }
 
@@ -31,6 +32,14 @@ namespace XCLCMS.FileManager.Controllers
             DateTime dtNow = DateTime.Now;
             string name = System.Guid.NewGuid().ToString("N");
             string ext = XCLNetTools.FileHandler.ComFile.GetExtName(file.FileName);
+
+            if (!XCLCMS.Lib.Common.Comm.AllowUploadExtInfo.Contains(ext))
+            {
+                msgModel.IsSuccess = false;
+                msgModel.Message = "不允许上传此格式的文件！";
+                return Json(msgModel);
+            }
+
             string newFileName = string.Format("{0}.{1}", name, ext);
             //附件主目录
             string directoryPath = string.Format("{0}/{1}/{2}/", XCLCMS.FileManager.Common.Library.FileManager_UploadPath.TrimEnd('/'), dtNow.Year, dtNow.Month);
