@@ -1041,6 +1041,7 @@
     <Content Include="Views\UserInfo\UserCenterIndex.cshtml" />
     <Content Include="Resources\Js\ckeditor\skins\moonocolor\readme.md" />
     <Content Include="Resources\Js\EasyUI\themes\material\images\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
