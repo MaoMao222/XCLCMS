@@ -165,7 +165,7 @@ namespace XCLCMS.Lib.Common
                 k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Office.ToString() ||
                 k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Pdf.ToString() ||
                 k.Text == XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Video.ToString()
-            ).Select(k => k.Description).ToList();
+            ).SelectMany(k => k.Description.Split(',')).ToList();
         }).Invoke();
 
         /// <summary>

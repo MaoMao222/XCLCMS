@@ -42,9 +42,9 @@ namespace XCLCMS.FileManager.Controllers
 
             string newFileName = string.Format("{0}.{1}", name, ext);
             //附件主目录
-            string directoryPath = string.Format("{0}/{1}/{2}/", XCLCMS.FileManager.Common.Library.FileManager_UploadPath.TrimEnd('/'), dtNow.Year, dtNow.Month);
+            string directoryPath = string.Format("{0}/{1}/{2}/{3}/", XCLCMS.FileManager.Common.Library.FileManager_UploadPath.TrimEnd('/'), base.CurrentUserMerchant.MerchantID,dtNow.Year, dtNow.Month);
             //附件临时目录
-            string directoryTempPath = string.Format("{0}/{1}/{2}/", XCLCMS.FileManager.Common.Library.FileManager_UploadPathTemp.TrimEnd('/'), dtNow.Year, dtNow.Month);
+            string directoryTempPath = string.Format("{0}/{1}/{2}/{3}/", XCLCMS.FileManager.Common.Library.FileManager_UploadPathTemp.TrimEnd('/'),base.CurrentUserMerchant.MerchantID, dtNow.Year, dtNow.Month);
 
             //保存后的相对路径
             string relativePath = string.Empty;
