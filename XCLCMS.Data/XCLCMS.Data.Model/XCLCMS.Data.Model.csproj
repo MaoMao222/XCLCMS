@@ -84,6 +84,7 @@
     <Compile Include="View\v_Ads.cs" />
     <Compile Include="View\v_Article.cs" />
     <Compile Include="View\v_Attachment.cs" />
+    <Compile Include="View\v_Comments.cs" />
     <Compile Include="View\v_FriendLinks.cs" />
     <Compile Include="View\v_Merchant.cs" />
     <Compile Include="View\v_MerchantApp.cs" />

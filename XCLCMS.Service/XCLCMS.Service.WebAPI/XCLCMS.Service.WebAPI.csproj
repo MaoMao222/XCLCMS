@@ -48,6 +48,7 @@
     <Compile Include="AdsService.cs" />
     <Compile Include="ArticleService.cs" />
     <Compile Include="AttachmentService.cs" />
+    <Compile Include="CommentsService.cs" />
     <Compile Include="CommonService.cs" />
     <Compile Include="FileInfoService.cs" />
     <Compile Include="FriendLinksService.cs" />

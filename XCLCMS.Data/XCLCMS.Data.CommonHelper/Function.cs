@@ -354,6 +354,30 @@ namespace XCLCMS.Data.CommonHelper
             /// </summary>
             [Description("广告位管理-广告位修改")]
             Ads_Edit = 400203,
+
+            /// <summary>
+            ///评论管理-评论查看
+            /// </summary>
+            [Description("评论管理-评论查看")]
+            Comments_View = 400206,
+
+            /// <summary>
+            ///评论管理-评论删除
+            /// </summary>
+            [Description("评论管理-评论删除")]
+            Comments_Del = 400207,
+
+            /// <summary>
+            ///评论管理-评论添加
+            /// </summary>
+            [Description("评论管理-评论添加")]
+            Comments_Add = 400208,
+
+            /// <summary>
+            ///评论管理-评论修改
+            /// </summary>
+            [Description("评论管理-评论修改")]
+            Comments_Edit = 400209,
         }
 
         /// <summary>
