@@ -15,6 +15,9 @@
         req.UserToken = XCLCMSPageGlobalConfig.UserToken;
         req.AppID = XCLCMSPageGlobalConfig.AppID;
         req.AppKey = XCLCMSPageGlobalConfig.AppKey;
+        req.ClientIP = XCLCMSPageGlobalConfig.ClientIP;
+        req.Url = XCLCMSPageGlobalConfig.Url;
+        req.Reffer = XCLCMSPageGlobalConfig.Reffer;
         return req;
     };
 

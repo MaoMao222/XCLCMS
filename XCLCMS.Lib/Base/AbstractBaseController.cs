@@ -299,6 +299,9 @@ namespace XCLCMS.Lib.Base
             pageConfig.FileManagerFileListURL = XCLCMS.Lib.Common.Setting.SettingModel.FileManager_FileListURL;
             pageConfig.FileManagerLogicFileListURL = XCLCMS.Lib.Common.Setting.SettingModel.FileManager_LogicFileListURL;
             pageConfig.WebAPIServiceURL = XCLCMS.Lib.Common.Comm.WebAPIServiceURL;
+            pageConfig.ClientIP = XCLNetTools.Common.IPHelper.GetClientIP();
+            pageConfig.Url = Request.Url?.AbsoluteUri;
+            pageConfig.Reffer = Request.UrlReferrer?.AbsoluteUri;
             pageConfig.EnumConfig = string.Empty;
             ViewBag.PageGlobalConfigJSON = string.Format("var XCLCMSPageGlobalConfig={0};XCLCMSPageGlobalConfig.EnumConfig={1};", Newtonsoft.Json.JsonConvert.SerializeObject(pageConfig), XCLCMS.Lib.Common.Comm.GetAllEnumJson);
 

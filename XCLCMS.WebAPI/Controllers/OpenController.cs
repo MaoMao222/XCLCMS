@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 
@@ -35,6 +36,9 @@ namespace XCLCMS.WebAPI.Controllers
                     //写入日志
                     iLogService.WriteLog(new XCLCMS.IService.Logger.LogModel()
                     {
+                        ClientIP = request.ClientIP,
+                        Url=request.Url,
+                        RefferUrl=request.Reffer,
                         LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
                         LogLevel = IService.Logger.LogEnum.LogLevel.INFO,
                         Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")

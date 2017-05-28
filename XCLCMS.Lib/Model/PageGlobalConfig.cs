@@ -62,5 +62,20 @@ namespace XCLCMS.Lib.Model
         /// web api服务地址
         /// </summary>
         public string WebAPIServiceURL { get; set; }
+
+        /// <summary>
+        /// clientip
+        /// </summary>
+        public string ClientIP { get; set; }
+
+        /// <summary>
+        /// url
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
+        /// 来源url
+        /// </summary>
+        public string Reffer { get; set; }
     }
 }

@@ -23,10 +23,16 @@ namespace XCLCMS.Data.WebAPIEntity
         public string ClientIP { get; set; }
 
         /// <summary>
-        /// 来源url
+        /// url
         /// </summary>
         [DataMember]
         public string Url { get; set; }
+
+        /// <summary>
+        /// 来源url
+        /// </summary>
+        [DataMember]
+        public string Reffer { get; set; }
 
         /// <summary>
         /// 请求ID

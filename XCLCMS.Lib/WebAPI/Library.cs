@@ -105,10 +105,8 @@ namespace XCLCMS.Lib.WebAPI
             APIRequestEntity<TRequest> request = new APIRequestEntity<TRequest>();
             request.ClientIP = XCLNetTools.Common.IPHelper.GetClientIP();
             request.UserToken = userToken;
-            if (null != HttpContext.Current && null != HttpContext.Current.Request && null != HttpContext.Current.Request.Url)
-            {
-                request.Url = HttpContext.Current.Request.Url.AbsoluteUri;
-            }
+            request.Url = HttpContext.Current?.Request?.Url?.AbsoluteUri;
+            request.Reffer = HttpContext.Current?.Request?.UrlReferrer?.AbsoluteUri;
             request.AppID = XCLCMS.Lib.Common.Comm.AppID;
             request.AppKey = XCLCMS.Lib.Common.Comm.AppKey;
             return request;
