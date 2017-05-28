@@ -131,6 +131,7 @@
     <Compile Include="WebAPI\AdsAPI.cs" />
     <Compile Include="WebAPI\ArticleAPI.cs" />
     <Compile Include="WebAPI\AttachmentAPI.cs" />
+    <Compile Include="WebAPI\CommentsAPI.cs" />
     <Compile Include="WebAPI\CommonAPI.cs" />
     <Compile Include="WebAPI\FileInfoAPI.cs" />
     <Compile Include="WebAPI\FriendLinksAPI.cs" />
