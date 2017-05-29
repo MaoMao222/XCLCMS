@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 
@@ -33,16 +32,6 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     //用户名和密码登录
                     userModel = userInfoBLL.GetModel(request.Body.UserName, XCLCMS.Data.CommonHelper.EncryptHelper.EncryptStringMD5(request.Body.Pwd));
-                    //写入日志
-                    iLogService.WriteLog(new XCLCMS.IService.Logger.LogModel()
-                    {
-                        ClientIP = request.ClientIP,
-                        Url=request.Url,
-                        RefferUrl=request.Reffer,
-                        LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
-                        LogLevel = IService.Logger.LogEnum.LogLevel.INFO,
-                        Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")
-                    });
                 }
                 else
                 {
@@ -76,6 +65,20 @@ namespace XCLCMS.WebAPI.Controllers
                     response.Body.Merchant = this.merchantBLL.GetModel(userModel.FK_MerchantID);
                     //所在商户应用
                     response.Body.MerchantApp = this.merchantAppBLL.GetModel(userModel.FK_MerchantAppID);
+                }
+
+                //使用用户名和密码登录时写入日志
+                if (string.IsNullOrWhiteSpace(request.Body.UserToken))
+                {
+                    iLogService.WriteLog(new XCLCMS.IService.Logger.LogModel()
+                    {
+                        ClientIP = request.ClientIP,
+                        Url = request.Url,
+                        RefferUrl = request.Reffer,
+                        LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
+                        LogLevel = IService.Logger.LogEnum.LogLevel.INFO,
+                        Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")
+                    });
                 }
 
                 return response;
