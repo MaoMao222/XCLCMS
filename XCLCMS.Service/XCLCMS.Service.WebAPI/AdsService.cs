@@ -33,6 +33,17 @@ namespace XCLCMS.Service.WebAPI
         }
 
         /// <summary>
+        /// 根据code来查询广告信息实体
+        /// </summary>
+        public APIResponseEntity<Data.Model.Ads> DetailByCode(APIRequestEntity<string> request)
+        {
+            var response = new APIResponseEntity<XCLCMS.Data.Model.Ads>();
+            response.Body = adsBLL.GetModel(request.Body);
+            response.IsSuccess = true;
+            return response;
+        }
+
+        /// <summary>
         /// 查询广告信息分页列表
         /// </summary>
         public APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Ads>> PageList(APIRequestEntity<PageListConditionEntity> request)

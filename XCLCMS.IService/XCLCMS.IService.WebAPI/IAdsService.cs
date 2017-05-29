@@ -18,6 +18,8 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<Data.Model.Ads> Detail(APIRequestEntity<long> request);
 
+        APIResponseEntity<Data.Model.Ads> DetailByCode(APIRequestEntity<string> request);
+
         APIResponseEntity<bool> IsExistCode(APIRequestEntity<IsExistCodeEntity> request);
 
         APIResponseEntity<PageListResponseEntity<v_Ads>> PageList(APIRequestEntity<PageListConditionEntity> request);

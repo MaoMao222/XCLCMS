@@ -65,6 +65,32 @@ namespace XCLCMS.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据code来查询广告信息实体
+        /// </summary>
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_View)]
+        public async Task<APIResponseEntity<XCLCMS.Data.Model.Ads>> DetailByCode([FromUri] APIRequestEntity<string> request)
+        {
+            return await Task.Run(() =>
+            {
+                var response = this.iAdsService.DetailByCode(request);
+
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                {
+                    response.Body = null;
+                    response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
+                }
+
+                #endregion 限制商户
+
+                return response;
+            });
+        }
+
+        /// <summary>
         /// 查询广告信息分页列表
         /// </summary>
         [HttpGet]

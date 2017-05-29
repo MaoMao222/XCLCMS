@@ -18,6 +18,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 根据code来查询广告信息实体
+        /// </summary>
+        public static APIResponseEntity<XCLCMS.Data.Model.Ads> DetailByCode(APIRequestEntity<string> request)
+        {
+            return Library.Request<string, XCLCMS.Data.Model.Ads>(request, "Ads/DetailByCode");
+        }
+
+        /// <summary>
         /// 查询广告信息分页列表
         /// </summary>
         public static APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Ads>> PageList(APIRequestEntity<PageListConditionEntity> request)
