@@ -153,6 +153,7 @@
     <Compile Include="Controllers\Ads\AdsController.cs" />
     <Compile Include="Controllers\Article\ArticleController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Comments\CommentsController.cs" />
     <Compile Include="Controllers\Common\CommonController.cs" />
     <Compile Include="Controllers\Common\OtherController.cs" />
     <Compile Include="Controllers\FriendLinks\FriendLinksController.cs" />
@@ -171,11 +172,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ads\TagsAddVM.cs" />
-    <Compile Include="Models\Ads\TagsListVM.cs" />
+    <Compile Include="Models\Ads\AdsAddVM.cs" />
+    <Compile Include="Models\Ads\AdsListVM.cs" />
     <Compile Include="Models\Article\ArticleAddVM.cs" />
     <Compile Include="Models\Article\ArticleListVM.cs" />
     <Compile Include="Models\Article\ArticleShowVM.cs" />
+    <Compile Include="Models\Comments\CommentsAddVM.cs" />
+    <Compile Include="Models\Comments\CommentsListVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksAddVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksListVM.cs" />
     <Compile Include="Models\Main\MainVM.cs" />
@@ -226,6 +229,7 @@
     <Content Include="Resources\Js\App\config.js" />
     <Content Include="Resources\Js\App\Lib\Ads.js" />
     <Content Include="Resources\Js\App\Lib\Article.js" />
+    <Content Include="Resources\Js\App\Lib\Comments.js" />
     <Content Include="Resources\Js\App\Lib\Common.js" />
     <Content Include="Resources\Js\App\Lib\EasyUI.js" />
     <Content Include="Resources\Js\App\Lib\FriendLinks.js" />
@@ -1042,6 +1046,8 @@
     <Content Include="Resources\Js\ckeditor\skins\moonocolor\readme.md" />
     <Content Include="Resources\Js\EasyUI\themes\material\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
+    <Content Include="Views\Comments\Add.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

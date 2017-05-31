@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Comments.CommentsListVM
+
+<form>
+
+    <div class="XCLPanel" style="margin-top:5px;">
+        <div class="XCLPanelHeader">
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Add))
+            {
+                <a href="@(string.Format("{0}Comments/Add",XCLNetTools.StringHander.Common.RootUri))" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
+            }
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Edit))
+            {
+                <a href="@(string.Format("{0}Comments/Add",XCLNetTools.StringHander.Common.RootUri))" id="btnUpdate" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            }
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Del))
+            {
+                <a href="javascript:void(0);" id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>
+            }
+        </div>
+        <div class="XCLPanelBody">
+            <div>
+                @Html.Raw(Model.Search.XCLNetSearchHTML())
+            </div>
+            <table class="XCLTableList">
+                <tr class="XCLTableHeader XCLTableNoHover">
+                    <td>
+                        <input type="checkbox" class="XCLTableCheckAll" value="" />
+                    </td>
+                    <td>序号</td>
+                    <td>评论ID</td>
+                    <td>所属商户</td>
+                    <td>所属应用</td>
+                    <td>评论者</td>
+                    <td>评论内容</td>
+                    <td>点【好】数</td>
+                    <td>点【中】数</td>
+                    <td>点【差】数</td>
+                    <td>审核状态</td>
+                    <td>备注</td>
+                    <td>记录状态</td>
+                    <td>创建时间</td>
+                    <td>更新时间</td>
+                </tr>
+                @{
+                    if (Model.CommentsList.IsNotNullOrEmpty())
+                    {
+                        for (int i = 0; i < Model.CommentsList.Count; i++)
+                        {
+                            var m = Model.CommentsList[i];
+                            <tr>
+                                <td align="center"><input type="checkbox" class="XCLTableCheckItem" value="@m.CommentsID" /></td>
+                                <td align="center">
+                                    @(Model.PagerModel.StartIndex + i)
+                                </td>
+                                <td align="center">
+                                    @m.CommentsID
+                                </td>
+                                <td align="center">
+                                    @m.MerchantName
+                                </td>
+                                <td>@m.MerchantAppName</td>
+                                <td>@m.UserName</td>
+                                <td>@m.Contents</td>
+                                <td>@m.GoodCount</td>
+                                <td>@m.MiddleCount</td>
+                                <td>@m.BadCount</td>
+                                <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum), m.VerifyState)</td>
+                                <td>@m.Remark</td>
+                                <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
+                                <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
+                                <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="100" align="center">
+                                暂无数据！
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    require(["Lib/Comments"], function (comments) {
+        $(function () {
+            comments.CommentsList.Init();
+        });
+    });
+</script>

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM
+
+<form id="mainForm" action="@Model.FormAction" method="post">
+    <input type="hidden" id="CommentsID" name="CommentsID" value="@Model.Comments.CommentsID" />
+
+    <div class="XCLAccordion" style="border-top: none;">
+        <div class="XCLAccordionHeader">1、基本信息：</div>
+        <div class="XCLAccordionBody">
+            <table class="XCLTableEdit">
+
+                <tr>
+                    <td class="XCLTitle">所属商户号：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Comments.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用号：</td>
+                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Comments.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>评论者：</td>
+                    <td>
+                        <input type="text" name="txtUserName" value="@Model.Comments.UserName" />
+                    </td>
+                    <td class="XCLTitle">电子邮件：</td>
+                    <td>
+                        <input type="text" name="txtEmail" value="@Model.Comments.Email" />
+                    </td>
+                    <td class="XCLTitle">评论内容：</td>
+                    <td>
+                        <textarea name="txtContents">@Model.Comments.Contents</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">点【好】数：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" style="height:25px;" name="txtGoodCount" value="@Model.Comments.GoodCount" />
+                    </td>
+                    <td class="XCLTitle">点【中】数：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" style="height:25px;" name="txtMiddleCount" value="@Model.Comments.MiddleCount" />
+                    </td>
+                    <td class="XCLTitle">点【差】数：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" style="height:25px;" name="txtBadCount" value="@Model.Comments.BadCount" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">备注：</td>
+                    <td>
+                        <input type="text" name="txtRemark" value="@Model.Comments.Remark" />
+                    </td>
+                    <td class="XCLTitle">审核状态</td>
+                    <td>
+                        <select name="selVerifyState">
+                            @Html.Raw(Model.VerifyStateOptions)
+                        </select>
+                    </td>
+                    <td class="XCLTitle">记录状态：</td>
+                    <td>
+                        <select name="selRecordState">
+                            @Html.Raw(Model.RecordStateOptions)
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="XCLHandBar">
+            <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+            @switch ((XCLNetTools.Enum.CommonEnum.HandleTypeEnum)ViewBag.CurrentHandleType)
+            {
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+                    break;
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                    if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Del))
+                    {
+                        <a id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删 除</a>
+                    }
+                    break;
+            }
+        </div>
+    </div>
+</form>
+
+<div class="XCLPanel" style="margin-top: 5px;">
+    <div class="XCLPanelHeader XCLBolder">
+        操作说明：
+    </div>
+    <div class="XCLPanelBody">
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(["Lib/Comments"], function (Comments) {
+        $(function () {
+            Comments.CommentsAdd.Init();
+        });
+    });
+</script>
