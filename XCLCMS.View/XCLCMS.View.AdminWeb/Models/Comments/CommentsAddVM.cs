@@ -15,5 +15,10 @@
         /// 审核状态select的options
         /// </summary>
         public string VerifyStateOptions { get; set; }
+
+        /// <summary>
+        /// 评论对象类型 select的options
+        /// </summary>
+        public string ObjectTypeOptions { get; set; }
     }
 }

@@ -33,7 +33,11 @@
                     <td>评论ID</td>
                     <td>所属商户</td>
                     <td>所属应用</td>
+                    <td>评论对象类别</td>
+                    <td>评论对象ID</td>
                     <td>评论者</td>
+                    <td>电子邮件</td>
+                    <td>上级评论</td>
                     <td>评论内容</td>
                     <td>点【好】数</td>
                     <td>点【中】数</td>
@@ -62,7 +66,11 @@
                                     @m.MerchantName
                                 </td>
                                 <td>@m.MerchantAppName</td>
+                                <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), m.ObjectType)</td>
+                                <td>@m.FK_ObjectID</td>
                                 <td>@m.UserName</td>
+                                <td>@m.Email</td>
+                                <td>@m.ParentCommentID</td>
                                 <td>@m.Contents</td>
                                 <td>@m.GoodCount</td>
                                 <td>@m.MiddleCount</td>

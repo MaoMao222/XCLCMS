@@ -25,12 +25,15 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
                 new XCLNetSearch.SearchFieldInfo("所属应用ID","FK_MerchantAppID|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("所属商户名","MerchantName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("所属应用名","MerchantAppName|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("评论对象类别","ObjectType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum))),
+                new XCLNetSearch.SearchFieldInfo("评论对象ID","FK_ObjectID|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("评论者","UserName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("电子邮件","Email|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("上级评论","ParentCommentID|number|text",""),
+                new XCLNetSearch.SearchFieldInfo("评论内容","Contents|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("点【好】数","GoodCount|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("点【中】数","MiddleCount|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("点【差】数","BadCount|number|text",""),
-                new XCLNetSearch.SearchFieldInfo("评论内容","Contents|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("审核状态","VerifyState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("备注","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
@@ -98,120 +101,112 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
                 DefaultValue = viewModel.Comments.VerifyState
             });
 
+            viewModel.ObjectTypeOptions = XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+            {
+                IsNeedPleaseSelect = false,
+                DefaultValue = viewModel.Comments.ObjectType
+            });
+
             return View(viewModel);
         }
 
-        ///// <summary>
-        ///// 将表单值转为viewModel
-        ///// </summary>
-        //private XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM GetViewModel(FormCollection fm)
-        //{
-        //    var viewModel = new XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM();
-        //    viewModel.Comments = new Data.Model.Comments();
-        //    viewModel.Comments.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
-        //    viewModel.Comments.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
-        //    viewModel.Comments.CommentsID = XCLNetTools.StringHander.FormHelper.GetLong("CommentsID");
-        //    viewModel.Comments.RecordState = fm["selRecordState"];
-        //    viewModel.Comments.AdHeight = XCLNetTools.StringHander.FormHelper.GetInt("txtAdHeight");
-        //    viewModel.Comments.CommentsType = fm["selCommentsType"];
-        //    viewModel.Comments.AdWidth = XCLNetTools.StringHander.FormHelper.GetInt("txtAdWidth");
-        //    viewModel.Comments.Code = fm["txtCode"];
-        //    viewModel.Comments.Contents = fm["txtContents"];
-        //    viewModel.Comments.Email = fm["txtEmail"];
-        //    viewModel.Comments.EndTime = XCLNetTools.StringHander.FormHelper.GetDateTimeNull("txtEndTime");
-        //    viewModel.Comments.NickName = fm["txtNickName"];
-        //    viewModel.Comments.OtherContact = fm["txtOtherContact"];
-        //    viewModel.Comments.QQ = fm["txtQQ"];
-        //    viewModel.Comments.Remark = fm["txtRemark"];
-        //    viewModel.Comments.StartTime = XCLNetTools.StringHander.FormHelper.GetDateTimeNull("txtStartTime");
-        //    viewModel.Comments.Tel = fm["txtTel"];
-        //    viewModel.Comments.Title = fm["txtTitle"];
-        //    viewModel.Comments.URL = fm["txtURL"];
-        //    viewModel.Comments.URLOpenType = fm["selURLOpenType"];
-        //    return viewModel;
-        //}
+        /// <summary>
+        /// 将表单值转为viewModel
+        /// </summary>
+        private XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM GetViewModel(FormCollection fm)
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM();
+            viewModel.Comments = new Data.Model.Comments();
+            viewModel.Comments.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
+            viewModel.Comments.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
+            viewModel.Comments.CommentsID = XCLNetTools.StringHander.FormHelper.GetLong("CommentsID");
+            viewModel.Comments.RecordState = fm["selRecordState"];
+            viewModel.Comments.ObjectType = fm["selObjectType"];
+            viewModel.Comments.FK_ObjectID = XCLNetTools.StringHander.FormHelper.GetLong("txtFK_ObjectID");
+            viewModel.Comments.UserName = fm["txtUserName"];
+            viewModel.Comments.Email = fm["txtEmail"];
+            viewModel.Comments.ParentCommentID = XCLNetTools.StringHander.FormHelper.GetLong("txtParentCommentID");
+            viewModel.Comments.Contents = fm["txtContents"];
+            viewModel.Comments.Email = fm["txtEmail"];
+            viewModel.Comments.GoodCount = XCLNetTools.StringHander.FormHelper.GetInt("txtGoodCount");
+            viewModel.Comments.MiddleCount = XCLNetTools.StringHander.FormHelper.GetInt("txtMiddleCount");
+            viewModel.Comments.BadCount = XCLNetTools.StringHander.FormHelper.GetInt("txtBadCount");
+            viewModel.Comments.VerifyState = fm["selVerifyState"];
+            viewModel.Comments.Remark = fm["txtRemark"];
+            return viewModel;
+        }
 
-        ///// <summary>
-        ///// 添加评论
-        ///// </summary>
-        //[XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Add)]
-        //public override ActionResult AddSubmit(FormCollection fm)
-        //{
-        //    XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
+        /// <summary>
+        /// 添加评论
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Add)]
+        public override ActionResult AddSubmit(FormCollection fm)
+        {
+            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
 
-        //    var viewModel = this.GetViewModel(fm);
-        //    var model = new XCLCMS.Data.Model.Comments();
-        //    model.CommentsID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
-        //    {
-        //        IDType = Data.CommonHelper.EnumType.IDTypeEnum.Comments.ToString()
-        //    });
-        //    model.RecordState = viewModel.Comments.RecordState;
-        //    model.FK_MerchantAppID = viewModel.Comments.FK_MerchantAppID;
-        //    model.FK_MerchantID = viewModel.Comments.FK_MerchantID;
-        //    model.AdHeight = viewModel.Comments.AdHeight;
-        //    model.CommentsType = viewModel.Comments.CommentsType;
-        //    model.AdWidth = viewModel.Comments.AdWidth;
-        //    model.Code = viewModel.Comments.Code;
-        //    model.Contents = viewModel.Comments.Contents;
-        //    model.Email = viewModel.Comments.Email;
-        //    model.EndTime = viewModel.Comments.EndTime;
-        //    model.NickName = viewModel.Comments.NickName;
-        //    model.OtherContact = viewModel.Comments.OtherContact;
-        //    model.QQ = viewModel.Comments.QQ;
-        //    model.Remark = viewModel.Comments.Remark;
-        //    model.StartTime = viewModel.Comments.StartTime;
-        //    model.Tel = viewModel.Comments.Tel;
-        //    model.Title = viewModel.Comments.Title;
-        //    model.URL = viewModel.Comments.URL;
-        //    model.URLOpenType = viewModel.Comments.URLOpenType;
+            var viewModel = this.GetViewModel(fm);
+            var model = new XCLCMS.Data.Model.Comments();
+            model.CommentsID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            {
+                IDType = Data.CommonHelper.EnumType.IDTypeEnum.CMT.ToString()
+            });
+            model.RecordState = viewModel.Comments.RecordState;
+            model.FK_MerchantAppID = viewModel.Comments.FK_MerchantAppID;
+            model.FK_MerchantID = viewModel.Comments.FK_MerchantID;
+            model.BadCount = viewModel.Comments.BadCount;
+            model.Contents = viewModel.Comments.Contents;
+            model.Email = viewModel.Comments.Email;
+            model.FK_ObjectID = viewModel.Comments.FK_ObjectID;
+            model.GoodCount = viewModel.Comments.GoodCount;
+            model.MiddleCount = viewModel.Comments.MiddleCount;
+            model.ObjectType = viewModel.Comments.ObjectType;
+            model.ParentCommentID = viewModel.Comments.ParentCommentID;
+            model.Remark = viewModel.Comments.Remark;
+            model.UserName = viewModel.Comments.UserName;
+            model.VerifyState = viewModel.Comments.VerifyState;
 
-        //    var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Comments>(base.UserToken);
-        //    request.Body = new Data.Model.Comments();
-        //    request.Body = model;
-        //    var response = XCLCMS.Lib.WebAPI.CommentsAPI.Add(request);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Comments>(base.UserToken);
+            request.Body = new Data.Model.Comments();
+            request.Body = model;
+            var response = XCLCMS.Lib.WebAPI.CommentsAPI.Add(request);
 
-        //    return Json(response);
-        //}
+            return Json(response);
+        }
 
-        ///// <summary>
-        ///// 修改评论
-        ///// </summary>
-        //[XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Edit)]
-        //public override ActionResult UpdateSubmit(FormCollection fm)
-        //{
-        //    XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
+        /// <summary>
+        /// 修改评论
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Edit)]
+        public override ActionResult UpdateSubmit(FormCollection fm)
+        {
+            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
 
-        //    var viewModel = this.GetViewModel(fm);
-        //    var model = new XCLCMS.Data.Model.Comments();
-        //    model.CommentsID = viewModel.Comments.CommentsID;
+            var viewModel = this.GetViewModel(fm);
+            var model = new XCLCMS.Data.Model.Comments();
+            model.CommentsID = viewModel.Comments.CommentsID;
 
-        //    model.RecordState = viewModel.Comments.RecordState;
-        //    model.FK_MerchantAppID = viewModel.Comments.FK_MerchantAppID;
-        //    model.FK_MerchantID = viewModel.Comments.FK_MerchantID;
+            model.RecordState = viewModel.Comments.RecordState;
+            model.FK_MerchantAppID = viewModel.Comments.FK_MerchantAppID;
+            model.FK_MerchantID = viewModel.Comments.FK_MerchantID;
 
-        //    model.AdHeight = viewModel.Comments.AdHeight;
-        //    model.CommentsType = viewModel.Comments.CommentsType;
-        //    model.AdWidth = viewModel.Comments.AdWidth;
-        //    model.Code = viewModel.Comments.Code;
-        //    model.Contents = viewModel.Comments.Contents;
-        //    model.Email = viewModel.Comments.Email;
-        //    model.EndTime = viewModel.Comments.EndTime;
-        //    model.NickName = viewModel.Comments.NickName;
-        //    model.OtherContact = viewModel.Comments.OtherContact;
-        //    model.QQ = viewModel.Comments.QQ;
-        //    model.Remark = viewModel.Comments.Remark;
-        //    model.StartTime = viewModel.Comments.StartTime;
-        //    model.Tel = viewModel.Comments.Tel;
-        //    model.Title = viewModel.Comments.Title;
-        //    model.URL = viewModel.Comments.URL;
-        //    model.URLOpenType = viewModel.Comments.URLOpenType;
+            model.BadCount = viewModel.Comments.BadCount;
+            model.Contents = viewModel.Comments.Contents;
+            model.Email = viewModel.Comments.Email;
+            model.FK_ObjectID = viewModel.Comments.FK_ObjectID;
+            model.GoodCount = viewModel.Comments.GoodCount;
+            model.MiddleCount = viewModel.Comments.MiddleCount;
+            model.ObjectType = viewModel.Comments.ObjectType;
+            model.ParentCommentID = viewModel.Comments.ParentCommentID;
+            model.Remark = viewModel.Comments.Remark;
+            model.UserName = viewModel.Comments.UserName;
+            model.VerifyState = viewModel.Comments.VerifyState;
 
-        //    var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Comments>(base.UserToken);
-        //    request.Body = new Data.Model.Comments();
-        //    request.Body = model;
-        //    var response = XCLCMS.Lib.WebAPI.CommentsAPI.Update(request);
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Comments>(base.UserToken);
+            request.Body = new Data.Model.Comments();
+            request.Body = model;
+            var response = XCLCMS.Lib.WebAPI.CommentsAPI.Update(request);
 
-        //    return Json(response);
-        //}
+            return Json(response);
+        }
     }
 }

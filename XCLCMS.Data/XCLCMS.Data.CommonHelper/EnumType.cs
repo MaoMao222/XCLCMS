@@ -521,7 +521,13 @@ namespace XCLCMS.Data.CommonHelper
             /// 广告位 Ads
             /// </summary>
             [Description("广告位")]
-            ADS
+            ADS,
+
+            /// <summary>
+            /// 评论 Comments
+            /// </summary>
+            [Description("评论")]
+            CMT
         }
 
         #endregion ID生成
