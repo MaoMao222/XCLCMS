@@ -206,17 +206,22 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 获取指定文章的相关联的其它文章信息
+        /// 获取指定文章的相关联的其它文章信息（相同商户且相同应用）
         /// </summary>
         public XCLCMS.Data.Model.Custom.ArticleRelationDetailModel GetRelationDetail(XCLCMS.Data.Model.Custom.ArticleRelationDetailCondition condition)
         {
             var result = new XCLCMS.Data.Model.Custom.ArticleRelationDetailModel();
+
+            var model = this.GetModel(condition.ArticleID);
+            if (null == model)
+            {
+                return result;
+            }
+
             Database db = base.CreateDatabase();
             string sql = RazorEngine.Engine.Razor.RunCompile(Properties.Resources.Article_GetRelationDetail, "XCLCMS.Data.DAL.Article.GetRelationDetail", null, new
             {
                 ArticleRecordState = null == condition.ArticleRecordState ? string.Empty : " and tb_Article.RecordState=@ArticleRecordState",
-                MerchantID = condition.MerchantID.HasValue ? " and tb_Article.MerchantID=@MerchantID " : string.Empty,
-                MerchantAppID = condition.MerchantAppID.HasValue ? " and tb_Article.MerchantAppID=@MerchantAppID " : string.Empty,
                 IsASC = condition.IsASC
             });
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
@@ -224,8 +229,8 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "IsASC", DbType.Byte, condition.IsASC ? 1 : 0);
             db.AddInParameter(dbCommand, "TopCount", DbType.Int32, condition.TopCount ?? 10);
             db.AddInParameter(dbCommand, "ArticleRecordState", DbType.AnsiString, condition.ArticleRecordState);
-            db.AddInParameter(dbCommand, "MerchantID", DbType.Int64, condition.MerchantID);
-            db.AddInParameter(dbCommand, "MerchantAppID", DbType.Int64, condition.MerchantAppID);
+            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
+            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
             var ds = db.ExecuteDataSet(dbCommand);
             if (null != ds && null != ds.Tables && ds.Tables.Count == 3)
             {

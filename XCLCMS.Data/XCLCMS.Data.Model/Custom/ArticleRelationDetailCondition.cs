@@ -27,15 +27,5 @@ namespace XCLCMS.Data.Model.Custom
         /// 相关文章取前几条
         /// </summary>
         public int? TopCount { get; set; }
-
-        /// <summary>
-        /// 所在商户号
-        /// </summary>
-        public long? MerchantID { get; set; }
-
-        /// <summary>
-        /// 所在应用号
-        /// </summary>
-        public long? MerchantAppID { get; set; }
     }
 }

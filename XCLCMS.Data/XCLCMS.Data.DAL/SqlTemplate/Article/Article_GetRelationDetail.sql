@@ -6,19 +6,15 @@
 IF(@@IsASC=0)
 BEGIN
 	 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
-	 WHERE ArticleID<@@ArticleID   
+	 WHERE ArticleID<@@ArticleID   AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
 	 @(Model.ArticleRecordState)  
-	 @(Model.MerchantID)  
-	 @(Model.MerchantAppID)   
 	 ORDER BY ArticleID DESC
 END
 ELSE
 BEGIN
 	SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	WHERE ArticleID>@@ArticleID  
+	WHERE ArticleID>@@ArticleID     AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
 	@(Model.ArticleRecordState)  
-	@(Model.MerchantID)  
-	@(Model.MerchantAppID)  
 	ORDER BY ArticleID ASC
 END
 
@@ -26,19 +22,15 @@ END
 IF(@@IsASC=0)
 BEGIN
 	 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	 WHERE ArticleID>@@ArticleID  
+	 WHERE ArticleID>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
 	 @(Model.ArticleRecordState)  
-	 @(Model.MerchantID)  
-	 @(Model.MerchantAppID)  
 	 ORDER BY ArticleID DESC
 END
 ELSE
 BEGIN
 	SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	WHERE ArticleID<@@ArticleID 
-	@(Model.ArticleRecordState)  
-	@(Model.MerchantID)  
-	@(Model.MerchantAppID)   
+	WHERE ArticleID<@@ArticleID    AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID 
+	@(Model.ArticleRecordState)
 	ORDER BY ArticleID ASC
 END
 
@@ -52,8 +44,6 @@ INNER JOIN dbo.ArticleType AS b  WITH(NOLOCK) ON tb_Article.ArticleID=b.FK_Artic
 INNER JOIN (
 	SELECT DISTINCT FK_TypeID FROM dbo.ArticleType WITH(NOLOCK) WHERE FK_ArticleID=@@ArticleID AND RecordState='N'
 ) AS c ON b.FK_TypeID=c.FK_TypeID
-WHERE tb_Article.ArticleID<>@@ArticleID
+WHERE tb_Article.ArticleID<>@@ArticleID  AND tb_Article.FK_MerchantID=@@FK_MerchantID AND tb_Article.FK_MerchantAppID=@@FK_MerchantAppID
 @(Model.ArticleRecordState)  
-@(Model.MerchantID)  
-@(Model.MerchantAppID) 
 ORDER BY tb_Article.ArticleID @(Model.IsASC?"ASC":"DESC")

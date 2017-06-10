@@ -67,7 +67,7 @@ namespace XCLCMS.Data.BLL
         }
 
         /// <summary>
-        /// 获取指定文章的相关联的其它文章信息
+        /// 获取指定文章的相关联的其它文章信息（相同商户且相同应用）
         /// </summary>
         public XCLCMS.Data.Model.Custom.ArticleRelationDetailModel GetRelationDetail(XCLCMS.Data.Model.Custom.ArticleRelationDetailCondition condition)
         {

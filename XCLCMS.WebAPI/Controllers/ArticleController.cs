@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 
@@ -73,6 +74,22 @@ namespace XCLCMS.WebAPI.Controllers
         {
             return await Task.Run(() =>
             {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant)
+                {
+                    var model = this.iArticleService.Detail(new APIRequestEntity<long>() { Body = request.Body })?.Body;
+                    if (base.CurrentUserModel.FK_MerchantID != model?.FK_MerchantID)
+                    {
+                        var response = new APIResponseEntity<ArticleRelationDetailModel>();
+                        response.IsSuccess = false;
+                        response.Message = "只能查询属于自己商户下的数据信息！";
+                        return response;
+                    }
+                }
+
+                #endregion 限制商户
+
                 return this.iArticleService.RelationDetail(request);
             });
         }
