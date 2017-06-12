@@ -17,7 +17,7 @@
                                 <img ng-if="!m.IsImage" ng-src="@(XCLNetTools.StringHander.Common.RootUri)Resources/Images/document.png" id="{{m.Id}}" />
                             </div>
                             <div class="itemDescription">
-                                <p>{{m.Name}}</p>
+                                <p title="{{m.Name}}">{{m.Name}}</p>
                                 <p>大小：{{m.Size}}，格式：{{m.Format}}</p>
                             </div>
                             <div class="itemBottom" ng-if="IsCanOperateFileItem">

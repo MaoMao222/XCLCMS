@@ -3,7 +3,7 @@
 
     //文件列表中的Model
     var fileModel = function () {
-        this.IsImage = false;//是否为图片
+        this.IsImage = false;//是否为图片(不包含gif)
         this.Path = "";//原路径
         this.ImgSmallPath = "";//较小尺寸（文件为图片时180*180）
         this.ImgBigPath = "";//较大尺寸（文件为图片时600*600）
@@ -173,7 +173,7 @@
      * 图片预览
      */
     var previewImage = function (options) {
-        if (!options.file || !XJ.ContentType.IsImage(options.file.type)) return; //确保文件是图片
+        if (!options.file || !XJ.ContentType.IsImage(options.file.type) || XJ.ContentType.IsGif(options.file.type)) return; //确保文件是图片
         if (XJ.ContentType.IsGif(options.file.type)) {//gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
             var fr = new mOxie.FileReader();
             fr.onload = function () {
@@ -309,7 +309,7 @@
                 model.Id = file.id;
                 model.Name = file.name;
                 model.Size = plupload.formatSize(file.size);
-                model.IsImage = XJ.ContentType.IsImage(file.type);
+                model.IsImage = XJ.ContentType.IsImage(file.type) && !XJ.ContentType.IsGif(file.type);
                 model.Format = file.name.slice(file.name.lastIndexOf(".") + 1);
                 //生成预览图
                 previewImage({
