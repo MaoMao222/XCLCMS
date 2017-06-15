@@ -13,13 +13,13 @@
           "AppID": 900104,
           "AppKey": "39ECF62590EB4E57C1D8A0C4A36625D4",
           "WebAPIJsUrl": "http://localhost/XCLCMS.WebAPI/Resources/Js/XCLCMSWebApi.js",
-          "WebAPIServiceURL": "http://localhost/XCLCMS.WebAPI/api/"
+          "WebAPIServiceURL": "http://localhost/XCLCMS.WebAPI/v1/"
         },
         "PRD": {
           "AppID": 900104,
           "AppKey": "39ECF62590EB4E57C1D8A0C4A36625D4",
           "WebAPIJsUrl": "http://cms.wodeabc.com/api/Resources/Js/XCLCMSWebApi.js",
-          "WebAPIServiceURL": "http://cms.wodeabc.com/api/api/"
+          "WebAPIServiceURL": "http://cms.wodeabc.com/api/v1/"
         }
       }
     },

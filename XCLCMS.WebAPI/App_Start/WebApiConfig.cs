@@ -15,7 +15,7 @@ namespace XCLCMS.WebAPI
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: "v1/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
