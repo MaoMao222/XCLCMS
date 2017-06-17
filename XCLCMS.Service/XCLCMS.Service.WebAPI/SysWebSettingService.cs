@@ -149,31 +149,31 @@ namespace XCLCMS.Service.WebAPI
             else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.SWH.ToString())
             {
                 var switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.KeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.TestKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.UATKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.PrdKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
             }
@@ -272,31 +272,31 @@ namespace XCLCMS.Service.WebAPI
             else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.SWH.ToString())
             {
                 var switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.KeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.TestKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.UATKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
                 switchResult = XCLNetTools.Common.SwitchControl.IsOpen(request.Body.PrdKeyValue);
-                if (!string.IsNullOrWhiteSpace(switchResult.Message))
+                if (!string.IsNullOrWhiteSpace(switchResult.ErrorMessage))
                 {
                     response.IsSuccess = false;
-                    response.Message = switchResult.Message;
+                    response.Message = switchResult.ErrorMessage;
                     return response;
                 }
             }
