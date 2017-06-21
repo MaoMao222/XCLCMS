@@ -1,5 +1,6 @@
-﻿define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
-    var app = {};
+/// <reference path="../../../common.d.ts" />
+define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
+    var app;
     app.SysWebSettingList = {
         Init: function () {
             var _this = this;
@@ -18,7 +19,8 @@
             var ids = selectVal.split(',');
             if (selectVal && selectVal !== "" && ids.length > 0) {
                 return ids;
-            } else {
+            }
+            else {
                 return null;
             }
         },
@@ -31,12 +33,12 @@
                 var query = {
                     handletype: "update",
                     SysWebSettingID: ids[0]
-                }
-
+                };
                 var url = XJ.Url.AddParam($btn.attr("href"), query);
                 $btn.attr("href", url);
                 return true;
-            } else {
+            }
+            else {
                 art.dialog.tips("请选择一条记录进行修改操作！");
                 return false;
             }
@@ -50,7 +52,6 @@
                 art.dialog.tips("请至少选择一条记录进行操作！");
                 return false;
             }
-
             art.dialog.confirm("您确定要删除此信息吗？", function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = ids;
@@ -64,8 +65,7 @@
                     }
                 });
             }, function () {
-            })
-
+            });
             return false;
         }
     };
@@ -73,13 +73,11 @@
         Init: function () {
             var _this = this;
             _this.InitValidator();
-
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
                 merchantAppIDObj: $("#txtMerchantAppID")
             });
-
             $("#btnDel").on("click", function () {
                 return _this.Del();
             });
@@ -134,6 +132,6 @@
             return false;
         }
     };
-
     return app;
 });
+//# sourceMappingURL=SysWebSetting.js.map

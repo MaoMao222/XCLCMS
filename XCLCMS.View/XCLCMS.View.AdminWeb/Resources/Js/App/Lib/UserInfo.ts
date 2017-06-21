@@ -1,10 +1,11 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
     /**
      * 用户管理
      * @type type
      */
-    var app;
+    let app: IAnyPropObject;
+
     /**
      * 用户信息列表
      * @type type
@@ -17,7 +18,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             });
             $("#btnDel").on("click", function () {
                 return _this.Del();
-            });
+            })
         },
         /**
          * 返回已选择的value数组
@@ -27,8 +28,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             var ids = selectVal.split(',');
             if (selectVal && selectVal !== "" && ids.length > 0) {
                 return ids;
-            }
-            else {
+            } else {
                 return null;
             }
         },
@@ -41,12 +41,12 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                 var query = {
                     handletype: "update",
                     UserInfoID: ids[0]
-                };
+                }
+
                 var url = XJ.Url.AddParam($btn.attr("href"), query);
                 $btn.attr("href", url);
                 return true;
-            }
-            else {
+            } else {
                 art.dialog.tips("请选择一条记录进行修改操作！");
                 return false;
             }
@@ -60,9 +60,11 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                 art.dialog.tips("请至少选择一条记录进行操作！");
                 return false;
             }
+
             art.dialog.confirm("您确定要删除此信息吗？", function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = ids;
+
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -74,9 +76,11 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                 });
             }, function () {
             });
+
             return false;
         }
     };
+
     /**
      * 用户信息添加与修改页
      */
@@ -95,11 +99,14 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             var _this = this;
             _this.Elements.Init();
             _this.InitValidator();
+
             $("#btnDel").on("click", function () {
                 return _this.Del();
             });
+
             //初始化角色选择框
             _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
+
             //初始化商户选择框
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
@@ -108,6 +115,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                     _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
                 }
             });
+
         },
         /**
         * 创建选择角色的combotree
@@ -117,9 +125,11 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             if (!$obj) {
                 return;
             }
+
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
             request.Body.MerchantID = $("input[name='txtMerchantID']").val();
+
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysRole/GetAllJsonForEasyUITree',
                 queryParams: request,
@@ -134,6 +144,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                     }
                 }
             });
+
             _this.Elements.txtUserRoleIDs.combotree("setValues", (_this.Elements.txtUserRoleIDs.attr("xcl-data-value") || "").split(','));
         },
         /**
@@ -177,6 +188,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             art.dialog.confirm("您确定要删除此信息吗？", function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = [$("#UserInfoID").val()];
+
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -189,7 +201,6 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             });
             return false;
         }
-    };
+    }
     return app;
 });
-//# sourceMappingURL=UserInfo.js.map

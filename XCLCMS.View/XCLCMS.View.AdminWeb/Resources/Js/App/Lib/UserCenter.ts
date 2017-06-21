@@ -1,6 +1,7 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common"], function (common) {
-    var app;
+    let app: IAnyPropObject;
+
     /**
      * 个人资料
      */
@@ -34,6 +35,7 @@ define(["Lib/Common"], function (common) {
             });
         }
     };
+
     /**
      * 修改密码
      */
@@ -68,6 +70,7 @@ define(["Lib/Common"], function (common) {
             });
         }
     };
+
     /**
      * 修改商户信息
      */
@@ -100,6 +103,6 @@ define(["Lib/Common"], function (common) {
             });
         }
     };
+
     return app;
 });
-//# sourceMappingURL=UserCenter.js.map

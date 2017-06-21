@@ -1,0 +1,11 @@
+{
+  "name": "xclcms",
+  "version": "1.0.0",
+  "description": "resources for xclcms",
+  "main": "index.js",
+  "scripts": {
+    "test": "index.js"
+  },
+  "author": "xcl",
+  "license": "ISC"
+}

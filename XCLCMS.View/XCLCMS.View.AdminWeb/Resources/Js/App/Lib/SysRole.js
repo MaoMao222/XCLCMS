@@ -1,5 +1,6 @@
-﻿define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI, userControl) {
-    var app = {};
+/// <reference path="../../../common.d.ts" />
+define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI, userControl) {
+    var app;
     app.SysRoleList = {
         /**
          * 界面元素
@@ -23,16 +24,13 @@
                 this.menu_SysRole_del = $("#menu_SysRole_del");
             }
         },
-
         /**
          * 数据列表jq对象
          */
         TreeObj: null,
-
         Init: function () {
             var _this = this;
             _this.Elements.Init();
-
             _this.TreeObj = $('#tableSysRoleList');
             //加载列表树
             var request = XCLCMSWebApi.CreateRequest();
@@ -61,41 +59,40 @@
                     return data;
                 },
                 columns: [[
-                    { field: 'SysRoleID', title: 'ID', width: '5%' },
-                    { field: 'ParentID', title: '父ID', width: '5%' },
-                    { field: 'NodeLevel', title: '层级', width: '5%' },
-                    { field: 'MerchantName', title: '所属商户', width: '5%' },
-                    { field: 'RoleName', title: '角色名', width: '20%' },
-                    { field: 'Weight', title: '权重', width: '5%' },
-                    { field: 'Code', title: '角色标识', width: '10%' },
-                    { field: 'Remark', title: '备注', width: '10%' },
-                    { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
-                    { field: 'CreateTime', title: '创建时间', width: '10%' },
-                    { field: 'CreaterName', title: '创建者名', width: '5%' },
-                    { field: 'UpdateTime', title: '更新时间', width: '10%' },
-                    { field: 'UpdaterName', title: '更新者名', width: '5%' }
-                ]],
+                        { field: 'SysRoleID', title: 'ID', width: '5%' },
+                        { field: 'ParentID', title: '父ID', width: '5%' },
+                        { field: 'NodeLevel', title: '层级', width: '5%' },
+                        { field: 'MerchantName', title: '所属商户', width: '5%' },
+                        { field: 'RoleName', title: '角色名', width: '20%' },
+                        { field: 'Weight', title: '权重', width: '5%' },
+                        { field: 'Code', title: '角色标识', width: '10%' },
+                        { field: 'Remark', title: '备注', width: '10%' },
+                        { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
+                        { field: 'CreateTime', title: '创建时间', width: '10%' },
+                        { field: 'CreaterName', title: '创建者名', width: '5%' },
+                        { field: 'UpdateTime', title: '更新时间', width: '10%' },
+                        { field: 'UpdaterName', title: '更新者名', width: '5%' }
+                    ]],
                 onContextMenu: function (e, row) {
                     e.preventDefault();
                     _this.Elements.menu_SysRole_add.show();
                     _this.Elements.menu_SysRole_del.show();
                     _this.Elements.menu_SysRole_edit.show();
-
                     if (row.NodeLevel == 3) {
                         _this.Elements.menu_SysRole_add.hide();
-                    } else if (row.NodeLevel == 2) {
+                    }
+                    else if (row.NodeLevel == 2) {
                         _this.Elements.menu_SysRole_del.hide();
                         _this.Elements.menu_SysRole_edit.hide();
-                    } else {
+                    }
+                    else {
                         _this.Elements.menu_SysRole_add.hide();
                         _this.Elements.menu_SysRole_del.hide();
                         _this.Elements.menu_SysRole_edit.hide();
                     }
-
                     if (row.MerchantSystemType == 'SYS') {
                         _this.Elements.menu_SysRole_del.hide();
                     }
-
                     $(this).treegrid('select', row.SysRoleID);
                     _this.Elements.menu_SysRole.menu('show', {
                         left: e.pageX,
@@ -103,7 +100,6 @@
                     });
                 }
             });
-
             //刷新节点
             _this.Elements.menu_SysRole_refresh.on("click", function () {
                 var ids = _this.GetSelectedIds();
@@ -155,7 +151,6 @@
                 }
             });
         },
-
         /**
          * 打开功能信息【修改】页面
          */
@@ -167,7 +162,8 @@
                     var parent = _this.TreeObj.treegrid("getParent", ids[0]);
                     if (parent) {
                         _this.TreeObj.treegrid("reload", parent.SysRoleID);
-                    } else {
+                    }
+                    else {
                         _this.Refresh();
                     }
                 }
@@ -206,7 +202,6 @@
             this.TreeObj.treegrid("reload");
         }
     };
-
     app.SysRoleAdd = {
         /**
         * 输入元素
@@ -222,10 +217,8 @@
             var _this = this;
             _this.Elements.Init();
             _this.InitValidator();
-
             //初始化功能选择树
             _this.CreateFunctionTree(_this.Elements.txtRoleFunction);
-
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
@@ -242,11 +235,9 @@
             if (!$obj) {
                 return;
             }
-
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
             request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',
                 queryParams: request,
@@ -260,7 +251,6 @@
                     }
                 }
             });
-
             _this.Elements.txtRoleFunction.combotree("setValues", (_this.Elements.txtRoleFunction.attr("xcl-data-value") || "").split(','));
         },
         /**
@@ -308,6 +298,6 @@
             });
         }
     };
-
     return app;
 });
+//# sourceMappingURL=SysRole.js.map

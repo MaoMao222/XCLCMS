@@ -1,59 +1,57 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI, userControl) {
-    /**
-      * 系统字典库
-      */
-    var app;
-    app.SysDicList = {
+    let app: IAnyPropObject;
+
+    app.SysRoleList = {
         /**
          * 界面元素
          */
         Elements: {
             //tree右键菜单
-            menu_SysDic: null,
+            menu_SysRole: null,
             //tree右键菜单_刷新节点
-            menu_SysDic_refresh: null,
+            menu_SysRole_refresh: null,
             //tree右键菜单_添加节点
-            menu_SysDic_add: null,
+            menu_SysRole_add: null,
             //tree右键菜单_修改节点
-            menu_SysDic_edit: null,
+            menu_SysRole_edit: null,
             //tree右键菜单_删除节点
-            menu_SysDic_del: null,
+            menu_SysRole_del: null,
             Init: function () {
-                this.menu_SysDic = $("#menu_SysDic");
-                this.menu_SysDic_refresh = $("#menu_SysDic_refresh");
-                this.menu_SysDic_add = $("#menu_SysDic_add");
-                this.menu_SysDic_edit = $("#menu_SysDic_edit");
-                this.menu_SysDic_del = $("#menu_SysDic_del");
+                this.menu_SysRole = $("#menu_SysRole");
+                this.menu_SysRole_refresh = $("#menu_SysRole_refresh");
+                this.menu_SysRole_add = $("#menu_SysRole_add");
+                this.menu_SysRole_edit = $("#menu_SysRole_edit");
+                this.menu_SysRole_del = $("#menu_SysRole_del");
             }
         },
+
         /**
          * 数据列表jq对象
          */
         TreeObj: null,
-        /**
-         * 页面初始化
-         */
+
         Init: function () {
             var _this = this;
             _this.Elements.Init();
-            _this.TreeObj = $('#tableSysDicList');
+
+            _this.TreeObj = $('#tableSysRoleList');
             //加载列表树
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = 0;
             _this.TreeObj.treegrid({
-                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysDic/GetList',
+                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysRole/GetList',
                 queryParams: request,
                 onBeforeExpand: function (node) {
                     _this.TreeObj.treegrid('options').queryParams = (function () {
                         var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = node.SysDicID;
+                        request.Body = node.SysRoleID;
                         return request;
                     })();
                 },
                 method: 'get',
-                idField: 'SysDicID',
-                treeField: 'DicName',
+                idField: 'SysRoleID',
+                treeField: 'RoleName',
                 rownumbers: true,
                 loadFilter: function (data) {
                     if (data) {
@@ -65,58 +63,64 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                     return data;
                 },
                 columns: [[
-                        { field: 'SysDicID', title: 'ID', width: '5%' },
-                        { field: 'ParentID', title: '父ID', width: '5%' },
-                        { field: 'NodeLevel', title: '层级', width: '2%' },
-                        { field: 'MerchantName', title: '所属商户', width: '10%' },
-                        { field: 'DicName', title: '字典名', width: '20%' },
-                        { field: 'DicValue', title: '字典值', width: '7%' },
-                        { field: 'Code', title: '唯一标识', width: '10%' },
-                        { field: 'Sort', title: '排序号', width: '5%' },
-                        { field: 'FK_FunctionID', title: '所属功能ID', width: '5%' },
-                        { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
-                        { field: 'Remark', title: '备注', width: '5%' },
-                        { field: 'CreateTime', title: '创建时间', width: '5%' },
-                        { field: 'CreaterName', title: '创建者名', width: '5%' },
-                        { field: 'UpdateTime', title: '更新时间', width: '5%' },
-                        { field: 'UpdaterName', title: '更新者名', width: '5%' }
-                    ]],
+                    { field: 'SysRoleID', title: 'ID', width: '5%' },
+                    { field: 'ParentID', title: '父ID', width: '5%' },
+                    { field: 'NodeLevel', title: '层级', width: '5%' },
+                    { field: 'MerchantName', title: '所属商户', width: '5%' },
+                    { field: 'RoleName', title: '角色名', width: '20%' },
+                    { field: 'Weight', title: '权重', width: '5%' },
+                    { field: 'Code', title: '角色标识', width: '10%' },
+                    { field: 'Remark', title: '备注', width: '10%' },
+                    { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
+                    { field: 'CreateTime', title: '创建时间', width: '10%' },
+                    { field: 'CreaterName', title: '创建者名', width: '5%' },
+                    { field: 'UpdateTime', title: '更新时间', width: '10%' },
+                    { field: 'UpdaterName', title: '更新者名', width: '5%' }
+                ]],
                 onContextMenu: function (e, row) {
                     e.preventDefault();
-                    _this.Elements.menu_SysDic_add.show();
-                    _this.Elements.menu_SysDic_del.show();
-                    _this.Elements.menu_SysDic_edit.show();
-                    if (row.NodeLevel < 2) {
-                        _this.Elements.menu_SysDic_add.hide();
-                        _this.Elements.menu_SysDic_del.hide();
-                        _this.Elements.menu_SysDic_edit.hide();
+                    _this.Elements.menu_SysRole_add.show();
+                    _this.Elements.menu_SysRole_del.show();
+                    _this.Elements.menu_SysRole_edit.show();
+
+                    if (row.NodeLevel == 3) {
+                        _this.Elements.menu_SysRole_add.hide();
+                    } else if (row.NodeLevel == 2) {
+                        _this.Elements.menu_SysRole_del.hide();
+                        _this.Elements.menu_SysRole_edit.hide();
+                    } else {
+                        _this.Elements.menu_SysRole_add.hide();
+                        _this.Elements.menu_SysRole_del.hide();
+                        _this.Elements.menu_SysRole_edit.hide();
                     }
-                    else if (row.NodeLevel == 2) {
-                        _this.Elements.menu_SysDic_del.hide();
-                        _this.Elements.menu_SysDic_edit.hide();
+
+                    if (row.MerchantSystemType == 'SYS') {
+                        _this.Elements.menu_SysRole_del.hide();
                     }
-                    $(this).treegrid('select', row.SysDicID);
-                    _this.Elements.menu_SysDic.menu('show', {
+
+                    $(this).treegrid('select', row.SysRoleID);
+                    _this.Elements.menu_SysRole.menu('show', {
                         left: e.pageX,
                         top: e.pageY
                     });
                 }
             });
+
             //刷新节点
-            _this.Elements.menu_SysDic_refresh.on("click", function () {
+            _this.Elements.menu_SysRole_refresh.on("click", function () {
                 var ids = _this.GetSelectedIds();
                 _this.TreeObj.treegrid("reload", ids[0]);
             });
             //添加子项
-            _this.Elements.menu_SysDic_add.on("click", function () {
+            _this.Elements.menu_SysRole_add.on("click", function () {
                 _this.Add();
             });
             //修改
-            _this.Elements.menu_SysDic_edit.on("click", function () {
+            _this.Elements.menu_SysRole_edit.on("click", function () {
                 _this.Update();
             });
             //删除
-            _this.Elements.menu_SysDic_del.on("click", function () {
+            _this.Elements.menu_SysRole_del.on("click", function () {
                 _this.Del();
             });
         },
@@ -134,45 +138,45 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             var rows = this.GetSelectRows();
             if (rows && rows.length > 0) {
                 for (var i = 0; i < rows.length; i++) {
-                    ids.push(rows[i].SysDicID);
+                    ids.push(rows[i].SysRoleID);
                 }
             }
             return ids;
         },
         /**
-         * 打开【添加】页面
-         */
+        * 打开添加页
+        */
         Add: function () {
             var _this = this;
             var ids = _this.GetSelectedIds();
-            art.dialog.open(XCLCMSPageGlobalConfig.RootURL + 'SysDic/Add?sysDicId=' + ids[0], {
-                title: '添加子节点', width: 1100, height: 600, close: function () {
+            art.dialog.open(XCLCMSPageGlobalConfig.RootURL + 'SysRole/Add?sysRoleId=' + ids[0], {
+                title: '添加子节点', width: 1000, height: 600, close: function () {
                     //叶子节点，刷新其父节点，非叶子节点刷新自己即可
                     var row = _this.TreeObj.treegrid("find", ids[0]);
-                    _this.TreeObj.treegrid("reload", row.IsLeaf == 1 ? row.ParentID : row.SysDicID);
+                    _this.TreeObj.treegrid("reload", row.IsLeaf == 1 ? row.ParentID : row.SysRoleID);
                 }
             });
         },
+
         /**
-         * 打开【修改】页面
+         * 打开功能信息【修改】页面
          */
         Update: function () {
             var _this = this;
             var ids = _this.GetSelectedIds();
-            art.dialog.open(XCLCMSPageGlobalConfig.RootURL + 'SysDic/Add?handletype=update&sysDicId=' + ids[0], {
-                title: '修改节点', width: 1100, height: 600, close: function () {
+            art.dialog.open(XCLCMSPageGlobalConfig.RootURL + 'SysRole/Add?handletype=update&sysRoleId=' + ids[0], {
+                title: '修改节点', width: 1000, height: 600, close: function () {
                     var parent = _this.TreeObj.treegrid("getParent", ids[0]);
                     if (parent) {
-                        _this.TreeObj.treegrid("reload", parent.SysDicID);
-                    }
-                    else {
+                        _this.TreeObj.treegrid("reload", parent.SysRoleID);
+                    } else {
                         _this.Refresh();
                     }
                 }
             });
         },
         /**
-         * 删除
+         * 删除功能信息
          */
         Del: function () {
             var _this = this;
@@ -182,7 +186,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                 request.Body = ids;
                 $.XGoAjax({
                     ajax: {
-                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/Delete",
+                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/Delete",
                         contentType: "application/json",
                         data: JSON.stringify(request),
                         type: "POST"
@@ -204,31 +208,31 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             this.TreeObj.treegrid("reload");
         }
     };
-    app.SysDicAdd = {
+
+    app.SysRoleAdd = {
         /**
         * 输入元素
         */
         Elements: {
-            //字典所属功能输入框对象
-            txtFunctionID: null,
+            //角色所拥有的功能输入框对象
+            txtRoleFunction: null,
             Init: function () {
-                this.txtFunctionID = $("#txtFunctionID");
+                this.txtRoleFunction = $("#txtRoleFunction");
             }
         },
-        /**
-        * 界面初始化
-        */
         Init: function () {
             var _this = this;
             _this.Elements.Init();
             _this.InitValidator();
-            _this.CreateFunctionTree(_this.Elements.txtFunctionID);
+
+            //初始化功能选择树
+            _this.CreateFunctionTree(_this.Elements.txtRoleFunction);
+
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
-                merchantAppIDObj: $("#txtMerchantAppID"),
                 merchantIDSelectCallback: function () {
-                    _this.CreateFunctionTree(_this.Elements.txtFunctionID);
+                    _this.CreateFunctionTree(_this.Elements.txtRoleFunction);
                 }
             });
         },
@@ -240,60 +244,61 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             if (!$obj) {
                 return;
             }
-            var isTxtFunctionID = ($obj == _this.Elements.txtFunctionID);
+
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
             request.Body.MerchantID = $("input[name='txtMerchantID']").val();
+
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',
                 queryParams: request,
                 method: 'get',
                 checkbox: true,
                 lines: true,
-                multiple: (!isTxtFunctionID),
+                multiple: true,
                 loadFilter: function (data) {
                     if (data) {
                         return data.Body || [];
                     }
-                },
-                onBeforeSelect: function (node) {
-                    //字典对应的功能只能选择一项
-                    if (isTxtFunctionID && node.children) {
-                        art.dialog.tips("只能选择叶子节点！");
-                        $obj.combotree("clear");
-                        return false;
-                    }
                 }
             });
+
+            _this.Elements.txtRoleFunction.combotree("setValues", (_this.Elements.txtRoleFunction.attr("xcl-data-value") || "").split(','));
         },
+        /**
+         * 表单验证初始化
+         */
         InitValidator: function () {
             var validator = $("form:first").validate({
                 rules: {
-                    txtDicName: {
+                    txtRoleName: {
                         required: true,
-                        XCLCustomRemote: function () {
-                            var request = XCLCMSWebApi.CreateRequest();
-                            request.Body = {};
-                            request.Body.SysDicName = $("#txtDicName").val();
-                            request.Body.ParentID = $("#ParentID").val();
-                            request.Body.SysDicID = $("#SysDicID").val();
-                            return {
-                                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/IsExistSysDicNameInSameLevel",
-                                data: request
-                            };
+                        XCLCustomRemote: {
+                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/IsExistRoleNameInSameLevel",
+                            data: function () {
+                                var request = XCLCMSWebApi.CreateRequest();
+                                request.Body = {};
+                                request.Body.RoleName = $("#txtRoleName").val();
+                                request.Body.ParentID = $("#ParentID").val();
+                                request.Body.SysRoleID = $("#SysRoleID").val();
+                                return request;
+                            }
                         }
                     },
                     txtCode: {
-                        XCLCustomRemote: function () {
-                            var request = XCLCMSWebApi.CreateRequest();
-                            request.Body = {};
-                            request.Body.Code = $("#txtCode").val();
-                            request.Body.SysDicID = $("#SysDicID").val();
-                            return {
-                                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/IsExistSysDicCode",
-                                data: request
-                            };
+                        XCLCustomRemote: {
+                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/IsExistCode",
+                            data: function () {
+                                var request = XCLCMSWebApi.CreateRequest();
+                                request.Body = {};
+                                request.Body.Code = $("#txtCode").val();
+                                request.Body.SysRoleID = $("#SysRoleID").val();
+                                return request;
+                            }
                         }
+                    },
+                    txtMerchantID: {
+                        required: true
                     }
                 }
             });
@@ -305,6 +310,6 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             });
         }
     };
+
     return app;
 });
-//# sourceMappingURL=SysDic.js.map

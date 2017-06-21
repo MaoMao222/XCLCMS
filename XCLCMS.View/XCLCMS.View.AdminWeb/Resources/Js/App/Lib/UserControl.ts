@@ -1,9 +1,10 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 /**
  * 用户控件
  */
 define([], function () {
-    var app;
+    let app: IAnyPropObject;
+
     /**
      * 选择商户控件
      */
@@ -14,7 +15,9 @@ define([], function () {
                 merchantAppIDObj: null,
                 merchantIDSelectCallback: null
             };
+
             ops = $.extend({}, dfs, ops);
+
             //查询商户应用
             var initMerchantAppSelect = function () {
                 if (!ops.merchantAppIDObj || ops.merchantAppIDObj.length == 0) {
@@ -37,6 +40,7 @@ define([], function () {
                 });
             };
             initMerchantAppSelect();
+
             //查询商户
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
@@ -59,6 +63,6 @@ define([], function () {
             });
         }
     };
+
     return app;
 });
-//# sourceMappingURL=UserControl.js.map

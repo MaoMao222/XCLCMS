@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -229,6 +230,7 @@
     <Content Include="Resources\Js\App\config.js" />
     <Content Include="Resources\Js\App\Lib\Ads.js" />
     <Content Include="Resources\Js\App\Lib\Article.js" />
+    <Content Include="Resources\Js\App\Lib\Article.ts" />
     <Content Include="Resources\Js\App\Lib\Comments.js" />
     <Content Include="Resources\Js\App\Lib\Common.js" />
     <Content Include="Resources\Js\App\Lib\EasyUI.js" />
@@ -1048,6 +1050,7 @@
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\Comments\Add.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Resources\Js\App\Lib\Ads.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1079,11 +1082,38 @@
   <ItemGroup>
     <Folder Include="Resources\Js\Jquery\UI\" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Resources\common.d.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Ads.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Comments.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Common.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\EasyUI.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\FriendLinks.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Home.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Login.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\MainMaster.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Merchant.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\SysDic.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\SysFunction.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\SysLog.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\SysRole.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\SysWebSetting.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\Tags.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\UserCenter.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\UserControl.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Lib\UserInfo.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

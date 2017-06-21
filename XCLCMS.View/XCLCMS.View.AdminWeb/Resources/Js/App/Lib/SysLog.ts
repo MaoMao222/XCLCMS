@@ -1,9 +1,10 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["readmore"], function () {
     /*
     * 系统日志
     */
-    var app;
+    let app: IAnyPropObject;
+
     app.SysLogList = {
         Init: function () {
             var _this = this;
@@ -24,6 +25,6 @@ define(["readmore"], function () {
             });
         }
     };
+
     return app;
 });
-//# sourceMappingURL=SysLog.js.map

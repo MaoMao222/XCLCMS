@@ -1,9 +1,10 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI, userControl) {
     /**
       * 系统字典库
       */
-    var app;
+    let app: IAnyPropObject;
+
     app.SysDicList = {
         /**
          * 界面元素
@@ -27,6 +28,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                 this.menu_SysDic_del = $("#menu_SysDic_del");
             }
         },
+
         /**
          * 数据列表jq对象
          */
@@ -37,6 +39,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
         Init: function () {
             var _this = this;
             _this.Elements.Init();
+
             _this.TreeObj = $('#tableSysDicList');
             //加载列表树
             var request = XCLCMSWebApi.CreateRequest();
@@ -65,36 +68,37 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                     return data;
                 },
                 columns: [[
-                        { field: 'SysDicID', title: 'ID', width: '5%' },
-                        { field: 'ParentID', title: '父ID', width: '5%' },
-                        { field: 'NodeLevel', title: '层级', width: '2%' },
-                        { field: 'MerchantName', title: '所属商户', width: '10%' },
-                        { field: 'DicName', title: '字典名', width: '20%' },
-                        { field: 'DicValue', title: '字典值', width: '7%' },
-                        { field: 'Code', title: '唯一标识', width: '10%' },
-                        { field: 'Sort', title: '排序号', width: '5%' },
-                        { field: 'FK_FunctionID', title: '所属功能ID', width: '5%' },
-                        { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
-                        { field: 'Remark', title: '备注', width: '5%' },
-                        { field: 'CreateTime', title: '创建时间', width: '5%' },
-                        { field: 'CreaterName', title: '创建者名', width: '5%' },
-                        { field: 'UpdateTime', title: '更新时间', width: '5%' },
-                        { field: 'UpdaterName', title: '更新者名', width: '5%' }
-                    ]],
+                    { field: 'SysDicID', title: 'ID', width: '5%' },
+                    { field: 'ParentID', title: '父ID', width: '5%' },
+                    { field: 'NodeLevel', title: '层级', width: '2%' },
+                    { field: 'MerchantName', title: '所属商户', width: '10%' },
+                    { field: 'DicName', title: '字典名', width: '20%' },
+                    { field: 'DicValue', title: '字典值', width: '7%' },
+                    { field: 'Code', title: '唯一标识', width: '10%' },
+                    { field: 'Sort', title: '排序号', width: '5%' },
+                    { field: 'FK_FunctionID', title: '所属功能ID', width: '5%' },
+                    { field: 'RecordState', title: '记录状态', formatter: easyUI.EnumToDescription, width: '5%' },
+                    { field: 'Remark', title: '备注', width: '5%' },
+                    { field: 'CreateTime', title: '创建时间', width: '5%' },
+                    { field: 'CreaterName', title: '创建者名', width: '5%' },
+                    { field: 'UpdateTime', title: '更新时间', width: '5%' },
+                    { field: 'UpdaterName', title: '更新者名', width: '5%' }
+                ]],
                 onContextMenu: function (e, row) {
                     e.preventDefault();
                     _this.Elements.menu_SysDic_add.show();
                     _this.Elements.menu_SysDic_del.show();
                     _this.Elements.menu_SysDic_edit.show();
+
                     if (row.NodeLevel < 2) {
                         _this.Elements.menu_SysDic_add.hide();
                         _this.Elements.menu_SysDic_del.hide();
                         _this.Elements.menu_SysDic_edit.hide();
-                    }
-                    else if (row.NodeLevel == 2) {
+                    } else if (row.NodeLevel == 2) {
                         _this.Elements.menu_SysDic_del.hide();
                         _this.Elements.menu_SysDic_edit.hide();
                     }
+
                     $(this).treegrid('select', row.SysDicID);
                     _this.Elements.menu_SysDic.menu('show', {
                         left: e.pageX,
@@ -102,6 +106,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                     });
                 }
             });
+
             //刷新节点
             _this.Elements.menu_SysDic_refresh.on("click", function () {
                 var ids = _this.GetSelectedIds();
@@ -164,8 +169,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                     var parent = _this.TreeObj.treegrid("getParent", ids[0]);
                     if (parent) {
                         _this.TreeObj.treegrid("reload", parent.SysDicID);
-                    }
-                    else {
+                    } else {
                         _this.Refresh();
                     }
                 }
@@ -204,6 +208,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             this.TreeObj.treegrid("reload");
         }
     };
+
     app.SysDicAdd = {
         /**
         * 输入元素
@@ -222,7 +227,9 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             var _this = this;
             _this.Elements.Init();
             _this.InitValidator();
+
             _this.CreateFunctionTree(_this.Elements.txtFunctionID);
+
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
@@ -241,16 +248,18 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                 return;
             }
             var isTxtFunctionID = ($obj == _this.Elements.txtFunctionID);
+
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = {};
             request.Body.MerchantID = $("input[name='txtMerchantID']").val();
+
             $obj.combotree({
                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',
                 queryParams: request,
                 method: 'get',
                 checkbox: true,
                 lines: true,
-                multiple: (!isTxtFunctionID),
+                multiple: (!isTxtFunctionID),//字典对应的功能id只允许选一个
                 loadFilter: function (data) {
                     if (data) {
                         return data.Body || [];
@@ -292,7 +301,7 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
                             return {
                                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/IsExistSysDicCode",
                                 data: request
-                            };
+                            }
                         }
                     }
                 }
@@ -305,6 +314,6 @@ define(["Lib/Common", "Lib/EasyUI", "Lib/UserControl"], function (common, easyUI
             });
         }
     };
+
     return app;
 });
-//# sourceMappingURL=SysDic.js.map

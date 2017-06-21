@@ -1,10 +1,10 @@
-﻿define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
+/// <reference path="../../../common.d.ts" />
+define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
     /**
      * 评论管理
      * @type type
      */
-    var app = {};
-
+    var app;
     /**
      * 评论列表
      * @type type
@@ -17,7 +17,7 @@
             });
             $("#btnDel").on("click", function () {
                 return _this.Del();
-            })
+            });
         },
         /**
          * 返回已选择的value数组
@@ -27,7 +27,8 @@
             var ids = selectVal.split(',');
             if (selectVal && selectVal !== "" && ids.length > 0) {
                 return ids;
-            } else {
+            }
+            else {
                 return null;
             }
         },
@@ -40,12 +41,12 @@
                 var query = {
                     handletype: "update",
                     CommentsID: ids[0]
-                }
-
+                };
                 var url = XJ.Url.AddParam($btn.attr("href"), query);
                 $btn.attr("href", url);
                 return true;
-            } else {
+            }
+            else {
                 art.dialog.tips("请选择一条记录进行修改操作！");
                 return false;
             }
@@ -59,11 +60,9 @@
                 art.dialog.tips("请至少选择一条记录进行操作！");
                 return false;
             }
-
             art.dialog.confirm("您确定要删除此信息吗？", function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = ids;
-
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -75,11 +74,9 @@
                 });
             }, function () {
             });
-
             return false;
         }
     };
-
     /**
      * 评论添加与修改页
      */
@@ -95,13 +92,11 @@
             var _this = this;
             _this.Elements.Init();
             _this.InitValidator();
-
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
                 merchantAppIDObj: $("#txtMerchantAppID")
             });
-
             $("#btnDel").on("click", function () {
                 return _this.Del();
             });
@@ -132,7 +127,6 @@
             art.dialog.confirm("您确定要删除此信息吗？", function () {
                 var request = XCLCMSWebApi.CreateRequest();
                 request.Body = [$("#CommentsID").val()];
-
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -145,6 +139,7 @@
             });
             return false;
         }
-    }
+    };
     return app;
 });
+//# sourceMappingURL=Comments.js.map

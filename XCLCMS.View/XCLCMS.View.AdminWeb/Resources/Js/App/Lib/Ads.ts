@@ -1,34 +1,34 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
     /**
      * 广告位管理
      * @type type
      */
-    var app;
+    let app: IAnyPropObject;
+
     /**
      * 广告位列表
      * @type type
      */
     app.AdsList = {
         Init: function () {
-            var _this = this;
+            let _this = this;
             $("#btnUpdate").on("click", function () {
                 return _this.Update();
             });
             $("#btnDel").on("click", function () {
                 return _this.Del();
-            });
+            })
         },
         /**
          * 返回已选择的value数组
          */
         GetSelectValue: function () {
-            var selectVal = $(".XCLTableCheckAll").val();
-            var ids = selectVal.split(',');
+            let selectVal = $(".XCLTableCheckAll").val();
+            let ids = selectVal.split(',');
             if (selectVal && selectVal !== "" && ids.length > 0) {
                 return ids;
-            }
-            else {
+            } else {
                 return null;
             }
         },
@@ -36,17 +36,17 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
          * 打开广告位【修改】页面
          */
         Update: function () {
-            var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
+            let $btn = $("#btnUpdate"), ids = this.GetSelectValue();
             if (ids && ids.length === 1) {
-                var query = {
+                let query = {
                     handletype: "update",
                     AdsID: ids[0]
-                };
-                var url = XJ.Url.AddParam($btn.attr("href"), query);
+                }
+
+                let url = XJ.Url.AddParam($btn.attr("href"), query);
                 $btn.attr("href", url);
                 return true;
-            }
-            else {
+            } else {
                 art.dialog.tips("请选择一条记录进行修改操作！");
                 return false;
             }
@@ -55,14 +55,16 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
          * 删除广告位
          */
         Del: function () {
-            var ids = this.GetSelectValue();
+            let ids = this.GetSelectValue();
             if (!ids || ids.length == 0) {
                 art.dialog.tips("请至少选择一条记录进行操作！");
                 return false;
             }
+
             art.dialog.confirm("您确定要删除此信息吗？", function () {
-                var request = XCLCMSWebApi.CreateRequest();
+                let request = XCLCMSWebApi.CreateRequest();
                 request.Body = ids;
+
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -74,9 +76,11 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                 });
             }, function () {
             });
+
             return false;
         }
     };
+
     /**
      * 广告位添加与修改页
      */
@@ -89,14 +93,16 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             }
         },
         Init: function () {
-            var _this = this;
+            let _this = this;
             _this.Elements.Init();
             _this.InitValidator();
+
             //商户号下拉框初始化
             userControl.MerchantSelect.Init({
                 merchantIDObj: $("#txtMerchantID"),
                 merchantAppIDObj: $("#txtMerchantAppID")
             });
+
             $("#btnDel").on("click", function () {
                 return _this.Del();
             });
@@ -105,7 +111,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
          * 表单验证初始化
          */
         InitValidator: function () {
-            var validator = $("form:first").validate({
+            let validator = $("form:first").validate({
                 rules: {
                     txtTitle: {
                         required: true
@@ -116,7 +122,7 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
                             return {
                                 url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/IsExistCode",
                                 data: function () {
-                                    var request = XCLCMSWebApi.CreateRequest();
+                                    let request = XCLCMSWebApi.CreateRequest();
                                     request.Body = {};
                                     request.Body.Code = $("input[name='txtCode']").val();
                                     request.Body.AdsID = $("input[name='AdsID']").val();
@@ -140,8 +146,9 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
          */
         Del: function () {
             art.dialog.confirm("您确定要删除此信息吗？", function () {
-                var request = XCLCMSWebApi.CreateRequest();
+                let request = XCLCMSWebApi.CreateRequest();
                 request.Body = [$("#AdsID").val()];
+
                 $.XGoAjax({
                     target: $("#btnDel")[0],
                     ajax: {
@@ -154,7 +161,6 @@ define(["Lib/Common", "Lib/UserControl"], function (common, userControl) {
             });
             return false;
         }
-    };
+    }
     return app;
 });
-//# sourceMappingURL=Ads.js.map

@@ -1,4 +1,4 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common"], function (common) {
     /**
     * 后台登录
@@ -20,6 +20,7 @@ define(["Lib/Common"], function (common) {
                     txtValidCode: { required: true }
                 }
             });
+
             var login = function () {
                 if (!common.CommonFormValid(validator)) {
                     return false;
@@ -41,8 +42,7 @@ define(["Lib/Common"], function (common) {
                         if (data.IsSuccess) {
                             art.dialog.tips("登录成功，正在跳转中......", 500000);
                             location.href = XCLCMSPageGlobalConfig.RootURL + "Default/Index";
-                        }
-                        else {
+                        } else {
                             art.dialog({
                                 time: 1,
                                 icon: 'error',
@@ -54,11 +54,13 @@ define(["Lib/Common"], function (common) {
                         $btnLogin.html("登录").removeClass("submitting");
                     }
                 });
-            };
+            }
+
             $("#btnLogin").on("click", function () {
                 login();
                 return false;
             });
+
             $("body").keypress(function (event) {
                 if (event.keyCode == 13) {
                     login();
@@ -71,4 +73,3 @@ define(["Lib/Common"], function (common) {
     };
     return app;
 });
-//# sourceMappingURL=Login.js.map

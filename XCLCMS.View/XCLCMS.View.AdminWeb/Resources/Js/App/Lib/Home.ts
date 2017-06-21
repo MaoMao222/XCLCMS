@@ -1,5 +1,5 @@
-/// <reference path="../../../common.d.ts" />
-define([], function () {
+﻿/// <reference path="../../../common.d.ts" />
+define([],function () {
     /**
      * 首页
      * @type type
@@ -14,4 +14,3 @@ define([], function () {
     };
     return app;
 });
-//# sourceMappingURL=Home.js.map

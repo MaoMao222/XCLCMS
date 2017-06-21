@@ -1,4 +1,4 @@
-/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="../../../common.d.ts" />
 define(["Lib/Common"], function (common) {
     /**
      * Easyui相关
@@ -13,4 +13,3 @@ define(["Lib/Common"], function (common) {
     };
     return app;
 });
-//# sourceMappingURL=EasyUI.js.map
