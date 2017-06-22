@@ -228,26 +228,6 @@
     <Content Include="Resources\Images\sky-shine.jpg" />
     <Content Include="Resources\Images\titlepg.png" />
     <Content Include="Resources\Js\App\config.js" />
-    <Content Include="Resources\Js\App\Lib\Ads.js" />
-    <Content Include="Resources\Js\App\Lib\Article.js" />
-    <Content Include="Resources\Js\App\Lib\Article.ts" />
-    <Content Include="Resources\Js\App\Lib\Comments.js" />
-    <Content Include="Resources\Js\App\Lib\Common.js" />
-    <Content Include="Resources\Js\App\Lib\EasyUI.js" />
-    <Content Include="Resources\Js\App\Lib\FriendLinks.js" />
-    <Content Include="Resources\Js\App\Lib\Home.js" />
-    <Content Include="Resources\Js\App\Lib\Login.js" />
-    <Content Include="Resources\Js\App\Lib\MainMaster.js" />
-    <Content Include="Resources\Js\App\Lib\Merchant.js" />
-    <Content Include="Resources\Js\App\Lib\SysDic.js" />
-    <Content Include="Resources\Js\App\Lib\SysFunction.js" />
-    <Content Include="Resources\Js\App\Lib\SysLog.js" />
-    <Content Include="Resources\Js\App\Lib\SysRole.js" />
-    <Content Include="Resources\Js\App\Lib\SysWebSetting.js" />
-    <Content Include="Resources\Js\App\Lib\Tags.js" />
-    <Content Include="Resources\Js\App\Lib\UserCenter.js" />
-    <Content Include="Resources\Js\App\Lib\UserControl.js" />
-    <Content Include="Resources\Js\App\Lib\UserInfo.js" />
     <Content Include="Resources\Js\App\main.js" />
     <Content Include="Resources\Js\App\require.js" />
     <Content Include="Resources\Js\artDialog\artDialog.js" />
@@ -994,6 +974,7 @@
     <Content Include="Resources\Js\XGoAjax\XGoAjax.js" />
     <Content Include="Resources\Js\XGoAjax\XGoAjaxTemplate.js" />
     <Content Include="Resources\Js\XJsTool.js" />
+    <Content Include="Resources\webpack.config.js" />
     <Content Include="robots.txt" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MasterView\Footer.cshtml" />
@@ -1050,7 +1031,8 @@
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\Comments\Add.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
-    <Content Include="Resources\Js\App\Lib\Ads.js.map" />
+    <Content Include="Resources\tsconfig.json" />
+    <Content Include="Resources\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1084,26 +1066,26 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Resources\common.d.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Ads.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Comments.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Common.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\EasyUI.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\FriendLinks.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Home.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Login.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\MainMaster.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Merchant.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\SysDic.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\SysFunction.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\SysLog.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\SysRole.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\SysWebSetting.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\Tags.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\UserCenter.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\UserControl.ts" />
-    <TypeScriptCompile Include="Resources\Js\App\Lib\UserInfo.ts" />
+    <TypeScriptCompile Include="Resources\index.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Ads.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Article.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Comments.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Common.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\EasyUI.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\FriendLinks.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Home.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Login.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\MainMaster.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Merchant.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\SysDic.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\SysFunction.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\SysLog.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\SysRole.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\SysWebSetting.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\Tags.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\UserCenter.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\UserControl.ts" />
+    <TypeScriptCompile Include="Resources\Js\App\Src\UserInfo.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

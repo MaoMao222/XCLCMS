@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "./Js/App/Lib.js",
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "include": [
+    "./Js/App/Src/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
