@@ -19,7 +19,7 @@ import userCenter from "./Js/App/UserCenter";
 import userControl from "./Js/App/UserControl";
 import userInfo from "./Js/App/UserInfo";
 
-window["xclcms"] = {
+(window as any).xclcms = {
     Ads: ads,
     Article: article,
     Comments: comments,

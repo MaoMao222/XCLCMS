@@ -1,13 +1,18 @@
+//{
+//  "compilerOptions": {
+//    "module": "amd",
+//    "target": "es3",
+//    "noImplicitAny": true,
+//    "removeComments": true,
+//    "preserveConstEnums": true,
+//    "outFile": "./temp.js",
+//    "sourceMap": true,
+//    "allowJs": true
+//  },
+//  "include": ["./Js/App/*"]
+//}
+
+
 {
-  "compilerOptions": {
-    "module": "amd",
-    "target": "es3",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "outFile": "./xclcms.js",
-    "sourceMap": true,
-    "allowJs": true
-  },
-  "include": ["./Js/App/*"]
+  "compilerOptions": {"sourceMap": true}
 }
