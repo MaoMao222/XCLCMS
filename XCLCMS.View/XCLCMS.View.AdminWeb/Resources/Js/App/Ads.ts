@@ -1,21 +1,21 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 import common from "./Common";
 import userControl from "./UserControl";
 
 /**
- * 评论管理
+ * 广告位管理
  * @type type
  */
 let app: IAnyPropObject = {};
 
 /**
- * 评论列表
+ * 广告位列表
  * @type type
  */
-app.CommentsList = {
+app.AdsList = {
     Init: function () {
-        var _this = this;
+        let _this = this;
         $("#btnUpdate").on("click", function () {
             return _this.Update();
         });
@@ -27,8 +27,8 @@ app.CommentsList = {
      * 返回已选择的value数组
      */
     GetSelectValue: function () {
-        var selectVal = $(".XCLTableCheckAll").val();
-        var ids = selectVal.split(',');
+        let selectVal = $(".XCLTableCheckAll").val();
+        let ids = selectVal.split(',');
         if (selectVal && selectVal !== "" && ids.length > 0) {
             return ids;
         } else {
@@ -36,17 +36,17 @@ app.CommentsList = {
         }
     },
     /**
-     * 打开评论【修改】页面
+     * 打开广告位【修改】页面
      */
     Update: function () {
-        var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
+        let $btn = $("#btnUpdate"), ids = this.GetSelectValue();
         if (ids && ids.length === 1) {
-            var query = {
+            let query = {
                 handletype: "update",
-                CommentsID: ids[0]
+                AdsID: ids[0]
             }
 
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            let url = XJ.Url.AddParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         } else {
@@ -55,23 +55,23 @@ app.CommentsList = {
         }
     },
     /**
-     * 删除评论
+     * 删除广告位
      */
     Del: function () {
-        var ids = this.GetSelectValue();
+        let ids = this.GetSelectValue();
         if (!ids || ids.length == 0) {
             art.dialog.tips("请至少选择一条记录进行操作！");
             return false;
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
+            let request = XCLCMSWebApi.CreateRequest();
             request.Body = ids;
 
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Comments/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
@@ -85,9 +85,9 @@ app.CommentsList = {
 };
 
 /**
- * 评论添加与修改页
+ * 广告位添加与修改页
  */
-app.CommentsAdd = {
+app.AdsAdd = {
     /**
     * 输入元素
     */
@@ -96,7 +96,7 @@ app.CommentsAdd = {
         }
     },
     Init: function () {
-        var _this = this;
+        let _this = this;
         _this.Elements.Init();
         _this.InitValidator();
 
@@ -114,10 +114,25 @@ app.CommentsAdd = {
      * 表单验证初始化
      */
     InitValidator: function () {
-        var validator = $("form:first").validate({
+        let validator = $("form:first").validate({
             rules: {
-                txtUserName: {
+                txtTitle: {
                     required: true
+                },
+                txtCode: {
+                    required: true,
+                    XCLCustomRemote: function () {
+                        return {
+                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/IsExistCode",
+                            data: function () {
+                                let request = XCLCMSWebApi.CreateRequest();
+                                request.Body = {};
+                                request.Body.Code = $("input[name='txtCode']").val();
+                                request.Body.AdsID = $("input[name='AdsID']").val();
+                                return request;
+                            }
+                        };
+                    }
                 },
                 txtEmail: "email"
             }
@@ -130,17 +145,17 @@ app.CommentsAdd = {
         });
     },
     /**
-     * 删除评论
+     * 删除广告位
      */
     Del: function () {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#CommentsID").val()];
+            let request = XCLCMSWebApi.CreateRequest();
+            request.Body = [$("#AdsID").val()];
 
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Comments/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"

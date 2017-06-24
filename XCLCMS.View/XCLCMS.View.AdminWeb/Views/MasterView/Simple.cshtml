@@ -3,8 +3,6 @@
 <head>
     @Html.Partial("~/Views/MasterView/Header.cshtml")
     @RenderSection("CustomHeader", false)
-    <script type="text/javascript" src="~/Resources/Js/App/config.js?v=@(ViewBag.ResourceVersion)"></script>
-    <script data-main="main.js" type="text/javascript" src="~/Resources/Js/App/require.js?v=@(ViewBag.ResourceVersion)"></script>
 </head>
 <body>
         @RenderBody()

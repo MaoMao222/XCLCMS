@@ -83,11 +83,9 @@
         @Html.Partial("~/Views/MasterView/Footer.cshtml")
     </div>
     <script type="text/javascript">
-        require(["Lib/Login"], function (login) {
             $(function () {
-                login.Init();
+                window.xclcms.Login.Init();
             });
-        });
     </script>
 </body>
 </html>

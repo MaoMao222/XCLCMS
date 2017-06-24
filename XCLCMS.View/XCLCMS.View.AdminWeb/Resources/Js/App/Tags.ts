@@ -1,21 +1,21 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 import common from "./Common";
 import userControl from "./UserControl";
 
 /**
- * 广告位管理
+ * 标签管理
  * @type type
  */
 let app: IAnyPropObject = {};
 
 /**
- * 广告位列表
+ * 标签列表
  * @type type
  */
-app.AdsList = {
+app.TagsList = {
     Init: function () {
-        let _this = this;
+        var _this = this;
         $("#btnUpdate").on("click", function () {
             return _this.Update();
         });
@@ -27,8 +27,8 @@ app.AdsList = {
      * 返回已选择的value数组
      */
     GetSelectValue: function () {
-        let selectVal = $(".XCLTableCheckAll").val();
-        let ids = selectVal.split(',');
+        var selectVal = $(".XCLTableCheckAll").val();
+        var ids = selectVal.split(',');
         if (selectVal && selectVal !== "" && ids.length > 0) {
             return ids;
         } else {
@@ -36,17 +36,17 @@ app.AdsList = {
         }
     },
     /**
-     * 打开广告位【修改】页面
+     * 打开标签【修改】页面
      */
     Update: function () {
-        let $btn = $("#btnUpdate"), ids = this.GetSelectValue();
+        var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
         if (ids && ids.length === 1) {
-            let query = {
+            var query = {
                 handletype: "update",
-                AdsID: ids[0]
+                TagsID: ids[0]
             }
 
-            let url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.AddParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         } else {
@@ -55,23 +55,23 @@ app.AdsList = {
         }
     },
     /**
-     * 删除广告位
+     * 删除标签
      */
     Del: function () {
-        let ids = this.GetSelectValue();
+        var ids = this.GetSelectValue();
         if (!ids || ids.length == 0) {
             art.dialog.tips("请至少选择一条记录进行操作！");
             return false;
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            let request = XCLCMSWebApi.CreateRequest();
+            var request = XCLCMSWebApi.CreateRequest();
             request.Body = ids;
 
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
@@ -85,9 +85,9 @@ app.AdsList = {
 };
 
 /**
- * 广告位添加与修改页
+ * 标签添加与修改页
  */
-app.AdsAdd = {
+app.TagsAdd = {
     /**
     * 输入元素
     */
@@ -96,7 +96,7 @@ app.AdsAdd = {
         }
     },
     Init: function () {
-        let _this = this;
+        var _this = this;
         _this.Elements.Init();
         _this.InitValidator();
 
@@ -114,21 +114,20 @@ app.AdsAdd = {
      * 表单验证初始化
      */
     InitValidator: function () {
-        let validator = $("form:first").validate({
+        var validator = $("form:first").validate({
             rules: {
-                txtTitle: {
-                    required: true
-                },
-                txtCode: {
+                txtTagName: {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/IsExistCode",
+                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/IsExistTagName",
                             data: function () {
-                                let request = XCLCMSWebApi.CreateRequest();
+                                var request = XCLCMSWebApi.CreateRequest();
                                 request.Body = {};
-                                request.Body.Code = $("input[name='txtCode']").val();
-                                request.Body.AdsID = $("input[name='AdsID']").val();
+                                request.Body.TagName = $("input[name='txtTagName']").val();
+                                request.Body.TagsID = $("input[name='TagsID']").val();
+                                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
+                                request.Body.MerchantAppID = $("input[name='txtMerchantAppID']").val();
                                 return request;
                             }
                         };
@@ -145,17 +144,17 @@ app.AdsAdd = {
         });
     },
     /**
-     * 删除广告位
+     * 删除标签
      */
     Del: function () {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            let request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#AdsID").val()];
+            var request = XCLCMSWebApi.CreateRequest();
+            request.Body = [$("#TagsID").val()];
 
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"

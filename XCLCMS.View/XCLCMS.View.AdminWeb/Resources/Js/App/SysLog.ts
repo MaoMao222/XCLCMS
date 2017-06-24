@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 /*
 * 系统日志

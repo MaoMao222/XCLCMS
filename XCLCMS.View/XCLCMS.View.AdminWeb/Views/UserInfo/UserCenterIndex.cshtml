@@ -195,11 +195,9 @@
 </div>
 
 <script type="text/javascript">
-    require(["Lib/UserCenter"], function (userCenter) {
         $(function () {
-            userCenter.UserInfo.Init();
-            userCenter.ChangePwd.Init();
-            userCenter.ChangeMerchant.Init();
+            window.xclcms.UserCenter.UserInfo.Init();
+            window.xclcms.UserCenter.ChangePwd.Init();
+            window.xclcms.UserCenter.ChangeMerchant.Init();
         });
-    });
 </script>

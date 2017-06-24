@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
     "module": "amd",
+    "target": "es3",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "outFile": "./Js/App/Lib.js",
+    "outFile": "./xclcms.js",
     "sourceMap": true,
     "allowJs": true
   },
-  "include": [
-    "./Js/App/Src/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./Js/App/*"]
 }

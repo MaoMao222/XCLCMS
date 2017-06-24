@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 /**
  * 用户控件
  */

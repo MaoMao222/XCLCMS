@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 import common from "./Common";
 import easyUI from "./EasyUI";

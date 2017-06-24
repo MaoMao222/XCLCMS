@@ -1,19 +1,11 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 import common from "./Common";
 import userControl from "./UserControl";
 
-/**
- * 标签管理
- * @type type
- */
 let app: IAnyPropObject = {};
 
-/**
- * 标签列表
- * @type type
- */
-app.TagsList = {
+app.SysWebSettingList = {
     Init: function () {
         var _this = this;
         $("#btnUpdate").on("click", function () {
@@ -21,7 +13,7 @@ app.TagsList = {
         });
         $("#btnDel").on("click", function () {
             return _this.Del();
-        })
+        });
     },
     /**
      * 返回已选择的value数组
@@ -36,14 +28,14 @@ app.TagsList = {
         }
     },
     /**
-     * 打开标签【修改】页面
+     * 打开配置信息【修改】页面
      */
     Update: function () {
         var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
         if (ids && ids.length === 1) {
             var query = {
                 handletype: "update",
-                TagsID: ids[0]
+                SysWebSettingID: ids[0]
             }
 
             var url = XJ.Url.AddParam($btn.attr("href"), query);
@@ -55,7 +47,7 @@ app.TagsList = {
         }
     },
     /**
-     * 删除标签
+     * 删除配置信息
      */
     Del: function () {
         var ids = this.GetSelectValue();
@@ -67,37 +59,24 @@ app.TagsList = {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
             var request = XCLCMSWebApi.CreateRequest();
             request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysWebSetting/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
                 }
             });
         }, function () {
-        });
+        })
 
         return false;
     }
 };
-
-/**
- * 标签添加与修改页
- */
-app.TagsAdd = {
-    /**
-    * 输入元素
-    */
-    Elements: {
-        Init: function () {
-        }
-    },
+app.SysWebSettingAdd = {
     Init: function () {
         var _this = this;
-        _this.Elements.Init();
         _this.InitValidator();
 
         //商户号下拉框初始化
@@ -116,24 +95,21 @@ app.TagsAdd = {
     InitValidator: function () {
         var validator = $("form:first").validate({
             rules: {
-                txtTagName: {
+                txtKeyName: {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/IsExistTagName",
+                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysWebSetting/IsExistKeyName",
                             data: function () {
                                 var request = XCLCMSWebApi.CreateRequest();
                                 request.Body = {};
-                                request.Body.TagName = $("input[name='txtTagName']").val();
-                                request.Body.TagsID = $("input[name='TagsID']").val();
-                                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-                                request.Body.MerchantAppID = $("input[name='txtMerchantAppID']").val();
+                                request.Body.KeyName = $("#txtKeyName").val();
+                                request.Body.SysWebSettingID = $("#SysWebSettingID").val();
                                 return request;
                             }
                         };
                     }
-                },
-                txtEmail: "email"
+                }
             }
         });
         common.BindLinkButtonEvent("click", $("#btnSave"), function () {
@@ -144,17 +120,16 @@ app.TagsAdd = {
         });
     },
     /**
-     * 删除标签
+     * 删除配置
      */
     Del: function () {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
             var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#TagsID").val()];
-
+            request.Body = [$("#SysWebSettingID").val()];
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysWebSetting/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
@@ -163,5 +138,6 @@ app.TagsAdd = {
         });
         return false;
     }
-}
+};
+
 export default app;

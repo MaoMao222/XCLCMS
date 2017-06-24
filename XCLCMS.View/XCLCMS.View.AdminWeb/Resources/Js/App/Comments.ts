@@ -1,19 +1,19 @@
-﻿/// <reference path="../../../common.d.ts" />
+﻿/// <reference path="common.d.ts" />
 
 import common from "./Common";
 import userControl from "./UserControl";
 
 /**
- * 友情链接管理
+ * 评论管理
  * @type type
  */
 let app: IAnyPropObject = {};
 
 /**
- * 友情链接列表
+ * 评论列表
  * @type type
  */
-app.FriendLinksList = {
+app.CommentsList = {
     Init: function () {
         var _this = this;
         $("#btnUpdate").on("click", function () {
@@ -36,14 +36,14 @@ app.FriendLinksList = {
         }
     },
     /**
-     * 打开友情链接【修改】页面
+     * 打开评论【修改】页面
      */
     Update: function () {
         var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
         if (ids && ids.length === 1) {
             var query = {
                 handletype: "update",
-                FriendLinkID: ids[0]
+                CommentsID: ids[0]
             }
 
             var url = XJ.Url.AddParam($btn.attr("href"), query);
@@ -55,7 +55,7 @@ app.FriendLinksList = {
         }
     },
     /**
-     * 删除友情链接
+     * 删除评论
      */
     Del: function () {
         var ids = this.GetSelectValue();
@@ -71,7 +71,7 @@ app.FriendLinksList = {
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "FriendLinks/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Comments/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
@@ -85,9 +85,9 @@ app.FriendLinksList = {
 };
 
 /**
- * 友情链接添加与修改页
+ * 评论添加与修改页
  */
-app.FriendLinksAdd = {
+app.CommentsAdd = {
     /**
     * 输入元素
     */
@@ -116,22 +116,8 @@ app.FriendLinksAdd = {
     InitValidator: function () {
         var validator = $("form:first").validate({
             rules: {
-                txtTitle: {
-                    required: true,
-                    XCLCustomRemote: function () {
-                        return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "FriendLinks/IsExistTitle",
-                            data: function () {
-                                var request = XCLCMSWebApi.CreateRequest();
-                                request.Body = {};
-                                request.Body.Title = $("input[name='txtTitle']").val();
-                                request.Body.FriendLinkID = $("input[name='FriendLinkID']").val();
-                                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-                                request.Body.MerchantAppID = $("input[name='txtMerchantAppID']").val();
-                                return request;
-                            }
-                        };
-                    }
+                txtUserName: {
+                    required: true
                 },
                 txtEmail: "email"
             }
@@ -144,17 +130,17 @@ app.FriendLinksAdd = {
         });
     },
     /**
-     * 删除友情链接
+     * 删除评论
      */
     Del: function () {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
             var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#FriendLinkID").val()];
+            request.Body = [$("#CommentsID").val()];
 
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "FriendLinks/Delete",
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Comments/Delete",
                     contentType: "application/json",
                     data: JSON.stringify(request),
                     type: "POST"
