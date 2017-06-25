@@ -138,7 +138,7 @@ app.SysRoleList = {
      * 获取已选择的行id数组
      */
     GetSelectedIds: function () {
-        var ids = [];
+        var ids = [] as any[];
         var rows = this.GetSelectRows();
         if (rows && rows.length > 0) {
             for (var i = 0; i < rows.length; i++) {

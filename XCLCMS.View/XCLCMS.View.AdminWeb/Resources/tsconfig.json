@@ -12,7 +12,9 @@
 //  "include": ["./Js/App/*"]
 //}
 
-
 {
-  "compilerOptions": {"sourceMap": true}
+  "compilerOptions": {
+    "sourceMap": true,
+    "strictNullChecks": true
+  }
 }
