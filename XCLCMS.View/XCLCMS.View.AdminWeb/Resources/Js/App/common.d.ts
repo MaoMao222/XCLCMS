@@ -1,9 +1,28 @@
-﻿interface IAnyPropObject {
+﻿/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
+interface IAnyPropObject {
     [name: string]: any
 }
 
-declare var $: IAnyPropObject & ((str: string) => any) & ((...args: any[]) => any);
-declare var jQuery: IAnyPropObject & ((str: string) => any) & ((...args: any[]) => any);
+interface IEasyUI {
+    treegrid: any;
+    tabs: any;
+    numberbox: any;
+}
+
+interface JQueryStatic {
+    XGoAjax: ((ops?: IAnyPropObject) => any) & any;
+    XCLTableList: (ops?: IAnyPropObject) => any;
+}
+
+interface JQuery extends IEasyUI {
+    validate: (ops?: IAnyPropObject) => any;
+    readmore: (ops?: IAnyPropObject) => any;
+}
+
+interface HTMLElement {
+    reset: () => void;
+}
+
 declare var XJ: IAnyPropObject;
 declare var XCLCMSWebApi: IAnyPropObject;
 declare var XCLCMSPageGlobalConfig: IAnyPropObject;

@@ -9,6 +9,7 @@
   "author": "https://github.com/xucongli1989",
   "license": "https://github.com/xucongli1989/XCLCMS/blob/master/LICENSE",
   "dependencies": {
+    "@types/jquery": "^1.10.32",
     "requirejs": "^2.3.3",
     "ts-loader": "^2.1.0",
     "typescript": "^2.3.4",
