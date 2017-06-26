@@ -4,29 +4,25 @@ import common from "./Common";
 import userControl from "./UserControl";
 
 /**
- * 广告位管理
- * @type type
- */
-let app: IAnyPropObject = {};
-
-/**
  * 广告位列表
- * @type type
  */
-app.AdsList = {
-    Init: function () {
+class AdsList {
+    /**
+     * 初始化
+     */
+    Init(): void {
         let _this = this;
         $("#btnUpdate").on("click", function () {
             return _this.Update();
         });
         $("#btnDel").on("click", function () {
             return _this.Del();
-        })
-    },
+        });
+    };
     /**
      * 返回已选择的value数组
      */
-    GetSelectValue: function () {
+    GetSelectValue(): Array<string> | null {
         let selectVal = $(".XCLTableCheckAll").val();
         let ids = selectVal.split(',');
         if (selectVal && selectVal !== "" && ids.length > 0) {
@@ -34,11 +30,11 @@ app.AdsList = {
         } else {
             return null;
         }
-    },
+    };
     /**
      * 打开广告位【修改】页面
      */
-    Update: function () {
+    Update(): boolean {
         let $btn = $("#btnUpdate"), ids = this.GetSelectValue();
         if (ids && ids.length === 1) {
             let query = {
@@ -53,11 +49,11 @@ app.AdsList = {
             art.dialog.tips("请选择一条记录进行修改操作！");
             return false;
         }
-    },
+    };
     /**
      * 删除广告位
      */
-    Del: function () {
+    Del(): boolean {
         let ids = this.GetSelectValue();
         if (!ids || ids.length == 0) {
             art.dialog.tips("请至少选择一条记录进行操作！");
@@ -82,20 +78,23 @@ app.AdsList = {
 
         return false;
     }
-};
+}
 
 /**
  * 广告位添加与修改页
  */
-app.AdsAdd = {
+class AdsAdd {
     /**
-    * 输入元素
-    */
-    Elements: {
+* 输入元素
+*/
+    Elements: any = {
         Init: function () {
         }
-    },
-    Init: function () {
+    }
+    /**
+     * 初始化
+     */
+    Init(): void {
         let _this = this;
         _this.Elements.Init();
         _this.InitValidator();
@@ -109,11 +108,11 @@ app.AdsAdd = {
         $("#btnDel").on("click", function () {
             return _this.Del();
         });
-    },
+    }
     /**
-     * 表单验证初始化
-     */
-    InitValidator: function () {
+ * 表单验证初始化
+ */
+    InitValidator(): void {
         let validator = $("form:first").validate({
             rules: {
                 txtTitle: {
@@ -143,11 +142,11 @@ app.AdsAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
+    }
     /**
-     * 删除广告位
-     */
-    Del: function () {
+ * 删除广告位
+ */
+    Del(): any {
         art.dialog.confirm("您确定要删除此信息吗？", function () {
             let request = XCLCMSWebApi.CreateRequest();
             request.Body = [$("#AdsID").val()];
@@ -165,4 +164,14 @@ app.AdsAdd = {
         return false;
     }
 }
-export default app;
+
+class App {
+    constructor() {
+        this.AdsAdd = new AdsAdd();
+        this.AdsList = new AdsList();
+    }
+    AdsList: AdsList;
+    AdsAdd: AdsAdd;
+}
+
+export default new App();

@@ -31,7 +31,7 @@ var app = {
      * @param {type} validator
      * @returns {unresolved}
      */
-    CommonFormValid: function (validator: any) {
+    CommonFormValid: function (validator: any): boolean {
         var _this = this;
         var result = validator.form();
         if (!result) {
@@ -46,7 +46,7 @@ var app = {
      * @param {type} callback
      * @returns {undefined}
      */
-    BindLinkButtonEvent: function (eventName: string, $btn: any, callback: any) {
+    BindLinkButtonEvent: function (eventName: string, $btn: any, callback: any): void {
         eventName = eventName || "click";
         $btn = $btn || $("#btnSave");
         $btn.on(eventName, function () {
@@ -73,7 +73,7 @@ var app = {
     /**
      * 自动生成code
      */
-    CreateAutoCode: function () {
+    CreateAutoCode: function (): string {
         var data: IAnyPropObject = {};
         $.XGoAjax({
             ajax: {
