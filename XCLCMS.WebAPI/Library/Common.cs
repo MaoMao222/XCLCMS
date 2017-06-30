@@ -37,13 +37,16 @@ namespace XCLCMS.WebAPI.Library
             XCLCMS.Lib.Model.ActionContextInfoEntity model = null;
 
             //header
-            var extendHeaders = actionContext.Request.Headers?.GetValues("XCLCMSHeaders")?.FirstOrDefault();
-            if (!string.IsNullOrWhiteSpace(extendHeaders))
+            if (null!= actionContext.Request.Headers && actionContext.Request.Headers.Contains("XCLCMSHeaders"))
             {
-                model = XCLNetTools.Serialize.JSON.DeSerialize<XCLCMS.Lib.Model.ActionContextInfoEntity>(extendHeaders, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft);
-                if (null != model && model.AppID > 0)
+                var extendHeaders = actionContext.Request.Headers.GetValues("XCLCMSHeaders")?.FirstOrDefault();
+                if (!string.IsNullOrWhiteSpace(extendHeaders))
                 {
-                    return model;
+                    model = XCLNetTools.Serialize.JSON.DeSerialize<XCLCMS.Lib.Model.ActionContextInfoEntity>(extendHeaders, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft);
+                    if (null != model && model.AppID > 0)
+                    {
+                        return model;
+                    }
                 }
             }
 
