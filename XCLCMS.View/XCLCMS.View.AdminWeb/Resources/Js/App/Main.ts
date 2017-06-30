@@ -17,6 +17,17 @@ let app = {
             isExclusive: false
         });
 
+        //ajax配置
+        $.ajaxSetup({
+            headers: {
+                "XCLCMSHeaders": JSON.stringify({
+                    AppID: XCLCMSPageGlobalConfig.AppID,
+                    AppKey: XCLCMSPageGlobalConfig.AppKey,
+                    UserToken: XCLCMSPageGlobalConfig.UserToken
+                })
+            }
+        });
+
         //重写全局的alert
         window.alert = art.dialog.alert;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XCLCMS.WebAPI.Model
+namespace XCLCMS.Lib.Model
 {
     /// <summary>
     /// 请求上下文基本信息实体

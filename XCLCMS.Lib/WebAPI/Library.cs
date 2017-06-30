@@ -50,6 +50,12 @@ namespace XCLCMS.Lib.WebAPI
             httpRequest.AddHeader("Accept", "application/json");
             httpRequest.AddHeader("Accept-Encoding", "GZIP");
             httpRequest.AddHeader("Content-Type", "application/json");
+            httpRequest.AddHeader("XCLCMSHeaders", XCLNetTools.Serialize.JSON.Serialize(new XCLCMS.Lib.Model.ActionContextInfoEntity()
+            {
+                AppID = request.AppID,
+                AppKey = request.AppKey,
+                UserToken = request.UserToken
+            }));
             client.Timeout = 30000;
             client.Encoding = System.Text.Encoding.UTF8;
 

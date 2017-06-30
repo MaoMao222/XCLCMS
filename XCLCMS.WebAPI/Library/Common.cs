@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http.Controllers;
@@ -27,13 +28,24 @@ namespace XCLCMS.WebAPI.Library
         /// <summary>
         /// 从请求上下文中获取参数的关键信息
         /// </summary>
-        public static XCLCMS.WebAPI.Model.ActionContextInfoEntity GetInfoFromActionContext(HttpActionContext actionContext)
+        public static XCLCMS.Lib.Model.ActionContextInfoEntity GetInfoFromActionContext(HttpActionContext actionContext)
         {
             if (null == actionContext || null == actionContext.Request)
             {
                 return null;
             }
-            XCLCMS.WebAPI.Model.ActionContextInfoEntity model = null;
+            XCLCMS.Lib.Model.ActionContextInfoEntity model = null;
+
+            //header
+            var extendHeaders = actionContext.Request.Headers?.GetValues("XCLCMSHeaders")?.FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(extendHeaders))
+            {
+                model = XCLNetTools.Serialize.JSON.DeSerialize<XCLCMS.Lib.Model.ActionContextInfoEntity>(extendHeaders, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft);
+                if (null != model && model.AppID > 0)
+                {
+                    return model;
+                }
+            }
 
             //post参数
             if (actionContext.Request.Method == HttpMethod.Post)
@@ -43,7 +55,7 @@ namespace XCLCMS.WebAPI.Library
                 {
                     return model;
                 }
-                model = new Model.ActionContextInfoEntity();
+                model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
                 var jobj = JObject.Parse(body);
                 JToken jtoken = null;
                 if (jobj.TryGetValue("AppID", out jtoken))
@@ -66,12 +78,13 @@ namespace XCLCMS.WebAPI.Library
                 var queryString = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
                 if (null != queryString)
                 {
-                    model = new Model.ActionContextInfoEntity();
+                    model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
                     model.AppID = XCLNetTools.Common.DataTypeConvert.ToLong(queryString["AppID"]);
                     model.AppKey = queryString["AppKey"];
                     model.UserToken = queryString["UserToken"];
                 }
             }
+
             return model;
         }
     }

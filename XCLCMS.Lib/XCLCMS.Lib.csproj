@@ -122,6 +122,7 @@
     <Compile Include="Filters\FunctionFilter.cs" />
     <Compile Include="Filters\PermissionFilter.cs" />
     <Compile Include="Common\LoginHelper.cs" />
+    <Compile Include="Model\ActionContextInfoEntity.cs" />
     <Compile Include="Model\CommonModel.cs" />
     <Compile Include="Model\PageGlobalConfig.cs" />
     <Compile Include="Permission\PerHelper.cs" />
