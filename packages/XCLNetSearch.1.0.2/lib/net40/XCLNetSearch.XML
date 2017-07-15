@@ -23,6 +23,11 @@
              <param name="param">Request.QueryString["where"]</param>
              <returns></returns>
         </member>
+        <member name="T:XCLNetSearch.Common.SearchDateFmt">
+            <summary>
+            查询的时间格式
+            </summary>
+        </member>
         <member name="M:XCLNetSearch.Common.GetTimeSqlInfoByFmt(System.String,XCLNetSearch.Common.SearchDateFmt)">
             <summary>
             根据日期格式返回SQL时间语句
@@ -89,9 +94,9 @@
             程序集内部资源访问
             </summary>
         </member>
-        <member name="T:XCLNetSearch.Common.SearchDateFmt">
+        <member name="T:XCLNetSearch.CommonState.LeftBracket">
             <summary>
-            查询的时间格式
+            左括号
             </summary>
         </member>
         <member name="M:XCLNetSearch.CommonState.GetLeftBracket(XCLNetSearch.CommonState.LeftBracket)">
@@ -101,12 +106,22 @@
             <param name="m"></param>
             <returns></returns>
         </member>
+        <member name="T:XCLNetSearch.CommonState.RightBracket">
+            <summary>
+            右括号
+            </summary>
+        </member>
         <member name="M:XCLNetSearch.CommonState.GetRightBracket(XCLNetSearch.CommonState.RightBracket)">
             <summary>
             获取实际右括号
             </summary>
             <param name="m"></param>
             <returns></returns>
+        </member>
+        <member name="T:XCLNetSearch.CommonState.logic">
+            <summary>
+            逻辑
+            </summary>
         </member>
         <member name="M:XCLNetSearch.CommonState.GetLogic(XCLNetSearch.CommonState.logic)">
             <summary>
@@ -115,34 +130,14 @@
             <param name="m"></param>
             <returns></returns>
         </member>
-        <member name="M:XCLNetSearch.CommonState.GetSymbol(XCLNetSearch.CommonState.Symbol)">
-            <summary>
-            根据符号枚举返回实际符号
-            </summary>
-        </member>
-        <member name="T:XCLNetSearch.CommonState.LeftBracket">
-            <summary>
-            左括号
-            </summary>
-        </member>
-        <member name="T:XCLNetSearch.CommonState.RightBracket">
-            <summary>
-            右括号
-            </summary>
-        </member>
-        <member name="T:XCLNetSearch.CommonState.logic">
-            <summary>
-            逻辑
-            </summary>
-        </member>
         <member name="T:XCLNetSearch.CommonState.Symbol">
             <summary>
             符号enum
             </summary>
         </member>
-        <member name="M:XCLNetSearch.EnumObj.IsExistEnumValue(System.Int32,System.Type)">
+        <member name="M:XCLNetSearch.CommonState.GetSymbol(XCLNetSearch.CommonState.Symbol)">
             <summary>
-            判断数字是否属于该枚举
+            根据符号枚举返回实际符号
             </summary>
         </member>
         <member name="P:XCLNetSearch.EnumObj.Text">
@@ -153,6 +148,11 @@
         <member name="P:XCLNetSearch.EnumObj.Value">
             <summary>
             值
+            </summary>
+        </member>
+        <member name="M:XCLNetSearch.EnumObj.IsExistEnumValue(System.Int32,System.Type)">
+            <summary>
+            判断数字是否属于该枚举
             </summary>
         </member>
         <member name="T:XCLNetSearch.Search">
@@ -168,14 +168,14 @@
             说明信息
             </summary>
         </member>
-        <member name="M:XCLNetSearch.Search.InitData">
-            <summary>
-            初始化
-            </summary>
-        </member>
         <member name="P:XCLNetSearch.Search.GetGuid">
             <summary>
             guid作为容器ID
+            </summary>
+        </member>
+        <member name="M:XCLNetSearch.Search.InitData">
+            <summary>
+            初始化
             </summary>
         </member>
         <member name="P:XCLNetSearch.Search.IsOnLoadShow">

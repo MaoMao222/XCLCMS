@@ -39,8 +39,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetLogger">
-      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetLogger.dll</HintPath>
+    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +52,9 @@
       <Project>{64ad7c94-7c7d-4674-98fd-c1a19418bcce}</Project>
       <Name>XCLCMS.IService.Logger</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

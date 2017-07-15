@@ -45,8 +45,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetTools">
-      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.6.3.38106, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XCLNetTools.2.6.3\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +115,9 @@
       <Name>XCLCMS.Data.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

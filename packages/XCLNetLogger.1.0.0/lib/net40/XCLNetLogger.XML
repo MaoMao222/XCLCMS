@@ -9,16 +9,16 @@
             log配置
             </summary>
         </member>
+        <member name="P:XCLNetLogger.Config.LogConfig.GetXLoggerConfig">
+            <summary>
+            当前log的配置信息
+            </summary>
+        </member>
         <member name="M:XCLNetLogger.Config.LogConfig.SetConfig(System.String)">
             <summary>
             设置配置信息
             </summary>
             <param name="configPath">配置文件所在路径</param>
-        </member>
-        <member name="P:XCLNetLogger.Config.LogConfig.GetXLoggerConfig">
-            <summary>
-            当前log的配置信息
-            </summary>
         </member>
         <member name="T:XCLNetLogger.Config.LogConfig.LogLevel">
             <summary>
@@ -64,6 +64,13 @@
             <summary>
             获取用户ip地址
             </summary>
+        </member>
+        <member name="M:XCLNetLogger.Lib.Common.InsertLogToDB(System.Web.HttpContext,XCLNetLogger.Model.LogModel)">
+            <summary>
+            向数据库中写入日志信息
+            </summary>
+            <param name="context">上下文</param>
+            <param name="model">日志model</param>
         </member>
         <member name="T:XCLNetLogger.Log">
             <summary>

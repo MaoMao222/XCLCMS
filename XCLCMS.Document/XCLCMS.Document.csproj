@@ -127,12 +127,6 @@
     <Content Include="Libs\MvcPager\3.0\Webdiyer.MvcPager.XML" />
     <Content Include="Libs\MvcPager\3.0\zh-CHS\Webdiyer.MvcPager.resources.dll" />
     <Content Include="Libs\MvcPager\MvcPager.dll" />
-    <Content Include="Libs\XCLNetLogger.dll" />
-    <Content Include="Libs\XCLNetLogger.XML" />
-    <Content Include="Libs\XCLNetSearch.dll" />
-    <Content Include="Libs\XCLNetSearch.xml" />
-    <Content Include="Libs\XCLNetTools.dll" />
-    <Content Include="Libs\XCLNetTools.xml" />
     <Content Include="数据库设计\XCLCMS.pdb" />
     <Content Include="软件著作权\XCLCMS后台管理系统v1.0\软著登字第1554794号.txt" />
   </ItemGroup>

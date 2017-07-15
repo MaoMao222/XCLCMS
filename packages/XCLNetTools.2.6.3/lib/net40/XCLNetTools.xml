@@ -1153,7 +1153,21 @@
             <param name="commandParameters">SqlParameter参数数组</param>
             <returns>返回命令影响的行数</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.String,System.String,System.Object[])" -->
+        <member name="M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.String,System.String,System.Object[])">
+            <summary>
+            执行指定连接字符串的存储过程,将对象数组的值赋给存储过程参数,
+            此方法需要在参数缓存方法中探索参数并生成参数.
+            </summary>
+            <remarks>
+            这个方法没有提供访问输出参数和返回值.
+            示例:
+             int result = ExecuteNonQuery(connString, "PublishOrders", 24, 36);
+            </remarks>
+            <param name="connectionString">一个有效的数据库连接字符串</param>
+            <param name="spName">存储过程名称</param>
+            <param name="parameterValues">分配到存储过程输入参数的对象数组</param>
+            <returns>返回受影响的行数</returns>
+        </member>
         <member name="M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
             <summary>
             执行指定数据库连接对象的命令
@@ -1195,7 +1209,19 @@
             <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
             <returns>返回影响的行数</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)" -->
+        <member name="M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            执行带事务的SqlCommand.
+            </summary>
+            <remarks>
+            示例.:
+             int result = ExecuteNonQuery(trans, CommandType.StoredProcedure, "PublishOrders");
+            </remarks>
+            <param name="transaction">一个有效的数据库连接对象</param>
+            <param name="commandType">命令类型(存储过程,命令文本或其它.)</param>
+            <param name="commandText">存储过程名称或T-SQL语句</param>
+            <returns>返回影响的行数</returns>
+        </member>
         <member name="M:XCLNetTools.DataBase.MSSQL.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
             <summary>
             执行带事务的SqlCommand(指定参数).
@@ -2648,6 +2674,11 @@
             错误码
             </summary>
         </member>
+        <member name="P:XCLNetTools.Entity.Message.JsonMsgHead.IsException">
+            <summary>
+            是否为异常
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Entity.MethodResult`1">
             <summary>
             方法返回值实体，主要是方便一个方法输出多个信息时使用，同时也减少使用out返回结果信息
@@ -3151,6 +3182,26 @@
             值
             </summary>
         </member>
+        <member name="T:XCLNetTools.Modules.ErrorHttpModule">
+            <summary>
+            异常处理
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.Modules.ErrorHttpModule.Init(System.Web.HttpApplication)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.Modules.ErrorHttpModule.Application_Error(System.Object,System.EventArgs)">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.Modules.ErrorHttpModule.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Office.ExcelHandler.DataToExcel">
             <summary>
             操作EXCEL导出数据报表的类
@@ -3367,6 +3418,7 @@
             <summary>
             向文本框写入数据，对指定WorkSheet操作
             </summary>
+            <param name="sheetIndex">index</param>
             <param name="ht">Hashtable的键值对保存文本框的ID和数据</param>
         </member>
         <member name="M:XCLNetTools.Office.ExcelHandler.ExcelHelper.SetCells(System.Int32,System.Int32,System.String)">
@@ -3396,6 +3448,7 @@
             <summary>
             向单元格写入数据，对指定WorkSheet操作
             </summary>
+            <param name="sheetIndex">index</param>
             <param name="ht">Hashtable的键值对保存单元格的位置索引（行索引和列索引用“,”隔开）和数据</param>
         </member>
         <member name="M:XCLNetTools.Office.ExcelHandler.ExcelHelper.SetCells(System.Int32,System.String[])">
@@ -3406,12 +3459,14 @@
             如果Excel的单元格格式设置为数字，日期或者其他类型时，需要设置这些单元格的FormulaR1C1属性，
             否则写到这些单元格的数据将不会按照预先设定的格式显示
             </remarks>
+            <param name="sheetIndex">index</param>
             <param name="arr">保存单元格的位置索引（行索引和列索引用“,”隔开）和数据</param>
         </member>
         <member name="M:XCLNetTools.Office.ExcelHandler.ExcelHelper.SetCells(System.String,System.Collections.Hashtable)">
             <summary>
             向单元格写入数据，对指定WorkSheet操作
             </summary>
+            <param name="sheetName">sheet name</param>
             <param name="ht">Hashtable的键值对保存单元格的位置索引（行索引和列索引用“,”隔开）和数据</param>
         </member>
         <member name="M:XCLNetTools.Office.ExcelHandler.ExcelHelper.MergeCells(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
@@ -3628,6 +3683,7 @@
             <summary>
             合并单元格，并赋值，对指定WorkSheet操作
             </summary>
+            <param name="sheet">sheet</param>
             <param name="beginRowIndex">开始行索引</param>
             <param name="beginColumnIndex">开始列索引</param>
             <param name="endRowIndex">结束行索引</param>
@@ -3638,6 +3694,7 @@
             <summary>
             将指定索引列的数据相同的行合并，对指定WorkSheet操作
             </summary>
+            <param name="sheet">sheet</param>
             <param name="columnIndex">要合并的列索引</param>
             <param name="beginRowIndex">合并开始行索引</param>
             <param name="rows">要合并的行数</param>
@@ -4009,6 +4066,16 @@
             RSA 签名验证
             </summary>
         </member>
+        <member name="M:XCLNetTools.Encrypt.RSACryption.SignatureDeformatter(System.String,System.Byte[],System.String)">
+            <summary>
+            RSA签名
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.Encrypt.RSACryption.SignatureDeformatter(System.String,System.String,System.String)">
+            <summary>
+            RSA签名
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Enum.CommonEnum">
             <summary>
             常用枚举常量
@@ -4127,6 +4194,21 @@
         <member name="F:XCLNetTools.Enum.CommonEnum.DiffResultFormat.dd">
             <summary>
             天数
+            </summary>
+        </member>
+        <member name="T:XCLNetTools.Enum.CommonEnum.DateFormat">
+            <summary>
+            日期或时间格式枚举
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.DateFormat.NONE">
+            <summary>
+            默认
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.DateFormat.dd_MMM_yyyy">
+            <summary>
+            如：03 Feb 1988
             </summary>
         </member>
         <member name="T:XCLNetTools.Enum.CommonEnum.ThumbImageModeEnum">
@@ -5067,7 +5149,6 @@
         <member name="T:XCLNetTools.FTP.FTPClient">
             <summary>
             FTP操作客户端类
-            <seealso cref="!:http://www.cnblogs.com/sufei/archive/2012/12/09/2810197.html"/>
             </summary>
         </member>
         <member name="M:XCLNetTools.FTP.FTPClient.#ctor">
@@ -5193,6 +5274,11 @@
             </summary>
             <param name="strMask">文件名的匹配字符串</param>
         </member>
+        <member name="M:XCLNetTools.FTP.FTPClient.NewPutByGuid(System.String,System.String)">
+            <summary>
+            上传文件
+            </summary>
+        </member>
         <member name="M:XCLNetTools.FTP.FTPClient.GetFileSize(System.String)">
             <summary>
             获取文件大小
@@ -5261,6 +5347,7 @@
             上传一个文件
             </summary>
             <param name="strFileName">本地文件名</param>
+            <param name="strGuid">guid</param>
         </member>
         <member name="M:XCLNetTools.FTP.FTPClient.MkDir(System.String)">
             <summary>
@@ -5772,26 +5859,6 @@
             <param name="charChinese">汉字</param>
             <returns>拼音</returns>
         </member>
-        <member name="T:XCLNetTools.Message.Error.ErrorHttpModule">
-            <summary>
-            异常处理
-            </summary>
-        </member>
-        <member name="M:XCLNetTools.Message.Error.ErrorHttpModule.Init(System.Web.HttpApplication)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:XCLNetTools.Message.Error.ErrorHttpModule.Application_Error(System.Object,System.EventArgs)">
-            <summary>
-            错误
-            </summary>
-        </member>
-        <member name="M:XCLNetTools.Message.Error.ErrorHttpModule.Dispose">
-            <summary>
-            Dispose
-            </summary>
-        </member>
         <member name="T:XCLNetTools.Message.MessageModel">
             <summary>
             消息提示实体类(用于json属性)
@@ -5815,6 +5882,11 @@
         <member name="P:XCLNetTools.Message.MessageModel.MessageMore">
             <summary>
             消息详细信息
+            </summary>
+        </member>
+        <member name="P:XCLNetTools.Message.MessageModel.ErrorMessage">
+            <summary>
+            错误消息信息
             </summary>
         </member>
         <member name="P:XCLNetTools.Message.MessageModel.Url">
@@ -6427,6 +6499,14 @@
             </summary>
             <param name="ticks">时间刻度ticks值</param>
             <returns>秒</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DateHelper.GetDateString(System.DateTime,XCLNetTools.Enum.CommonEnum.DateFormat)">
+            <summary>
+            将日期返回为指定的日期格式
+            </summary>
+            <param name="dt">日期</param>
+            <param name="format">格式枚举</param>
+            <returns>转换后的日期字符串</returns>
         </member>
         <member name="T:XCLNetTools.StringHander.FormHelper">
             <summary>
@@ -7258,6 +7338,11 @@
         <member name="M:XCLNetTools.XML.XMLHelper.UpdateXMLNodeInnerText(System.String,System.String,System.String)">
             <summary>
             更新指定xpath节点的innerText
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ExtensionAttribute">
+            <summary>
+            扩展属性
             </summary>
         </member>
     </members>

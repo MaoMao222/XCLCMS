@@ -45,8 +45,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetTools">
-      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.6.3.38106, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XCLNetTools.2.6.3\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +99,9 @@
       <Name>XCLCMS.Data.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

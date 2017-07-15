@@ -107,12 +107,11 @@
       <HintPath>..\XCLCMS.View\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XCLNetLogger">
-      <HintPath>..\XCLCMS.Document\Libs\XCLNetLogger.dll</HintPath>
+    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
     </Reference>
-    <Reference Include="XCLNetTools, Version=1.0.5474.21774, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.6.3.38106, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XCLNetTools.2.6.3\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

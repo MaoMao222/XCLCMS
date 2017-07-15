@@ -40,8 +40,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetTools">
-      <HintPath>..\..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.6.3.38106, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XCLNetTools.2.6.3\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +85,9 @@
       <Project>{61eca097-bb37-4c8d-9284-fd7d8c564869}</Project>
       <Name>XCLCMS.IService.WebAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

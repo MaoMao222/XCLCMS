@@ -127,9 +127,8 @@
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XCLNetTools, Version=2.3.5944.18941, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XCLCMS.Document\Libs\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.6.3.38106, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XCLNetTools.2.6.3\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
