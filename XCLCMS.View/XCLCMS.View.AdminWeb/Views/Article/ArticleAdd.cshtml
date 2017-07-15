@@ -109,17 +109,13 @@
                     <td>
                         <input id="selArticleType" name="selArticleType" value="@Model.Article.ArticleTypeIDs" style="width:200px;height:25px;" multiple />
                     </td>
-                    <td class="XCLTitle">meta关键字：</td>
+                    <td class="XCLTitle">网页关键字：</td>
                     <td>
-                        <textarea id="txtKeyWords" name="txtKeyWords" style="height:40px;">@Model.Article.KeyWords</textarea>
-                        <p></p>
-                        <span class="XCLNote">注：多个请用英文逗号（,）隔开！</span>
+                        <textarea class="easyui-tagbox"  id="txtKeyWords" name="txtKeyWords" style="height:40px;width:65%;">@Model.Article.KeyWords</textarea>
                     </td>
                     <td class="XCLTitle">标签：</td>
                     <td>
-                        <textarea id="txtTags" name="txtTags" style="height:40px;">@Model.Article.Tags</textarea>
-                        <p></p>
-                        <span class="XCLNote">注：多个请用英文逗号（,）隔开！</span>
+                        <textarea class="easyui-tagbox" id="txtTags" name="txtTags" style="height:40px;width:70%;">@Model.Article.Tags</textarea>
                     </td>
                 </tr>
                 <tr>

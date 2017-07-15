@@ -3,195 +3,199 @@
 }
 @model XCLCMS.View.AdminWeb.Models.Article.ArticleShowVM
 
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" rowspan="2" style="width:10%">标题：</td>
+                <td style="width:30%">
+                    主标题：
+                    @Model.Article.Title
+                </td>
+                <td class="XCLTitle" style="width:10%">作者：</td>
+                <td style="width:20%">
+                    @Model.Article.AuthorName
+                </td>
+                <td class="XCLTitle" style="width:10%">来源：</td>
+                <td style="width:20%">
+                    @Model.Article.FromInfo
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    子标题：
+                    @Model.Article.SubTitle
+                </td>
+                <td class="XCLTitle">内容类型：</td>
+                <td>
+                    <table style="width:100%">
+                        <tr>
+                            <td align="right">类型</td>
+                            <td>
+                                @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleContentTypeEnum), Model.Article.ArticleContentType)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">跳转链接地址</td>
+                            <td>
+                                @Model.Article.LinkUrl
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="XCLTitle">打开方式：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.URLOpenTypeEnum), Model.Article.URLOpenType)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">所属商户：</td>
+                <td>@Model.Article.MerchantName</td>
+                <td class="XCLTitle">所属应用：</td>
+                <td>@Model.Article.MerchantAppName</td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">分类：</td>
+                <td>
+                    @Model.Article.ArticleTypeNames
+                </td>
+                <td class="XCLTitle">关键字：</td>
+                <td>
+                    @Model.Article.KeyWords
+                </td>
+                <td class="XCLTitle">标签：</td>
+                <td>
+                    @Model.Article.Tags
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">主图：</td>
+                <td>
 
-    <div class="XCLAccordion" style="border-top: none;">
-        <div class="XCLAccordionHeader">1、基本信息：</div>
-        <div class="XCLAccordionBody">
-            <table class="XCLTableEdit">
-                <tr>
-                    <td class="XCLTitle"  rowspan="2">标题：</td>
-                    <td >
-                        主标题：
-                        @Model.Article.Title
-                    </td>
-                    <td class="XCLTitle" >作者：</td>
-                    <td >
-                        @Model.Article.AuthorName
-                    </td>
-                    <td class="XCLTitle" >来源：</td>
-                    <td >
-                        @Model.Article.FromInfo
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        子标题：
-                        @Model.Article.SubTitle
-                    </td>
-                    <td class="XCLTitle">内容类型：</td>
-                    <td>
-                        <table style="width:100%">
-                            <tr>
-                                <td align="right">类型</td>
-                                <td>
-                                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleContentTypeEnum), Model.Article.ArticleContentType)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">跳转链接地址</td>
-                                <td>
-                                    @Model.Article.LinkUrl
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="XCLTitle">打开方式：</td>
-                    <td>
-                        @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.URLOpenTypeEnum), Model.Article.URLOpenType)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">所属商户：</td>
-                    <td>@Model.Article.MerchantName</td>
-                    <td class="XCLTitle">所属应用：</td>
-                    <td>@Model.Article.MerchantAppName</td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">分类：</td>
-                    <td>
-                        @Model.Article.ArticleTypeNames
-                    </td>
-                    <td class="XCLTitle">关键字：</td>
-                    <td>
-                        @Model.Article.KeyWords
-                    </td>
-                    <td class="XCLTitle">标签：</td>
-                    <td>
-                        @Model.Article.Tags
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">主图：</td>
-                    <td>
-                        
-                        @if (Model.MainImgList.IsNotNullOrEmpty())
+                    @if (Model.MainImgList.IsNotNullOrEmpty())
                         {
-                            <ul>
-                                @foreach (var m in Model.MainImgList)
+                        <ul>
+                            @foreach (var m in Model.MainImgList)
                                 {
-                                    <li>
-                                        <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                                        （@m.FileSize KB）
-                                    </li>
+                                <li>
+                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                                    （@m.FileSize KB）
+                                </li>
                                 }
-                            </ul>
+                        </ul>
                         }
-
-                    </td>
-                    <td class="XCLTitle">发布时间：</td>
-                    <td>
-                        @string.Format("{0:yyyy-MM-dd HH:mm}", Model.Article.PublishTime)
-                    </td>
-                    <td class="XCLTitle">唯一标识：</td>
-                    <td>
-                        @Model.Article.Code
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">属性：</td>
-                    <td colspan="5">
-                        可以评论：@Model.Article.IsCanComment
-                        推荐：@Model.Article.IsRecommend
-                        精华：@Model.Article.IsEssence
-                        置顶：@Model.Article.IsTop（@string.Format("{0:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime)~@string.Format("{0:yyyy-MM-dd hh:mm}", Model.Article.TopEndTime)）
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">概述：</td>
-                    <td colspan="5">
-                        @Model.Article.Summary
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">内容：</td>
-                    <td colspan="5">
-                        @Html.Raw(Model.Article.Contents)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">点评：</td>
-                    <td colspan="5">
-                        @Model.Article.Comments
-                    </td>
-                </tr>
-                <tr>
-                    <td class="XCLTitle">附件：</td>
-                    <td colspan="5">
-                        @if (Model.AttactmentList.IsNotNullOrEmpty())
+                </td>
+                <td class="XCLTitle">发布时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm}", Model.Article.PublishTime)
+                </td>
+                <td class="XCLTitle">唯一标识：</td>
+                <td>
+                    @Model.Article.Code
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">属性：</td>
+                <td colspan="5">
+                    <strong>可以评论：</strong>@(Model.Article.IsCanComment == "Y" ? "是" : "否")
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>推荐：</strong>@(Model.Article.IsRecommend == "Y" ? "是" : "否")
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>精华：</strong>@(Model.Article.IsEssence == "Y" ? "是" : "否")
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>置顶：</strong>@(Model.Article.IsTop == "Y" ? "是" : "否")
+                    @if (Model.Article.IsTop == "Y")
                         {
-                            <ul>
-                                @foreach (var m in Model.AttactmentList)
-                                {
-                                    <li>
-                                        <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                                        （@m.FileSize KB）
-                                    </li>
-                                }
-                            </ul>
+                        <span>@string.Format("{0:yyyy-MM-dd hh:mm}~{1:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime, Model.Article.TopEndTime)</span>
                         }
-                    </td>
-                </tr>
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">概述：</td>
+                <td colspan="5">
+                    @Model.Article.Summary
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">内容：</td>
+                <td colspan="5">
+                    @Html.Raw(Model.Article.Contents)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">点评：</td>
+                <td colspan="5">
+                    @Model.Article.Comments
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">附件：</td>
+                <td colspan="5">
+                    @if (Model.AttactmentList.IsNotNullOrEmpty())
+                        {
+                        <ul>
+                            @foreach (var m in Model.AttactmentList)
+                                {
+                                <li>
+                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                                    （@m.FileSize KB）
+                                </li>
+                                }
+                        </ul>
+                        }
+                </td>
+            </tr>
 
-                <tr>
-                    <td class="XCLTitle">浏览数：</td>
-                    <td>
-                        @Model.Article.ViewCount
-                    </td>
-                    <td class="XCLTitle">热度：</td>
-                    <td>
-                        @Model.Article.HotCount
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <tr>
+                <td class="XCLTitle">浏览数：</td>
+                <td>
+                    @Model.Article.ViewCount
+                </td>
+                <td class="XCLTitle">热度：</td>
+                <td>
+                    @Model.Article.HotCount
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
 
-                <tr>
-                    <td class="XCLTitle">好评数：</td>
-                    <td>
-                        @Model.Article.GoodCount
-                    </td>
-                    <td class="XCLTitle">中评数：</td>
-                    <td>
-                        @Model.Article.MiddleCount
-                    </td>
-                    <td class="XCLTitle">差评数：</td>
-                    <td>@Model.Article.BadCount</td>
-                </tr>
+            <tr>
+                <td class="XCLTitle">好评数：</td>
+                <td>
+                    @Model.Article.GoodCount
+                </td>
+                <td class="XCLTitle">中评数：</td>
+                <td>
+                    @Model.Article.MiddleCount
+                </td>
+                <td class="XCLTitle">差评数：</td>
+                <td>@Model.Article.BadCount</td>
+            </tr>
 
-
-                <tr>
-                    <td class="XCLTitle">文章状态：</td>
-                    <td>
-                        @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleStateEnum), Model.Article.ArticleState)
-                    </td>
-                    <td class="XCLTitle">记录状态：</td>
-                    <td>
-                        @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Article.RecordState)
-                    </td>
-                    <td class="XCLTitle">审核状态：</td>
-                    <td>
-                        @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum), Model.Article.VerifyState)
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="XCLHandBar">
-            <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
-        </div>
+            <tr>
+                <td class="XCLTitle">文章状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleStateEnum), Model.Article.ArticleState)
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Article.RecordState)
+                </td>
+                <td class="XCLTitle">审核状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum), Model.Article.VerifyState)
+                </td>
+            </tr>
+        </table>
     </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>
 
 <div class="XCLPanel" style="margin-top: 5px;">
     <div class="XCLPanelHeader XCLBolder">
