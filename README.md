@@ -54,6 +54,10 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 - 广告位管理
 - 标签管理
 
+## 数据流向
+
+![](https://raw.githubusercontent.com/xucongli1989/XCLCMS/master/XCLCMS.Document/Img/%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91%E5%9B%BE.jpg)
+
 ## 部署说明
 
 [请参见部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
