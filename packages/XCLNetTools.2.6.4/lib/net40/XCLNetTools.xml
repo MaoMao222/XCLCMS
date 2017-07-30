@@ -4807,7 +4807,7 @@
             在文件里追加内容
             </summary>
             <param name="filePathName">文件名</param>
-            <param name="writeWord">追加内容</param>
+            <param name="writeWord">追加的内容</param>
             <param name="encode">编码</param>
         </member>
         <member name="M:XCLNetTools.FileHandler.FileDirectory.ReadFileData(System.String)">
