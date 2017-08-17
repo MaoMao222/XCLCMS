@@ -3,36 +3,16 @@
 --DECLARE @@TopCount INT=0
 
 --上一篇
-IF(@@IsASC=0)
-BEGIN
-	 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
-	 WHERE ArticleID<@@ArticleID   AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
-	 @(Model.ArticleRecordState)  
-	 ORDER BY ArticleID DESC
-END
-ELSE
-BEGIN
-	SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	WHERE ArticleID>@@ArticleID     AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
-	@(Model.ArticleRecordState)  
-	ORDER BY ArticleID ASC
-END
+SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
+WHERE ArticleID<@@ArticleID   AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
+@(Model.ArticleRecordState)  
+ORDER BY ArticleID DESC
 
 --下一篇
-IF(@@IsASC=0)
-BEGIN
-	 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	 WHERE ArticleID>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
-	 @(Model.ArticleRecordState)  
-	 ORDER BY ArticleID DESC
-END
-ELSE
-BEGIN
-	SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-	WHERE ArticleID<@@ArticleID    AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID 
-	@(Model.ArticleRecordState)
-	ORDER BY ArticleID ASC
-END
+SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
+WHERE ArticleID>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
+@(Model.ArticleRecordState)  
+ORDER BY ArticleID ASC
 
 --同类其它文章（top n）
 SELECT 
