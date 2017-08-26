@@ -96,7 +96,7 @@ namespace XCLCMS.Data.DAL.View
                                             (
                                                 SELECT
                                                 tb_Article.*,
-                                                ROW_NUMBER() OVER (ORDER BY tb_Article.ArticleID DESC) AS RowNumber
+                                                ROW_NUMBER() OVER (ORDER BY tb_Article.PublishTime DESC) AS RowNumber
                                                 FROM dbo.v_Article AS tb_Article WITH(NOLOCK)
                                                 #join_ArticleType#
                                                 #where#
@@ -153,6 +153,11 @@ namespace XCLCMS.Data.DAL.View
                 {
                     where.Add("tb_Article.FK_MerchantID=@FK_MerchantID");
                     db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.MerchantID);
+                }
+                if (condition.MaxPublishTime.HasValue)
+                {
+                    where.Add("tb_Article.PublishTime<=@MaxPublishTime");
+                    db.AddInParameter(dbCommand, "MaxPublishTime", DbType.DateTime, condition.MaxPublishTime);
                 }
             }
 

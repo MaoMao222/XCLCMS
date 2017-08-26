@@ -1,18 +1,15 @@
-﻿--DECLARE @@ArticleID BIGINT=0
---DECLARE @@IsASC TINYINT=0
---DECLARE @@TopCount INT=0
-
+﻿
 --上一篇
 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
-WHERE ArticleID<@@ArticleID   AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
+WHERE PublishTime<@@PublishTime AND ArticleID<>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
 @(Model.ArticleRecordState)  
-ORDER BY ArticleID DESC
+ORDER BY PublishTime DESC
 
 --下一篇
 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-WHERE ArticleID>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
+WHERE PublishTime>@@PublishTime  AND ArticleID<>@@ArticleID AND  FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
 @(Model.ArticleRecordState)  
-ORDER BY ArticleID ASC
+ORDER BY PublishTime ASC
 
 --同类其它文章（top n）
 SELECT 
@@ -26,4 +23,4 @@ INNER JOIN (
 ) AS c ON b.FK_TypeID=c.FK_TypeID
 WHERE tb_Article.ArticleID<>@@ArticleID  AND tb_Article.FK_MerchantID=@@FK_MerchantID AND tb_Article.FK_MerchantAppID=@@FK_MerchantAppID
 @(Model.ArticleRecordState)  
-ORDER BY tb_Article.ArticleID @(Model.IsASC?"ASC":"DESC")
+ORDER BY tb_Article.PublishTime DESC

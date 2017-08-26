@@ -44,7 +44,7 @@ namespace XCLCMS.Data.Model.View
         private string _tags;
         private string _comments;
         private string _linkurl;
-        private DateTime? _publishtime;
+        private DateTime _publishtime;
         private string _recordstate;
         private DateTime _createtime;
         private long _createrid;
@@ -342,7 +342,7 @@ namespace XCLCMS.Data.Model.View
         /// <summary>
         ///
         /// </summary>
-        public DateTime? PublishTime
+        public DateTime PublishTime
         {
             set { _publishtime = value; }
             get { return _publishtime; }

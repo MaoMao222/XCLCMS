@@ -72,7 +72,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
                     viewModel.Article = new Data.Model.View.v_Article();
                     viewModel.Article.IsCanComment = XCLCMS.Data.CommonHelper.EnumType.YesNoEnum.Y.ToString();
                     viewModel.FormAction = Url.Action("AddSubmit", "Article");
-                    viewModel.Article.PublishTime = DateTime.Now.Date;
+                    viewModel.Article.PublishTime = DateTime.Now;
                     viewModel.Article.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
                     viewModel.Article.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
                     break;
@@ -223,7 +223,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             }
 
             viewModel.Article.MiddleCount = XCLNetTools.StringHander.FormHelper.GetInt("txtMiddleCount");
-            viewModel.Article.PublishTime = XCLNetTools.StringHander.FormHelper.GetDateTimeNull("txtPublishTime");
+            viewModel.Article.PublishTime = XCLNetTools.StringHander.FormHelper.GetDateTime("txtPublishTime",DateTime.Now);
             viewModel.Article.SubTitle = XCLNetTools.StringHander.FormHelper.GetString("txtSubTitle");
             viewModel.Article.Summary = XCLNetTools.StringHander.FormHelper.GetString("txtSummary");
             viewModel.Article.Tags = XCLNetTools.StringHander.FormHelper.GetString("txtTags");

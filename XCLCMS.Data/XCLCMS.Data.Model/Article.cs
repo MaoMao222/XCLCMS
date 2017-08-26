@@ -44,7 +44,7 @@ namespace XCLCMS.Data.Model
         private string _tags;
         private string _comments;
         private string _linkurl;
-        private DateTime? _publishtime;
+        private DateTime _publishtime;
         private long _fk_merchantid = 0;
         private long _fk_merchantappid = 0;
         private string _recordstate;
@@ -337,7 +337,7 @@ namespace XCLCMS.Data.Model
         /// <summary>
         /// 发布时间
         /// </summary>
-        public DateTime? PublishTime
+        public DateTime PublishTime
         {
             set { _publishtime = value; }
             get { return _publishtime; }

@@ -42,7 +42,6 @@ namespace XCLCMS.Service.WebAPI
             var condition = new Data.Model.Custom.ArticleRelationDetailCondition()
             {
                 ArticleID = request.Body,
-                IsASC = false,
                 ArticleRecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString(),
                 TopCount = 6
             };
@@ -195,6 +194,10 @@ namespace XCLCMS.Service.WebAPI
             {
                 request.Body.Article.Title = request.Body.Article.Title.Trim();
             }
+            if (request.Body.Article.PublishTime==DateTime.MinValue)
+            {
+                request.Body.Article.PublishTime = DateTime.Now;
+            }
 
             //商户必须存在
             var merchant = this.merchantBLL.GetModel(request.Body.Article.FK_MerchantID);
@@ -340,6 +343,10 @@ namespace XCLCMS.Service.WebAPI
             if (!string.IsNullOrEmpty(request.Body.Article.Title))
             {
                 request.Body.Article.Title = request.Body.Article.Title.Trim();
+            }
+            if (request.Body.Article.PublishTime== DateTime.MinValue)
+            {
+                request.Body.Article.PublishTime = DateTime.Now;
             }
 
             var model = this.articleBLL.GetModel(request.Body.Article.ArticleID);

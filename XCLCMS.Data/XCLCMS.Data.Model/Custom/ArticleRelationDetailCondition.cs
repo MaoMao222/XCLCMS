@@ -12,12 +12,7 @@ namespace XCLCMS.Data.Model.Custom
         /// 文章ID
         /// </summary>
         public long ArticleID { get; set; }
-
-        /// <summary>
-        /// 是否按主键升序排列
-        /// </summary>
-        public bool IsASC { get; set; }
-
+        
         /// <summary>
         /// 记录状态
         /// </summary>

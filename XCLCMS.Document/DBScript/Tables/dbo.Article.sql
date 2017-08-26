@@ -31,7 +31,7 @@ CREATE TABLE [dbo].[Article]
 [Tags] [nvarchar] (100) COLLATE Chinese_PRC_CI_AS NULL,
 [Comments] [nvarchar] (500) COLLATE Chinese_PRC_CI_AS NULL,
 [LinkUrl] [varchar] (300) COLLATE Chinese_PRC_CI_AS NULL,
-[PublishTime] [datetime] NULL,
+[PublishTime] [datetime] NOT NULL,
 [FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__1881A0DE] DEFAULT ((0)),
 [FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__1975C517] DEFAULT ((0)),
 [RecordState] [char] (1) COLLATE Chinese_PRC_CI_AS NOT NULL,
@@ -42,6 +42,8 @@ CREATE TABLE [dbo].[Article]
 [UpdaterID] [bigint] NOT NULL,
 [UpdaterName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+CREATE NONCLUSTERED INDEX [IX_PublishTime] ON [dbo].[Article] ([PublishTime] DESC) ON [PRIMARY]
+
 ALTER TABLE [dbo].[Article] ADD 
 CONSTRAINT [PK_Article] PRIMARY KEY CLUSTERED  ([ArticleID]) ON [PRIMARY]
 GO

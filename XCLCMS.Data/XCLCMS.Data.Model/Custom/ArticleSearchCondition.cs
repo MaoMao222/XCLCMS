@@ -33,5 +33,10 @@ namespace XCLCMS.Data.Model.Custom
         /// 商户号
         /// </summary>
         public long? MerchantID { get; set; }
+
+        /// <summary>
+        /// 发布时间的最大值
+        /// </summary>
+        public DateTime? MaxPublishTime { get; set; }
     }
 }

@@ -221,16 +221,15 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             string sql = RazorEngine.Engine.Razor.RunCompile(Properties.Resources.Article_GetRelationDetail, "XCLCMS.Data.DAL.Article.GetRelationDetail", null, new
             {
-                ArticleRecordState = null == condition.ArticleRecordState ? string.Empty : " and tb_Article.RecordState=@ArticleRecordState",
-                IsASC = condition.IsASC
+                ArticleRecordState = null == condition.ArticleRecordState ? string.Empty : " and tb_Article.RecordState=@ArticleRecordState"
             });
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
             db.AddInParameter(dbCommand, "ArticleID", DbType.Int64, condition.ArticleID);
-            db.AddInParameter(dbCommand, "IsASC", DbType.Byte, condition.IsASC ? 1 : 0);
             db.AddInParameter(dbCommand, "TopCount", DbType.Int32, condition.TopCount ?? 10);
             db.AddInParameter(dbCommand, "ArticleRecordState", DbType.AnsiString, condition.ArticleRecordState);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "PublishTime", DbType.DateTime, model.PublishTime);
             var ds = db.ExecuteDataSet(dbCommand);
             if (null != ds && null != ds.Tables && ds.Tables.Count == 3)
             {
