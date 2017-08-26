@@ -60,7 +60,7 @@ namespace XCLCMS.Service.WebAPI
             response.Body = new Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<Data.Model.View.v_Article>();
             response.Body.ResultList = vArticleBLL.GetPageList(pager, new XCLNetTools.Entity.SqlPagerConditionEntity()
             {
-                OrderBy = "[ArticleID] desc",
+                OrderBy = "[PublishTime] desc",
                 Where = request.Body.Where
             });
             response.Body.PagerInfo = pager;

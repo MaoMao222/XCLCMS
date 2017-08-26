@@ -33,6 +33,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
                 new XCLNetSearch.SearchFieldInfo("热度","HotCount|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("文章状态","ArticleState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
+                new XCLNetSearch.SearchFieldInfo("发布时间","PublishTime|dateTime|text",""),
                 new XCLNetSearch.SearchFieldInfo("创建时间","CreateTime|dateTime|text",""),
                 new XCLNetSearch.SearchFieldInfo("创建者名","CreaterName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("更新时间","UpdateTime|dateTime|text",""),
