@@ -1,13 +1,14 @@
-﻿
+﻿DECLARE @@dtNow DATETIME =GETDATE()
+
 --上一篇
 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK) 
-WHERE PublishTime<@@PublishTime AND ArticleID<>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID
+WHERE PublishTime<@@PublishTime AND ArticleID<>@@ArticleID  AND FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID AND PublishTime<=@@dtNow AND ArticleState='PUB' AND VerifyState='YES'
 @(Model.ArticleRecordState)  
 ORDER BY PublishTime DESC
 
 --下一篇
 SELECT TOP 1 * FROM dbo.Article as tb_Article WITH(NOLOCK)  
-WHERE PublishTime>@@PublishTime  AND ArticleID<>@@ArticleID AND  FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID  
+WHERE PublishTime>@@PublishTime  AND ArticleID<>@@ArticleID AND  FK_MerchantID=@@FK_MerchantID AND FK_MerchantAppID=@@FK_MerchantAppID   AND PublishTime<=@@dtNow AND ArticleState='PUB' AND VerifyState='YES'
 @(Model.ArticleRecordState)  
 ORDER BY PublishTime ASC
 
@@ -21,6 +22,6 @@ INNER JOIN dbo.ArticleType AS b  WITH(NOLOCK) ON tb_Article.ArticleID=b.FK_Artic
 INNER JOIN (
 	SELECT DISTINCT FK_TypeID FROM dbo.ArticleType WITH(NOLOCK) WHERE FK_ArticleID=@@ArticleID AND RecordState='N'
 ) AS c ON b.FK_TypeID=c.FK_TypeID
-WHERE tb_Article.ArticleID<>@@ArticleID  AND tb_Article.FK_MerchantID=@@FK_MerchantID AND tb_Article.FK_MerchantAppID=@@FK_MerchantAppID
+WHERE tb_Article.ArticleID<>@@ArticleID  AND tb_Article.FK_MerchantID=@@FK_MerchantID AND tb_Article.FK_MerchantAppID=@@FK_MerchantAppID AND tb_Article.PublishTime<=@@dtNow AND tb_Article.ArticleState='PUB' AND tb_Article.VerifyState='YES'
 @(Model.ArticleRecordState)  
 ORDER BY tb_Article.PublishTime DESC
