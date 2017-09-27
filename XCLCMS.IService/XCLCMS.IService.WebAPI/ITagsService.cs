@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using XCLCMS.Data.Model;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.Model.View;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
@@ -24,5 +24,7 @@ namespace XCLCMS.IService.WebAPI
         APIResponseEntity<PageListResponseEntity<v_Tags>> PageList(APIRequestEntity<PageListConditionEntity> request);
 
         APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.Tags> request);
+
+        APIResponseEntity<List<Data.Model.Tags>> GetObjectTags(APIRequestEntity<Tags_ObjectTagsCondition> request);
     }
 }

@@ -131,6 +131,28 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
+        /// 查询指定对象的所有标签列表
+        /// </summary>
+        public List<XCLCMS.Data.Model.Tags> GetModelListByObject(Tags_ObjectTagsCondition condition)
+        {
+            Database db = base.CreateDatabase();
+            DbCommand dbCommand = db.GetSqlStringCommand(@"
+                                                                                                            SELECT
+                                                                                                            b.*
+                                                                                                            FROM dbo.ObjectTag AS a WITH(NOLOCK)
+                                                                                                            INNER JOIN dbo.Tags AS b WITH(NOLOCK) ON a.FK_TagsID=b.TagsID
+                                                                                                            WHERE a.ObjectType=@ObjectType AND a.FK_ObjectID=@FK_ObjectID AND b.FK_MerchantID=@FK_MerchantID AND b.FK_MerchantAppID=@FK_MerchantAppID AND b.RecordState=@RecordState
+                                                                                                        ");
+            db.AddInParameter(dbCommand, "ObjectType", DbType.String, condition.ObjectType);
+            db.AddInParameter(dbCommand, "FK_ObjectID", DbType.Int64, condition.ObjectID);
+            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.FK_MerchantID);
+            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "RecordState", DbType.String, condition.RecordState);
+            var ds = db.ExecuteDataSet(dbCommand);
+            return XCLNetTools.DataSource.DataSetHelper.DataSetToList<XCLCMS.Data.Model.Tags>(ds);
+        }
+
+        /// <summary>
         /// 批量添加tags，并返回添加成功的tagid列表
         /// </summary>
         public XCLNetTools.Entity.MethodResult<Tags_AddMethodResult> Add(List<XCLCMS.Data.Model.Tags> lst)

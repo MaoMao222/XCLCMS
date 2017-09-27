@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 
@@ -86,6 +87,28 @@ namespace XCLCMS.WebAPI.Controllers
                 #endregion 限制商户
 
                 return this.iTagsService.PageList(request);
+            });
+        }
+
+        /// <summary>
+        /// 查询指定对象的所有标签列表
+        /// </summary>
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_View)]
+        public async Task<APIResponseEntity<List<Data.Model.Tags>>> GetObjectTags([FromUri] APIRequestEntity<Tags_ObjectTagsCondition> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant)
+                {
+                    request.Body.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
+                }
+
+                #endregion 限制商户
+
+                return this.iTagsService.GetObjectTags(request);
             });
         }
 

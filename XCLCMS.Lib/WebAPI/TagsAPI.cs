@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 
@@ -23,6 +24,14 @@ namespace XCLCMS.Lib.WebAPI
         public static APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Tags>> PageList(APIRequestEntity<PageListConditionEntity> request)
         {
             return Library.Request<PageListConditionEntity, XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Tags>>(request, "Tags/PageList");
+        }
+
+        /// <summary>
+        /// 查询指定对象的所有标签列表
+        /// </summary>
+        public static APIResponseEntity<List<Data.Model.Tags>> GetObjectTags(APIRequestEntity<Tags_ObjectTagsCondition> request)
+        {
+            return Library.Request<Tags_ObjectTagsCondition, List<Data.Model.Tags>>(request, "Tags/GetObjectTags");
         }
 
         /// <summary>

@@ -52,6 +52,17 @@ namespace XCLCMS.Service.WebAPI
         }
 
         /// <summary>
+        /// 查询指定对象的所有标签列表
+        /// </summary>
+        public APIResponseEntity<List<Data.Model.Tags>> GetObjectTags(APIRequestEntity<Tags_ObjectTagsCondition> request)
+        {
+            var response = new APIResponseEntity<List<XCLCMS.Data.Model.Tags>>();
+            response.Body = tagsBLL.GetModelListByObject(request.Body);
+            response.IsSuccess = true;
+            return response;
+        }
+
+        /// <summary>
         /// 判断标签是否存在
         /// </summary>
         public APIResponseEntity<bool> IsExistTagName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Tags.IsExistTagNameEntity> request)
