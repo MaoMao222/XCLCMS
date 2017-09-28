@@ -46,7 +46,7 @@ app.FriendLinksList = {
                 FriendLinkID: ids[0]
             }
 
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         } else {

@@ -390,7 +390,7 @@ var AdsList = (function () {
                 handletype: "update",
                 AdsID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -568,7 +568,7 @@ app.ArticleList = {
                 handletype: "update",
                 ArticleID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -791,7 +791,7 @@ app.CommentsList = {
                 handletype: "update",
                 CommentsID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -944,7 +944,7 @@ app.FriendLinksList = {
                 handletype: "update",
                 FriendLinkID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -1326,7 +1326,7 @@ app.MerchantList = {
                 handletype: "update",
                 MerchantID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -1462,7 +1462,7 @@ app.MerchantAppList = {
                 handletype: "update",
                 MerchantAppID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -2565,7 +2565,7 @@ app.SysWebSettingList = {
                 handletype: "update",
                 SysWebSettingID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -2718,7 +2718,7 @@ app.TagsList = {
                 handletype: "update",
                 TagsID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }
@@ -2997,7 +2997,7 @@ app.UserInfoList = {
                 handletype: "update",
                 UserInfoID: ids[0]
             };
-            var url = XJ.Url.AddParam($btn.attr("href"), query);
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         }

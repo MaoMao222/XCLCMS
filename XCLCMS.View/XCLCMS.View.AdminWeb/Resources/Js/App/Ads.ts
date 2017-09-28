@@ -42,7 +42,7 @@ class AdsList {
                 AdsID: ids[0]
             }
 
-            let url = XJ.Url.AddParam($btn.attr("href"), query);
+            let url = XJ.Url.UpdateParam($btn.attr("href"), query);
             $btn.attr("href", url);
             return true;
         } else {
