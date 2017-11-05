@@ -254,6 +254,12 @@ namespace XCLCMS.Data.CommonHelper
             VID,
 
             /// <summary>
+            /// 音频 Music
+            /// </summary>
+            [Description("音频")]
+            MUS,
+
+            /// <summary>
             /// 压缩包 RAR
             /// </summary>
             [Description("压缩包")]

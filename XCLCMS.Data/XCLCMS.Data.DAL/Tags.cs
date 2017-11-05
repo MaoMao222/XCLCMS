@@ -149,7 +149,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
             db.AddInParameter(dbCommand, "RecordState", DbType.String, condition.RecordState);
             var ds = db.ExecuteDataSet(dbCommand);
-            return XCLNetTools.DataSource.DataSetHelper.DataSetToList<XCLCMS.Data.Model.Tags>(ds);
+            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Tags>(ds).ToList();
         }
 
         /// <summary>

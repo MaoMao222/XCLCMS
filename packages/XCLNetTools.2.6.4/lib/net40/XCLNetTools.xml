@@ -2184,39 +2184,6 @@
             <param name="dr">要转换的数据</param>
             <returns>list</returns>
         </member>
-        <member name="T:XCLNetTools.DataSource.DataSetHelper">
-            <summary>
-            dataset相关
-            </summary>
-        </member>
-        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataSetToIList``1(System.Data.DataSet)">
-            <summary>
-            将dataset的第一个datatable转为list
-            </summary>
-            <param name="ds">要转换的数据</param>
-            <returns>list</returns>
-        </member>
-        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataTableToIList``1(System.Data.DataTable)">
-            <summary>
-            将dataTable转为list
-            </summary>
-            <param name="dt">要转换的数据</param>
-            <returns>list</returns>
-        </member>
-        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataSetToList``1(System.Data.DataSet)">
-            <summary>
-            将dataset的第一个datatable转为list
-            </summary>
-            <param name="ds">要转换的数据</param>
-            <returns>list</returns>
-        </member>
-        <member name="M:XCLNetTools.DataSource.DataSetHelper.DataTableToList``1(System.Data.DataTable)">
-            <summary>
-            将dataTable转为list
-            </summary>
-            <param name="dt">要转换的数据</param>
-            <returns>list</returns>
-        </member>
         <member name="T:XCLNetTools.DataSource.DataTableHelper">
             <summary>
             datatable相关
@@ -2243,10 +2210,17 @@
         </member>
         <member name="M:XCLNetTools.DataSource.DataTableHelper.ToDataTable``1(System.Collections.Generic.IList{``0})">
             <summary>
-            将List转换成DataTable
+            将List转换成DataTable，如果数据为空，则返回一个没有内容的DataTable
             </summary>
             <param name="data">要转换的数据</param>
             <returns>datatable</returns>
+        </member>
+        <member name="M:XCLNetTools.DataSource.DataTableHelper.ToDataSet``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            将List转换成DataSet
+            </summary>
+            <param name="data">要转换的数据</param>
+            <returns>dataset</returns>
         </member>
         <member name="T:XCLNetTools.Entity.BookmarkEntity">
             <summary>
@@ -2829,8 +2803,7 @@
         </member>
         <member name="T:XCLNetTools.Entity.Office.ExcelHandler.OutPutClass">
             <summary>
-            导出字段实体类
-            （主要是便于在所有导出信息字段类中查询到要导出的记录的字段对应信息）
+            导出字段实体类（数据源中的每个数据表中的字段名与导出后的文件实际显示的字段名的对应关系）
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutClass.TableName">
@@ -2850,7 +2823,7 @@
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutField.oldName">
             <summary>
-            该字段的原始名
+            数据源中的字段名
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutField.newName">
@@ -2865,12 +2838,12 @@
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.TableName">
             <summary>
-            表名（主要是便于在xml字段名list中找到该节点信息）,对应dataSet中的table
+            表名,对应dataSet中的table名（用于在OutPutClass参数中查找字段的对应关系，当没有设置字段对应关系时可以为null）
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.OutPutClass">
             <summary>
-            导出类，包含新旧字段名（为null时，则保持ds中的相应的列名）
+            DataSet中的字段与Sheet中实际显示的字段对应关系设置（为null时，则使用DataSet中的列名）
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.Ds">
@@ -2880,17 +2853,17 @@
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.FileTitle">
             <summary>
-            导出的EXCEL文件的名字
+            导出的EXCEL文件的名字（仅适用于Http环境）
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.ConTitle">
             <summary>
-            excel中第一行的标题
+            Excel中每个Sheet的名称
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.AutoDownLoad">
             <summary>
-            是否自动下载
+            是否自动下载（true：在Http环境自动下载；false：默认行为），默认值为true
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.CustomFileName">
@@ -2905,7 +2878,7 @@
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.FirstRowIndex">
             <summary>
-            填充的数据起始行索引号（0为第一行）
+            填充的数据起始行索引号（0为第一行），默认为1
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.FirstColumnIndex">
@@ -2915,7 +2888,7 @@
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.IsShowCustomLine">
             <summary>
-            是否显示自定义文字行（就是第一行的导出信息）
+            是否显示每个Sheet的第一行的导出状态信息，默认为true
             </summary>
         </member>
         <member name="P:XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass.IsShowFieldLine">
@@ -3211,11 +3184,11 @@
             <summary>
             数据导出excel
             </summary>
-            <param name="tableName">【表名】（主要是便于在字段信息xml的list中查找到当前导出的信息字段对应关系）</param>
-            <param name="outPutClass">导出字段对应关系list</param>
-            <param name="ds">数据源</param>
-            <param name="fileTitle">文件名</param>
-            <param name="conTitle">文件内容第一行的名称</param>
+            <param name="tableName">表名,对应dataSet中的table名（用于在OutPutClass参数中查找字段的对应关系，当没有设置字段对应关系时可以为null）</param>
+            <param name="outPutClass">DataSet中的字段与Sheet中实际显示的字段对应关系设置（为null时，则使用DataSet中的列名）</param>
+            <param name="ds">要导出的DataSet</param>
+            <param name="fileTitle">导出的EXCEL文件的名字（仅适用于Http环境）</param>
+            <param name="conTitle">Excel中每个Sheet的名称</param>
         </member>
         <member name="M:XCLNetTools.Office.ExcelHandler.DataToExcel.OutPutExcel(XCLNetTools.Entity.Office.ExcelHandler.OutPutParamClass)">
             <summary>
@@ -4081,6 +4054,11 @@
             常用枚举常量
             </summary>
         </member>
+        <member name="F:XCLNetTools.Enum.CommonEnum.EnumDic">
+            <summary>
+            当前所有枚举字典(Key为枚举名，Value为枚举的实体形式的列表)
+            </summary>
+        </member>
         <member name="T:XCLNetTools.Enum.CommonEnum.是否">
             <summary>
             是否
@@ -4691,6 +4669,13 @@
             <param name="filePath">文件路径</param>
             <returns>返回True为文本文件，否则是二进制文件</returns>
         </member>
+        <member name="M:XCLNetTools.FileHandler.ComFile.GetFileExtType(System.String)">
+            <summary>
+            判断指定的文件扩展名属于哪种文件类型（若返回-1，则表示在本库预设的类型中没有找到）
+            </summary>
+            <param name="ext">文件扩展名</param>
+            <returns>文件类型枚举</returns>
+        </member>
         <member name="M:XCLNetTools.FileHandler.ComFile.MapPath(System.String)">
             <summary>
             取得文件物理路径
@@ -4823,6 +4808,11 @@
             </summary>
             <param name="absoluteFilePath">文件绝对地址</param>
             <returns>true:删除文件成功,false:删除文件失败</returns>
+        </member>
+        <member name="M:XCLNetTools.FileHandler.FileDirectory.GetDesktopPath">
+            <summary>
+            获取当前操作系统桌面的物理路径，如：C:\Users\XCL\Desktop
+            </summary>
         </member>
         <member name="T:XCLNetTools.FileHandler.UploadEventArgs">
             <summary>
@@ -5477,6 +5467,14 @@
             </summary>
             <param name="dt">要转换的数据</param>
             <returns>list</returns>
+        </member>
+        <member name="M:XCLNetTools.Generic.ListHelper.DataRowToModel``1(System.Data.DataRow)">
+            <summary>
+            将DataRow转为Model
+            </summary>
+            <typeparam name="T">要转换的类型</typeparam>
+            <param name="dr">DataRow对象</param>
+            <returns>实体</returns>
         </member>
         <member name="T:XCLNetTools.Http.CookieHelper">
             <summary>

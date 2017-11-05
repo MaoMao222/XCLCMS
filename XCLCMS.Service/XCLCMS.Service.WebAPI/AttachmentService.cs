@@ -8,6 +8,7 @@ using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
+using static XCLCMS.Data.CommonHelper.EnumType;
 
 namespace XCLCMS.Service.WebAPI
 {
@@ -121,6 +122,36 @@ namespace XCLCMS.Service.WebAPI
             request.Body.UpdaterID = request.Body.CreaterID;
             request.Body.UpdaterName = request.Body.CreaterName;
             request.Body.UpdateTime = request.Body.CreateTime;
+
+            var extType = XCLNetTools.FileHandler.ComFile.GetFileExtType(request.Body.Ext);
+            switch (extType)
+            {
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Txt:
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Office:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.WOR.ToString();
+                    break;
+
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Image:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.IMG.ToString();
+                    break;
+
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Video:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.VID.ToString();
+                    break;
+
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Music:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.MUS.ToString();
+                    break;
+
+                case XCLNetTools.Enum.CommonEnum.FileExtInfoEnum.Compress:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.RAR.ToString();
+                    break;
+
+                default:
+                    request.Body.FormatType = AttachmentFormatTypeEnum.OTH.ToString();
+                    break;
+            }
+
             response.IsSuccess = this.attachmentBLL.Add(request.Body);
 
             if (response.IsSuccess)
