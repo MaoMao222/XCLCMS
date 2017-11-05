@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[Ads]
 [Code] [varchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
 [AdsType] [char] (3) COLLATE Chinese_PRC_CI_AS NULL,
 [Title] [nvarchar] (200) COLLATE Chinese_PRC_CI_AS NULL,
-[Contents] [nvarchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
+[Contents] [nvarchar] (max) COLLATE Chinese_PRC_CI_AS NULL,
 [AdWidth] [int] NOT NULL,
 [AdHeight] [int] NOT NULL,
 [URL] [varchar] (500) COLLATE Chinese_PRC_CI_AS NULL,
@@ -26,7 +26,7 @@ CREATE TABLE [dbo].[Ads]
 [UpdateTime] [datetime] NOT NULL,
 [UpdaterID] [bigint] NOT NULL,
 [UpdaterName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 ALTER TABLE [dbo].[Ads] ADD 
 CONSTRAINT [PK_ADS] PRIMARY KEY CLUSTERED  ([AdsID]) ON [PRIMARY]
 GO
