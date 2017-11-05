@@ -54,7 +54,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 - 广告位管理
 - 标签管理
 
-## 数据流向
+## 数据流
 
 ![](https://raw.githubusercontent.com/xucongli1989/XCLCMS/master/XCLCMS.Document/Img/%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91%E5%9B%BE.jpg)
 
@@ -62,19 +62,22 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 
 [请参见部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
 
+## Web API文档
+
+[http://cms.wodeabc.com/api/help](http://cms.wodeabc.com/api/help) 或 [http://cms.wodeabc.com/api/swagger/](http://cms.wodeabc.com/api/swagger/)
+
 ## 案例
-- 博客站点前台：[我的ABC](http://www.wodeabc.com)
-- Web API文档：[http://cms.wodeabc.com/api/help](http://cms.wodeabc.com/api/help) 或 [http://cms.wodeabc.com/api/swagger/](http://cms.wodeabc.com/api/swagger/)
+- 前台博客站点：[我的ABC](http://www.wodeabc.com)
 - 管理后台（[http://cms.wodeabc.com/admin](http://cms.wodeabc.com/admin)），用户名：test，密码：123456
 
 ## 进度
 - 开始编码于：2014年10月
-- V1.1版本已完成：85%
+- V2.0版本已完成：85%
 - [当前计划安排](https://github.com/xucongli1989/XCLCMS/projects/1)
 
-> 1、由于v1.0版本号已被著作权占用，故正式版的版本号为V1.1
+> 1、由于v1.0版本号已被著作权占用，故正式版的版本号为V2.0
 > 
-> 2、正式版（v1.1）还未开发完成，其中的某些已有模块可能会有较大变动，如果您不介意，在合法的授权协议下也可直接进行二次开发。
+> 2、正式版还未开发完成，其中的某些已有模块可能会有较大变动，如果您不介意，在合法的授权协议下也可直接进行二次开发。
 
 ## 里程碑
 - 2016-12-16——已申请著作权（软著登字第1554794号）
