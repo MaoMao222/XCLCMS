@@ -99,7 +99,7 @@ namespace XCLCMS.Lib.Common
                     for (int i = 0; i < props.Length; i++)
                     {
                         propsName = props[i].Name;
-                        tempKeyModel = all.Where(k => string.Equals(k.Key, propsName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                        tempKeyModel = all.FirstOrDefault(k => string.Equals(k.Key, propsName, StringComparison.OrdinalIgnoreCase));
                         if (null == tempKeyModel)
                         {
                             throw new Exception(string.Format("配置{0}在数据库中不存在！", propsName));

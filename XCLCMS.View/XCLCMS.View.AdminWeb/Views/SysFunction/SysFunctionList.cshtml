@@ -4,33 +4,44 @@
 
 <form>
 
-<div class="XCLPanel" style="margin-top:5px;">
-    <div class="XCLPanelHeader"></div>
-    <div class="XCLPanelBody">
-        <table id="tableSysFunctionList" style="height: auto;"></table>
+    <div class="XCLPanel" style="margin-top:5px;">
+        <div class="XCLPanelHeader"></div>
+        <div class="XCLPanelBody">
+            <table id="tableSysFunctionList" style="height: auto;"></table>
 
-        <div id="menu_SysFunction" class="easyui-menu" style="width:120px;">
-            <div id="menu_SysFunction_refresh" data-options="iconCls:'icon-reload'">刷新节点</div>
-            @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionAdd))
-            {
-            <div id="menu_SysFunction_add" data-options="iconCls:'icon-add'">添加子项</div>
-            }
-            @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionEdit))
-            {
-            <div id="menu_SysFunction_edit" data-options="iconCls:'icon-edit'">修改节点</div>
-            }
-            @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionDel))
-            {
-                <div id="menu_SysFunction_del" data-options="iconCls:'icon-cancel'">删除节点</div>
-                <div id="menu_SysFunction_delSub" data-options="iconCls:'icon-cancel'">清空子节点</div>
-            }
+            <div id="menu_SysFunction" class="easyui-menu" style="width:120px;">
+                <div id="menu_SysFunction_refresh" data-options="iconCls:'icon-reload'">刷新节点</div>
+                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionAdd))
+                {
+                    <div id="menu_SysFunction_add" data-options="iconCls:'icon-add'">添加子项</div>
+                }
+                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionEdit))
+                {
+                    <div id="menu_SysFunction_edit" data-options="iconCls:'icon-edit'">修改节点</div>
+                }
+                @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionDel))
+                {
+                    <div id="menu_SysFunction_del" data-options="iconCls:'icon-cancel'">删除节点</div>
+                    <div id="menu_SysFunction_delSub" data-options="iconCls:'icon-cancel'">清空子节点</div>
+                }
+            </div>
         </div>
     </div>
-</div>
 </form>
 
+<div class="XCLPanel" style="margin-top: 5px;">
+    <div class="XCLPanelHeader XCLBolder">
+        操作说明：
+    </div>
+    <div class="XCLPanelBody">
+        <ul>
+            <li>1、在节点上单击右键，可以对该节点进行操作</li>
+        </ul>
+    </div>
+</div>
+
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.SysFunction.SysFunctionList.Init();
-        });
+    $(function () {
+        window.xclcms.SysFunction.SysFunctionList.Init();
+    });
 </script>

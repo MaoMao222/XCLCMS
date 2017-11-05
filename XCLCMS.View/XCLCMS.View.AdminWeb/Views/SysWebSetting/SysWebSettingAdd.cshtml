@@ -28,28 +28,43 @@
                     <td>
                         <textarea id="txtKeyName" name="txtKeyName">@Model.SysWebSetting.KeyName</textarea>
                     </td>
-                    <td class="XCLTitle">值：</td>
+                    <td class="XCLTitle">值类型：</td>
                     <td>
-                        值类型：
                         <select name="selValueType">
                             @Html.Raw(XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
                        {
                            DefaultValue = Model.SysWebSetting.ValueType,
-                           IsNeedPleaseSelect=false
+                           IsNeedPleaseSelect = false
                        }))
                         </select>
-                        <br />
-                        开发环境：<br />
-                        <textarea id="txtKeyValue" name="txtKeyValue" style="height:30px;">@Model.SysWebSetting.KeyValue</textarea>
-                        <br />测试环境：<br />
-                        <textarea id="txtTestKeyValue" name="txtTestKeyValue" style="height:30px;">@Model.SysWebSetting.TestKeyValue</textarea>
-                        <br />UAT环境：<br />
-                        <textarea id="txtUATKeyValue" name="txtUATKeyValue" style="height:30px;">@Model.SysWebSetting.UATKeyValue</textarea>
-                        <br />生产环境：<br />
-                        <textarea id="txtPrdKeyValue" name="txtPrdKeyValue" style="height:30px;">@Model.SysWebSetting.PrdKeyValue</textarea>
                     </td>
                     <td class="XCLTitle"></td>
                     <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">值（开发环境）：</td>
+                    <td colspan="100">
+                        <textarea id="txtKeyValue" name="txtKeyValue" style="height:30px;">@Model.SysWebSetting.KeyValue</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">值（测试环境）：</td>
+                    <td colspan="100">
+                        <textarea id="txtTestKeyValue" name="txtTestKeyValue" style="height:30px;">@Model.SysWebSetting.TestKeyValue</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">值（UAT环境）：</td>
+                    <td colspan="100">
+                        <textarea id="txtUATKeyValue" name="txtUATKeyValue" style="height:30px;">@Model.SysWebSetting.UATKeyValue</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle XCLRed">值（生产环境）：</td>
+                    <td colspan="100">
+                        <textarea id="txtPrdKeyValue" name="txtPrdKeyValue" style="height:30px;" class="easyui-tooltip" title="<span class='XCLRed'>该内容作用于生产环境，请一定要注意哦！</span>">@Model.SysWebSetting.PrdKeyValue</textarea>
+                    </td>
                 </tr>
 
                 <tr>
@@ -98,11 +113,15 @@
         操作说明：
     </div>
     <div class="XCLPanelBody">
+        <ul>
+            <li>1、开发环境为系统开发人员所运行的本地环境；测试和UAT环境为测试人员在测试时使用的环境；生产环境为系统发布上线后，外部用户所访问的环境，也就是指线上的服务器。</li>
+            <li>2、【开关】的值类型是用于控制开关的流量比例，<a href="https://github.com/xucongli1989/XCLNetTools/blob/master/XCLNetTools/Common/SwitchControl.cs" target="_blank">控制方法及原理请参见此链接</a>。</li>
+        </ul>
     </div>
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.SysWebSetting.SysWebSettingAdd.Init();
-        });
+    $(function () {
+        window.xclcms.SysWebSetting.SysWebSettingAdd.Init();
+    });
 </script>

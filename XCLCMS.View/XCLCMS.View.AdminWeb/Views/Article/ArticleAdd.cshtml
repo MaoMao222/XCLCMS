@@ -110,11 +110,11 @@
                         <input id="selArticleType" name="selArticleType" value="@Model.Article.ArticleTypeIDs" style="width:200px;height:25px;" multiple />
                     </td>
                     <td class="XCLTitle">网页关键字：</td>
-                    <td>
-                        <textarea class="easyui-tagbox"  id="txtKeyWords" name="txtKeyWords" style="height:40px;width:65%;">@Model.Article.KeyWords</textarea>
+                    <td class="easyui-tooltip" title="每输入一个关键字，请按一下回车键哦。">
+                        <textarea class="easyui-tagbox" id="txtKeyWords" name="txtKeyWords" style="height:40px;width:65%;">@Model.Article.KeyWords</textarea>
                     </td>
                     <td class="XCLTitle">标签：</td>
-                    <td>
+                    <td class="easyui-tooltip" title="每输入一个标签，请按一下回车键哦。">
                         <textarea class="easyui-tagbox" id="txtTags" name="txtTags" style="height:40px;width:70%;">@Model.Article.Tags</textarea>
                     </td>
                 </tr>
@@ -278,7 +278,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Article.ArticleAdd.Init();
-        });
+    $(function () {
+        window.xclcms.Article.ArticleAdd.Init();
+    });
 </script>

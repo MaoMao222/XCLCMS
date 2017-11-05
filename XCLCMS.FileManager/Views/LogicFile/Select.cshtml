@@ -3,6 +3,8 @@
 }
 @model XCLCMS.FileManager.Models.LogicFile.ListVM
 
+<div class="XCLNote">温馨提示：若找不到想要的文件，可以先到主菜单的文件管理中上传文件，再到此页面选择对应的文件。</div>
+<br />
 <form>
 
     <input type="hidden" name="IsSelectFile" value="@(Model.IsSelectFile?1:0)" />
