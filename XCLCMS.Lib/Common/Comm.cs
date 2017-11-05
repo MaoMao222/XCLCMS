@@ -247,6 +247,7 @@ namespace XCLCMS.Lib.Common
             if (null != response && null != response.Body && null != response.Body.Merchant && null != response.Body.MerchantApp)
             {
                 model = response.Body;
+                model.MerchantApp.CopyRight = model.MerchantApp.CopyRight?.Replace("{Year}", DateTime.Now.Year.ToString());
             }
             else
             {
