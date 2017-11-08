@@ -138,6 +138,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
                 DefaultValue = viewModel.Article.RecordState
             });
 
+            ViewBag.IsNeedCKEditor = true;
+
             return View("~/Views/Article/ArticleAdd.cshtml", viewModel);
         }
 

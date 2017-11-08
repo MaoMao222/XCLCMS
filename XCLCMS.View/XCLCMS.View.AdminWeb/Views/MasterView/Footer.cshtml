@@ -1,3 +1,5 @@
-﻿<script src="~/Resources/Js/ckeditor/ckeditor.js?v=@(ViewBag.ResourceVersion)" type="text/javascript"></script>
-<script src="~/Resources/Js/ckeditor/lang/zh-cn.js?v=@(ViewBag.ResourceVersion)" type="text/javascript"></script>
-<script src="~/Resources/Js/readmore.js?v=@(ViewBag.ResourceVersion)" type="text/javascript"></script>
+﻿@if (null != ViewBag.IsNeedCKEditor && ViewBag.IsNeedCKEditor)
+{
+    <script src="~/Resources/Js/ckeditor/ckeditor.js?v=@(ViewBag.ResourceVersion)" type="text/javascript"></script>
+    <script src="~/Resources/Js/ckeditor/lang/zh-cn.js?v=@(ViewBag.ResourceVersion)" type="text/javascript"></script>
+}

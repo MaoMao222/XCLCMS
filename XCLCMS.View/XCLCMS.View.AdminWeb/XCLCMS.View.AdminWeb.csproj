@@ -35,6 +35,7 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -204,6 +205,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Resources\Build\ckeditor.js" />
+    <Content Include="Resources\Build\plugins.js" />
+    <Content Include="Resources\Build\xclcms.js" />
     <Content Include="Resources\Css\Base.css" />
     <Content Include="Resources\Css\Login.css" />
     <Content Include="Resources\Images\document.png" />
@@ -971,7 +975,6 @@
     <Content Include="Resources\Js\XGoAjax\XGoAjaxTemplate.js" />
     <Content Include="Resources\Js\XJsTool.js" />
     <Content Include="Resources\webpack.config.js" />
-    <Content Include="Resources\xclcms.js" />
     <Content Include="robots.txt" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MasterView\Footer.cshtml" />
@@ -1030,6 +1033,7 @@
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Resources\tsconfig.json" />
     <Content Include="Resources\package.json" />
+    <Content Include="Resources\Build\xclcms.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1063,7 +1067,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Resources\Js\App\common.d.ts" />
-    <TypeScriptCompile Include="Resources\index.ts" />
+    <TypeScriptCompile Include="Resources\xclcms.ts" />
     <TypeScriptCompile Include="Resources\Js\App\Ads.ts" />
     <TypeScriptCompile Include="Resources\Js\App\Article.ts" />
     <TypeScriptCompile Include="Resources\Js\App\Comments.ts" />
