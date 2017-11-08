@@ -44,7 +44,8 @@ module.exports = {
                 './Js/XGoAjax/XGoAjaxTemplate.js',
                 './Js/dynamicCon.js',
                 './Js/XJsTool.js',
-                './Js/readmore.js'
+                './Js/readmore.js',
+                './Js/WdatePicker/WdatePicker.js'
             ]
         }),
         new webpack.optimize.UglifyJsPlugin({
