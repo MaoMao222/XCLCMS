@@ -17,7 +17,7 @@ module.exports = {
             { test: /\.tsx?$/, loader: 'ts-loader' }
         ]
     },
-    devtool: "source-map",
+    //devtool: "source-map",
     plugins: [
         new RawBundlerPlugin({
             readEncoding: "utf-8",
@@ -47,13 +47,13 @@ module.exports = {
                 './Js/readmore.js',
                 './Js/WdatePicker/WdatePicker.js'
             ]
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            sourceMap: true,
-            parallel: true
         })
+        //new webpack.optimize.UglifyJsPlugin({
+        //    compress: {
+        //        warnings: false
+        //    },
+        //    sourceMap: true,
+        //    parallel: true
+        //})
     ]
 }
