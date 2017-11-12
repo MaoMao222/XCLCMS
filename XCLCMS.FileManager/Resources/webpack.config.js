@@ -16,7 +16,7 @@ module.exports = {
             includeFilePathComments: true,
             allowDuplicatesInBundle: false,
             printProgress: false,
-            fileEnding: "\n\n",
+            fileEnding: ";\n\n",
             commentTags: { Start: "/* ", End: " */" },
             bundles: [
                 "plugins.js",

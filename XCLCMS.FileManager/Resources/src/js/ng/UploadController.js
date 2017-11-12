@@ -1,4 +1,4 @@
-﻿angular.module('ngUpload', []).controller('fileUpload', function ($scope) {
+﻿angular.module('ngUpload', []).controller('fileUpload', ["$scope",function ($scope) {
     var tabFileUpload = $("#tabFileUpload");
 
     //文件列表中的Model
@@ -380,7 +380,7 @@
         });
     };
     $scope.init();
-});
+}]);
 
 $(function () {
     var tabFileUpload = $("#tabFileUpload");

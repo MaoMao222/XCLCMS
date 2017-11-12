@@ -1,4 +1,4 @@
-﻿angular.module('ngFileInfo', []).controller('fileInfoList', function ($scope) {
+﻿angular.module('ngFileInfo', []).controller('fileInfoList', ["$scope",function ($scope) {
     $scope.data = [];
 
     $scope.initList = function () {
@@ -40,6 +40,6 @@
 
 
 
-}).filter('encodeURIComponent', function () {
+}]).filter('encodeURIComponent', function () {
     return window.encodeURIComponent;
 });
