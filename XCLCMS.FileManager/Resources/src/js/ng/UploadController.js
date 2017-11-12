@@ -293,7 +293,7 @@
             url: AppConfig.RootUrl + 'Upload/UploadSubmit',
             file_data_name: "FileInfo",
             filters: {
-                mime_types: [{ title: "选择文件", extensions: window.pageConfig.AllowUploadExtInfo }],
+                mime_types: [{ title: "选择文件", extensions: window.AppConfig.AllowUploadExtInfo }],
                 prevent_duplicates: true
             },
             flash_swf_url: AppConfig.RootUrl + "Resources/src/js/plupload/Moxie.swf",

@@ -1,5 +1,11 @@
 ﻿<title>@ViewBag.CurrentApplicationMerchantApp.MerchantAppName</title>
 <meta name="viewport" content="width=device-width" />
+<script type="text/javascript">
+    (function (config) {
+        config.RootUrl = "@XCLNetTools.StringHander.Common.RootUri";
+        config.AllowUploadExtInfo= "@(ViewBag.AllowUploadExtInfo)";
+    })(window.AppConfig = window.AppConfig || {});
+</script>
 
 <link href="~/Resources/src/css/Base.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
 <link href="~/Resources/src/js/bootstrap/css/bootstrap.min.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
@@ -11,18 +17,16 @@
 <script src="~/Resources/dist/plugins.js?v=@(ViewBag.ResourceVersion)"></script>
 <script src="~/Resources/dist/app.js?v=@(ViewBag.ResourceVersion)"></script>
 <script type="text/javascript">
-    (function (config,go) {
-        config.RootUrl="@XCLNetTools.StringHander.Common.RootUri";
+    (function (go) {
         go.globalSettings({
             templateName: "artdialog",
             isExclusive:false
         });
-    })(window.AppConfig = window.AppConfig || {}, $.XGoAjax);
-
+    })($.XGoAjax);
     (function (config) {
         config.lock = true;
         config.opacity = 0.2;
         config.resize = true;
-        confg.path = "@Url.Content("~/Resources/src/js/artDialog")";
+        config.path="@Url.Content("~/Resources/src/js/artDialog")";
     })(art.dialog.defaults);
 </script>

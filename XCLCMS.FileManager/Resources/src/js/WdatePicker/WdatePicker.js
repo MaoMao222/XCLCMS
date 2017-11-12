@@ -21,7 +21,7 @@ var $dp, WdatePicker; (function () {
         $wdate: true,
         $crossFrame: true,
         $preLoad: false,
-        $dpPath: "",
+        $dpPath: window.AppConfig.RootUrl+"Resources/src/js/WdatePicker/",
         doubleCalendar: false,
         enableKeyboard: true,
         enableInputMask: true,
