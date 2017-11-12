@@ -9,7 +9,7 @@ let app = {
             config.lock = true;
             config.opacity = 0.2;
             config.resize = true;
-            config.path = `${XCLCMSPageGlobalConfig.RootURL}Resources/Js/artDialog`;
+            config.path = `${XCLCMSPageGlobalConfig.RootURL}Resources/src/js/artDialog`;
         })(art.dialog.defaults);
 
         //XGoAjax配置

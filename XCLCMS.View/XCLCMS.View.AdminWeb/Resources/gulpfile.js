@@ -5,11 +5,11 @@ var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('default', function (cb) {
     pump([
-        gulp.src('./Build/*.js'),
+        gulp.src('./dist/*.js'),
         sourcemaps.init(),
         uglify(),
         sourcemaps.write('.'),
-        gulp.dest('./Build/')
+        gulp.dest('./dist/')
     ],
         cb
     );

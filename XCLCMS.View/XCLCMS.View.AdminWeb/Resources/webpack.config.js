@@ -7,7 +7,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: __dirname + '/Build'
+        path: __dirname + '/dist'
     },
     resolve: {
         extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
@@ -30,22 +30,22 @@ module.exports = {
                 "plugins.js"
             ],
             "plugins.js": [
-                './Js/json2.js',
-                './Js/Jquery/jquery-1.11.2.js',
-                './Js/EasyUI/jquery.easyui.min.js',
-                './Js/artDialog/artDialog.js',
-                './Js/artDialog/plugins/iframeTools.js',
-                './Js/artTemplate/template.js',
-                './Js/validate/jquery.validate.js',
-                './Js/Validate/zh-cn.js',
-                './Js/validate/XCLValidatorMethod.js',
-                './Js/table.js',
-                './Js/XGoAjax/XGoAjax.js',
-                './Js/XGoAjax/XGoAjaxTemplate.js',
-                './Js/dynamicCon.js',
-                './Js/XJsTool.js',
-                './Js/readmore.js',
-                './Js/WdatePicker/WdatePicker.js'
+                './src/js/json2.js',
+                './src/js/Jquery/jquery-1.11.2.js',
+                './src/js/EasyUI/jquery.easyui.min.js',
+                './src/js/artDialog/artDialog.js',
+                './src/js/artDialog/plugins/iframeTools.js',
+                './src/js/artTemplate/template.js',
+                './src/js/validate/jquery.validate.js',
+                './src/js/Validate/zh-cn.js',
+                './src/js/validate/XCLValidatorMethod.js',
+                './src/js/table.js',
+                './src/js/XGoAjax/XGoAjax.js',
+                './src/js/XGoAjax/XGoAjaxTemplate.js',
+                './src/js/dynamicCon.js',
+                './src/js/XJsTool.js',
+                './src/js/readmore.js',
+                './src/js/WdatePicker/WdatePicker.js'
             ]
         })
         //new webpack.optimize.UglifyJsPlugin({
