@@ -296,8 +296,8 @@
                 mime_types: [{ title: "选择文件", extensions: window.pageConfig.AllowUploadExtInfo }],
                 prevent_duplicates: true
             },
-            flash_swf_url: AppConfig.RootUrl + "Resources/Js/plupload/Moxie.swf",
-            silverlight_xap_url: AppConfig.RootUrl + "Resources/Js/plupload/Moxie.xap"
+            flash_swf_url: AppConfig.RootUrl + "Resources/src/js/plupload/Moxie.swf",
+            silverlight_xap_url: AppConfig.RootUrl + "Resources/src/js/plupload/Moxie.xap"
         });
         _uploader.init();
 

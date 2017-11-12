@@ -14,7 +14,7 @@
                         <li ng-repeat="m in FileModelList">
                             <div class="itemContent">
                                 <img ng-if="m.IsImage" ng-src="{{m.ImgSmallPath}}" id="{{m.Id}}" />
-                                <img ng-if="!m.IsImage" ng-src="@(XCLNetTools.StringHander.Common.RootUri)Resources/Images/document.png" id="{{m.Id}}" />
+                                <img ng-if="!m.IsImage" ng-src="@(XCLNetTools.StringHander.Common.RootUri)Resources/src/images/document.png" id="{{m.Id}}" />
                             </div>
                             <div class="itemDescription">
                                 <p title="{{m.Name}}">{{m.Name}}</p>

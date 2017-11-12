@@ -1,44 +1,15 @@
 ﻿<title>@ViewBag.CurrentApplicationMerchantApp.MerchantAppName</title>
 <meta name="viewport" content="width=device-width" />
 
-<link href="~/Resources/Css/Base.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/css/Base.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/js/bootstrap/css/bootstrap.min.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/js/Jcrop/css/jquery.Jcrop.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/js/EasyUI/themes/icon.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
+<link href="~/Resources/src/js/EasyUI/themes/default/easyui.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
 
-<script src="~/Resources/Js/json2.js?v=@(ViewBag.ResourceVersion)"></script>
-<script src="~/Resources/Js/Jquery/jquery-1.11.2.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/artDialog/artDialog.js?v=@(ViewBag.ResourceVersion)&skin=blue"></script>
-<script src="~/Resources/Js/artDialog/plugins/iframeTools.js?v=@(ViewBag.ResourceVersion)"></script>
-<script src="~/Resources/Js/artTemplate/template.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<link href="~/Resources/Js/bootstrap/css/bootstrap.min.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
-<script src="~/Resources/Js/bootstrap/js/bootstrap.min.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/Angularjs/angular.min.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/XGoAjax.js?v=@(ViewBag.ResourceVersion)"></script>
-<script src="~/Resources/Js/XGoAjaxTemplate.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<link href="~/Resources/Js/Jcrop/css/jquery.Jcrop.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
-<script src="~/Resources/Js/Jcrop/js/jquery.Jcrop.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/plupload/moxie.min.js?v=@(ViewBag.ResourceVersion)"></script>
-<link href="~/Resources/Js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
-<script src="~/Resources/Js/plupload/plupload.full.min.js?v=@(ViewBag.ResourceVersion)"></script>
-<script src="~/Resources/Js/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js?v=@(ViewBag.ResourceVersion)"></script>
-
-
-<link href="~/Resources/Js/EasyUI/themes/icon.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
-<link href="~/Resources/Js/EasyUI/themes/default/easyui.css?v=@(ViewBag.ResourceVersion)" rel="stylesheet" />
-<script src="~/Resources/Js/EasyUI/jquery.easyui.min.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/XJsTool.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/XCheck.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/dynamicCon.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/WdatePicker/WdatePicker.js?v=@(ViewBag.ResourceVersion)"></script>
-
+<script src="~/Resources/dist/plugins.js?v=@(ViewBag.ResourceVersion)"></script>
+<script src="~/Resources/dist/app.js?v=@(ViewBag.ResourceVersion)"></script>
 <script type="text/javascript">
     (function (config,go) {
         config.RootUrl="@XCLNetTools.StringHander.Common.RootUri";
@@ -52,12 +23,6 @@
         config.lock = true;
         config.opacity = 0.2;
         config.resize = true;
+        confg.path = "@Url.Content("~/Resources/src/js/artDialog")";
     })(art.dialog.defaults);
-
 </script>
-
-
-<script src="~/Resources/Js/App.js?v=@(ViewBag.ResourceVersion)"></script>
-
-<script src="~/Resources/Js/ng/FileInfoController.js?v=@(ViewBag.ResourceVersion)"></script>
-<script src="~/Resources/Js/ng/UploadController.js?v=@(ViewBag.ResourceVersion)"></script>
