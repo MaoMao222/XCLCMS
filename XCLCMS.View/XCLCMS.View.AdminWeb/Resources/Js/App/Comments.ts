@@ -105,10 +105,6 @@ app.CommentsAdd = {
             merchantIDObj: $("#txtMerchantID"),
             merchantAppIDObj: $("#txtMerchantAppID")
         });
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
     },
     /**
      * 表单验证初始化
@@ -128,26 +124,6 @@ app.CommentsAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
-    /**
-     * 删除评论
-     */
-    Del: function () {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#CommentsID").val()];
-
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Comments/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 }
 export default app;

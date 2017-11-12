@@ -104,10 +104,6 @@ class AdsAdd {
             merchantIDObj: $("#txtMerchantID"),
             merchantAppIDObj: $("#txtMerchantAppID")
         });
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
     }
     /**
  * 表单验证初始化
@@ -142,26 +138,6 @@ class AdsAdd {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    }
-    /**
- * 删除广告位
- */
-    Del(): any {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            let request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#AdsID").val()];
-
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 }
 

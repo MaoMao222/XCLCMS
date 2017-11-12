@@ -255,10 +255,6 @@
                     break;
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
                     <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
-                    if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleDel))
-                    {
-                        <a id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删 除</a>
-                    }
                     break;
             }
         </div>

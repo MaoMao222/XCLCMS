@@ -90,10 +90,7 @@ app.MerchantAdd = {
     Init: function () {
         var _this = this;
         _this.InitValidator();
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
+        
         $("#txtRegisterTime").on("click", function () {
             WdatePicker({ dateFmt: 'yyyy-MM-dd' });
             return false;
@@ -128,25 +125,6 @@ app.MerchantAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
-    /**
-     * 删除商户
-     */
-    Del: function () {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#MerchantID").val()];
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Merchant/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 };
 
@@ -231,10 +209,6 @@ app.MerchantAppAdd = {
         userControl.MerchantSelect.Init({
             merchantIDObj: $("#txtMerchantID")
         });
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
     },
     /**
      * 表单验证初始化
@@ -266,25 +240,6 @@ app.MerchantAppAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
-    /**
-     * 删除商户应用
-     */
-    Del: function () {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#MerchantAppID").val()];
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "MerchantApp/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 };
 

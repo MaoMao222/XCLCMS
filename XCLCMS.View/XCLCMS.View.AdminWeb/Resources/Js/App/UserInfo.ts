@@ -101,11 +101,7 @@ app.UserAdd = {
         var _this = this;
         _this.Elements.Init();
         _this.InitValidator();
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
-
+        
         //初始化角色选择框
         _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
 
@@ -181,26 +177,6 @@ app.UserAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
-    /**
-     * 删除用户
-     */
-    Del: function () {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#UserInfoID").val()];
-
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "UserInfo/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 }
 export default app;

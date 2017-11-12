@@ -84,10 +84,6 @@ app.SysWebSettingAdd = {
             merchantIDObj: $("#txtMerchantID"),
             merchantAppIDObj: $("#txtMerchantAppID")
         });
-
-        $("#btnDel").on("click", function () {
-            return _this.Del();
-        });
     },
     /**
      * 表单验证初始化
@@ -118,25 +114,6 @@ app.SysWebSettingAdd = {
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
-    },
-    /**
-     * 删除配置
-     */
-    Del: function () {
-        art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = [$("#SysWebSettingID").val()];
-            $.XGoAjax({
-                target: $("#btnDel")[0],
-                ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysWebSetting/Delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(request),
-                    type: "POST"
-                }
-            });
-        });
-        return false;
     }
 };
 

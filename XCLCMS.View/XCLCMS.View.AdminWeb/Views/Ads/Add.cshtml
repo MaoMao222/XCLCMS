@@ -119,14 +119,10 @@
             @switch ((XCLNetTools.Enum.CommonEnum.HandleTypeEnum)ViewBag.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存广告位</a>
                     break;
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
                     <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
-                    if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Del))
-                    {
-                        <a id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删 除</a>
-                    }
                     break;
             }
         </div>
