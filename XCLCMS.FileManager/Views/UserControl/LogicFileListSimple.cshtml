@@ -39,7 +39,7 @@
                         }
                     </td>
                     <td>@XCLNetTools.StringHander.Common.GetSubString(m.Title, 20, "...")</td>
-                    <td class="text-center">@m.FormatType</td>
+                    <td class="text-center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AttachmentFormatTypeEnum), m.FormatType)</td>
                     <td class="text-center">@m.Ext</td>
                     <td><a href="@Url.Action("ShowAttachment","OpenApi",new { id=m.AttachmentID})" target="_blank">@m.OriginFileName</a></td>
                     <td>@XCLNetTools.StringHander.Common.GetSubString(m.Description, 20, "...")</td>
