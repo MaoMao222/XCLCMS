@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "index.js",
-    "release": "gulp & gulp mincss"
+    "release": "gulp"
   },
   "author": "https://github.com/xucongli1989",
   "license": "https://github.com/xucongli1989/XCLCMS/blob/master/LICENSE",

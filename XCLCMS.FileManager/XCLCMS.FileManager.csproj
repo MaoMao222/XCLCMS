@@ -117,6 +117,7 @@
     <Content Include="Resources\dist\app.js" />
     <Content Include="Resources\dist\main.js" />
     <Content Include="Resources\dist\plugins.js" />
+    <Content Include="Resources\dist\style.css" />
     <Content Include="Resources\gulpfile.js" />
     <Content Include="Resources\index.js" />
     <Content Include="Resources\src\css\Base.css" />
