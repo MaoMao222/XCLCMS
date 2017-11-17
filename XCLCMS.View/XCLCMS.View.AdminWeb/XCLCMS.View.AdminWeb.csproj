@@ -205,13 +205,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="Resources\dist\login.css" />
     <Content Include="Resources\dist\plugins.js" />
     <Content Include="Resources\dist\style.css" />
     <Content Include="Resources\dist\xclcms.js" />
     <Content Include="Resources\gulpfile.js" />
     <Content Include="Resources\src\css\Base.css" />
-    <Content Include="Resources\src\css\Login.css" />
     <Content Include="Resources\src\images\document.png" />
     <Content Include="Resources\src\images\false.gif" />
     <Content Include="Resources\src\images\Hydrangeas.jpg" />

@@ -1,4 +1,193 @@
-﻿html, body {
+﻿/*login start*/
+
+#divLoginContainer {
+    background: #0F67A5;
+}
+
+    #divLoginContainer img {
+        border: 0 none;
+        vertical-align: top;
+    }
+
+    #divLoginContainer ul, #divLoginContainer li {
+        list-style-type: none;
+    }
+
+    #divLoginContainer h1, #divLoginContainer h2, #divLoginContainer h3, #divLoginContainer h4, #divLoginContainer h5, #divLoginContainer h6 {
+        font-size: 14px;
+    }
+
+    #divLoginContainer a {
+        color: #1b4f86;
+        text-decoration: none;
+    }
+
+        #divLoginContainer a:hover {
+            text-decoration: underline;
+            color: #16387c;
+        }
+
+    #divLoginContainer .login-wrap {
+        background: url(../images/login-bg.gif) repeat-x top;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        margin-top: -230px;
+        z-index: 0;
+    }
+
+    #divLoginContainer .login-welcome {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: #0B4A73;
+        border-bottom: 1px solid #5BAAE4;
+        text-align: center;
+        color: #B6C9D5;
+        position: absolute;
+        top: 0;
+        z-index: 998;
+    }
+
+    #divLoginContainer .login-top {
+        margin: 0px auto 0;
+        width: 920px;
+        background: url(../images/login_01.gif) no-repeat center;
+        height: 64px;
+    }
+
+    #divLoginContainer .login {
+        width: 920px;
+        margin: 0 auto;
+    }
+
+    #divLoginContainer .login-l {
+        float: left;
+        background: url(../images/login_03.gif) no-repeat top;
+        width: 220px;
+        height: 310px;
+    }
+
+    #divLoginContainer .login-r {
+        float: right;
+        background: url(../images/login_02.gif) no-repeat top;
+        width: 242px;
+        height: 310px;
+    }
+
+    #divLoginContainer .login-c {
+        float: left;
+        width: 458px;
+        background: url(../images/login_06.gif) repeat-x bottom;
+        height: 310px;
+    }
+
+    #divLoginContainer .login-c-00 {
+        padding-top: 2px;
+    }
+
+    #divLoginContainer .login-c-01 {
+        float: left;
+        width: 79px;
+        border-right: 1px solid #138FC7;
+        height: 161px;
+    }
+
+    #divLoginContainer .login-c-02 {
+        float: left;
+        width: 301px;
+        border-left: 1px solid #fff;
+        border-right: 1px solid #138FC7;
+        height: 161px;
+    }
+
+        #divLoginContainer .login-c-02 ul {
+            padding: 10px 3px 0px 3px;
+        }
+
+            #divLoginContainer .login-c-02 ul li {
+                height: 27px;
+                line-height: 27px;
+                color: #004B7B;
+            }
+
+                #divLoginContainer .login-c-02 ul li b {
+                    width: 85px;
+                    text-align: right;
+                    display: block;
+                    float: left;
+                }
+
+    #divLoginContainer .bk2 {
+        border-width: 1px;
+        border-color: #4B99CC #8EC5E9 #8EC5E9 #4B99CC;
+        border-style: solid;
+    }
+
+    #divLoginContainer .login-c-03 {
+        float: left;
+        border-left: 1px solid #fff;
+        height: 161px;
+    }
+
+    #divLoginContainer .login-bottom {
+        width: 920px;
+        margin: 0 auto;
+    }
+
+    #divLoginContainer .login-anniu a {
+        background: url(../images/login_12.gif) no-repeat 0 0;
+        color: #FFF;
+        font-weight: bold;
+        display: block;
+        width: 58px;
+        height: 33px;
+        text-align: center;
+        line-height: 22px;
+        float: left;
+        margin: 10px 20px 10px 0px;
+    }
+
+        #divLoginContainer .login-anniu a:hover {
+            background: url(../images/login_12.gif) no-repeat 0 -33px;
+            text-decoration: none;
+            color: #FCFFA8;
+        }
+
+    #divLoginContainer .login-footer {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: #0B4A73;
+        border-top: 1px solid #5BAAE4;
+        text-align: center;
+        color: #B6C9D5;
+        position: absolute;
+        bottom: 0;
+    }
+
+        #divLoginContainer .login-footer a {
+            color: #B6C9D5;
+        }
+
+    #divLoginContainer .loginTable {
+        width: 100%;
+        font-size: 14px;
+        font-weight: bolder;
+        color: #0B4A73;
+    }
+
+        #divLoginContainer .loginTable td {
+            padding-top: 5px;
+        }
+
+    #divLoginContainer .gray {
+        color: #ccc;
+    }
+
+/*login end*/
+
+html, body {
     height: 100%;
     font-family: "Microsoft YaHei",Sans-Serif;
     width: 100%;
@@ -55,8 +244,9 @@ a {
 .XCLRed {
     color: #f00;
 }
+
 .XCLGreen {
-    color:#2a9c2a;
+    color: #2a9c2a;
 }
 
 .XCLRedBolder {
@@ -157,7 +347,7 @@ a {
         text-align: right;
         font-weight: bolder;
         font-size: 14px;
-        width:10%;
+        width: 10%;
     }
 
     .XCLTableEdit .XCLTableHeader {

@@ -7,6 +7,7 @@ var modifyCssUrls = require('gulp-modify-css-urls');
 var concat = require('gulp-concat');
 var uglifycss = require('gulp-uglifycss');
 
+//压缩js
 gulp.task('default', function (cb) {
     pump([
         gulp.src('./dist/*.js'),
@@ -17,24 +18,8 @@ gulp.task('default', function (cb) {
     ], cb);
 });
 
-//登录页css
-gulp.task('min_logincss', (cb) => {
-    pump([
-        gulp.src([
-            './src/css/login.css'
-        ]),
-        rebaseUrlPath(),
-        modifyCssUrls({
-            prepend: '../'
-        }),
-        concat('login.css'),
-        uglifycss(),
-        gulp.dest('./dist/')
-    ], cb);
-});
-
-//主界面css
-gulp.task('min_maincss', (cb) => {
+//压缩css
+gulp.task('mincss', (cb) => {
     pump([
         gulp.src([
             './src/js/EasyUI/themes/icon.css',
@@ -51,5 +36,3 @@ gulp.task('min_maincss', (cb) => {
         gulp.dest('./dist/')
     ], cb);
 });
-
-gulp.task('mincss', ['min_logincss', 'min_maincss']);
