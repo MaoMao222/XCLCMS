@@ -67,9 +67,8 @@
     <Reference Include="MvcPager">
       <HintPath>..\..\XCLCMS.Document\Libs\MvcPager\MvcPager.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -142,8 +141,8 @@
     <Reference Include="XCLNetSearch, Version=1.0.2.35476, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XCLNetSearch.1.0.2\lib\net40\XCLNetSearch.dll</HintPath>
     </Reference>
-    <Reference Include="XCLNetTools, Version=2.6.4.39836, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XCLNetTools.2.6.4\lib\net40\XCLNetTools.dll</HintPath>
+    <Reference Include="XCLNetTools, Version=2.7.6531.18061, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XCLNetTools.2.7\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
