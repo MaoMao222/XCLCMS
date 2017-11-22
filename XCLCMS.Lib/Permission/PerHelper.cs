@@ -6,7 +6,7 @@ namespace XCLCMS.Lib.Permission
     /// <summary>
     /// 权限帮助类
     /// </summary>
-    public class PerHelper
+    public static class PerHelper
     {
         #region 角色相关
 

@@ -8,7 +8,7 @@ namespace XCLCMS.Lib.Common
     /// <summary>
     /// 获取站点配置
     /// </summary>
-    public class Setting
+    public static class Setting
     {
         /// <summary>
         /// 获取所有配置

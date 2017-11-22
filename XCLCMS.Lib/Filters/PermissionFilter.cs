@@ -30,11 +30,6 @@ namespace XCLCMS.Lib.Filters
             {
                 return true;
             }
-
-            var req = httpContext.Request.RequestContext;
-            string controllerName = Convert.ToString(req.RouteData.Values["controller"]);
-            string actionName = Convert.ToString(req.RouteData.Values["action"]);
-
             bool flag = false;
             var detail = XCLCMS.Lib.Common.LoginHelper.GetUserInfoFromLoginInfo();
             this.UserInfo = null == detail ? null : detail.UserInfo;

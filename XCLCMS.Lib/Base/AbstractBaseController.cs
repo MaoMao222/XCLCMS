@@ -284,15 +284,12 @@ namespace XCLCMS.Lib.Base
             //页面全局配置信息
             var pageConfig = new XCLCMS.Lib.Model.PageGlobalConfig();
             pageConfig.AppID = XCLCMS.Lib.Common.Comm.AppID;
-            if (null != commonModel)
+            pageConfig.IsLogOn = commonModel.IsLogOn;
+            if (null != commonModel.CurrentUserModel)
             {
-                pageConfig.IsLogOn = commonModel.IsLogOn;
-                if (null != commonModel.CurrentUserModel)
-                {
-                    pageConfig.UserID = commonModel.CurrentUserModel.UserInfoID;
-                    pageConfig.UserName = commonModel.CurrentUserModel.UserName;
-                    pageConfig.AppKey = XCLCMS.Lib.Common.Comm.AppKey;
-                }
+                pageConfig.UserID = commonModel.CurrentUserModel.UserInfoID;
+                pageConfig.UserName = commonModel.CurrentUserModel.UserName;
+                pageConfig.AppKey = XCLCMS.Lib.Common.Comm.AppKey;
             }
             pageConfig.RootURL = XCLNetTools.StringHander.Common.RootUri;
             pageConfig.UserToken = this.UserToken;

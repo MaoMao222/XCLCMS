@@ -1,11 +1,12 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 
 namespace XCLCMS.Lib.Common
 {
     /// <summary>
     /// 登录相关
     /// </summary>
-    public class LoginHelper
+    public static class LoginHelper
     {
         /// <summary>
         /// 登录信息的session名 or Cookie名
@@ -40,7 +41,7 @@ namespace XCLCMS.Lib.Common
                 case XCLNetTools.Enum.CommonEnum.LoginTypeEnum.ON:
                     if (string.IsNullOrWhiteSpace(userToken))
                     {
-                        throw new System.Exception("必须指定用户的登录令牌信息！");
+                        throw new ArgumentException("必须指定用户的登录令牌信息！");
                     }
                     XCLNetTools.Http.CookieHelper.SetCookies(LoginHelper.UserLoginFlagName, userToken, 30);
                     context.Session[LoginHelper.UserLoginFlagName] = userToken;
