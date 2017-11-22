@@ -272,7 +272,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Article();
             model.ArticleContentType = viewModel.Article.ArticleContentType;
-            model.ArticleID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.ArticleID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.ART.ToString()
             });

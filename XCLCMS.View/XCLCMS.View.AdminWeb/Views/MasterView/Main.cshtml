@@ -54,7 +54,7 @@
                     <div title="@m.DicName" xcl-sysdiccode="@m.Code" xcl-tabTitle="@m.DicName" style="padding:10px">
                         <div>
                             @{
-                                List<XCLCMS.Data.Model.SysDic> childMenu =XCLCMS.Lib.WebAPI.Library.SysDicAPI_GetChildListByID(Convert.ToString(ViewBag.UserToken),m.SysDicID.Value);
+                                List<XCLCMS.Data.Model.SysDic> childMenu = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetChildListByID(Convert.ToString(ViewBag.UserToken),m.SysDicID.Value);
                                 if (childMenu.IsNotNullOrEmpty())
                                 {
                                     childMenu=childMenu.Where(ch=>ch.FK_FunctionID==null || XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,(XCLCMS.Data.CommonHelper.Function.FunctionEnum)ch.FK_FunctionID)).ToList();

@@ -157,7 +157,7 @@ namespace XCLCMS.FileManager.Controllers
             request.Body = new Data.Model.Attachment();
             System.IO.FileInfo info = new System.IO.FileInfo(Server.MapPath(relativePath));
             DateTime dtNow = DateTime.Now;
-            request.Body.AttachmentID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            request.Body.AttachmentID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.ATT.ToString()
             });

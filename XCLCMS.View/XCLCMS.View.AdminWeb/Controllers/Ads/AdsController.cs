@@ -156,7 +156,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
 
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Ads();
-            model.AdsID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.AdsID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.ADS.ToString()
             });

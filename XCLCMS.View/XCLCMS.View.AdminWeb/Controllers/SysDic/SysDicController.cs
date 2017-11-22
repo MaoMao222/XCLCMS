@@ -31,7 +31,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
             //判断当前字典是否属于【系统菜单】
             if (viewModel.SysDicCategory == XCLCMS.View.AdminWeb.Models.SysDic.SysDicCategoryEnum.None)
             {
-                var menus = XCLCMS.Lib.WebAPI.Library.SysDicAPI_GetSystemMenuModelList(base.UserToken);
+                var menus = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetSystemMenuModelList(base.UserToken);
                 if (menus.IsNotNullOrEmpty())
                 {
                     if (menus.Exists(k => k.SysDicID == sysDicId || (k.ParentID == sysDicId && base.CurrentHandleType == XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD)))
@@ -64,7 +64,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
                     break;
             }
 
-            viewModel.PathList = XCLCMS.Lib.WebAPI.Library.SysDicAPI_GetLayerListBySysDicID(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysDic.GetLayerListBySysDicIDEntity()
+            viewModel.PathList = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetLayerListBySysDicID(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysDic.GetLayerListBySysDicIDEntity()
             {
                 SysDicID = sysDicId
             });
@@ -109,7 +109,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysDic
             sysDicModel.Sort = viewModel.SysDic.Sort;
             sysDicModel.Remark = viewModel.SysDic.Remark;
             sysDicModel.FK_FunctionID = viewModel.SysDic.FK_FunctionID;
-            sysDicModel.SysDicID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            sysDicModel.SysDicID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.DIC.ToString()
             });

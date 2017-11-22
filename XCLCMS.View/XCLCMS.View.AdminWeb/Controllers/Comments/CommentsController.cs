@@ -146,7 +146,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
 
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Comments();
-            model.CommentsID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.CommentsID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.CMT.ToString()
             });

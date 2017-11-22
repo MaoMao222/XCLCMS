@@ -45,7 +45,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
                     viewModel.SysRole = response.Body;
                     viewModel.ParentID = response.Body.ParentID;
                     viewModel.SysRoleID = response.Body.SysRoleID;
-                    var roleHadFunctions = XCLCMS.Lib.WebAPI.Library.SysFunctionAPI_GetListByRoleID(base.UserToken, sysRoleID);
+                    var roleHadFunctions = XCLCMS.Lib.Common.FastAPI.SysFunctionAPI_GetListByRoleID(base.UserToken, sysRoleID);
                     if (roleHadFunctions.IsNotNullOrEmpty())
                     {
                         viewModel.RoleFunctionIDList = roleHadFunctions.Select(m => m.SysFunctionID).ToList();
@@ -54,7 +54,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
                     break;
             }
 
-            viewModel.PathList = XCLCMS.Lib.WebAPI.Library.SysRoleAPI_GetLayerListBySysRoleID(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysRole.GetLayerListBySysRoleIDEntity()
+            viewModel.PathList = XCLCMS.Lib.Common.FastAPI.SysRoleAPI_GetLayerListBySysRoleID(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysRole.GetLayerListBySysRoleIDEntity()
             {
                 SysRoleID = sysRoleID
             });
@@ -93,7 +93,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
             model.RoleName = viewModel.SysRole.RoleName;
             model.Remark = viewModel.SysRole.Remark;
             model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
-            model.SysRoleID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.SysRoleID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.RLE.ToString()
             });

@@ -130,7 +130,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         {
             var viewModel = this.GetViewModel(fm);
             XCLCMS.Data.Model.MerchantApp model = new XCLCMS.Data.Model.MerchantApp();
-            model.MerchantAppID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.MerchantAppID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.MEP.ToString()
             });

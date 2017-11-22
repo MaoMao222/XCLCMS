@@ -75,8 +75,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM();
             viewModel.Merchant = new XCLCMS.Data.Model.Merchant();
 
-            var merchantTypeDic = XCLCMS.Lib.WebAPI.Library.MerchantAPI_GetMerchantTypeDic(base.UserToken);
-            var passTypeDic = XCLCMS.Lib.WebAPI.Library.SysDicAPI_GetPassTypeDic(base.UserToken);
+            var merchantTypeDic = XCLCMS.Lib.Common.FastAPI.MerchantAPI_GetMerchantTypeDic(base.UserToken);
+            var passTypeDic = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetPassTypeDic(base.UserToken);
 
             switch (base.CurrentHandleType)
             {
@@ -176,7 +176,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         {
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM viewModel = this.GetViewModel(fm);
             XCLCMS.Data.Model.Merchant model = new XCLCMS.Data.Model.Merchant();
-            model.MerchantID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.MerchantID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.MER.ToString()
             }); 

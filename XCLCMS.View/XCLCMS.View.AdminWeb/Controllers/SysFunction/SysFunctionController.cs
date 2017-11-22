@@ -47,7 +47,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
                     break;
             }
 
-            viewModel.PathList = XCLCMS.Lib.WebAPI.Library.SysFunctionAPI_GetLayerListBySysFunctionId(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysFunction.GetLayerListBySysFunctionIdEntity()
+            viewModel.PathList = XCLCMS.Lib.Common.FastAPI.SysFunctionAPI_GetLayerListBySysFunctionId(base.UserToken, new Data.WebAPIEntity.RequestEntity.SysFunction.GetLayerListBySysFunctionIdEntity()
             {
                 SysFunctionId = sysFunctionID
             });
@@ -84,7 +84,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
             model.FunctionName = viewModel.SysFunction.FunctionName;
             model.Remark = viewModel.SysFunction.Remark;
             model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
-            model.SysFunctionID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.SysFunctionID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.FUN.ToString()
             });

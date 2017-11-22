@@ -151,7 +151,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM viewModel = this.GetViewModel(fm);
             XCLCMS.Data.Model.UserInfo model = new XCLCMS.Data.Model.UserInfo();
             XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-            model.UserInfoID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.UserInfoID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.USR.ToString()
             });

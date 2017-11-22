@@ -30,8 +30,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             //修改密码
             viewModel.PasswordFormAction = Url.Action("UpdatePassword", "UserCenter");
             //商户资料
-            var merchantTypeDic = XCLCMS.Lib.WebAPI.Library.MerchantAPI_GetMerchantTypeDic(base.UserToken);
-            var passTypeDic = XCLCMS.Lib.WebAPI.Library.SysDicAPI_GetPassTypeDic(base.UserToken);
+            var merchantTypeDic = XCLCMS.Lib.Common.FastAPI.MerchantAPI_GetMerchantTypeDic(base.UserToken);
+            var passTypeDic = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetPassTypeDic(base.UserToken);
             viewModel.MerchantInfo = new Models.UserInfo.UserCenterMerchantInfo();
             viewModel.MerchantInfo.ContactName = base.CurrentUserMerchant.ContactName;
             viewModel.MerchantInfo.Domain = base.CurrentUserMerchant.Domain;

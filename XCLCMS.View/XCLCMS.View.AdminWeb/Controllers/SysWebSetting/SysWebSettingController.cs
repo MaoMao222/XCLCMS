@@ -129,7 +129,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
             model.ValueType = viewModel.SysWebSetting.ValueType;
             model.Remark = viewModel.SysWebSetting.Remark;
             model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
-            model.SysWebSettingID = XCLCMS.Lib.WebAPI.Library.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            model.SysWebSettingID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.SET.ToString()
             });
