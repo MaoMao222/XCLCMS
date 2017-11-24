@@ -6,7 +6,6 @@
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
 
     <!--应用号-->
-    <add key="AppID" value="${config.AppID}" />
     <add key="AppKey" value="${config.AppKey}" />
     <add key="WebAPIJsUrl" value="${config.WebAPIJsUrl}" />
     <add key="WebAPIServiceURL" value="${config.WebAPIServiceURL}" />

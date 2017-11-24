@@ -49,7 +49,6 @@ namespace XCLCMS.Lib.WebAPI
             httpRequest.AddHeader("Content-Type", "application/json");
             httpRequest.AddHeader("XCLCMSHeaders", XCLNetTools.Serialize.JSON.Serialize(new XCLCMS.Lib.Model.ActionContextInfoEntity()
             {
-                AppID = request.AppID,
                 AppKey = request.AppKey,
                 UserToken = request.UserToken
             }));
@@ -110,7 +109,6 @@ namespace XCLCMS.Lib.WebAPI
             request.UserToken = userToken;
             request.Url = HttpContext.Current?.Request?.Url?.AbsoluteUri;
             request.Reffer = HttpContext.Current?.Request?.UrlReferrer?.AbsoluteUri;
-            request.AppID = XCLCMS.Lib.Common.Comm.AppID;
             request.AppKey = XCLCMS.Lib.Common.Comm.AppKey;
             return request;
         }

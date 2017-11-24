@@ -283,7 +283,6 @@ namespace XCLCMS.Lib.Base
 
             //页面全局配置信息
             var pageConfig = new XCLCMS.Lib.Model.PageGlobalConfig();
-            pageConfig.AppID = XCLCMS.Lib.Common.Comm.AppID;
             pageConfig.IsLogOn = commonModel.IsLogOn;
             if (null != commonModel.CurrentUserModel)
             {

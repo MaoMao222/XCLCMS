@@ -91,14 +91,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModel(appKey);
         }
 
-        /// <summary>
-        /// 根据appid和appkey查询实体
-        /// </summary>
-        public XCLCMS.Data.Model.MerchantApp GetModel(long appID, string appKey)
-        {
-            return dal.GetModel(appID, appKey);
-        }
-
         #endregion Extend Method
     }
 }

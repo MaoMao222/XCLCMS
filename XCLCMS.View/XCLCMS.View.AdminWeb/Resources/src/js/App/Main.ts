@@ -22,7 +22,6 @@ let app = {
         $.ajaxSetup({
             headers: {
                 "XCLCMSHeaders": JSON.stringify({
-                    AppID: XCLCMSPageGlobalConfig.AppID,
                     AppKey: XCLCMSPageGlobalConfig.AppKey,
                     UserToken: XCLCMSPageGlobalConfig.UserToken
                 })

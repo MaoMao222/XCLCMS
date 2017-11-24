@@ -10,12 +10,10 @@
       ],
       "val": {
         "DEV": {
-          "AppID": 900120,
           "AppKey": "DC013C390DE0455CA027F61623EC52DF",
           "WebAPIServiceURL": "http://localhost/XCLCMS.WebAPI/v1/"
         },
         "PRD": {
-          "AppID": 900120,
           "AppKey": "DC013C390DE0455CA027F61623EC52DF",
           "WebAPIServiceURL": "http://cms.wodeabc.com/api/v1/"
         }

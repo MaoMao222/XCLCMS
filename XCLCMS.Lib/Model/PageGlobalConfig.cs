@@ -9,11 +9,6 @@ namespace XCLCMS.Lib.Model
     public class PageGlobalConfig
     {
         /// <summary>
-        /// 当前应用程序的应用号
-        /// </summary>
-        public long AppID { get; set; }
-
-        /// <summary>
         /// 当前应用程序的应用Key
         /// </summary>
         public string AppKey { get; set; }

@@ -13,7 +13,6 @@
     lib.CreateRequest = function () {
         var req = new _request();
         req.UserToken = XCLCMSPageGlobalConfig.UserToken;
-        req.AppID = XCLCMSPageGlobalConfig.AppID;
         req.AppKey = XCLCMSPageGlobalConfig.AppKey;
         req.ClientIP = XCLCMSPageGlobalConfig.ClientIP;
         req.Url = XCLCMSPageGlobalConfig.Url;

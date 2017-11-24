@@ -44,22 +44,6 @@ namespace XCLCMS.Lib.Common
         }
 
         /// <summary>
-        /// 获取当前应用ID
-        /// </summary>
-        public static long AppID
-        {
-            get
-            {
-                var id = XCLNetTools.Common.DataTypeConvert.ToLong(XCLNetTools.XML.ConfigClass.GetConfigString("AppID"));
-                if (id <= 0)
-                {
-                    throw new ArgumentNullException("AppID", "请在配置文件中配置有效的AppID！");
-                }
-                return id;
-            }
-        }
-
-        /// <summary>
         /// 获取当前应用AppKey
         /// </summary>
         public static string AppKey

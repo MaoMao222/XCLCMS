@@ -9,11 +9,6 @@ namespace XCLCMS.Lib.Model
     public class ActionContextInfoEntity
     {
         /// <summary>
-        /// 应用号
-        /// </summary>
-        public long AppID { get; set; }
-
-        /// <summary>
         /// 应用key
         /// </summary>
         public string AppKey { get; set; }

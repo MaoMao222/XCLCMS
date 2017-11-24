@@ -47,12 +47,6 @@ namespace XCLCMS.Data.WebAPIEntity
         public TBody Body { get; set; }
 
         /// <summary>
-        /// 应用程序商户应用号
-        /// </summary>
-        [DataMember]
-        public long AppID { get; set; }
-
-        /// <summary>
         /// 应用程序AppKey
         /// </summary>
         [DataMember]

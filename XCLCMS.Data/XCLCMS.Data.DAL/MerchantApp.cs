@@ -176,21 +176,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        /// <summary>
-        /// 根据appid和appkey查询实体
-        /// </summary>
-        public XCLCMS.Data.Model.MerchantApp GetModel(long appID, string appKey)
-        {
-            Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from MerchantApp  WITH(NOLOCK)  where MerchantAppID=@MerchantAppID and AppKey=@AppKey");
-            db.AddInParameter(dbCommand, "MerchantAppID", DbType.Int64, appID);
-            db.AddInParameter(dbCommand, "AppKey", DbType.AnsiString, appKey);
-            using (var dr = db.ExecuteReader(dbCommand))
-            {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.MerchantApp>(dr);
-            }
-        }
-
         #endregion Extend Method
     }
 }

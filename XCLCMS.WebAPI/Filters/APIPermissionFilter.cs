@@ -55,10 +55,10 @@ namespace XCLCMS.WebAPI.Filters
 
             #region 应用AppKey校验
 
-            var merchantAppModel = this.merchantAppBLL.GetModel(bodyModel.AppID, bodyModel.AppKey);
+            var merchantAppModel = this.merchantAppBLL.GetModel(bodyModel.AppKey);
             if (null == merchantAppModel)
             {
-                this.unauthorizedResponse.Message = "应用AppID、AppKey校验失败，系统已阻止您的访问！";
+                this.unauthorizedResponse.Message = "应用AppKey校验失败，系统已阻止您的访问！";
                 return false;
             }
             if (merchantAppModel.RecordState != XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString())

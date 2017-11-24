@@ -43,7 +43,7 @@ namespace XCLCMS.WebAPI.Library
                 if (!string.IsNullOrWhiteSpace(extendHeaders))
                 {
                     model = XCLNetTools.Serialize.JSON.DeSerialize<XCLCMS.Lib.Model.ActionContextInfoEntity>(extendHeaders, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft);
-                    if (null != model && model.AppID > 0)
+                    if (null != model && !string.IsNullOrWhiteSpace(model.AppKey))
                     {
                         return model;
                     }
@@ -61,10 +61,6 @@ namespace XCLCMS.WebAPI.Library
                 model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
                 var jobj = JObject.Parse(body);
                 JToken jtoken = null;
-                if (jobj.TryGetValue("AppID", out jtoken))
-                {
-                    model.AppID = XCLNetTools.Common.DataTypeConvert.ToLong(Convert.ToString(jtoken));
-                }
                 if (jobj.TryGetValue("AppKey", out jtoken))
                 {
                     model.AppKey = Convert.ToString(jtoken);
@@ -82,7 +78,6 @@ namespace XCLCMS.WebAPI.Library
                 if (null != queryString)
                 {
                     model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
-                    model.AppID = XCLNetTools.Common.DataTypeConvert.ToLong(queryString["AppID"]);
                     model.AppKey = queryString["AppKey"];
                     model.UserToken = queryString["UserToken"];
                 }
