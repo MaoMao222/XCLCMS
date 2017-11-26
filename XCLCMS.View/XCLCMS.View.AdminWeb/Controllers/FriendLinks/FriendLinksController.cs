@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
@@ -42,6 +41,14 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
                 new XCLNetSearch.SearchFieldInfo("更新人名","UpdaterName|string|text","")
             };
             string strWhere = viewModel.Search.StrSQL;
+
+            if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_ShowAllRecordState))
+            {
+                strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                    strWhere,
+                    "RecordState='N'"
+                });
+            }
 
             #endregion 初始化查询条件
 

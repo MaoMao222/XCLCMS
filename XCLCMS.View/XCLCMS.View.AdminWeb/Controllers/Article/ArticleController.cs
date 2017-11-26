@@ -60,6 +60,14 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             };
             string strWhere = viewModel.Search.StrSQL;
 
+            if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_ShowAllRecordState))
+            {
+                strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                    strWhere,
+                    "RecordState='N'"
+                });
+            }
+
             #endregion 初始化查询条件
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.PageListConditionEntity>(base.UserToken);
@@ -245,7 +253,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             }
 
             viewModel.Article.MiddleCount = XCLNetTools.StringHander.FormHelper.GetInt("txtMiddleCount");
-            viewModel.Article.PublishTime = XCLNetTools.StringHander.FormHelper.GetDateTime("txtPublishTime",DateTime.Now);
+            viewModel.Article.PublishTime = XCLNetTools.StringHander.FormHelper.GetDateTime("txtPublishTime", DateTime.Now);
             viewModel.Article.SubTitle = XCLNetTools.StringHander.FormHelper.GetString("txtSubTitle");
             viewModel.Article.Summary = XCLNetTools.StringHander.FormHelper.GetString("txtSummary");
             viewModel.Article.Tags = XCLNetTools.StringHander.FormHelper.GetString("txtTags");

@@ -284,6 +284,12 @@ namespace XCLCMS.Data.CommonHelper
             SysFun_DataFilter_OnlyCurrentMerchant = 400188,
 
             /// <summary>
+            ///数据过滤-数据列表显示所有记录状态的数据
+            /// </summary>
+            [Description("数据过滤-数据列表显示所有记录状态的数据")]
+            SysFun_DataFilter_ShowAllRecordState = 400210,
+
+            /// <summary>
             ///友情链接管理-友情链接添加
             /// </summary>
             [Description("友情链接管理-友情链接添加")]
@@ -383,7 +389,7 @@ namespace XCLCMS.Data.CommonHelper
         /// <summary>
         /// 普通商户角色必须包含的权限功能ID列表
         /// </summary>
-        public static List<long> NormalMerchantFixedFunctionIDList = new List<long>() {
+        public static readonly List<long> NormalMerchantFixedFunctionIDList = new List<long>() {
             (long)FunctionEnum.SysFun_DataFilter_OnlyCurrentMerchant
         };
     }

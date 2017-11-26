@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace XCLCMS.View.AdminWeb.Controllers.Merchant
@@ -48,6 +47,14 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             };
             string strWhere = viewModel.Search.StrSQL;
 
+            if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_ShowAllRecordState))
+            {
+                strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                    strWhere,
+                    "RecordState='N'"
+                });
+            }
+
             #endregion 初始化查询条件
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.PageListConditionEntity>(base.UserToken);
@@ -71,7 +78,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         public ActionResult Add()
         {
             long merchantId = XCLNetTools.StringHander.FormHelper.GetLong("merchantId");
-            
+
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM();
             viewModel.Merchant = new XCLCMS.Data.Model.Merchant();
 
@@ -179,7 +186,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             model.MerchantID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.MER.ToString()
-            }); 
+            });
             model.Address = viewModel.Merchant.Address;
             model.ContactName = viewModel.Merchant.ContactName;
             model.Domain = viewModel.Merchant.Domain;

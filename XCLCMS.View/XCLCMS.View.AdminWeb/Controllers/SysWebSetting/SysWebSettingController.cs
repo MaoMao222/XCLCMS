@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
@@ -39,12 +38,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
                 new XCLNetSearch.SearchFieldInfo("更新时间","UpdateTime|dateTime|text",""),
                 new XCLNetSearch.SearchFieldInfo("更新人名","UpdaterName|string|text","")
             };
-            string strWhere = string.Format("RecordState='{0}'", XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString());
-            string strSearch = viewModel.Search.StrSQL;
-            if (!string.IsNullOrEmpty(strSearch))
-            {
-                strWhere = string.Format("{0} and ({1})", strWhere, strSearch);
-            }
+            string strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                                            viewModel.Search.StrSQL,
+                                            "RecordState='N'"
+                                        });
 
             #endregion 初始化查询条件
 

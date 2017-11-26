@@ -40,7 +40,15 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
                 new XCLNetSearch.SearchFieldInfo("更新时间","UpdateTime|dateTime|text",""),
                 new XCLNetSearch.SearchFieldInfo("更新人名","UpdaterName|string|text","")
             };
-            string strWhere =  viewModel.Search.StrSQL;
+            string strWhere = viewModel.Search.StrSQL;
+
+            if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_ShowAllRecordState))
+            {
+                strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                    strWhere,
+                    "RecordState='N'"
+                });
+            }
 
             #endregion 初始化查询条件
 
@@ -65,7 +73,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         public ActionResult Add()
         {
             long merchantAppId = XCLNetTools.StringHander.FormHelper.GetLong("merchantAppId");
-            
+
             var viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppAddVM();
             viewModel.MerchantApp = new Data.Model.MerchantApp();
 

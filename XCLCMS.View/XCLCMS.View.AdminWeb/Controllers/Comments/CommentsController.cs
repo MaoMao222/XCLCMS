@@ -44,6 +44,14 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
             };
             string strWhere = viewModel.Search.StrSQL;
 
+            if (!XCLCMS.Lib.Permission.PerHelper.HasPermission(base.UserID, Data.CommonHelper.Function.FunctionEnum.SysFun_DataFilter_ShowAllRecordState))
+            {
+                strWhere = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
+                    strWhere,
+                    "RecordState='N'"
+                });
+            }
+
             #endregion 初始化查询条件
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.PageListConditionEntity>(base.UserToken);
