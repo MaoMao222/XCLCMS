@@ -25,10 +25,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 查询用户信息实体
         /// </summary>
-        public APIResponseEntity<XCLCMS.Data.Model.UserInfo> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<XCLCMS.Data.Model.View.v_UserInfo> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.UserInfo>();
-            response.Body = userInfoBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_UserInfo>();
+            response.Body = vUserInfoBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

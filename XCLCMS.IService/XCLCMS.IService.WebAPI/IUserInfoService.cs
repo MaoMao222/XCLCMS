@@ -17,7 +17,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
-        APIResponseEntity<Data.Model.UserInfo> Detail(APIRequestEntity<long> request);
+        APIResponseEntity<Data.Model.View.v_UserInfo> Detail(APIRequestEntity<long> request);
 
         APIResponseEntity<bool> IsExistUserName(APIRequestEntity<string> request);
 

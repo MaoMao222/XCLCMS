@@ -82,12 +82,12 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
             long userInfoId = XCLNetTools.StringHander.FormHelper.GetLong("userInfoId");
 
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM viewModel = new XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM();
-            viewModel.UserInfo = new XCLCMS.Data.Model.UserInfo();
+            viewModel.UserInfo = new XCLCMS.Data.Model.View.v_UserInfo();
 
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.UserInfo = new Data.Model.UserInfo();
+                    viewModel.UserInfo = new Data.Model.View.v_UserInfo();
                     viewModel.UserInfo.SexType = XCLCMS.Data.CommonHelper.EnumType.UserSexTypeEnum.M.ToString();
                     viewModel.UserInfo.UserState = XCLCMS.Data.CommonHelper.EnumType.UserStateEnum.N.ToString();
                     viewModel.UserInfo.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
@@ -120,12 +120,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserView)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("UserInfoID");
+            var response = XCLCMS.Lib.WebAPI.UserInfoAPI.Detail(request);
+            viewModel.UserInfo = response.Body ?? new Data.Model.View.v_UserInfo();
+            return View("~/Views/UserInfo/UserInfoShow.cshtml", viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM GetViewModel(FormCollection fm)
         {
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM viewModel = new XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM();
-            viewModel.UserInfo = new Data.Model.UserInfo();
+            viewModel.UserInfo = new Data.Model.View.v_UserInfo();
             viewModel.UserInfo.Age = XCLNetTools.Common.DataTypeConvert.ToInt((fm["txtAge"] ?? "").Trim());
             viewModel.UserInfo.Birthday = XCLNetTools.Common.DataTypeConvert.ToDateTimeNull((fm["txtBirthday"] ?? "").Trim());
             viewModel.UserInfo.Email = (fm["txtEmail"] ?? "").Trim();
@@ -157,7 +171,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
         {
             XCLCMS.View.AdminWeb.Models.UserInfo.UserInfoAddVM viewModel = this.GetViewModel(fm);
             XCLCMS.Data.Model.UserInfo model = new XCLCMS.Data.Model.UserInfo();
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
             model.UserInfoID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
             {
                 IDType = Data.CommonHelper.EnumType.IDTypeEnum.USR.ToString()

@@ -76,17 +76,17 @@
                 <td>
 
                     @if (Model.MainImgList.IsNotNullOrEmpty())
-                        {
-                        <ul>
-                            @foreach (var m in Model.MainImgList)
-                                {
-                                <li>
-                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                                    （@m.FileSize KB）
-                                </li>
-                                }
-                        </ul>
-                        }
+            {
+                <ul>
+                    @foreach (var m in Model.MainImgList)
+            {
+                <li>
+                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                    （@m.FileSize KB）
+                </li>
+    }
+                </ul>
+    }
                 </td>
                 <td class="XCLTitle">发布时间：</td>
                 <td>
@@ -108,21 +108,15 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <strong>置顶：</strong>@(Model.Article.IsTop == "Y" ? "是" : "否")
                     @if (Model.Article.IsTop == "Y")
-                        {
-                        <span>@string.Format("{0:yyyy-MM-dd hh:mm}~{1:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime, Model.Article.TopEndTime)</span>
-                        }
+            {
+                <span>@string.Format("{0:yyyy-MM-dd hh:mm}~{1:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime, Model.Article.TopEndTime)</span>
+    }
                 </td>
             </tr>
             <tr>
                 <td class="XCLTitle">概述：</td>
                 <td colspan="5">
                     @Model.Article.Summary
-                </td>
-            </tr>
-            <tr>
-                <td class="XCLTitle">内容：</td>
-                <td colspan="5">
-                    @Html.Raw(Model.Article.Contents)
                 </td>
             </tr>
             <tr>
@@ -135,17 +129,17 @@
                 <td class="XCLTitle">附件：</td>
                 <td colspan="5">
                     @if (Model.AttactmentList.IsNotNullOrEmpty())
-                        {
-                        <ul>
-                            @foreach (var m in Model.AttactmentList)
-                                {
-                                <li>
-                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                                    （@m.FileSize KB）
-                                </li>
-                                }
-                        </ul>
-                        }
+            {
+                <ul>
+                    @foreach (var m in Model.AttactmentList)
+            {
+                <li>
+                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                    （@m.FileSize KB）
+                </li>
+    }
+                </ul>
+    }
                 </td>
             </tr>
 
@@ -187,6 +181,27 @@
                 <td class="XCLTitle">审核状态：</td>
                 <td>
                     @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum), Model.Article.VerifyState)
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Article.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Article.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Article.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Article.UpdaterName
+                </td>
+                <td class="XCLTitle"></td>
+                <td>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">内容：</td>
+                <td colspan="5">
+                    @Html.Raw(Model.Article.Contents)
                 </td>
             </tr>
         </table>

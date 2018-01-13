@@ -1,109 +1,92 @@
 ﻿@{
     Layout = "~/Views/MasterView/Main.cshtml";
-    }
+}
 @model XCLCMS.View.AdminWeb.Models.Merchant.MerchantListVM
 
 <form>
 
-<div class="XCLPanel" style="margin-top:5px;">
-    <div class="XCLPanelHeader">
-        @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAdd)){
-            <a href="@(string.Format("{0}Merchant/Add",XCLNetTools.StringHander.Common.RootUri))" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
-        }
-        @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantEdit))
-        {
-            <a href="@(string.Format("{0}Merchant/Add",XCLNetTools.StringHander.Common.RootUri))" id="btnUpdate" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
-        }
-        @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantDel))
-        {
-            <a href="javascript:void(0);" id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>
-        }
-    </div>
-    <div class="XCLPanelBody">
-        <div>
-            @Html.Raw(Model.Search.XCLNetSearchHTML())
+    <div class="XCLPanel" style="margin-top:5px;">
+        <div class="XCLPanelHeader">
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAdd))
+            {
+                <a href="@(string.Format("{0}Merchant/Add",XCLNetTools.StringHander.Common.RootUri))" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
+            }
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantEdit))
+            {
+                <a href="@(string.Format("{0}Merchant/Add",XCLNetTools.StringHander.Common.RootUri))" id="btnUpdate" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
+            }
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantDel))
+            {
+                <a href="javascript:void(0);" id="btnDel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>
+            }
         </div>
-        <table class="XCLTableList">
-            <tr class="XCLTableHeader XCLTableNoHover">
-                <td>
-                    <input type="checkbox" class="XCLTableCheckAll" value="" />
-                </td>
-                <td>序号</td>
-                <td>商户ID</td>
-                <td>商户名</td>
-                <td>商户类型</td>
-                <td>系统类型</td>
-                <td>绑定的域名</td>
-                <td>logo</td>
-                <td>联系人</td>
-                <td>手机</td>
-                <td>固话</td>
-                <td>电子邮件</td>
-                <td>QQ</td>
-                <td>证件类型</td>
-                <td>证件号</td>
-                <td>地址</td>
-                <td>其它联系信息</td>
-                <td>商户备注</td>
-                <td>注册时间</td>
-                <td>商户状态</td>
-                <td>备注</td>
-                <td>记录状态</td>
-                <td>创建时间</td>
-                <td>更新时间</td>
-            </tr>
-            @{
-                if (Model.MerchantList.IsNotNullOrEmpty())
-                {
-                    for (int i = 0; i < Model.MerchantList.Count; i++)
+        <div class="XCLPanelBody">
+            <div>
+                @Html.Raw(Model.Search.XCLNetSearchHTML())
+            </div>
+            <table class="XCLTableList">
+                <tr class="XCLTableHeader XCLTableNoHover">
+                    <td>
+                        <input type="checkbox" class="XCLTableCheckAll" value="" />
+                    </td>
+                    <td>序号</td>
+                    <td>商户ID</td>
+                    <td>商户名</td>
+                    <td>商户类型</td>
+                    <td>系统类型</td>
+                    <td>联系人</td>
+                    <td>手机</td>
+                    <td>电子邮件</td>
+                    <td>注册时间</td>
+                    <td>商户状态</td>
+                    <td>备注</td>
+                    <td>记录状态</td>
+                    <td>创建时间</td>
+                    <td>更新时间</td>
+                </tr>
+                @{
+                    if (Model.MerchantList.IsNotNullOrEmpty())
                     {
-                        var m = Model.MerchantList[i];
+                        for (int i = 0; i < Model.MerchantList.Count; i++)
+                        {
+                            var m = Model.MerchantList[i];
+                            <tr>
+                                <td align="center"><input type="checkbox" class="XCLTableCheckItem" value="@m.MerchantID" /></td>
+                                <td align="center">
+                                    @(Model.PagerModel.StartIndex + i)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Show","Merchant",new { MerchantID=m.MerchantID})" target="_blank">@m.MerchantID</a>
+                                </td>
+                                <td><a href="@Url.Action("Show","Merchant",new { MerchantID=m.MerchantID})" target="_blank">@m.MerchantName</a></td>
+                                <td align="center">@m.MerchantTypeName</td>
+                                <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum), m.MerchantSystemType)</td>
+                                <td>@m.ContactName</td>
+                                <td>@m.Tel</td>
+                                <td>@m.Email</td>
+                                <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.RegisterTime)</td>
+                                <td align="center" class="@(string.Equals(m.MerchantState,XCLCMS.Data.CommonHelper.EnumType.MerchantStateEnum.N.ToString())?"XCLRed":"")">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantStateEnum), m.MerchantState)</td>
+                                <td>@m.Remark</td>
+                                <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
+                                <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
+                                <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
                         <tr>
-                            <td align="center"><input type="checkbox" class="XCLTableCheckItem" value="@m.MerchantID" /></td>
-                            <td align="center">
-                                @(Model.PagerModel.StartIndex+i)
+                            <td colspan="100" align="center">
+                                暂无数据！
                             </td>
-                            <td>
-                                @m.MerchantID
-                            </td>
-                            <td>@m.MerchantName</td>
-                            <td align="center">@m.MerchantTypeName</td>
-                            <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum), m.MerchantSystemType)</td>
-                            <td>@m.Domain</td>
-                            <td>@m.LogoURL</td>
-                            <td>@m.ContactName</td>
-                            <td>@m.Tel</td>
-                            <td>@m.Landline</td>
-                            <td>@m.Email</td>
-                            <td>@m.QQ</td>
-                            <td align="center">@m.PassTypeName</td>
-                            <td>@m.PassNumber</td>
-                            <td>@m.Address</td>
-                            <td>@m.OtherContact</td>
-                            <td>@m.MerchantRemark</td>
-                            <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.RegisterTime)</td>
-                            <td align="center" class="@(string.Equals(m.MerchantState,XCLCMS.Data.CommonHelper.EnumType.MerchantStateEnum.N.ToString())?"XCLRed":"")">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantStateEnum),m.MerchantState)</td>
-                            <td>@m.Remark</td>
-                            <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
-                            <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
-                            <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
                         </tr>
                     }
                 }
-                else
-                {
-                    <tr>
-                        <td colspan="100" align="center">
-                            暂无数据！
-                        </td>
-                    </tr>
-                }
-            }
-        </table>
+            </table>
 
-        @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+            @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+        </div>
     </div>
-</div>
 </form>
 
 <div class="XCLPanel" style="margin-top: 5px;">
@@ -117,14 +100,12 @@
                 2、<strong>商户创建流程：</strong>
                 添加商户基础信息->添加商户应用信息->添加商户主用户的账号信息（可选择默认角色即可）。
             </li>
-
         </ul>
     </div>
 </div>
 
-
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Merchant.MerchantList.Init();
-        });
+    $(function () {
+        window.xclcms.Merchant.MerchantList.Init();
+    });
 </script>

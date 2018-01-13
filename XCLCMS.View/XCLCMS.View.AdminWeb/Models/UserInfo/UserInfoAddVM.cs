@@ -15,7 +15,7 @@ namespace XCLCMS.View.AdminWeb.Models.UserInfo
         /// <summary>
         /// 用户model
         /// </summary>
-        public XCLCMS.Data.Model.UserInfo UserInfo { get; set; }
+        public XCLCMS.Data.Model.View.v_UserInfo UserInfo { get; set; }
 
         /// <summary>
         /// 角色id list

@@ -12,9 +12,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 查询用户信息实体
         /// </summary>
-        public static APIResponseEntity<XCLCMS.Data.Model.UserInfo> Detail(APIRequestEntity<long> request)
+        public static APIResponseEntity<XCLCMS.Data.Model.View.v_UserInfo> Detail(APIRequestEntity<long> request)
         {
-            return Library.Request<long, XCLCMS.Data.Model.UserInfo>(request, "UserInfo/Detail");
+            return Library.Request<long, XCLCMS.Data.Model.View.v_UserInfo>(request, "UserInfo/Detail");
         }
 
         /// <summary>

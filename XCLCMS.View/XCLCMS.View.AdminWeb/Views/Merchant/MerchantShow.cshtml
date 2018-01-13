@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Merchant.MerchantShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle">商户名：</td>
+                <td>
+                    @Model.Merchant.MerchantName
+                </td>
+                <td class="XCLTitle">商户类型：</td>
+                <td>
+                    @Model.Merchant.MerchantTypeName
+                </td>
+                <td class="XCLTitle">域名：</td>
+                <td>
+                    @Model.Merchant.Domain
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">联系人：</td>
+                <td>
+                    @Model.Merchant.ContactName
+                </td>
+                <td class="XCLTitle">手机：</td>
+                <td>
+                    @Model.Merchant.Tel
+                </td>
+                <td class="XCLTitle">固话：</td>
+                <td>
+                    @Model.Merchant.Landline
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">电子邮件：</td>
+                <td>
+                    @Model.Merchant.Email
+                </td>
+                <td class="XCLTitle">QQ：</td>
+                <td>
+                    @Model.Merchant.QQ
+                </td>
+                <td class="XCLTitle">证件信息：</td>
+                <td>
+                    证件类型：@Model.Merchant.PassTypeName
+                    <br />
+                    证件号：@Model.Merchant.PassNumber
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">地址：</td>
+                <td>
+                    @Model.Merchant.Address
+                </td>
+                <td class="XCLTitle">注册时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd}", Model.Merchant.RegisterTime)
+                </td>
+                <td class="XCLTitle">其它联系信息：</td>
+                <td>
+                    @Model.Merchant.OtherContact
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">商户备注信息：</td>
+                <td>
+                    @Model.Merchant.MerchantRemark
+                </td>
+                <td class="XCLTitle">商户状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantStateEnum), Model.Merchant.MerchantState)
+                </td>
+                <td class="XCLTitle">商户系统类型：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum), Model.Merchant.MerchantSystemType)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.Merchant.Remark
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Merchant.RecordState)
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Merchant.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Merchant.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Merchant.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Merchant.UpdaterName
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

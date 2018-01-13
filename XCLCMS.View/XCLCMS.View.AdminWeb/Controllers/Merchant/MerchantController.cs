@@ -80,7 +80,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             long merchantId = XCLNetTools.StringHander.FormHelper.GetLong("merchantId");
 
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM();
-            viewModel.Merchant = new XCLCMS.Data.Model.Merchant();
+            viewModel.Merchant = new XCLCMS.Data.Model.View.v_Merchant();
 
             var merchantTypeDic = XCLCMS.Lib.Common.FastAPI.MerchantAPI_GetMerchantTypeDic(base.UserToken);
             var passTypeDic = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetPassTypeDic(base.UserToken);
@@ -88,7 +88,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.Merchant = new Data.Model.Merchant();
+                    viewModel.Merchant = new Data.Model.View.v_Merchant();
                     viewModel.Merchant.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
                     viewModel.MerchantTypeOptions = XCLNetTools.Control.HtmlControl.Lib.GetOptions(merchantTypeDic, new XCLNetTools.Entity.SetOptionEntity()
                     {
@@ -146,12 +146,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantView)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("MerchantID");
+            var response = XCLCMS.Lib.WebAPI.MerchantAPI.Detail(request);
+            viewModel.Merchant = response.Body ?? new Data.Model.View.v_Merchant();
+            return View("~/Views/Merchant/MerchantShow.cshtml", viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM GetViewModel(FormCollection fm)
         {
             XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAddVM();
-            viewModel.Merchant = new Data.Model.Merchant();
+            viewModel.Merchant = new Data.Model.View.v_Merchant();
             viewModel.Merchant.Address = (fm["txtAddress"] ?? "").Trim();
             viewModel.Merchant.ContactName = (fm["txtContactName"] ?? "").Trim();
             viewModel.Merchant.Domain = (fm["txtDomain"] ?? "").Trim();

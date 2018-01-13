@@ -35,10 +35,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 查询商户信息实体
         /// </summary>
-        public APIResponseEntity<XCLCMS.Data.Model.Merchant> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<XCLCMS.Data.Model.View.v_Merchant> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.Merchant>();
-            response.Body = merchantBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_Merchant>();
+            response.Body = vMerchantBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

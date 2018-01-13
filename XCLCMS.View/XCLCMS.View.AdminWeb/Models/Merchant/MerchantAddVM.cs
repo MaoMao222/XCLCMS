@@ -10,7 +10,7 @@
         /// <summary>
         /// 商户model
         /// </summary>
-        public XCLCMS.Data.Model.Merchant Merchant { get; set; }
+        public XCLCMS.Data.Model.View.v_Merchant Merchant { get; set; }
 
         /// <summary>
         /// 商户类型select的option
