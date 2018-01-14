@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+
+@model XCLCMS.View.AdminWeb.Models.Comments.CommentsShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" style="width:10%">所属商户：</td>
+                <td style="width:40%">
+                    @Model.Comments.MerchantName
+                </td>
+                <td class="XCLTitle" style="width:10%">所属应用号：</td>
+                <td style="width:40%">
+                    @Model.Comments.MerchantAppName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">评论对象类型：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), Model.Comments.ObjectType)
+                </td>
+                <td class="XCLTitle">评论对象ID：</td>
+                <td>
+                    @Model.Comments.FK_ObjectID
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">上级评论：</td>
+                <td>
+                    @Model.Comments.ParentCommentID
+                </td>
+                <td class="XCLTitle">评论者：</td>
+                <td>
+                    @Model.Comments.UserName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">电子邮件：</td>
+                <td>
+                    @Model.Comments.Email
+                </td>
+                <td class="XCLTitle">评论内容：</td>
+                <td>
+                    @Model.Comments.Contents
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">点【好】数：</td>
+                <td>
+                    @Model.Comments.GoodCount
+                </td>
+                <td class="XCLTitle">点【中】数：</td>
+                <td>
+                    @Model.Comments.MiddleCount
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">点【差】数：</td>
+                <td>
+                    @Model.Comments.BadCount
+                </td>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.Comments.Remark
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">审核状态</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.VerifyStateEnum), Model.Comments.VerifyState)
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Comments.RecordState)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Comments.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Comments.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Comments.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Comments.UpdaterName
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

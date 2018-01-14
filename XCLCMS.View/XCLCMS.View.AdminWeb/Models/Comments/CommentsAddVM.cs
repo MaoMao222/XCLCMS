@@ -9,7 +9,7 @@
 
         public string FormAction { get; set; }
 
-        public XCLCMS.Data.Model.Comments Comments { get; set; }
+        public XCLCMS.Data.Model.View.v_Comments Comments { get; set; }
 
         /// <summary>
         /// 审核状态select的options

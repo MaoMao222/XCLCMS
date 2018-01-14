@@ -42,7 +42,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_View)]
-        public async Task<APIResponseEntity<XCLCMS.Data.Model.Comments>> Detail([FromUri] APIRequestEntity<long> request)
+        public async Task<APIResponseEntity<XCLCMS.Data.Model.View.v_Comments>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
             {

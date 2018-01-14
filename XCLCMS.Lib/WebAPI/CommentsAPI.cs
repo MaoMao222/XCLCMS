@@ -12,9 +12,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 查询评论信息实体
         /// </summary>
-        public static APIResponseEntity<XCLCMS.Data.Model.Comments> Detail(APIRequestEntity<long> request)
+        public static APIResponseEntity<XCLCMS.Data.Model.View.v_Comments> Detail(APIRequestEntity<long> request)
         {
-            return Library.Request<long, XCLCMS.Data.Model.Comments>(request, "Comments/Detail");
+            return Library.Request<long, XCLCMS.Data.Model.View.v_Comments>(request, "Comments/Detail");
         }
 
         /// <summary>

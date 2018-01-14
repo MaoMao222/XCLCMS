@@ -27,10 +27,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 评论详情
         /// </summary>
-        public APIResponseEntity<Data.Model.Comments> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<Data.Model.View.v_Comments> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.Comments>();
-            response.Body = commentsBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_Comments>();
+            response.Body = vCommentsBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

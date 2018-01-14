@@ -24,10 +24,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 查询广告信息实体
         /// </summary>
-        public APIResponseEntity<XCLCMS.Data.Model.Ads> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<XCLCMS.Data.Model.View.v_Ads> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.Ads>();
-            response.Body = adsBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_Ads>();
+            response.Body = vAdsBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

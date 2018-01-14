@@ -36,19 +36,11 @@
                     <td>唯一标识</td>
                     <td>类型</td>
                     <td>标题</td>
-                    <td>内容</td>
-                    <td>宽度</td>
-                    <td>高度</td>
                     <td>链接地址</td>
-                    <td>打开方式</td>
                     <td>开始时间</td>
                     <td>结束时间</td>
-                    <td>昵称</td>
                     <td>电子邮件</td>
-                    <td>QQ</td>
                     <td>手机号</td>
-                    <td>其它联系方式</td>
-                    <td>备注</td>
                     <td>记录状态</td>
                     <td>创建时间</td>
                     <td>更新时间</td>
@@ -65,7 +57,7 @@
                                     @(Model.PagerModel.StartIndex + i)
                                 </td>
                                 <td align="center">
-                                    @m.AdsID
+                                    <a href="@Url.Action("Show","Ads",new { AdsID=m.AdsID})" target="_blank">@m.AdsID</a>
                                 </td>
                                 <td align="center">
                                     @m.MerchantName
@@ -73,20 +65,12 @@
                                 <td>@m.MerchantAppName</td>
                                 <td>@m.Code</td>
                                 <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AdsTypeEnum), m.AdsType)</td>
-                                <td>@m.Title</td>
-                                <td>@m.Contents</td>
-                                <td>@m.AdWidth</td>
-                                <td>@m.AdHeight</td>
+                                <td><a href="@Url.Action("Show","Ads",new { AdsID=m.AdsID})" target="_blank">@m.Title</a></td>
                                 <td>@m.URL</td>
-                                <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.URLOpenTypeEnum), m.URLOpenType)</td>
                                 <td>@string.Format("{0:yyyy-MM-dd}", m.StartTime)</td>
                                 <td>@string.Format("{0:yyyy-MM-dd}", m.EndTime)</td>
-                                <td>@m.NickName</td>
                                 <td>@m.Email</td>
-                                <td>@m.QQ</td>
                                 <td>@m.Tel</td>
-                                <td>@m.OtherContact</td>
-                                <td>@m.Remark</td>
                                 <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
@@ -121,7 +105,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Ads.AdsList.Init();
-        });
+    $(function () {
+        window.xclcms.Ads.AdsList.Init();
+    });
 </script>

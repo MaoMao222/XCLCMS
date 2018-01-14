@@ -15,7 +15,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
-        APIResponseEntity<Data.Model.Comments> Detail(APIRequestEntity<long> request);
+        APIResponseEntity<Data.Model.View.v_Comments> Detail(APIRequestEntity<long> request);
 
         APIResponseEntity<PageListResponseEntity<v_Comments>> PageList(APIRequestEntity<PageListConditionEntity> request);
 

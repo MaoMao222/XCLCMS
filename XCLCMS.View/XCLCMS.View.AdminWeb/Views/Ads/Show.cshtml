@@ -1,0 +1,122 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Ads.AdsShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" style="width:10%">所属商户：</td>
+                <td style="width:40%">
+                    @Model.Ads.MerchantName
+                </td>
+                <td class="XCLTitle" style="width:10%">所属应用：</td>
+                <td style="width:40%">
+                    @Model.Ads.MerchantAppName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">标题：</td>
+                <td>
+                    @Model.Ads.Title
+                </td>
+                <td class="XCLTitle">唯一标识：</td>
+                <td>
+                    @Model.Ads.Code
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">类型：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AdsTypeEnum), Model.Ads.AdsType)
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">宽度：</td>
+                <td>
+                    @Model.Ads.AdWidth
+                </td>
+                <td class="XCLTitle">高度：</td>
+                <td>
+                    @Model.Ads.AdHeight
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">链接地址：</td>
+                <td>
+                    @Model.Ads.URL
+                </td>
+                <td class="XCLTitle">打开方式：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.URLOpenTypeEnum), Model.Ads.URLOpenType)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">起止时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm}", Model.Ads.StartTime)
+                    ~
+                    @string.Format("{0:yyyy-MM-dd HH:mm}", Model.Ads.EndTime)
+                </td>
+                <td class="XCLTitle">昵称：</td>
+                <td>
+                    @Model.Ads.NickName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">电子邮件：</td>
+                <td>
+                    @Model.Ads.Email
+                </td>
+                <td class="XCLTitle">QQ：</td>
+                <td>
+                    @Model.Ads.QQ
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">手机号：</td>
+                <td>
+                    @Model.Ads.Tel
+                </td>
+                <td class="XCLTitle">其它联系方式：</td>
+                <td>
+                    @Model.Ads.OtherContact
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.Ads.Remark
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Ads.RecordState)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Ads.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Ads.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Ads.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Ads.UpdaterName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">内容：</td>
+                <td colspan="3">
+                    @Model.Ads.Contents
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

@@ -12,9 +12,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 查询广告信息实体
         /// </summary>
-        public static APIResponseEntity<XCLCMS.Data.Model.Ads> Detail(APIRequestEntity<long> request)
+        public static APIResponseEntity<XCLCMS.Data.Model.View.v_Ads> Detail(APIRequestEntity<long> request)
         {
-            return Library.Request<long, XCLCMS.Data.Model.Ads>(request, "Ads/Detail");
+            return Library.Request<long, XCLCMS.Data.Model.View.v_Ads>(request, "Ads/Detail");
         }
 
         /// <summary>

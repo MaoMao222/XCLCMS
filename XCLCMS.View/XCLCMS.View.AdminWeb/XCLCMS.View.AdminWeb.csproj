@@ -173,11 +173,13 @@
     </Compile>
     <Compile Include="Models\Ads\AdsAddVM.cs" />
     <Compile Include="Models\Ads\AdsListVM.cs" />
+    <Compile Include="Models\Ads\AdsShowVM.cs" />
     <Compile Include="Models\Article\ArticleAddVM.cs" />
     <Compile Include="Models\Article\ArticleListVM.cs" />
     <Compile Include="Models\Article\ArticleShowVM.cs" />
     <Compile Include="Models\Comments\CommentsAddVM.cs" />
     <Compile Include="Models\Comments\CommentsListVM.cs" />
+    <Compile Include="Models\Comments\CommentsShowVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksAddVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksListVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksShowVM.cs" />
@@ -1048,6 +1050,8 @@
     <Content Include="Views\Merchant\MerchantShow.cshtml" />
     <Content Include="Views\Merchant\MerchantAppShow.cshtml" />
     <Content Include="Views\FriendLinks\Show.cshtml" />
+    <Content Include="Views\Comments\Show.cshtml" />
+    <Content Include="Views\Ads\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

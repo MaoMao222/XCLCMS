@@ -9,7 +9,7 @@
 
         public string FormAction { get; set; }
 
-        public XCLCMS.Data.Model.Ads Ads { get; set; }
+        public XCLCMS.Data.Model.View.v_Ads Ads { get; set; }
 
         /// <summary>
         /// 广告类型select的options

@@ -86,7 +86,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.Ads = new Data.Model.Ads();
+                    viewModel.Ads = new Data.Model.View.v_Ads();
                     viewModel.FormAction = Url.Action("AddSubmit", "Ads");
                     viewModel.Ads.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
                     viewModel.Ads.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
@@ -124,12 +124,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_View)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Ads.AdsShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("AdsID");
+            var response = XCLCMS.Lib.WebAPI.AdsAPI.Detail(request);
+            viewModel.Ads = response.Body ?? new Data.Model.View.v_Ads();
+            return View(viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.Ads.AdsAddVM GetViewModel(FormCollection fm)
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Ads.AdsAddVM();
-            viewModel.Ads = new Data.Model.Ads();
+            viewModel.Ads = new Data.Model.View.v_Ads();
             viewModel.Ads.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
             viewModel.Ads.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
             viewModel.Ads.AdsID = XCLNetTools.StringHander.FormHelper.GetLong("AdsID");

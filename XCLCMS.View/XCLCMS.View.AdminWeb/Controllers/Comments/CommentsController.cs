@@ -81,7 +81,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.Comments = new Data.Model.Comments();
+                    viewModel.Comments = new Data.Model.View.v_Comments();
                     viewModel.FormAction = Url.Action("AddSubmit", "Comments");
                     viewModel.Comments.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
                     viewModel.Comments.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
@@ -119,12 +119,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_View)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Comments.CommentsShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("CommentsID");
+            var response = XCLCMS.Lib.WebAPI.CommentsAPI.Detail(request);
+            viewModel.Comments = response.Body ?? new Data.Model.View.v_Comments();
+            return View(viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM GetViewModel(FormCollection fm)
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Comments.CommentsAddVM();
-            viewModel.Comments = new Data.Model.Comments();
+            viewModel.Comments = new Data.Model.View.v_Comments();
             viewModel.Comments.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
             viewModel.Comments.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
             viewModel.Comments.CommentsID = XCLNetTools.StringHander.FormHelper.GetLong("CommentsID");

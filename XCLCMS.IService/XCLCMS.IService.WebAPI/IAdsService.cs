@@ -16,7 +16,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
-        APIResponseEntity<Data.Model.Ads> Detail(APIRequestEntity<long> request);
+        APIResponseEntity<Data.Model.View.v_Ads> Detail(APIRequestEntity<long> request);
 
         APIResponseEntity<Data.Model.Ads> DetailByCode(APIRequestEntity<string> request);
 
