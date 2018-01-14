@@ -30,19 +30,11 @@
                         <input type="checkbox" class="XCLTableCheckAll" value="" />
                     </td>
                     <td>序号</td>
-                    <td>所属商户ID</td>
                     <td>商户应用ID</td>
-                    <td>商户应用Key</td>
                     <td>所属商户</td>
                     <td>商户应用名</td>
-                    <td>静态资源版本号</td>
                     <td>联系人邮箱</td>
-                    <td>版权信息</td>
-                    <td>Meta描述</td>
-                    <td>Meta关键字</td>
-                    <td>Meta标题</td>
                     <td>站点网址</td>
-                    <td>备注</td>
                     <td>记录状态</td>
                     <td>创建时间</td>
                     <td>更新时间</td>
@@ -59,24 +51,12 @@
                                     @(Model.PagerModel.StartIndex + i)
                                 </td>
                                 <td align="center">
-                                    @m.FK_MerchantID
+                                    <a href="@Url.Action("Show","MerchantApp",new { MerchantAppID=m.MerchantAppID})" target="_blank">@m.MerchantAppID</a>
                                 </td>
-                                <td align="center">
-                                    @m.MerchantAppID
-                                </td>
-                                <td align="center">
-                                    @m.AppKey
-                                </td>
-                                <td>@m.MerchantName</td>
+                                <td><a href="@Url.Action("Show","MerchantApp",new { MerchantAppID=m.MerchantAppID})" target="_blank">@m.MerchantName</a></td>
                                 <td>@m.MerchantAppName</td>
-                                <td>@m.ResourceVersion</td>
                                 <td>@m.Email</td>
-                                <td>@m.CopyRight</td>
-                                <td>@m.MetaDescription</td>
-                                <td>@m.MetaKeyWords</td>
-                                <td>@m.MetaTitle</td>
                                 <td>@m.WebURL</td>
-                                <td>@m.Remark</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
@@ -113,7 +93,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Merchant.MerchantAppList.Init();
-        });
+    $(function () {
+        window.xclcms.Merchant.MerchantAppList.Init();
+    });
 </script>

@@ -43,7 +43,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppView)]
-        public async Task<APIResponseEntity<XCLCMS.Data.Model.MerchantApp>> Detail([FromUri] APIRequestEntity<long> request)
+        public async Task<APIResponseEntity<XCLCMS.Data.Model.View.v_MerchantApp>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
             {

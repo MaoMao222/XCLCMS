@@ -24,10 +24,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 查询商户应用信息实体
         /// </summary>
-        public APIResponseEntity<XCLCMS.Data.Model.MerchantApp> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<XCLCMS.Data.Model.View.v_MerchantApp> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.MerchantApp>();
-            response.Body = merchantAppBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_MerchantApp>();
+            response.Body = vMerchantAppBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

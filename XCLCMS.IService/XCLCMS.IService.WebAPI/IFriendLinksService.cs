@@ -17,7 +17,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
-        APIResponseEntity<Data.Model.FriendLinks> Detail(APIRequestEntity<long> request);
+        APIResponseEntity<Data.Model.View.v_FriendLinks> Detail(APIRequestEntity<long> request);
 
         APIResponseEntity<bool> IsExistTitle(APIRequestEntity<IsExistTitleEntity> request);
 

@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+
+            <tr>
+                <td class="XCLTitle">所属商户：</td>
+                <td>
+                    @Model.FriendLinks.MerchantName
+                </td>
+                <td class="XCLTitle">所属应用：</td>
+                <td>
+                    @Model.FriendLinks.MerchantAppName
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">标题：</td>
+                <td>
+                    @Model.FriendLinks.Title
+                </td>
+                <td class="XCLTitle">描述：</td>
+                <td>
+                    @Model.FriendLinks.Description
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">链接地址：</td>
+                <td>
+                    @Model.FriendLinks.URL
+                </td>
+                <td class="XCLTitle">联系人名：</td>
+                <td>
+                    @Model.FriendLinks.ContactName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">电子邮件：</td>
+                <td>
+                    @Model.FriendLinks.Email
+                </td>
+                <td class="XCLTitle">QQ：</td>
+                <td>
+                    @Model.FriendLinks.QQ
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">手机号：</td>
+                <td>
+                    @Model.FriendLinks.Tel
+                </td>
+                <td class="XCLTitle">其它联系方式：</td>
+                <td>
+                    @Model.FriendLinks.OtherContact
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.FriendLinks.Remark
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.FriendLinks.RecordState)
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.FriendLinks.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.FriendLinks.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.FriendLinks.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.FriendLinks.UpdaterName
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

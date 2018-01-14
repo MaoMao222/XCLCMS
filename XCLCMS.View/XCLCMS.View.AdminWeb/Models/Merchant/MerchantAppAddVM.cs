@@ -10,7 +10,7 @@
         /// <summary>
         /// 商户应用model
         /// </summary>
-        public XCLCMS.Data.Model.MerchantApp MerchantApp { get; set; }
+        public XCLCMS.Data.Model.View.v_MerchantApp MerchantApp { get; set; }
 
         /// <summary>
         /// 记录状态select的options

@@ -17,7 +17,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
-        APIResponseEntity<Data.Model.MerchantApp> Detail(APIRequestEntity<long> request);
+        APIResponseEntity<Data.Model.View.v_MerchantApp> Detail(APIRequestEntity<long> request);
 
         APIResponseEntity<MerchantAppInfoModel> DetailByAppKey(APIRequestEntity<object> request);
 

@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" style="width:20%">所属商户：</td>
+                <td style="width:80%">
+                    @Model.MerchantApp.MerchantName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">商户应用名：</td>
+                <td>
+                    @Model.MerchantApp.MerchantAppName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">静态资源版本号：</td>
+                <td>
+                    @Model.MerchantApp.ResourceVersion
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">站点网址：</td>
+                <td>
+                    @Model.MerchantApp.WebURL
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">联系人邮箱：</td>
+                <td>
+                    @Model.MerchantApp.Email
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">应用Key：</td>
+                <td>
+                    @Model.MerchantApp.AppKey
+                </td>
+            </tr>
+
+            <tr>
+
+                <td class="XCLTitle">Meta标题：</td>
+                <td>
+                    @Model.MerchantApp.MetaTitle
+                </td>
+            </tr>
+
+            <tr>
+
+                <td class="XCLTitle">Meta关键字：</td>
+                <td>
+                    @Model.MerchantApp.MetaKeyWords
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">Meta描述：</td>
+                <td>
+                    @Model.MerchantApp.MetaDescription
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">版权信息：</td>
+                <td>
+                    @Model.MerchantApp.CopyRight
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.MerchantApp.Remark
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.MerchantApp.RecordState)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.MerchantApp.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.MerchantApp.CreaterName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.MerchantApp.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.MerchantApp.UpdaterName
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

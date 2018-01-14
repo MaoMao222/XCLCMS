@@ -12,9 +12,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 查询商户应用信息实体
         /// </summary>
-        public static APIResponseEntity<XCLCMS.Data.Model.MerchantApp> Detail(APIRequestEntity<long> request)
+        public static APIResponseEntity<XCLCMS.Data.Model.View.v_MerchantApp> Detail(APIRequestEntity<long> request)
         {
-            return Library.Request<long, XCLCMS.Data.Model.MerchantApp>(request, "MerchantApp/Detail");
+            return Library.Request<long, XCLCMS.Data.Model.View.v_MerchantApp>(request, "MerchantApp/Detail");
         }
 
         /// <summary>

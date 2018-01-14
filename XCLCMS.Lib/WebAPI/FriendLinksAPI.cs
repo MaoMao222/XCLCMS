@@ -12,9 +12,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 查询友情链接信息实体
         /// </summary>
-        public static APIResponseEntity<XCLCMS.Data.Model.FriendLinks> Detail(APIRequestEntity<long> request)
+        public static APIResponseEntity<XCLCMS.Data.Model.View.v_FriendLinks> Detail(APIRequestEntity<long> request)
         {
-            return Library.Request<long, XCLCMS.Data.Model.FriendLinks>(request, "FriendLinks/Detail");
+            return Library.Request<long, XCLCMS.Data.Model.View.v_FriendLinks>(request, "FriendLinks/Detail");
         }
 
         /// <summary>

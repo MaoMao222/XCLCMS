@@ -180,10 +180,12 @@
     <Compile Include="Models\Comments\CommentsListVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksAddVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksListVM.cs" />
+    <Compile Include="Models\FriendLinks\FriendLinksShowVM.cs" />
     <Compile Include="Models\Main\MainVM.cs" />
     <Compile Include="Models\Merchant\MerchantAddVM.cs" />
     <Compile Include="Models\Merchant\MerchantAppAddVM.cs" />
     <Compile Include="Models\Merchant\MerchantAppListVM.cs" />
+    <Compile Include="Models\Merchant\MerchantAppShowVM.cs" />
     <Compile Include="Models\Merchant\MerchantListVM.cs" />
     <Compile Include="Models\Merchant\MerchantShowVM.cs" />
     <Compile Include="Models\SysDic\SysDicAddVM.cs" />
@@ -1044,6 +1046,8 @@
     <Content Include="Resources\dist\xclcms.js.map" />
     <Content Include="Views\UserInfo\UserInfoShow.cshtml" />
     <Content Include="Views\Merchant\MerchantShow.cshtml" />
+    <Content Include="Views\Merchant\MerchantAppShow.cshtml" />
+    <Content Include="Views\FriendLinks\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

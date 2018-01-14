@@ -75,12 +75,12 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
             long merchantAppId = XCLNetTools.StringHander.FormHelper.GetLong("merchantAppId");
 
             var viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppAddVM();
-            viewModel.MerchantApp = new Data.Model.MerchantApp();
+            viewModel.MerchantApp = new Data.Model.View.v_MerchantApp();
 
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.MerchantApp = new Data.Model.MerchantApp();
+                    viewModel.MerchantApp = new Data.Model.View.v_MerchantApp();
                     viewModel.MerchantApp.FK_MerchantID = base.CurrentUserMerchant.MerchantID;
                     viewModel.MerchantApp.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
                     viewModel.MerchantApp.AppKey = Guid.NewGuid().ToString("N").ToUpper();
@@ -107,12 +107,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppView)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("MerchantAppID");
+            var response = XCLCMS.Lib.WebAPI.MerchantAppAPI.Detail(request);
+            viewModel.MerchantApp = response.Body ?? new Data.Model.View.v_MerchantApp();
+            return View("~/Views/Merchant/MerchantAppShow.cshtml", viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppAddVM GetViewModel(FormCollection fm)
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.Merchant.MerchantAppAddVM();
-            viewModel.MerchantApp = new Data.Model.MerchantApp();
+            viewModel.MerchantApp = new Data.Model.View.v_MerchantApp();
             viewModel.MerchantApp.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
             viewModel.MerchantApp.MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("MerchantAppID");
             viewModel.MerchantApp.MerchantAppName = XCLNetTools.StringHander.FormHelper.GetString("txtMerchantAppName");
@@ -170,7 +184,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
             base.UpdateSubmit(fm);
-            long merchantAppId = XCLNetTools.StringHander.FormHelper.GetLong("merchantAppId");
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.MerchantApp();
             model.MerchantAppID = viewModel.MerchantApp.MerchantAppID;

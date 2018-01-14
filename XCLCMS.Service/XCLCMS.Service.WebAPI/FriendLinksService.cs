@@ -24,10 +24,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 查询友情链接信息实体
         /// </summary>
-        public APIResponseEntity<XCLCMS.Data.Model.FriendLinks> Detail(APIRequestEntity<long> request)
+        public APIResponseEntity<XCLCMS.Data.Model.View.v_FriendLinks> Detail(APIRequestEntity<long> request)
         {
-            var response = new APIResponseEntity<XCLCMS.Data.Model.FriendLinks>();
-            response.Body = friendLinksBLL.GetModel(request.Body);
+            var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_FriendLinks>();
+            response.Body = vFriendLinksBLL.GetModel(request.Body);
             response.IsSuccess = true;
             return response;
         }

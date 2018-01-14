@@ -65,7 +65,7 @@
                     </td>
                     <td class="XCLTitle">注册时间：</td>
                     <td>
-                        <input type="text" id="txtRegisterTime" name="txtRegisterTime" value="@string.Format("{0:yyyy-MM-dd}",Model.Merchant.RegisterTime)" />
+                        <input type="text" id="txtRegisterTime" name="txtRegisterTime" value="@string.Format("{0:yyyy-MM-dd}",Model.Merchant.RegisterTime)"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'}); return false;" />
                     </td>
                     <td>
                         证件号：<input type="text" id="txtPassNumber" name="txtPassNumber" value="@Model.Merchant.PassNumber" />

@@ -9,6 +9,6 @@
 
         public string FormAction { get; set; }
 
-        public XCLCMS.Data.Model.FriendLinks FriendLinks { get; set; }
+        public XCLCMS.Data.Model.View.v_FriendLinks FriendLinks { get; set; }
     }
 }

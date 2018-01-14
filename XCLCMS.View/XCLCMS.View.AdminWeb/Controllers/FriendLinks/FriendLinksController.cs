@@ -79,7 +79,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
             switch (base.CurrentHandleType)
             {
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
-                    viewModel.FriendLinks = new Data.Model.FriendLinks();
+                    viewModel.FriendLinks = new Data.Model.View.v_FriendLinks();
                     viewModel.FormAction = Url.Action("AddSubmit", "FriendLinks");
                     viewModel.FriendLinks.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
                     viewModel.FriendLinks.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
@@ -105,12 +105,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
         }
 
         /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_View)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("FriendLinkID");
+            var response = XCLCMS.Lib.WebAPI.FriendLinksAPI.Detail(request);
+            viewModel.FriendLinks = response.Body ?? new Data.Model.View.v_FriendLinks();
+            return View(viewModel);
+        }
+
+        /// <summary>
         /// 将表单值转为viewModel
         /// </summary>
         private XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksAddVM GetViewModel(FormCollection fm)
         {
             var viewModel = new XCLCMS.View.AdminWeb.Models.FriendLinks.FriendLinksAddVM();
-            viewModel.FriendLinks = new Data.Model.FriendLinks();
+            viewModel.FriendLinks = new Data.Model.View.v_FriendLinks();
             viewModel.FriendLinks.ContactName = fm["txtContactName"];
             viewModel.FriendLinks.Description = fm["txtDescription"];
             viewModel.FriendLinks.Email = fm["txtEmail"];

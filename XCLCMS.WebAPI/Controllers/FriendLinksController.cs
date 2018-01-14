@@ -43,7 +43,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_View)]
-        public async Task<APIResponseEntity<XCLCMS.Data.Model.FriendLinks>> Detail([FromUri] APIRequestEntity<long> request)
+        public async Task<APIResponseEntity<XCLCMS.Data.Model.View.v_FriendLinks>> Detail([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
             {
