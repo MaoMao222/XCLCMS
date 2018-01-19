@@ -14,10 +14,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class SysWebSettingService : ISysWebSettingService
     {
-        private XCLCMS.Data.BLL.View.v_SysWebSetting vSysWebSettingBLL = new Data.BLL.View.v_SysWebSetting();
-        private XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.View.v_SysWebSetting vSysWebSettingBLL = new Data.BLL.View.v_SysWebSetting();
+        private readonly XCLCMS.Data.BLL.SysWebSetting sysWebSettingBLL = new Data.BLL.SysWebSetting();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
 
         public ContextModel ContextInfo { get; set; }
 

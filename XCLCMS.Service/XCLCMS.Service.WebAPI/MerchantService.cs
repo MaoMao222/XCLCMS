@@ -16,13 +16,12 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class MerchantService : IMerchantService
     {
-        private XCLCMS.Service.WebAPI.SysRoleService sysRoleWebAPIBLL = new XCLCMS.Service.WebAPI.SysRoleService();
-        private XCLCMS.Service.WebAPI.SysFunctionService sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunctionService();
-        private XCLCMS.Data.BLL.View.v_Merchant vMerchantBLL = new Data.BLL.View.v_Merchant();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
-        private XCLCMS.Data.BLL.SysDic sysDicBLL = new XCLCMS.Data.BLL.SysDic();
+        private readonly XCLCMS.Service.WebAPI.SysRoleService sysRoleWebAPIBLL = new XCLCMS.Service.WebAPI.SysRoleService();
+        private readonly XCLCMS.Service.WebAPI.SysFunctionService sysFunctionWebAPIBLL = new XCLCMS.Service.WebAPI.SysFunctionService();
+        private readonly XCLCMS.Data.BLL.View.v_Merchant vMerchantBLL = new Data.BLL.View.v_Merchant();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.SysRole sysRoleBLL = new XCLCMS.Data.BLL.SysRole();
+        private readonly XCLCMS.Data.BLL.SysDic sysDicBLL = new XCLCMS.Data.BLL.SysDic();
 
         public ContextModel ContextInfo { get; set; }
 

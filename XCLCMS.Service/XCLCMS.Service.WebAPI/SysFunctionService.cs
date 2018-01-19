@@ -13,10 +13,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class SysFunctionService : ISysFunctionService
     {
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.SysFunction sysFunctionBLL = new Data.BLL.SysFunction();
-        private XCLCMS.Data.BLL.View.v_SysFunction vSysFunctionBLL = new Data.BLL.View.v_SysFunction();
-        private XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new XCLCMS.Data.BLL.View.v_SysRole();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.SysFunction sysFunctionBLL = new Data.BLL.SysFunction();
+        private readonly XCLCMS.Data.BLL.View.v_SysFunction vSysFunctionBLL = new Data.BLL.View.v_SysFunction();
+        private readonly XCLCMS.Data.BLL.View.v_SysRole vSysRoleBLL = new XCLCMS.Data.BLL.View.v_SysRole();
 
         public ContextModel ContextInfo { get; set; }
 

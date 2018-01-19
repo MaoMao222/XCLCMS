@@ -17,10 +17,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class AttachmentService : IAttachmentService
     {
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.Attachment attachmentBLL = new XCLCMS.Data.BLL.Attachment();
-        private XCLCMS.Data.BLL.ObjectAttachment objectAttachmentBLL = new XCLCMS.Data.BLL.ObjectAttachment();
-        public XCLCMS.Data.BLL.View.v_Attachment vAttachmentBLL = new XCLCMS.Data.BLL.View.v_Attachment();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.Attachment attachmentBLL = new XCLCMS.Data.BLL.Attachment();
+        private readonly XCLCMS.Data.BLL.ObjectAttachment objectAttachmentBLL = new XCLCMS.Data.BLL.ObjectAttachment();
+        public readonly XCLCMS.Data.BLL.View.v_Attachment vAttachmentBLL = new XCLCMS.Data.BLL.View.v_Attachment();
 
         public ContextModel ContextInfo { get; set; }
 

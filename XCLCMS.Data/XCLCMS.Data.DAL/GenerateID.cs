@@ -19,6 +19,7 @@ namespace XCLCMS.Data.DAL
         /// 生成主键
         /// </summary>
         /// <param name="IDType">类型</param>
+        /// <param name="remark">备注</param>
         public long GetGenerateID(string IDType, string remark = "")
         {
             Database db = base.CreateDatabase();

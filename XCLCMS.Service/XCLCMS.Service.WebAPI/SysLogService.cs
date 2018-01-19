@@ -10,7 +10,7 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class SysLogService : ISysLogService
     {
-        public XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
+        public readonly XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
 
         public ContextModel ContextInfo { get; set; }
 

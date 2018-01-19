@@ -14,11 +14,11 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class ArticleService : IArticleService
     {
-        private XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
-        private XCLCMS.Data.BLL.View.v_Article vArticleBLL = new XCLCMS.Data.BLL.View.v_Article();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
+        private readonly XCLCMS.Data.BLL.Article articleBLL = new Data.BLL.Article();
+        private readonly XCLCMS.Data.BLL.View.v_Article vArticleBLL = new XCLCMS.Data.BLL.View.v_Article();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
 
         public ContextModel ContextInfo { get; set; }
 

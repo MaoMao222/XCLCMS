@@ -14,10 +14,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class FriendLinksService : IFriendLinksService
     {
-        public XCLCMS.Data.BLL.FriendLinks friendLinksBLL = new XCLCMS.Data.BLL.FriendLinks();
-        public XCLCMS.Data.BLL.View.v_FriendLinks vFriendLinksBLL = new XCLCMS.Data.BLL.View.v_FriendLinks();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        public readonly XCLCMS.Data.BLL.FriendLinks friendLinksBLL = new XCLCMS.Data.BLL.FriendLinks();
+        public readonly XCLCMS.Data.BLL.View.v_FriendLinks vFriendLinksBLL = new XCLCMS.Data.BLL.View.v_FriendLinks();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
         public ContextModel ContextInfo { get; set; }
 

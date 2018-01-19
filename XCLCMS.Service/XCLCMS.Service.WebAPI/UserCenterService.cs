@@ -11,10 +11,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class UserCenterService : IUserCenterService
     {
-        private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private IUserInfoService iUserInfoService = new UserInfoService();
-        private IMerchantService iMerchantService = new MerchantService();
+        private readonly XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly IUserInfoService iUserInfoService = new UserInfoService();
+        private readonly IMerchantService iMerchantService = new MerchantService();
 
         public ContextModel ContextInfo { get; set; }
 

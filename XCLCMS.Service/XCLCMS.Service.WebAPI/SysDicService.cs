@@ -13,10 +13,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class SysDicService : ISysDicService
     {
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
-        private XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.View.v_SysDic vSysDicBLL = new Data.BLL.View.v_SysDic();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.View.v_SysDic vSysDicBLL = new Data.BLL.View.v_SysDic();
 
         public ContextModel ContextInfo { get; set; }
 

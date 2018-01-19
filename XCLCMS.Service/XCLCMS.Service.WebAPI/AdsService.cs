@@ -14,10 +14,10 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class AdsService : IAdsService
     {
-        private XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();
-        private XCLCMS.Data.BLL.View.v_Ads vAdsBLL = new Data.BLL.View.v_Ads();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.Ads adsBLL = new XCLCMS.Data.BLL.Ads();
+        private readonly XCLCMS.Data.BLL.View.v_Ads vAdsBLL = new Data.BLL.View.v_Ads();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
         public ContextModel ContextInfo { get; set; }
 
