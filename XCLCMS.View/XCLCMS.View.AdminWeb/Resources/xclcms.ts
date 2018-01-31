@@ -18,6 +18,7 @@ import tags from "./src/js/App/Tags";
 import userCenter from "./src/js/App/UserCenter";
 import userControl from "./src/js/App/UserControl";
 import userInfo from "./src/js/App/UserInfo";
+import product from "./src/js/App/Product";
 
 (window as any).xclcms = {
     Ads: ads,
@@ -39,5 +40,6 @@ import userInfo from "./src/js/App/UserInfo";
     Tags: tags,
     UserCenter: userCenter,
     UserControl: userControl,
-    UserInfo: userInfo
+    UserInfo: userInfo,
+    Product: product
 };

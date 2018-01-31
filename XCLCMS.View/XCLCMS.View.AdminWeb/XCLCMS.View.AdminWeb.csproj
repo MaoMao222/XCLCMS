@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Merchant\MerchantAppController.cs" />
     <Compile Include="Controllers\Merchant\MerchantController.cs" />
+    <Compile Include="Controllers\Product\ProductController.cs" />
     <Compile Include="Controllers\SysDic\SysDicController.cs" />
     <Compile Include="Controllers\SysFunction\SysFunctionController.cs" />
     <Compile Include="Controllers\SysLog\SysLogController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Models\Merchant\MerchantAppShowVM.cs" />
     <Compile Include="Models\Merchant\MerchantListVM.cs" />
     <Compile Include="Models\Merchant\MerchantShowVM.cs" />
+    <Compile Include="Models\Product\ProductListVM.cs" />
     <Compile Include="Models\SysDic\SysDicAddVM.cs" />
     <Compile Include="Models\SysFunction\SysFunctionAddVM.cs" />
     <Compile Include="Models\SysLog\SysLogListVM.cs" />
@@ -1065,6 +1067,7 @@
     <Content Include="Views\FriendLinks\Show.cshtml" />
     <Content Include="Views\Comments\Show.cshtml" />
     <Content Include="Views\Ads\Show.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

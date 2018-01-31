@@ -54,6 +54,7 @@
     <Compile Include="FriendLinksService.cs" />
     <Compile Include="MerchantService.cs" />
     <Compile Include="MerchantAppService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysDicService.cs" />
     <Compile Include="SysFunctionService.cs" />

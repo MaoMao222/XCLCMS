@@ -384,6 +384,30 @@ namespace XCLCMS.Data.CommonHelper
             /// </summary>
             [Description("评论管理-评论修改")]
             Comments_Edit = 400209,
+
+            /// <summary>
+            ///产品管理-产品查看
+            /// </summary>
+            [Description("产品管理-产品查看")]
+            Product_View = 400212,
+
+            /// <summary>
+            ///产品管理-产品删除
+            /// </summary>
+            [Description("产品管理-产品删除")]
+            Product_Del = 400213,
+
+            /// <summary>
+            ///产品管理-产品添加
+            /// </summary>
+            [Description("产品管理-产品添加")]
+            Product_Add = 400214,
+
+            /// <summary>
+            ///产品管理-产品修改
+            /// </summary>
+            [Description("产品管理-产品修改")]
+            Product_Edit = 400215,
         }
 
         /// <summary>

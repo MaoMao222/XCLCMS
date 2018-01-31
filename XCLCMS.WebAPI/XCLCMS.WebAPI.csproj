@@ -175,6 +175,7 @@
     <Compile Include="Controllers\MerchantAppController.cs" />
     <Compile Include="Controllers\MerchantController.cs" />
     <Compile Include="Controllers\OpenController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SysDicController.cs" />
     <Compile Include="Controllers\SysFunctionController.cs" />
     <Compile Include="Controllers\SysLogController.cs" />
