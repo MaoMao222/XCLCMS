@@ -408,6 +408,30 @@ namespace XCLCMS.Data.CommonHelper
             /// </summary>
             [Description("产品管理-产品修改")]
             Product_Edit = 400215,
+
+            /// <summary>
+            ///订单管理-订单查看
+            /// </summary>
+            [Description("订单管理-订单查看")]
+            Orders_View = 400217,
+
+            /// <summary>
+            ///订单管理-订单删除
+            /// </summary>
+            [Description("订单管理-订单删除")]
+            Orders_Del = 400218,
+
+            /// <summary>
+            ///订单管理-订单添加
+            /// </summary>
+            [Description("订单管理-订单添加")]
+            Orders_Add = 400219,
+
+            /// <summary>
+            ///订单管理-订单修改
+            /// </summary>
+            [Description("订单管理-订单修改")]
+            Orders_Edit = 400220,
         }
 
         /// <summary>

@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Merchant\MerchantAppController.cs" />
     <Compile Include="Controllers\Merchant\MerchantController.cs" />
+    <Compile Include="Controllers\Orders\OrdersController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
     <Compile Include="Controllers\SysDic\SysDicController.cs" />
     <Compile Include="Controllers\SysFunction\SysFunctionController.cs" />
