@@ -3072,7 +3072,11 @@ var ProductAdd = (function () {
      */
     ProductAdd.prototype.InitValidator = function () {
         var validator = $("form:first").validate({
-            rules: {}
+            rules: {
+                txtProductName: {
+                    required: true
+                }
+            }
         });
         Common_1["default"].BindLinkButtonEvent("click", $("#btnSave"), function () {
             if (!Common_1["default"].CommonFormValid(validator)) {

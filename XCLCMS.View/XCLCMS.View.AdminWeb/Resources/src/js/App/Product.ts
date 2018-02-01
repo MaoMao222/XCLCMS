@@ -111,7 +111,9 @@ class ProductAdd {
     InitValidator(): void {
         let validator = $("form:first").validate({
             rules: {
-
+                txtProductName: {
+                    required: true
+                }
             }
         });
         common.BindLinkButtonEvent("click", $("#btnSave"), function () {

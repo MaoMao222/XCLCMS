@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Product.ProductShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" style="width:10%">所属商户：</td>
+                <td style="width:40%">
+                    @Model.Product.MerchantName
+                </td>
+                <td class="XCLTitle" style="width:10%">所属应用：</td>
+                <td style="width:40%">
+                    @Model.Product.MerchantAppName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">名称：</td>
+                <td>
+                    @Model.Product.ProductName
+                </td>
+                <td class="XCLTitle">售价：</td>
+                <td>
+                    @Model.Product.Price
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">描述：</td>
+                <td>
+                    @Html.Raw(Model.Product.Description)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.Product.Remark
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Product.RecordState)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Product.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Product.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Product.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Product.UpdaterName
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>
