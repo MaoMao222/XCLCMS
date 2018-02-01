@@ -533,7 +533,13 @@ namespace XCLCMS.Data.CommonHelper
             /// 评论 Comments
             /// </summary>
             [Description("评论")]
-            CMT
+            CMT,
+
+            /// <summary>
+            /// 产品 Product
+            /// </summary>
+            [Description("产品")]
+            PRD
         }
 
         #endregion ID生成

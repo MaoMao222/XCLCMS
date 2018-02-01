@@ -24,6 +24,7 @@ GO
 
 
 
+
 CREATE PROC [dbo].[sp_GenerateID](
 	@ResultCode INT OUTPUT,
 	@ResultMessage NVARCHAR(1000) OUTPUT,
@@ -50,6 +51,12 @@ BEGIN
 		BEGIN
 			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
 			SET @IDCode=CAST('101'+CAST(@IDValue AS VARCHAR) AS BIGINT)		        
+		END
+		--产品
+		ELSE IF(@IDType='PRD')
+		BEGIN
+			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
+			SET @IDCode=CAST('102'+CAST(@IDValue AS VARCHAR) AS BIGINT)		
 		END
 		--系统配置ID
 		ELSE IF(@IDType='SET')
@@ -134,6 +141,7 @@ BEGIN
 
 	
 END
+
 
 
 

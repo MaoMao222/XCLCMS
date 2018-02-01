@@ -20,6 +20,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
                 new XCLNetSearch.SearchFieldInfo("所属商户名","MerchantName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("所属应用名","MerchantAppName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("产品名称","ProductName|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("售价","Price|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("产品描述","Description|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("备注","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
@@ -51,6 +52,131 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
             viewModel.PagerModel = response.PagerInfo;
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// 添加与编辑页面首页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_Add)]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_Edit)]
+        public ActionResult Add()
+        {
+            long ProductID = XCLNetTools.StringHander.FormHelper.GetLong("ProductID");
+
+            var viewModel = new Models.Product.ProductAddVM();
+
+            switch (base.CurrentHandleType)
+            {
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
+                    viewModel.Product = new Data.Model.View.v_Product();
+                    viewModel.FormAction = Url.Action("AddSubmit", "Product");
+                    viewModel.Product.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
+                    viewModel.Product.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
+                    break;
+
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
+                    var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+                    request.Body = ProductID;
+                    var response = XCLCMS.Lib.WebAPI.ProductAPI.Detail(request);
+
+                    viewModel.Product = response.Body;
+                    viewModel.FormAction = Url.Action("UpdateSubmit", "Product");
+                    break;
+            }
+
+            viewModel.RecordStateOptions = XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), new XCLNetTools.Entity.SetOptionEntity()
+            {
+                IsNeedPleaseSelect = false,
+                DefaultValue = viewModel.Product.RecordState
+            });
+
+            return View(viewModel);
+        }
+
+        /// <summary>
+        /// 查看页
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_View)]
+        public ActionResult Show()
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Product.ProductShowVM();
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = XCLNetTools.StringHander.FormHelper.GetLong("ProductID");
+            var response = XCLCMS.Lib.WebAPI.ProductAPI.Detail(request);
+            viewModel.Product = response.Body ?? new Data.Model.View.v_Product();
+            return View(viewModel);
+        }
+
+        /// <summary>
+        /// 将表单值转为viewModel
+        /// </summary>
+        private XCLCMS.View.AdminWeb.Models.Product.ProductAddVM GetViewModel(FormCollection fm)
+        {
+            var viewModel = new XCLCMS.View.AdminWeb.Models.Product.ProductAddVM();
+            viewModel.Product = new Data.Model.View.v_Product();
+            viewModel.Product.FK_MerchantID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantID");
+            viewModel.Product.FK_MerchantAppID = XCLNetTools.StringHander.FormHelper.GetLong("txtMerchantAppID");
+            viewModel.Product.ProductID = XCLNetTools.StringHander.FormHelper.GetLong("ProductID");
+            viewModel.Product.RecordState = fm["selRecordState"];
+            viewModel.Product.Remark = fm["txtRemark"];
+            viewModel.Product.Description = fm["txtDescription"];
+            viewModel.Product.Price = XCLNetTools.StringHander.FormHelper.GetDecimal("txtPrice");
+            viewModel.Product.ProductName = fm["txtProductName"];
+            return viewModel;
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_Add)]
+        public override ActionResult AddSubmit(FormCollection fm)
+        {
+            var viewModel = this.GetViewModel(fm);
+            var model = new XCLCMS.Data.Model.Product();
+            model.ProductID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
+            {
+                IDType = Data.CommonHelper.EnumType.IDTypeEnum.PRD.ToString()
+            });
+            model.RecordState = viewModel.Product.RecordState;
+            model.FK_MerchantAppID = viewModel.Product.FK_MerchantAppID;
+            model.FK_MerchantID = viewModel.Product.FK_MerchantID;
+            model.Remark = viewModel.Product.Remark;
+            model.Description = viewModel.Product.Description;
+            model.Price = viewModel.Product.Price;
+            model.ProductName = viewModel.Product.ProductName;
+
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Product>(base.UserToken);
+            request.Body = new Data.Model.Product();
+            request.Body = model;
+            var response = XCLCMS.Lib.WebAPI.ProductAPI.Add(request);
+
+            return Json(response);
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_Edit)]
+        public override ActionResult UpdateSubmit(FormCollection fm)
+        {
+            var viewModel = this.GetViewModel(fm);
+            var model = new XCLCMS.Data.Model.Product();
+            model.ProductID = viewModel.Product.ProductID;
+
+            model.RecordState = viewModel.Product.RecordState;
+            model.FK_MerchantAppID = viewModel.Product.FK_MerchantAppID;
+            model.FK_MerchantID = viewModel.Product.FK_MerchantID;
+            model.Remark = viewModel.Product.Remark;
+            model.Description = viewModel.Product.Description;
+            model.Price = viewModel.Product.Price;
+            model.ProductName = viewModel.Product.ProductName;
+
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Product>(base.UserToken);
+            request.Body = new Data.Model.Product();
+            request.Body = model;
+            var response = XCLCMS.Lib.WebAPI.ProductAPI.Update(request);
+
+            return Json(response);
         }
     }
 }

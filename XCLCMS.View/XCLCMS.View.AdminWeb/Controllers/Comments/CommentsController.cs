@@ -164,8 +164,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Add)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Comments();
             model.CommentsID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
@@ -201,8 +199,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Edit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Comments();
             model.CommentsID = viewModel.Comments.CommentsID;

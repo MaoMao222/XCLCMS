@@ -18,6 +18,7 @@ namespace XCLCMS.Data.Model
         private long _fk_merchantappid = 0;
         private string _productname;
         private string _description;
+        private decimal _price;
         private string _remark;
         private string _recordstate;
         private DateTime _createtime;
@@ -71,6 +72,15 @@ namespace XCLCMS.Data.Model
             set { _description = value; }
             get { return _description; }
         }
+
+		/// <summary>
+		/// 售价
+		/// </summary>
+		public decimal Price
+		{
+			set{ _price=value;}
+			get{return _price;}
+		}
 
         /// <summary>
         /// 备注

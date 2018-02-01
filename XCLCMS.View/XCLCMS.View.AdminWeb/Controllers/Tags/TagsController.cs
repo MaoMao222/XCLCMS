@@ -119,8 +119,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Add)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Tags();
             model.TagsID = XCLCMS.Lib.Common.FastAPI.CommonAPI_GenerateID(base.UserToken, new Data.WebAPIEntity.RequestEntity.Common.GenerateIDEntity()
@@ -147,8 +145,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Edit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Tags();
             model.TagsID = viewModel.Tags.TagsID;

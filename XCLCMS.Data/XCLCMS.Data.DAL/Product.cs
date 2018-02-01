@@ -22,6 +22,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, model.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, model.Description);
+            db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
             db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
             db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
@@ -58,6 +59,7 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
             db.AddInParameter(dbCommand, "ProductName", DbType.String, model.ProductName);
             db.AddInParameter(dbCommand, "Description", DbType.String, model.Description);
+            db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
             db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
             db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);

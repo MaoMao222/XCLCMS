@@ -78,7 +78,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
             XCLCMS.View.AdminWeb.Models.SysFunction.SysFunctionAddVM viewModel = this.GetViewModel(fm);
 
             XCLCMS.Data.Model.SysFunction model = null;
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
             model = new Data.Model.SysFunction();
             model.ParentID = viewModel.ParentID;
             model.FunctionName = viewModel.SysFunction.FunctionName;

@@ -134,6 +134,13 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            if (string.IsNullOrWhiteSpace(request.Body.ProductName))
+            {
+                response.IsSuccess = false;
+                response.Message = "请提供产品名称！";
+                return response;
+            }
+
             //应用号与商户一致
             if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
             {
@@ -144,6 +151,9 @@ namespace XCLCMS.Service.WebAPI
 
             #endregion 数据校验
 
+            model.ProductName = request.Body.ProductName;
+            model.Description = request.Body.Description;
+            model.Price = request.Body.Price;
             model.Remark = request.Body.Remark;
             model.FK_MerchantID = request.Body.FK_MerchantID;
             model.FK_MerchantAppID = request.Body.FK_MerchantAppID;

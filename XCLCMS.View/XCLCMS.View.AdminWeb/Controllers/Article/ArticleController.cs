@@ -275,8 +275,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleAdd)]
         public override ActionResult AddSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Article();
             model.ArticleContentType = viewModel.Article.ArticleContentType;
@@ -339,8 +337,6 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleEdit)]
         public override ActionResult UpdateSubmit(FormCollection fm)
         {
-            XCLNetTools.Message.MessageModel msgModel = new XCLNetTools.Message.MessageModel();
-
             var viewModel = this.GetViewModel(fm);
             var model = new XCLCMS.Data.Model.Article();
             model.ArticleID = viewModel.Article.ArticleID;
