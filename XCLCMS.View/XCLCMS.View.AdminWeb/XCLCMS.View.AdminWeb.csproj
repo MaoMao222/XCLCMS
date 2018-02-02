@@ -192,6 +192,9 @@
     <Compile Include="Models\Merchant\MerchantAppShowVM.cs" />
     <Compile Include="Models\Merchant\MerchantListVM.cs" />
     <Compile Include="Models\Merchant\MerchantShowVM.cs" />
+    <Compile Include="Models\Orders\OrdersAddVM.cs" />
+    <Compile Include="Models\Orders\OrdersListVM.cs" />
+    <Compile Include="Models\Orders\OrdersShowVM.cs" />
     <Compile Include="Models\Product\ProductAddVM.cs" />
     <Compile Include="Models\Product\ProductListVM.cs" />
     <Compile Include="Models\Product\ProductShowVM.cs" />
@@ -1073,6 +1076,9 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Add.cshtml" />
     <Content Include="Views\Product\Show.cshtml" />
+    <Content Include="Views\Orders\Add.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

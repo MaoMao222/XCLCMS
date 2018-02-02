@@ -539,7 +539,13 @@ namespace XCLCMS.Data.CommonHelper
             /// 产品 Product
             /// </summary>
             [Description("产品")]
-            PRD
+            PRD,
+
+            /// <summary>
+            /// 订单 Orders
+            /// </summary>
+            [Description("订单")]
+            ORD
         }
 
         #endregion ID生成
@@ -577,5 +583,51 @@ namespace XCLCMS.Data.CommonHelper
         }
 
         #endregion 系统配置
+
+        #region 订单
+
+        /// <summary>
+        /// 支付状态
+        /// </summary>
+        public enum PayStatusEnum
+        {
+            /// <summary>
+            /// 待支付 Wait
+            /// </summary>
+            [Description("待支付")]
+            WAT,
+
+            /// <summary>
+            /// 已支付 Done
+            /// </summary>
+            [Description("已支付")]
+            DON
+        }
+
+        /// <summary>
+        /// 支付方式
+        /// </summary>
+        public enum PayTypeEnum
+        {
+            /// <summary>
+            /// 支付宝
+            /// </summary>
+            [Description("支付宝")]
+            ZFB,
+
+            /// <summary>
+            /// 微信
+            /// </summary>
+            [Description("微信")]
+            WEX,
+
+            /// <summary>
+            /// 其它 Other
+            /// </summary>
+            [Description("其它")]
+            OTH
+        }
+
+        #endregion 订单
     }
 }

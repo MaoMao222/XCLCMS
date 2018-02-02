@@ -314,6 +314,7 @@ var UserCenter_1 = __webpack_require__(19);
 var UserControl_1 = __webpack_require__(1);
 var UserInfo_1 = __webpack_require__(20);
 var Product_1 = __webpack_require__(21);
+var Orders_1 = __webpack_require__(22);
 window.xclcms = {
     Ads: Ads_1["default"],
     Article: Article_1["default"],
@@ -335,7 +336,8 @@ window.xclcms = {
     UserCenter: UserCenter_1["default"],
     UserControl: UserControl_1["default"],
     UserInfo: UserInfo_1["default"],
-    Product: Product_1["default"]
+    Product: Product_1["default"],
+    Orders: Orders_1["default"]
 };
 
 
@@ -3091,6 +3093,152 @@ var App = (function () {
     function App() {
         this.ProductAdd = new ProductAdd();
         this.ProductList = new ProductList();
+    }
+    return App;
+}());
+exports["default"] = new App();
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/// <reference path="common.d.ts" />
+exports.__esModule = true;
+var Common_1 = __webpack_require__(0);
+var UserControl_1 = __webpack_require__(1);
+/**
+ * 订单列表
+ */
+var OrdersList = (function () {
+    function OrdersList() {
+    }
+    /**
+     * 初始化
+     */
+    OrdersList.prototype.Init = function () {
+        var _this = this;
+        $("#btnUpdate").on("click", function () {
+            return _this.Update();
+        });
+        $("#btnDel").on("click", function () {
+            return _this.Del();
+        });
+    };
+    ;
+    /**
+     * 返回已选择的value数组
+     */
+    OrdersList.prototype.GetSelectValue = function () {
+        var selectVal = $(".XCLTableCheckAll").val();
+        var ids = selectVal.split(',');
+        if (selectVal && selectVal !== "" && ids.length > 0) {
+            return ids;
+        }
+        else {
+            return null;
+        }
+    };
+    ;
+    /**
+     * 打开订单【修改】页面
+     */
+    OrdersList.prototype.Update = function () {
+        var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
+        if (ids && ids.length === 1) {
+            var query = {
+                handletype: "update",
+                OrdersID: ids[0]
+            };
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
+            $btn.attr("href", url);
+            return true;
+        }
+        else {
+            art.dialog.tips("请选择一条记录进行修改操作！");
+            return false;
+        }
+    };
+    ;
+    /**
+     * 删除订单
+     */
+    OrdersList.prototype.Del = function () {
+        var ids = this.GetSelectValue();
+        if (!ids || ids.length == 0) {
+            art.dialog.tips("请至少选择一条记录进行操作！");
+            return false;
+        }
+        art.dialog.confirm("您确定要删除此信息吗？", function () {
+            var request = XCLCMSWebApi.CreateRequest();
+            request.Body = ids;
+            $.XGoAjax({
+                target: $("#btnDel")[0],
+                ajax: {
+                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/Delete",
+                    contentType: "application/json",
+                    data: JSON.stringify(request),
+                    type: "POST"
+                }
+            });
+        }, function () {
+        });
+        return false;
+    };
+    return OrdersList;
+}());
+/**
+ * 订单添加与修改页
+ */
+var OrdersAdd = (function () {
+    function OrdersAdd() {
+        /**
+        * 输入元素
+        */
+        this.Elements = {
+            Init: function () {
+            }
+        };
+    }
+    /**
+     * 初始化
+     */
+    OrdersAdd.prototype.Init = function () {
+        var _this = this;
+        _this.Elements.Init();
+        _this.InitValidator();
+        //商户号下拉框初始化
+        UserControl_1["default"].MerchantSelect.Init({
+            merchantIDObj: $("#txtMerchantID"),
+            merchantAppIDObj: $("#txtMerchantAppID")
+        });
+    };
+    /**
+     * 表单验证初始化
+     */
+    OrdersAdd.prototype.InitValidator = function () {
+        var validator = $("form:first").validate({
+            rules: {
+                txtOrdersName: {
+                    required: true
+                }
+            }
+        });
+        Common_1["default"].BindLinkButtonEvent("click", $("#btnSave"), function () {
+            if (!Common_1["default"].CommonFormValid(validator)) {
+                return false;
+            }
+            $.XGoAjax({ target: $("#btnSave")[0] });
+        });
+    };
+    return OrdersAdd;
+}());
+var App = (function () {
+    function App() {
+        this.OrdersAdd = new OrdersAdd();
+        this.OrdersList = new OrdersList();
     }
     return App;
 }());

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.Orders.OrdersAddVM
+
+<form id="mainForm" action="@Model.FormAction" method="post">
+    <input type="hidden" id="OrderID" name="OrderID" value="@Model.Orders.OrderID" />
+
+    <div class="XCLAccordion" style="border-top: none;">
+        <div class="XCLAccordionHeader">1、基本信息：</div>
+        <div class="XCLAccordionBody">
+            <table class="XCLTableEdit">
+
+                <tr>
+                    <td class="XCLTitle">所属商户号：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" id="txtMerchantID" name="txtMerchantID" value="@Model.Orders.FK_MerchantID" />
+                    </td>
+                    <td class="XCLTitle">所属应用号：</td>
+                    <td><input type="text" class="easyui-numberbox" id="txtMerchantAppID" name="txtMerchantAppID" value="@Model.Orders.FK_MerchantAppID" /></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>所属产品：</td>
+                    <td>
+                        <input type="text" name="txtFK_ProductID" value="@Model.Orders.FK_ProductID" />
+                    </td>
+                    <td class="XCLTitle">所属用户ID：</td>
+                    <td>
+                        <input type="text" name="txtFK_UserID" value="@Model.Orders.FK_UserID" />
+                    </td>
+                    <td class="XCLTitle">所属用户名：</td>
+                    <td>
+                        <input type="text" name="txtUserName" value="@Model.Orders.UserName" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">金额：</td>
+                    <td>
+                        <input type="text" class="easyui-numberbox" precision="2" style="height:25px;" name="txtPrice" value="@Model.Orders.Price" />
+                    </td>
+                    <td class="XCLTitle">支付状态：</td>
+                    <td>
+                        @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum), Model.Orders.PayStatus)
+                    </td>
+                    <td class="XCLTitle">支付方式：</td>
+                    <td>
+                        <select name="selPayType">
+                            @Html.Raw(Model.PayTypeOptions)
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">流水状态：</td>
+                    <td>
+                        @Model.Orders.FlowStatus
+                    </td>
+                    <td class="XCLTitle">备注：</td>
+                    <td><textarea name="txtRemark">@Model.Orders.Remark</textarea></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">记录状态：</td>
+                    <td>
+                        <select name="selRecordState">
+                            @Html.Raw(Model.RecordStateOptions)
+                        </select>
+                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="XCLHandBar">
+            <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+            @switch ((XCLNetTools.Enum.CommonEnum.HandleTypeEnum)ViewBag.CurrentHandleType)
+            {
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD:
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存订单信息</a>
+                    break;
+                case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
+                    <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                    break;
+            }
+        </div>
+    </div>
+</form>
+
+<div class="XCLPanel" style="margin-top: 5px;">
+    <div class="XCLPanelHeader XCLBolder">
+        操作说明：
+    </div>
+    <div class="XCLPanelBody">
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        window.xclcms.Orders.OrdersAdd.Init();
+    });
+</script>

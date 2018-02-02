@@ -54,6 +54,7 @@
     <Compile Include="IFriendLinksService.cs" />
     <Compile Include="IMerchantService.cs" />
     <Compile Include="IMerchantAppService.cs" />
+    <Compile Include="IOrdersService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="ISysDicService.cs" />
     <Compile Include="ISysFunctionService.cs" />

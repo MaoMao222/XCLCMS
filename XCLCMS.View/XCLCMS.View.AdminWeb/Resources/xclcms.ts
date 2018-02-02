@@ -19,6 +19,7 @@ import userCenter from "./src/js/App/UserCenter";
 import userControl from "./src/js/App/UserControl";
 import userInfo from "./src/js/App/UserInfo";
 import product from "./src/js/App/Product";
+import orders from "./src/js/App/Orders";
 
 (window as any).xclcms = {
     Ads: ads,
@@ -41,5 +42,6 @@ import product from "./src/js/App/Product";
     UserCenter: userCenter,
     UserControl: userControl,
     UserInfo: userInfo,
-    Product: product
+    Product: product,
+    Orders: orders
 };
