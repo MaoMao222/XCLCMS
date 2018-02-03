@@ -6,7 +6,7 @@
 <form id="mainForm" action="@Model.FormAction" method="post">
     <input type="hidden" id="OrderID" name="OrderID" value="@Model.Orders.OrderID" />
     <input type="hidden" id="txtOrderVersion" name="txtOrderVersion" value="@Model.Orders.Version" />
-    <input type="hidden" id="txtOrderVersion" name="txtOrderVersion" value="@Model.Orders.Version" />
+    <input type="hidden" id="txtFK_MerchantID" name="txtFK_MerchantID" value="@Model.Orders.FK_MerchantID" />
 
     <div class="XCLAccordion" style="border-top: none;">
         <div class="XCLAccordionHeader">1、基本信息：</div>
