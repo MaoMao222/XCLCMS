@@ -14,25 +14,26 @@ namespace XCLCMS.Data.DAL
         {
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetStoredProcCommand("sp_Orders_ADD");
-            db.AddInParameter(dbCommand, "OrderID", DbType.Int64, model.OrderID);
-            db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
-            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
-            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
-            db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
-            db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
-            db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
-            db.AddInParameter(dbCommand, "PayStatus", DbType.AnsiString, model.PayStatus);
-            db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
-            db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
-            db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
-            db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
-            db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
-            db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
-            db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
-            db.AddInParameter(dbCommand, "CreaterName", DbType.String, model.CreaterName);
-            db.AddInParameter(dbCommand, "UpdateTime", DbType.DateTime, model.UpdateTime);
-            db.AddInParameter(dbCommand, "UpdaterID", DbType.Int64, model.UpdaterID);
-            db.AddInParameter(dbCommand, "UpdaterName", DbType.String, model.UpdaterName);
+			db.AddInParameter(dbCommand, "OrderID", DbType.Int64, model.OrderID);
+			db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
+			db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
+			db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+			db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
+			db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
+			db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
+			db.AddInParameter(dbCommand, "PayStatus", DbType.AnsiString, model.PayStatus);
+			db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
+			db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
+			db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
+			db.AddInParameter(dbCommand, "Version", DbType.Int32, model.Version);
+			db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
+			db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
+			db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
+			db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
+			db.AddInParameter(dbCommand, "CreaterName", DbType.String, model.CreaterName);
+			db.AddInParameter(dbCommand, "UpdateTime", DbType.DateTime, model.UpdateTime);
+			db.AddInParameter(dbCommand, "UpdaterID", DbType.Int64, model.UpdaterID);
+			db.AddInParameter(dbCommand, "UpdaterName", DbType.String, model.UpdaterName);
 
             db.AddOutParameter(dbCommand, "ResultCode", DbType.Int32, 4);
             db.AddOutParameter(dbCommand, "ResultMessage", DbType.String, 1000);
@@ -56,25 +57,26 @@ namespace XCLCMS.Data.DAL
         {
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetStoredProcCommand("sp_Orders_Update");
-            db.AddInParameter(dbCommand, "OrderID", DbType.Int64, model.OrderID);
-            db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
-            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
-            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
-            db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
-            db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
-            db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
-            db.AddInParameter(dbCommand, "PayStatus", DbType.AnsiString, model.PayStatus);
-            db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
-            db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
-            db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
-            db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
-            db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
-            db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
-            db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
-            db.AddInParameter(dbCommand, "CreaterName", DbType.String, model.CreaterName);
-            db.AddInParameter(dbCommand, "UpdateTime", DbType.DateTime, model.UpdateTime);
-            db.AddInParameter(dbCommand, "UpdaterID", DbType.Int64, model.UpdaterID);
-            db.AddInParameter(dbCommand, "UpdaterName", DbType.String, model.UpdaterName);
+			db.AddInParameter(dbCommand, "OrderID", DbType.Int64, model.OrderID);
+			db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
+			db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
+			db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+			db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
+			db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
+			db.AddInParameter(dbCommand, "Price", DbType.Decimal, model.Price);
+			db.AddInParameter(dbCommand, "PayStatus", DbType.AnsiString, model.PayStatus);
+			db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
+			db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
+			db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
+			db.AddInParameter(dbCommand, "Version", DbType.Int32, model.Version);
+			db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
+			db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
+			db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
+			db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
+			db.AddInParameter(dbCommand, "CreaterName", DbType.String, model.CreaterName);
+			db.AddInParameter(dbCommand, "UpdateTime", DbType.DateTime, model.UpdateTime);
+			db.AddInParameter(dbCommand, "UpdaterID", DbType.Int64, model.UpdaterID);
+			db.AddInParameter(dbCommand, "UpdaterName", DbType.String, model.UpdaterName);
 
             db.AddOutParameter(dbCommand, "ResultCode", DbType.Int32, 4);
             db.AddOutParameter(dbCommand, "ResultMessage", DbType.String, 1000);
@@ -94,11 +96,11 @@ namespace XCLCMS.Data.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.Orders GetModel(long OrdersID)
+        public XCLCMS.Data.Model.Orders GetModel(long OrderID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from Orders WITH(NOLOCK)   where OrdersID=@OrdersID");
-            db.AddInParameter(dbCommand, "OrdersID", DbType.Int64, OrdersID);
+            DbCommand dbCommand = db.GetSqlStringCommand("select * from Orders WITH(NOLOCK)   where OrderID=@OrderID");
+            db.AddInParameter(dbCommand, "OrderID", DbType.Int64, OrderID);
             using (var dr = db.ExecuteReader(dbCommand))
             {
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Orders>(dr);

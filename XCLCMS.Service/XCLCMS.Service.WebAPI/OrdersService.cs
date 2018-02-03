@@ -4,6 +4,7 @@ using System.Linq;
 using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.Data.WebAPIEntity.RequestEntity.Orders;
 using XCLCMS.IService.WebAPI;
 using XCLNetTools.Generic;
 
@@ -200,6 +201,7 @@ namespace XCLCMS.Service.WebAPI
             model.UpdaterID = this.ContextInfo.UserInfoID;
             model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
+            model.Version = request.Body.Version;
 
             response.IsSuccess = this.bll.Update(model);
             if (response.IsSuccess)
@@ -209,6 +211,50 @@ namespace XCLCMS.Service.WebAPI
             else
             {
                 response.Message = "订单信息修改失败！";
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// 修改订单支付状态
+        /// </summary>
+        public APIResponseEntity<bool> UpdatePayStatus(APIRequestEntity<UpdatePayStatusEntity> request)
+        {
+            var response = new APIResponseEntity<bool>();
+
+            #region 数据校验
+
+            var model = bll.GetModel(request.Body.OrderID);
+            if (null == model)
+            {
+                response.IsSuccess = false;
+                response.Message = "请指定有效的订单信息！";
+                return response;
+            }
+
+            if (model.PayStatus == request.Body.PayStatus)
+            {
+                response.IsSuccess = false;
+                response.Message = "订单支付状态与当前系统数据一致，无需更新！";
+                return response;
+            }
+
+            #endregion 数据校验
+
+            model.UpdaterID = this.ContextInfo.UserInfoID;
+            model.UpdaterName = this.ContextInfo.UserName;
+            model.UpdateTime = DateTime.Now;
+            model.Version = request.Body.Version;
+            model.PayStatus = request.Body.PayStatus;
+
+            response.IsSuccess = this.bll.Update(model);
+            if (response.IsSuccess)
+            {
+                response.Message = "支付状态修改成功！";
+            }
+            else
+            {
+                response.Message = "支付状态修改失败！";
             }
             return response;
         }

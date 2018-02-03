@@ -23,9 +23,9 @@
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.Orders GetModel(long OrdersID)
+        public XCLCMS.Data.Model.Orders GetModel(long OrderID)
         {
-            return dal.GetModel(OrdersID);
+            return dal.GetModel(OrderID);
         }
     }
 }

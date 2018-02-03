@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.Data.WebAPIEntity.RequestEntity.Orders;
 
 namespace XCLCMS.WebAPI.Controllers
 {
@@ -136,6 +137,31 @@ namespace XCLCMS.WebAPI.Controllers
                 #endregion 限制商户
 
                 return this.iOrdersService.Update(request);
+            });
+        }
+
+        /// <summary>
+        /// 修改订单支付状态
+        /// </summary>
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Orders_Edit)]
+        public async Task<APIResponseEntity<bool>> UpdatePayStatus([FromBody] APIRequestEntity<UpdatePayStatusEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                {
+                    var response = new APIResponseEntity<bool>();
+                    response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
+                    return response;
+                }
+
+                #endregion 限制商户
+
+                return this.iOrdersService.UpdatePayStatus(request);
             });
         }
 

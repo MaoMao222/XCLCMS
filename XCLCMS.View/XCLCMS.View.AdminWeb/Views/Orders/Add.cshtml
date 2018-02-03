@@ -5,6 +5,8 @@
 
 <form id="mainForm" action="@Model.FormAction" method="post">
     <input type="hidden" id="OrderID" name="OrderID" value="@Model.Orders.OrderID" />
+    <input type="hidden" id="txtOrderVersion" name="txtOrderVersion" value="@Model.Orders.Version" />
+    <input type="hidden" id="txtOrderVersion" name="txtOrderVersion" value="@Model.Orders.Version" />
 
     <div class="XCLAccordion" style="border-top: none;">
         <div class="XCLAccordionHeader">1、基本信息：</div>
@@ -88,6 +90,8 @@
                     break;
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
                     <a id="btnSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存修改</a>
+                    <a id="btnPayed" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">置为已支付</a>
+                    <a id="btnCancel" class="easyui-linkbutton" data-options="iconCls:'icon-clear'">取消订单</a>
                     break;
             }
         </div>

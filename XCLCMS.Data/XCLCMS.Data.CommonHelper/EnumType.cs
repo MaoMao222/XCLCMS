@@ -601,7 +601,13 @@ namespace XCLCMS.Data.CommonHelper
             /// 已支付 Done
             /// </summary>
             [Description("已支付")]
-            DON
+            DON,
+
+            /// <summary>
+            /// 已取消 Cancel
+            /// </summary>
+            [Description("已取消")]
+            CEL
         }
 
         /// <summary>
@@ -609,6 +615,18 @@ namespace XCLCMS.Data.CommonHelper
         /// </summary>
         public enum PayTypeEnum
         {
+            /// <summary>
+            /// 其它 Other
+            /// </summary>
+            [Description("其它")]
+            OTH,
+
+            /// <summary>
+            /// 现金 Cash
+            /// </summary>
+            [Description("现金")]
+            CSH,
+
             /// <summary>
             /// 支付宝
             /// </summary>
@@ -619,13 +637,7 @@ namespace XCLCMS.Data.CommonHelper
             /// 微信
             /// </summary>
             [Description("微信")]
-            WEX,
-
-            /// <summary>
-            /// 其它 Other
-            /// </summary>
-            [Description("其它")]
-            OTH
+            WEX
         }
 
         #endregion 订单

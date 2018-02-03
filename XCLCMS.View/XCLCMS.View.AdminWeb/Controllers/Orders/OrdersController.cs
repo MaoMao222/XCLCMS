@@ -140,6 +140,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             viewModel.Orders.FK_UserID = XCLNetTools.StringHander.FormHelper.GetLong("txtFK_UserID");
             viewModel.Orders.UserName = fm["txtUserName"];
             viewModel.Orders.PayType = fm["selPayType"];
+            viewModel.Orders.Version = XCLNetTools.StringHander.FormHelper.GetInt("txtOrderVersion");
             return viewModel;
         }
 
@@ -164,6 +165,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             model.FK_UserID = viewModel.Orders.FK_UserID;
             model.UserName = viewModel.Orders.UserName;
             model.PayType = viewModel.Orders.PayType;
+            model.Version = viewModel.Orders.Version;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Orders>(base.UserToken);
             request.Body = new Data.Model.Orders();
@@ -191,6 +193,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             model.PayType = viewModel.Orders.PayType;
             model.FK_UserID = viewModel.Orders.FK_UserID;
             model.UserName = viewModel.Orders.UserName;
+            model.Version = viewModel.Orders.Version;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Orders>(base.UserToken);
             request.Body = new Data.Model.Orders();

@@ -11,11 +11,11 @@ namespace XCLCMS.Data.DAL.View
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.View.v_Orders GetModel(long OrdersID)
+        public XCLCMS.Data.Model.View.v_Orders GetModel(long OrderID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Orders WITH(NOLOCK)   where OrdersID=@OrdersID");
-            db.AddInParameter(dbCommand, "OrdersID", DbType.Int64, OrdersID);
+            DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Orders WITH(NOLOCK)   where OrderID=@OrderID");
+            db.AddInParameter(dbCommand, "OrderID", DbType.Int64, OrderID);
             using (var dr = db.ExecuteReader(dbCommand))
             {
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_Orders>(dr);

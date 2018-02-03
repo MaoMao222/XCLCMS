@@ -23,9 +23,10 @@ namespace XCLCMS.Data.Model.View
         private string _paystatus;
         private string _paytype;
         private DateTime? _dealdonetime;
+        private int _flowstatus;
+        private int _version;
         private string _remark;
         private string _recordstate;
-        private int _flowstatus;
         private DateTime _createtime;
         private long _createrid;
         private string _creatername;
@@ -131,6 +132,24 @@ namespace XCLCMS.Data.Model.View
         /// <summary>
         ///
         /// </summary>
+        public int FlowStatus
+        {
+            set { _flowstatus = value; }
+            get { return _flowstatus; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public int Version
+        {
+            set { _version = value; }
+            get { return _version; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
         public string Remark
         {
             set { _remark = value; }
@@ -144,15 +163,6 @@ namespace XCLCMS.Data.Model.View
         {
             set { _recordstate = value; }
             get { return _recordstate; }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public int FlowStatus
-        {
-            set { _flowstatus = value; }
-            get { return _flowstatus; }
         }
 
         /// <summary>

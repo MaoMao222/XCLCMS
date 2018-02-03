@@ -1,8 +1,80 @@
-﻿
-@{
-    ViewBag.Title = "Show";
+﻿@{
     Layout = "~/Views/MasterView/Main.cshtml";
 }
+@model XCLCMS.View.AdminWeb.Models.Orders.OrdersShowVM
 
-<h2>Show</h2>
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
 
+            <tr>
+                <td class="XCLTitle">所属商户：</td>
+                <td>
+                    @Model.Orders.MerchantName
+                </td>
+                <td class="XCLTitle">所属应用：</td>
+                <td>
+                    @Model.Orders.MerchantAppName
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">所属产品：</td>
+                <td>
+                    @Model.Orders.ProductName
+                </td>
+                <td class="XCLTitle">所属用户ID：</td>
+                <td>
+                    @Model.Orders.FK_UserID
+                </td>
+                <td class="XCLTitle">所属用户名：</td>
+                <td>
+                    @Model.Orders.UserName
+                </td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">金额：</td>
+                <td>
+                    @Model.Orders.Price
+                </td>
+                <td class="XCLTitle">支付状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum), Model.Orders.PayStatus)
+                </td>
+                <td class="XCLTitle">支付方式：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayTypeEnum), Model.Orders.PayType)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">流水状态：</td>
+                <td>
+                    @Model.Orders.FlowStatus
+                </td>
+                <td class="XCLTitle">备注：</td>
+                <td>@Model.Orders.Remark</td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Orders.RecordState)
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

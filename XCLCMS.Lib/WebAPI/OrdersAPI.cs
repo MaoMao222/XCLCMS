@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+using XCLCMS.Data.WebAPIEntity.RequestEntity.Orders;
 
 namespace XCLCMS.Lib.WebAPI
 {
@@ -39,6 +40,14 @@ namespace XCLCMS.Lib.WebAPI
         public static APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.Model.Orders> request)
         {
             return Library.Request<XCLCMS.Data.Model.Orders, bool>(request, "Orders/Update", false);
+        }
+
+        /// <summary>
+        /// 修改订单支付状态
+        /// </summary>
+        public static APIResponseEntity<bool> UpdatePayStatus(APIRequestEntity<UpdatePayStatusEntity> request)
+        {
+            return Library.Request<UpdatePayStatusEntity, bool>(request, "Orders/UpdatePayStatus", false);
         }
 
         /// <summary>

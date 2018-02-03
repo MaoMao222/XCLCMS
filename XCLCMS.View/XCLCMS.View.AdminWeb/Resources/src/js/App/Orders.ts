@@ -39,7 +39,7 @@ class OrdersList {
         if (ids && ids.length === 1) {
             let query = {
                 handletype: "update",
-                OrdersID: ids[0]
+                OrderID: ids[0]
             }
 
             let url = XJ.Url.UpdateParam($btn.attr("href"), query);
@@ -111,7 +111,7 @@ class OrdersAdd {
     InitValidator(): void {
         let validator = $("form:first").validate({
             rules: {
-                txtOrdersName: {
+                txtFK_ProductID: {
                     required: true
                 }
             }
@@ -121,6 +121,50 @@ class OrdersAdd {
                 return false;
             }
             $.XGoAjax({ target: $("#btnSave")[0] });
+        });
+        common.BindLinkButtonEvent("click", $("#btnPayed"), function () {
+            art.dialog.confirm("您确定要将此订单设置为已支付吗？", function () {
+                let request = XCLCMSWebApi.CreateRequest();
+                request.Body = {
+                    OrderID: $("#OrderID").val(),
+                    FK_MerchantID: $("#txtFK_MerchantID").val(),
+                    PayStatus: 'DON',
+                    Version: $("#txtOrderVersion").val()
+                };
+
+                $.XGoAjax({
+                    target: $("#btnPayed")[0],
+                    ajax: {
+                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/UpdatePayStatus",
+                        contentType: "application/json",
+                        data: JSON.stringify(request),
+                        type: "POST"
+                    }
+                });
+            }, function () {
+            });
+        });
+        common.BindLinkButtonEvent("click", $("#btnCancel"), function () {
+            art.dialog.confirm("您确定要取消此订单吗？", function () {
+                let request = XCLCMSWebApi.CreateRequest();
+                request.Body = {
+                    OrderID: $("#OrderID").val(),
+                    FK_MerchantID: $("#txtFK_MerchantID").val(),
+                    PayStatus: 'CEL',
+                    Version: $("#txtOrderVersion").val()
+                };
+
+                $.XGoAjax({
+                    target: $("#btnCancel")[0],
+                    ajax: {
+                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/UpdatePayStatus",
+                        contentType: "application/json",
+                        data: JSON.stringify(request),
+                        type: "POST"
+                    }
+                });
+            }, function () {
+            });
         });
     }
 }

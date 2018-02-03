@@ -68,6 +68,7 @@
     <Compile Include="RequestEntity\MerchantApp\IsExistMerchantAppNameEntity.cs" />
     <Compile Include="RequestEntity\Merchant\IsExistMerchantNameEntity.cs" />
     <Compile Include="RequestEntity\Open\LogonCheckEntity.cs" />
+    <Compile Include="RequestEntity\Orders\UpdatePayStatusEntity.cs" />
     <Compile Include="RequestEntity\PageListConditionEntity.cs" />
     <Compile Include="RequestEntity\SysDic\GetEasyUITreeByConditionEntity.cs" />
     <Compile Include="RequestEntity\SysDic\GetEasyUITreeByCodeEntity.cs" />

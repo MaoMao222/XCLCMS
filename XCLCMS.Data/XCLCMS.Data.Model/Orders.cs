@@ -23,9 +23,10 @@ namespace XCLCMS.Data.Model
         private string _paystatus;
         private string _paytype;
         private DateTime? _dealdonetime;
+        private int _flowstatus = 0;
+        private int _version;
         private string _remark;
         private string _recordstate;
-        private int _flowstatus = 0;
         private DateTime _createtime;
         private long _createrid;
         private string _creatername;
@@ -88,7 +89,7 @@ namespace XCLCMS.Data.Model
         }
 
         /// <summary>
-        /// 价格
+        /// 金额
         /// </summary>
         public decimal Price
         {
@@ -115,12 +116,30 @@ namespace XCLCMS.Data.Model
         }
 
         /// <summary>
-        ///
+        /// 成交时间
         /// </summary>
         public DateTime? DealDoneTime
         {
             set { _dealdonetime = value; }
             get { return _dealdonetime; }
+        }
+
+        /// <summary>
+        /// 流水状态
+        /// </summary>
+        public int FlowStatus
+        {
+            set { _flowstatus = value; }
+            get { return _flowstatus; }
+        }
+
+        /// <summary>
+        /// 记录版本号
+        /// </summary>
+        public int Version
+        {
+            set { _version = value; }
+            get { return _version; }
         }
 
         /// <summary>
@@ -139,15 +158,6 @@ namespace XCLCMS.Data.Model
         {
             set { _recordstate = value; }
             get { return _recordstate; }
-        }
-
-        /// <summary>
-        /// 流水状态
-        /// </summary>
-        public int FlowStatus
-        {
-            set { _flowstatus = value; }
-            get { return _flowstatus; }
         }
 
         /// <summary>
