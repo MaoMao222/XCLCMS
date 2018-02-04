@@ -245,5 +245,29 @@ namespace XCLCMS.View.AdminWeb.Controllers.Ads
 
             return Json(response);
         }
+
+        /// <summary>
+        /// 删除广告位
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Ads_Del)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.AdsAPI.Delete(request);
+            return Json(response);
+        }
+
+        /// <summary>
+        /// 检查广告code是否已存在
+        /// </summary>
+        [HttpGet]
+        public ActionResult IsExistCodeSubmit(Data.WebAPIEntity.RequestEntity.Ads.IsExistCodeEntity entity)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Ads.IsExistCodeEntity>(base.UserToken);
+            request.Body = entity;
+            var response = XCLCMS.Lib.WebAPI.AdsAPI.IsExistCode(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

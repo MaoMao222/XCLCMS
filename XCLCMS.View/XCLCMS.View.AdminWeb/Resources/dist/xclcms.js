@@ -414,14 +414,12 @@ var AdsList = (function () {
             return false;
         }
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Ads/DelByIDSubmit",
+                    data: JSON.stringify(ids),
                     contentType: "application/json",
-                    data: JSON.stringify(request),
                     type: "POST"
                 }
             });
@@ -470,13 +468,12 @@ var AdsAdd = (function () {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Ads/IsExistCode",
+                            url: XCLCMSPageGlobalConfig.RootURL + "Ads/IsExistCodeSubmit",
                             data: function () {
-                                var request = XCLCMSWebApi.CreateRequest();
-                                request.Body = {};
-                                request.Body.Code = $("input[name='txtCode']").val();
-                                request.Body.AdsID = $("input[name='AdsID']").val();
-                                return request;
+                                return {
+                                    Code: $("input[name='txtCode']").val(),
+                                    AdsID: $("input[name='AdsID']").val()
+                                };
                             }
                         };
                     }

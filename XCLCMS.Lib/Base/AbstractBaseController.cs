@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO.Compression;
 using System.Web.Mvc;
 
@@ -214,6 +215,15 @@ namespace XCLCMS.Lib.Base
         /// </summary>
         [HttpPost]
         public virtual ActionResult DelSubmit(FormCollection fm)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        [HttpPost]
+        public virtual ActionResult DelByIDSubmit(List<long> ids)
         {
             return null;
         }
