@@ -170,6 +170,23 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
+            //产品必须存在
+            var productModel = this.productBLL.GetModel(request.Body.FK_ProductID);
+            if (null == productModel)
+            {
+                response.IsSuccess = false;
+                response.Message = "请指定有效的产品信息！";
+                return response;
+            }
+
+            //产品与商户一致
+            if (productModel.FK_MerchantID != request.Body.FK_MerchantID)
+            {
+                response.IsSuccess = false;
+                response.Message = "当前订单中的产品信息所属商户应与该订单所属商户一致！";
+                return response;
+            }
+
             //买家校验
             if (request.Body.FK_UserID > 0)
             {

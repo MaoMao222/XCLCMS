@@ -78,9 +78,9 @@ namespace XCLCMS.WebAPI.Controllers
                 if (base.IsOnlyCurrentMerchant)
                 {
                     request.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
-                    request.Body.Where,
-                    string.Format("FK_MerchantID={0}",base.CurrentUserModel.FK_MerchantID)
-                });
+                        request.Body.Where,
+                        string.Format("FK_MerchantID={0}",base.CurrentUserModel.FK_MerchantID)
+                    });
                 }
 
                 #endregion 限制商户
