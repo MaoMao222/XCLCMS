@@ -65,7 +65,7 @@
                                     @m.MerchantName
                                 </td>
                                 <td>@m.MerchantAppName</td>
-                                <td>@m.ProductName</td>
+                                <td><a href="@Url.Action("Show","Product",new { ProductID=m.FK_ProductID})" target="_blank">@m.ProductName</a></td>
                                 <td align="center">@m.ProductPrice</td>
                                 <td>@m.ProductDesc</td>
                                 <td align="center">@m.UserName</td>
