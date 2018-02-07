@@ -118,7 +118,6 @@ namespace XCLCMS.Data.DAL
         /// </summary>
         public XCLCMS.Data.Model.Ads GetModel(long AdsID)
         {
-            XCLCMS.Data.Model.Ads model = new XCLCMS.Data.Model.Ads();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Ads WITH(NOLOCK)   where AdsID=@AdsID");
             db.AddInParameter(dbCommand, "AdsID", DbType.Int64, AdsID);

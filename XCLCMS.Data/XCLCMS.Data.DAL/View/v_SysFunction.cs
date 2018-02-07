@@ -24,7 +24,6 @@ namespace XCLCMS.Data.DAL.View
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 * from v_SysFunction  WITH(NOLOCK)  ");
             strSql.Append(" where SysFunctionID=@SysFunctionID ");
-            XCLCMS.Data.Model.View.v_SysFunction model = new XCLCMS.Data.Model.View.v_SysFunction();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysFunctionID", DbType.Int64, SysFunctionID);

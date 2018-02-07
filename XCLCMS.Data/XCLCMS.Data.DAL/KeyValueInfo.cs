@@ -2,39 +2,30 @@
 using System;
 using System.Data;
 using System.Data.Common;
-using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.Data.DAL
 {
-    /// <summary>
-    /// 数据访问类:FriendLinks
-    /// </summary>
-    public partial class FriendLinks : XCLCMS.Data.DAL.Common.BaseDAL
+    public class KeyValueInfo : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public FriendLinks()
-        { }
-
         #region Method
 
         /// <summary>
         ///  增加一条数据
         /// </summary>
-        public bool Add(XCLCMS.Data.Model.FriendLinks model)
+        public bool Add(XCLCMS.Data.Model.KeyValueInfo model)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetStoredProcCommand("sp_FriendLinks_ADD");
-            db.AddInParameter(dbCommand, "FriendLinkID", DbType.Int64, model.FriendLinkID);
-            db.AddInParameter(dbCommand, "Title", DbType.String, model.Title);
-            db.AddInParameter(dbCommand, "Description", DbType.String, model.Description);
-            db.AddInParameter(dbCommand, "URL", DbType.AnsiString, model.URL);
-            db.AddInParameter(dbCommand, "ContactName", DbType.String, model.ContactName);
-            db.AddInParameter(dbCommand, "Email", DbType.AnsiString, model.Email);
-            db.AddInParameter(dbCommand, "QQ", DbType.AnsiString, model.QQ);
-            db.AddInParameter(dbCommand, "Tel", DbType.AnsiString, model.Tel);
-            db.AddInParameter(dbCommand, "Remark", DbType.String, model.Remark);
-            db.AddInParameter(dbCommand, "OtherContact", DbType.String, model.OtherContact);
+            DbCommand dbCommand = db.GetStoredProcCommand("sp_KeyValueInfo_ADD");
+            db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, model.KeyValueInfoID);
+            db.AddInParameter(dbCommand, "Code", DbType.AnsiString, model.Code);
+            db.AddInParameter(dbCommand, "KeyValueType", DbType.AnsiString, model.KeyValueType);
+            db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
+            db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
+            db.AddInParameter(dbCommand, "Contents", DbType.AnsiString, model.Contents);
+            db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
             db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
             db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
@@ -61,22 +52,20 @@ namespace XCLCMS.Data.DAL
         /// <summary>
         ///  更新一条数据
         /// </summary>
-        public bool Update(XCLCMS.Data.Model.FriendLinks model)
+        public bool Update(XCLCMS.Data.Model.KeyValueInfo model)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetStoredProcCommand("sp_FriendLinks_Update");
-            db.AddInParameter(dbCommand, "FriendLinkID", DbType.Int64, model.FriendLinkID);
-            db.AddInParameter(dbCommand, "Title", DbType.String, model.Title);
-            db.AddInParameter(dbCommand, "Description", DbType.String, model.Description);
-            db.AddInParameter(dbCommand, "URL", DbType.AnsiString, model.URL);
-            db.AddInParameter(dbCommand, "ContactName", DbType.String, model.ContactName);
-            db.AddInParameter(dbCommand, "Email", DbType.AnsiString, model.Email);
-            db.AddInParameter(dbCommand, "QQ", DbType.AnsiString, model.QQ);
-            db.AddInParameter(dbCommand, "Tel", DbType.AnsiString, model.Tel);
-            db.AddInParameter(dbCommand, "Remark", DbType.String, model.Remark);
-            db.AddInParameter(dbCommand, "OtherContact", DbType.String, model.OtherContact);
+            DbCommand dbCommand = db.GetStoredProcCommand("sp_KeyValueInfo_Update");
+            db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, model.KeyValueInfoID);
+            db.AddInParameter(dbCommand, "Code", DbType.AnsiString, model.Code);
+            db.AddInParameter(dbCommand, "KeyValueType", DbType.AnsiString, model.KeyValueType);
+            db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, model.FK_UserID);
+            db.AddInParameter(dbCommand, "UserName", DbType.String, model.UserName);
+            db.AddInParameter(dbCommand, "Contents", DbType.AnsiString, model.Contents);
+            db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
             db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
             db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
             db.AddInParameter(dbCommand, "CreaterID", DbType.Int64, model.CreaterID);
@@ -103,14 +92,14 @@ namespace XCLCMS.Data.DAL
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.FriendLinks GetModel(long FriendLinkID)
+        public XCLCMS.Data.Model.KeyValueInfo GetModel(long KeyValueInfoID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from FriendLinks WITH(NOLOCK)   where FriendLinkID=@FriendLinkID");
-            db.AddInParameter(dbCommand, "FriendLinkID", DbType.Int64, FriendLinkID);
+            DbCommand dbCommand = db.GetSqlStringCommand("select * from KeyValueInfo WITH(NOLOCK)   where KeyValueInfoID=@KeyValueInfoID");
+            db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, KeyValueInfoID);
             using (var dr = db.ExecuteReader(dbCommand))
             {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.FriendLinks>(dr);
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.KeyValueInfo>(dr);
             }
         }
 
@@ -119,26 +108,27 @@ namespace XCLCMS.Data.DAL
         #region MethodEx
 
         /// <summary>
-        /// 判断指定标题是否存在
+        /// 判断指定code是否存在
         /// </summary>
-        public bool IsExist(FriendLinks_TitleCondition condition)
+        public bool IsExistCode(string code)
         {
-            return null != this.GetModel(condition);
+            Database db = base.CreateDatabase();
+            DbCommand dbCommand = db.GetSqlStringCommand("select top 1 1 from KeyValueInfo  WITH(NOLOCK)  where Code=@Code");
+            db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
+            return db.ExecuteScalar(dbCommand) != null;
         }
 
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.FriendLinks GetModel(FriendLinks_TitleCondition condition)
+        public XCLCMS.Data.Model.KeyValueInfo GetModel(string code)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from FriendLinks with(nolock) where Title=@Title and FK_MerchantID=@FK_MerchantID and FK_MerchantAppID=@FK_MerchantAppID");
-            db.AddInParameter(dbCommand, "Title", DbType.String, condition.Title);
-            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.FK_MerchantID);
-            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
+            DbCommand dbCommand = db.GetSqlStringCommand("select top 1 * from KeyValueInfo with(nolock) where Code=@Code");
+            db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
             using (var dr = db.ExecuteReader(dbCommand))
             {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.FriendLinks>(dr);
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.KeyValueInfo>(dr);
             }
         }
 

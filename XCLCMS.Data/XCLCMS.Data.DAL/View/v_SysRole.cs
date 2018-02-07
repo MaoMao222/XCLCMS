@@ -24,7 +24,6 @@ namespace XCLCMS.Data.DAL.View
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 * from v_SysRole  WITH(NOLOCK)  ");
             strSql.Append(" where SysRoleID=@SysRoleID ");
-            XCLCMS.Data.Model.View.v_SysRole model = new XCLCMS.Data.Model.View.v_SysRole();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysRoleID", DbType.Int64, SysRoleID);

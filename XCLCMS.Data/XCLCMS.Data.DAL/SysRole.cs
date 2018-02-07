@@ -99,7 +99,6 @@ namespace XCLCMS.Data.DAL
         /// </summary>
         public XCLCMS.Data.Model.SysRole GetModel(long SysRoleID)
         {
-            XCLCMS.Data.Model.SysRole model = new XCLCMS.Data.Model.SysRole();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from SysRole  WITH(NOLOCK)  where SysRoleID=@SysRoleID");
             db.AddInParameter(dbCommand, "SysRoleID", DbType.Int64, SysRoleID);
@@ -246,7 +245,7 @@ namespace XCLCMS.Data.DAL
         {
             if (null == roleIdList || roleIdList.Count == 0)
             {
-                return null;
+                return new List<Model.SysRole>();
             }
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(@"

@@ -20,7 +20,6 @@ namespace XCLCMS.Data.DAL.View
         /// </summary>
         public XCLCMS.Data.Model.View.v_Article GetModel(long ArticleID)
         {
-            XCLCMS.Data.Model.View.v_Article model = new XCLCMS.Data.Model.View.v_Article();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_Article WITH(NOLOCK)   where ArticleID=@ArticleID");
             db.AddInParameter(dbCommand, "ArticleID", DbType.Int64, ArticleID);

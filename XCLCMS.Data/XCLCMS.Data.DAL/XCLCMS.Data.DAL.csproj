@@ -72,6 +72,7 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="FriendLinks.cs" />
     <Compile Include="GenerateID.cs" />
+    <Compile Include="KeyValueInfo.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
     <Compile Include="ObjectAttachment.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="View\v_Attachment.cs" />
     <Compile Include="View\v_Comments.cs" />
     <Compile Include="View\v_FriendLinks.cs" />
+    <Compile Include="View\v_KeyValueInfo.cs" />
     <Compile Include="View\v_Merchant.cs" />
     <Compile Include="View\v_MerchantApp.cs" />
     <Compile Include="View\v_Orders.cs" />

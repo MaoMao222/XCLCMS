@@ -105,7 +105,6 @@ namespace XCLCMS.Data.DAL
         /// </summary>
         public XCLCMS.Data.Model.Comments GetModel(long CommentsID)
         {
-            XCLCMS.Data.Model.Comments model = new XCLCMS.Data.Model.Comments();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Comments WITH(NOLOCK)   where CommentsID=@CommentsID");
             db.AddInParameter(dbCommand, "CommentsID", DbType.Int64, CommentsID);

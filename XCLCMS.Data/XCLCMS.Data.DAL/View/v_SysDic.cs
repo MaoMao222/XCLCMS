@@ -21,7 +21,6 @@ namespace XCLCMS.Data.DAL.View
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 * from v_SysDic  WITH(NOLOCK)  ");
             strSql.Append(" where SysDicID=@SysDicID ");
-            XCLCMS.Data.Model.View.v_SysDic model = new XCLCMS.Data.Model.View.v_SysDic();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
             db.AddInParameter(dbCommand, "SysDicID", DbType.Int64, SysDicID);

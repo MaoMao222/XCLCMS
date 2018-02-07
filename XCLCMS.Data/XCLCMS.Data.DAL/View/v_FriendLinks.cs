@@ -21,7 +21,6 @@ namespace XCLCMS.Data.DAL.View
         /// </summary>
         public XCLCMS.Data.Model.View.v_FriendLinks GetModel(long FriendLinkID)
         {
-            XCLCMS.Data.Model.View.v_FriendLinks model = new XCLCMS.Data.Model.View.v_FriendLinks();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_FriendLinks WITH(NOLOCK)   where FriendLinkID=@FriendLinkID");
             db.AddInParameter(dbCommand, "FriendLinkID", DbType.Int64, FriendLinkID);

@@ -152,7 +152,6 @@ namespace XCLCMS.Data.DAL
         /// </summary>
         public XCLCMS.Data.Model.Article GetModel(long ArticleID)
         {
-            XCLCMS.Data.Model.Article model = new XCLCMS.Data.Model.Article();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Article WITH(NOLOCK)   where ArticleID=@ArticleID");
             db.AddInParameter(dbCommand, "ArticleID", DbType.Int64, ArticleID);

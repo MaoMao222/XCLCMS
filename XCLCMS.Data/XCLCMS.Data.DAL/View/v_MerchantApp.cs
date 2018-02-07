@@ -21,7 +21,6 @@ namespace XCLCMS.Data.DAL.View
         /// </summary>
         public XCLCMS.Data.Model.View.v_MerchantApp GetModel(long MerchantAppID)
         {
-            XCLCMS.Data.Model.View.v_MerchantApp model = new XCLCMS.Data.Model.View.v_MerchantApp();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from v_MerchantApp WITH(NOLOCK)   where MerchantAppID=@MerchantAppID");
             db.AddInParameter(dbCommand, "MerchantAppID", DbType.Int64, MerchantAppID);

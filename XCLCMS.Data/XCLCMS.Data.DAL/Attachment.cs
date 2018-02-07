@@ -117,7 +117,6 @@ namespace XCLCMS.Data.DAL
         /// </summary>
         public XCLCMS.Data.Model.Attachment GetModel(long AttachmentID)
         {
-            XCLCMS.Data.Model.Attachment model = new XCLCMS.Data.Model.Attachment();
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand("select * from Attachment WITH(NOLOCK)   where AttachmentID=@AttachmentID");
             db.AddInParameter(dbCommand, "AttachmentID", DbType.Int64, AttachmentID);
@@ -171,7 +170,7 @@ namespace XCLCMS.Data.DAL
             var model = this.GetModel(attachmentID);
             if (null == model)
             {
-                return null;
+                return new List<Model.Attachment>();
             }
             XCLCMS.Data.Model.Attachment tempModel = null;
             List<XCLCMS.Data.Model.Attachment> temp = null;
@@ -199,7 +198,7 @@ namespace XCLCMS.Data.DAL
                 }
             }
 
-            if (null != result && result.Count > 0)
+            if (result.Count > 0)
             {
                 result = result.Distinct().Where(k => k.AttachmentID != attachmentID).ToList();
             }
@@ -264,7 +263,7 @@ namespace XCLCMS.Data.DAL
         {
             if (null == ids || ids.Count == 0)
             {
-                return null;
+                return new List<Model.Attachment>();
             }
             ids = ids.Distinct().ToList();
 
