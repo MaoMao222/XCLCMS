@@ -50,24 +50,37 @@
                     @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayTypeEnum), Model.Orders.PayType)
                 </td>
             </tr>
+
             <tr>
                 <td class="XCLTitle">流水状态：</td>
                 <td>
                     @Model.Orders.FlowStatus
                 </td>
-                <td class="XCLTitle">备注：</td>
-                <td>@Model.Orders.Remark</td>
-                <td class="XCLTitle"></td>
-                <td></td>
+                <td class="XCLTitle">联系人：</td>
+                <td>
+                    @Model.Orders.ContactName
+                </td>
+                <td class="XCLTitle">电子邮件：</td>
+                <td>@Model.Orders.Email</td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">手机号：</td>
+                <td>@Model.Orders.Mobile</td>
+                <td class="XCLTitle">其它联系方式：</td>
+                <td>
+                    @Model.Orders.OtherContact
+                </td>
+                <td class="XCLTitle">交易号：</td>
+                <td>@Model.Orders.TransactionNO</td>
             </tr>
 
             <tr>
+                <td class="XCLTitle">备注：</td>
+                <td>@Model.Orders.Remark</td>
                 <td class="XCLTitle">记录状态：</td>
                 <td>
                     @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.Orders.RecordState)
                 </td>
-                <td class="XCLTitle"></td>
-                <td></td>
                 <td class="XCLTitle"></td>
                 <td></td>
             </tr>

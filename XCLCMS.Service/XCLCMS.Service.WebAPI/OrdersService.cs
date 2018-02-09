@@ -116,6 +116,7 @@ namespace XCLCMS.Service.WebAPI
             request.Body.DealDoneTime = null;
             request.Body.FlowStatus = 0;
             request.Body.PayStatus = XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum.WAT.ToString();
+            request.Body.TransactionNO = Guid.NewGuid().ToString("N").ToUpper();
             request.Body.CreaterID = this.ContextInfo.UserInfoID;
             request.Body.CreaterName = this.ContextInfo.UserName;
             request.Body.CreateTime = DateTime.Now;
@@ -171,7 +172,7 @@ namespace XCLCMS.Service.WebAPI
             }
 
             //产品必须存在
-            var productModel = this.productBLL.GetModel(request.Body.FK_ProductID);
+            var productModel = this.productBLL.GetModel(model.FK_ProductID);
             if (null == productModel)
             {
                 response.IsSuccess = false;

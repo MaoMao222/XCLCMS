@@ -25,9 +25,18 @@
                 </tr>
 
                 <tr>
-                    <td class="XCLTitle"><span class="XCLRedBolder">*</span>所属产品：</td>
+                    <td class="XCLTitle">@Html.Raw(ViewBag.CurrentHandleType == XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD ? @"<span class=""XCLRedBolder"">*</span>" : "")所属产品：</td>
                     <td>
-                        <input type="text" name="txtFK_ProductID" value="@Model.Orders.FK_ProductID" />
+                        @if (ViewBag.CurrentHandleType == XCLNetTools.Enum.CommonEnum.HandleTypeEnum.ADD)
+                        {
+                            <input type="text" name="txtFK_ProductID" value="@Model.Orders.FK_ProductID" />
+                            <br />
+                            <div class="XCLNote" style="width:150px;">提交后，将不能修改！</div>
+                        }
+                        else
+                        {
+                            @Model.Orders.ProductName
+                        }
                     </td>
                     <td class="XCLTitle">所属用户ID：</td>
                     <td>
@@ -55,15 +64,32 @@
                         </select>
                     </td>
                 </tr>
+
                 <tr>
                     <td class="XCLTitle">流水状态：</td>
                     <td>
                         @Model.Orders.FlowStatus
                     </td>
+                    <td class="XCLTitle">联系人：</td>
+                    <td>
+                        <input type="text" name="txtContactName" value="@Model.Orders.ContactName" />
+                    </td>
+                    <td class="XCLTitle">电子邮件：</td>
+                    <td>
+                        <input type="text" name="txtEmail" value="@Model.Orders.Email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="XCLTitle">手机号：</td>
+                    <td>
+                        <input type="text" name="txtMobile" value="@Model.Orders.Mobile" />
+                    </td>
+                    <td class="XCLTitle">其它联系方式：</td>
+                    <td>
+                        <textarea name="txtOtherContact">@Model.Orders.OtherContact</textarea>
+                    </td>
                     <td class="XCLTitle">备注：</td>
                     <td><textarea name="txtRemark">@Model.Orders.Remark</textarea></td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
                 </tr>
 
                 <tr>

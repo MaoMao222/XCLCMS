@@ -30,6 +30,11 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
                 new XCLNetSearch.SearchFieldInfo("支付方式","PayType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.PayTypeEnum))),
                 new XCLNetSearch.SearchFieldInfo("流水状态","FlowStatus|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("成交时间","DealDoneTime|dateTime|text",""),
+                new XCLNetSearch.SearchFieldInfo("联系人","ContactName|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("电子邮件","Email|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("手机号","Mobile|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("其它联系方式","OtherContact|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("交易号","TransactionNO|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("备注","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("创建时间","CreateTime|dateTime|text",""),
@@ -141,6 +146,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             viewModel.Orders.UserName = fm["txtUserName"];
             viewModel.Orders.PayType = fm["selPayType"];
             viewModel.Orders.Version = XCLNetTools.StringHander.FormHelper.GetInt("txtOrderVersion");
+            viewModel.Orders.ContactName = fm["txtContactName"];
+            viewModel.Orders.Email = fm["txtEmail"];
+            viewModel.Orders.Mobile = fm["txtMobile"];
+            viewModel.Orders.OtherContact = fm["txtOtherContact"];
             return viewModel;
         }
 
@@ -166,6 +175,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             model.UserName = viewModel.Orders.UserName;
             model.PayType = viewModel.Orders.PayType;
             model.Version = viewModel.Orders.Version;
+            model.ContactName = viewModel.Orders.ContactName;
+            model.Email = viewModel.Orders.Email;
+            model.Mobile = viewModel.Orders.Mobile;
+            model.OtherContact = viewModel.Orders.OtherContact;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Orders>(base.UserToken);
             request.Body = new Data.Model.Orders();
@@ -194,6 +207,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
             model.FK_UserID = viewModel.Orders.FK_UserID;
             model.UserName = viewModel.Orders.UserName;
             model.Version = viewModel.Orders.Version;
+            model.ContactName = viewModel.Orders.ContactName;
+            model.Email = viewModel.Orders.Email;
+            model.Mobile = viewModel.Orders.Mobile;
+            model.OtherContact = viewModel.Orders.OtherContact;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Orders>(base.UserToken);
             request.Body = new Data.Model.Orders();
