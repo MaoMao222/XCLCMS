@@ -22,6 +22,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
                 new XCLNetSearch.SearchFieldInfo("产品名称","ProductName|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("售价","Price|number|text",""),
                 new XCLNetSearch.SearchFieldInfo("产品描述","Description|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("销售方式","SaleType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.SaleTypeEnum))),
+                new XCLNetSearch.SearchFieldInfo("销售标题","SaleTitle|string|text",""),
+                new XCLNetSearch.SearchFieldInfo("购买成功后处理方式","PayedActionType|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.PayedActionTypeEnum))),
+                new XCLNetSearch.SearchFieldInfo("购买成功后展示内容","PayedRemark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("备注","Remark|string|text",""),
                 new XCLNetSearch.SearchFieldInfo("记录状态","RecordState|string|select",XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum))),
                 new XCLNetSearch.SearchFieldInfo("创建时间","CreateTime|dateTime|text",""),
@@ -72,6 +76,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
                     viewModel.FormAction = Url.Action("AddSubmit", "Product");
                     viewModel.Product.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
                     viewModel.Product.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
+                    viewModel.Product.PayedActionType = XCLCMS.Data.CommonHelper.EnumType.PayedActionTypeEnum.NON.ToString();
+                    viewModel.Product.SaleType = XCLCMS.Data.CommonHelper.EnumType.SaleTypeEnum.FRE.ToString();
                     break;
 
                 case XCLNetTools.Enum.CommonEnum.HandleTypeEnum.UPDATE:
@@ -88,6 +94,18 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
             {
                 IsNeedPleaseSelect = false,
                 DefaultValue = viewModel.Product.RecordState
+            });
+
+            viewModel.SaleTypeOptions = XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.SaleTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+            {
+                IsNeedPleaseSelect = false,
+                DefaultValue = viewModel.Product.SaleType
+            });
+
+            viewModel.PayedActionTypeOptions = XCLNetTools.Control.HtmlControl.Lib.GetOptions(typeof(XCLCMS.Data.CommonHelper.EnumType.PayedActionTypeEnum), new XCLNetTools.Entity.SetOptionEntity()
+            {
+                IsNeedPleaseSelect = false,
+                DefaultValue = viewModel.Product.PayedActionType
             });
 
             return View(viewModel);
@@ -122,6 +140,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
             viewModel.Product.Description = fm["txtDescription"];
             viewModel.Product.Price = XCLNetTools.StringHander.FormHelper.GetDecimal("txtPrice");
             viewModel.Product.ProductName = fm["txtProductName"];
+            viewModel.Product.PayedActionType = fm["selPayedActionType"];
+            viewModel.Product.PayedRemark = fm["txtPayedRemark"];
+            viewModel.Product.SaleTitle = fm["txtSaleTitle"];
+            viewModel.Product.SaleType = fm["selSaleType"];
             return viewModel;
         }
 
@@ -144,6 +166,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
             model.Description = viewModel.Product.Description;
             model.Price = viewModel.Product.Price;
             model.ProductName = viewModel.Product.ProductName;
+            model.PayedActionType = viewModel.Product.PayedActionType;
+            model.PayedRemark = viewModel.Product.PayedRemark;
+            model.SaleTitle = viewModel.Product.SaleTitle;
+            model.SaleType = viewModel.Product.SaleType;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Product>(base.UserToken);
             request.Body = new Data.Model.Product();
@@ -170,6 +196,10 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
             model.Description = viewModel.Product.Description;
             model.Price = viewModel.Product.Price;
             model.ProductName = viewModel.Product.ProductName;
+            model.PayedActionType = viewModel.Product.PayedActionType;
+            model.PayedRemark = viewModel.Product.PayedRemark;
+            model.SaleTitle = viewModel.Product.SaleTitle;
+            model.SaleType = viewModel.Product.SaleType;
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.Product>(base.UserToken);
             request.Body = new Data.Model.Product();

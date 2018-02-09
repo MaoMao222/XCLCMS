@@ -1,11 +1,15 @@
 CREATE TABLE [dbo].[Product]
 (
 [ProductID] [bigint] NOT NULL,
-[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__7FD5EEA5] DEFAULT ((0)),
-[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__00CA12DE] DEFAULT ((0)),
+[FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__3FBB6990] DEFAULT ((0)),
+[FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__tmp_ms_xx__FK_Me__40AF8DC9] DEFAULT ((0)),
 [ProductName] [nvarchar] (200) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [Description] [nvarchar] (max) COLLATE Chinese_PRC_CI_AS NULL,
 [Price] [decimal] (18, 2) NOT NULL,
+[SaleType] [char] (3) COLLATE Chinese_PRC_CI_AS NULL,
+[SaleTitle] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
+[PayedActionType] [char] (3) COLLATE Chinese_PRC_CI_AS NULL,
+[PayedRemark] [nvarchar] (2000) COLLATE Chinese_PRC_CI_AS NULL,
 [Remark] [varchar] (1000) COLLATE Chinese_PRC_CI_AS NULL,
 [RecordState] [char] (1) COLLATE Chinese_PRC_CI_AS NOT NULL,
 [CreateTime] [datetime] NOT NULL,
@@ -43,6 +47,12 @@ GO
 EXEC sp_addextendedproperty N'MS_Description', '所属商户号', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'FK_MerchantID'
 GO
 
+EXEC sp_addextendedproperty N'MS_Description', '购买成功后处理方式(PayedActionTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'PayedActionType'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '购买成功后展示内容', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'PayedRemark'
+GO
+
 EXEC sp_addextendedproperty N'MS_Description', '售价', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'Price'
 GO
 
@@ -56,6 +66,12 @@ EXEC sp_addextendedproperty N'MS_Description', '记录状态(RecordStateEnum)', 
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '备注', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'Remark'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '销售标题', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'SaleTitle'
+GO
+
+EXEC sp_addextendedproperty N'MS_Description', '销售方式(SaleTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'SaleType'
 GO
 
 EXEC sp_addextendedproperty N'MS_Description', '更新人ID', 'SCHEMA', N'dbo', 'TABLE', N'Product', 'COLUMN', N'UpdaterID'

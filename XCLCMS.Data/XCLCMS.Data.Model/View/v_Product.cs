@@ -2,8 +2,11 @@
 
 namespace XCLCMS.Data.Model.View
 {
+    /// <summary>
+    /// v_Product:实体类(属性说明自动提取数据库字段的描述信息)
+    /// </summary>
     [Serializable]
-    public class v_Product
+    public partial class v_Product
     {
         public v_Product()
         { }
@@ -16,6 +19,10 @@ namespace XCLCMS.Data.Model.View
         private string _productname;
         private string _description;
         private decimal _price;
+        private string _saletype;
+        private string _saletitle;
+        private string _payedactiontype;
+        private string _payedremark;
         private string _remark;
         private string _recordstate;
         private DateTime _createtime;
@@ -73,12 +80,48 @@ namespace XCLCMS.Data.Model.View
         }
 
         /// <summary>
-        /// 售价
+        ///
         /// </summary>
         public decimal Price
         {
             set { _price = value; }
             get { return _price; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string SaleType
+        {
+            set { _saletype = value; }
+            get { return _saletype; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string SaleTitle
+        {
+            set { _saletitle = value; }
+            get { return _saletitle; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string PayedActionType
+        {
+            set { _payedactiontype = value; }
+            get { return _payedactiontype; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string PayedRemark
+        {
+            set { _payedremark = value; }
+            get { return _payedremark; }
         }
 
         /// <summary>

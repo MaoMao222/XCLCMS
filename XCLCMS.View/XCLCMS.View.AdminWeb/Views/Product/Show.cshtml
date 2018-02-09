@@ -27,6 +27,29 @@
                     @Model.Product.Price
                 </td>
             </tr>
+
+            <tr>
+                <td class="XCLTitle">销售方式：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SaleTypeEnum), Model.Product.SaleType)
+                </td>
+                <td class="XCLTitle">销售标题：</td>
+                <td>
+                    @Model.Product.SaleTitle
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">购买成功后处理方式：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayedActionTypeEnum), Model.Product.PayedActionType)
+                </td>
+                <td class="XCLTitle">购买成功后展示内容：</td>
+                <td>
+                    @Model.Product.PayedRemark
+                </td>
+            </tr>
+
+
             <tr>
                 <td class="XCLTitle">描述：</td>
                 <td>

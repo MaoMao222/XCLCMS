@@ -4,6 +4,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
+
 CREATE PROCEDURE [dbo].[sp_Orders_Update]
 @OrderID bigint,
 @FK_ProductID bigint,
@@ -16,6 +17,11 @@ CREATE PROCEDURE [dbo].[sp_Orders_Update]
 @PayType char(3),
 @DealDoneTime datetime,
 @FlowStatus int,
+@ContactName nvarchar(50),
+@Email varchar(100),
+@Mobile varchar(100),
+@OtherContact nvarchar(200),
+@TransactionNO varchar(100),
 @Version int,
 @Remark varchar(1000),
 @RecordState char(1),
@@ -42,8 +48,8 @@ BEGIN TRY
 	SET @Version=@Version+1
 
 	UPDATE [Orders] SET 
-	 FK_MerchantID=@FK_MerchantID ,
-	[FK_ProductID] = @FK_ProductID,[FK_MerchantAppID] = @FK_MerchantAppID,[FK_UserID] = @FK_UserID,[UserName] = @UserName,[Price] = @Price,[PayStatus] = @PayStatus,[PayType] = @PayType,[DealDoneTime] = @DealDoneTime,[FlowStatus] = @FlowStatus,[Version] = @Version,[Remark] = @Remark,[RecordState] = @RecordState,[CreateTime] = @CreateTime,[CreaterID] = @CreaterID,[CreaterName] = @CreaterName,[UpdateTime] = @UpdateTime,[UpdaterID] = @UpdaterID,[UpdaterName] = @UpdaterName
+	FK_MerchantID=@FK_MerchantID ,
+	[FK_ProductID] = @FK_ProductID,[FK_MerchantAppID] = @FK_MerchantAppID,[FK_UserID] = @FK_UserID,[UserName] = @UserName,[Price] = @Price,[PayStatus] = @PayStatus,[PayType] = @PayType,[DealDoneTime] = @DealDoneTime,[FlowStatus] = @FlowStatus,[ContactName] = @ContactName,[Email] = @Email,[Mobile] = @Mobile,[OtherContact] = @OtherContact,[TransactionNO] = @TransactionNO,[Version] = @Version,[Remark] = @Remark,[RecordState] = @RecordState,[CreateTime] = @CreateTime,[CreaterID] = @CreaterID,[CreaterName] = @CreaterName,[UpdateTime] = @UpdateTime,[UpdaterID] = @UpdaterID,[UpdaterName] = @UpdaterName
 	WHERE OrderID=@OrderID
 	SET @ResultCode=1
 END TRY
@@ -51,5 +57,6 @@ BEGIN CATCH
 	SET @ResultMessage= ERROR_MESSAGE() 
 	SET @ResultCode=0
 END CATCH
+
 
 GO

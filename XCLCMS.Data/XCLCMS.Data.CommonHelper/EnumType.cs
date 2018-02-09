@@ -641,5 +641,51 @@ namespace XCLCMS.Data.CommonHelper
         }
 
         #endregion 订单
+
+        #region 产品
+
+        /// <summary>
+        /// 销售方式
+        /// </summary>
+        public enum SaleTypeEnum
+        {
+            /// <summary>
+            /// 免费 Free
+            /// </summary>
+            [Description("免费")]
+            FRE,
+
+            /// <summary>
+            /// 付费 Cost
+            /// </summary>
+            [Description("付费")]
+            COS
+        }
+
+        /// <summary>
+        /// 购买成功后处理方式
+        /// </summary>
+        public enum PayedActionTypeEnum
+        {
+            /// <summary>
+            /// 默认 None
+            /// </summary>
+            [Description("默认")]
+            NON,
+
+            /// <summary>
+            /// 跳转链接  Url
+            /// </summary>
+            [Description("跳转链接")]
+            URL,
+
+            /// <summary>
+            /// 显示内容 Tip
+            /// </summary>
+            [Description("显示内容")]
+            TIP
+        }
+
+        #endregion 产品
     }
 }

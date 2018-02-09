@@ -154,6 +154,10 @@ namespace XCLCMS.Service.WebAPI
             model.ProductName = request.Body.ProductName;
             model.Description = request.Body.Description;
             model.Price = request.Body.Price;
+            model.PayedActionType = request.Body.PayedActionType;
+            model.PayedRemark = request.Body.PayedRemark;
+            model.SaleTitle = request.Body.SaleTitle;
+            model.SaleType = request.Body.SaleType;
             model.Remark = request.Body.Remark;
             model.FK_MerchantID = request.Body.FK_MerchantID;
             model.FK_MerchantAppID = request.Body.FK_MerchantAppID;

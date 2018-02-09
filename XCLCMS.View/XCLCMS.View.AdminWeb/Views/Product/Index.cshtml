@@ -35,6 +35,7 @@
                     <td>所属应用</td>
                     <td>名称</td>
                     <td>售价</td>
+                    <td>销售方式</td>
                     <td>描述</td>
                     <td>备注</td>
                     <td>记录状态</td>
@@ -60,7 +61,8 @@
                                 </td>
                                 <td>@m.MerchantAppName</td>
                                 <td>@m.ProductName</td>
-                                <td>@m.Price</td>
+                                <td align="center">@m.Price</td>
+                                <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SaleTypeEnum), m.SaleType)</td>
                                 <td>@m.Description </td>
                                 <td>@m.Remark</td>
                                 <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>

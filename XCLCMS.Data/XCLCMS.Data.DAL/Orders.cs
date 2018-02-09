@@ -25,6 +25,11 @@ namespace XCLCMS.Data.DAL
 			db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
 			db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
 			db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
+			db.AddInParameter(dbCommand, "ContactName", DbType.String, model.ContactName);
+			db.AddInParameter(dbCommand, "Email", DbType.AnsiString, model.Email);
+			db.AddInParameter(dbCommand, "Mobile", DbType.AnsiString, model.Mobile);
+			db.AddInParameter(dbCommand, "OtherContact", DbType.String, model.OtherContact);
+			db.AddInParameter(dbCommand, "TransactionNO", DbType.AnsiString, model.TransactionNO);
 			db.AddInParameter(dbCommand, "Version", DbType.Int32, model.Version);
 			db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
 			db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);
@@ -68,6 +73,11 @@ namespace XCLCMS.Data.DAL
 			db.AddInParameter(dbCommand, "PayType", DbType.AnsiString, model.PayType);
 			db.AddInParameter(dbCommand, "DealDoneTime", DbType.DateTime, model.DealDoneTime);
 			db.AddInParameter(dbCommand, "FlowStatus", DbType.Int32, model.FlowStatus);
+			db.AddInParameter(dbCommand, "ContactName", DbType.String, model.ContactName);
+			db.AddInParameter(dbCommand, "Email", DbType.AnsiString, model.Email);
+			db.AddInParameter(dbCommand, "Mobile", DbType.AnsiString, model.Mobile);
+			db.AddInParameter(dbCommand, "OtherContact", DbType.String, model.OtherContact);
+			db.AddInParameter(dbCommand, "TransactionNO", DbType.AnsiString, model.TransactionNO);
 			db.AddInParameter(dbCommand, "Version", DbType.Int32, model.Version);
 			db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
 			db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, model.RecordState);

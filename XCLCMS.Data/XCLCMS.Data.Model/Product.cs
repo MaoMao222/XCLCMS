@@ -19,6 +19,10 @@ namespace XCLCMS.Data.Model
         private string _productname;
         private string _description;
         private decimal _price;
+        private string _saletype;
+        private string _saletitle;
+        private string _payedactiontype;
+        private string _payedremark;
         private string _remark;
         private string _recordstate;
         private DateTime _createtime;
@@ -73,14 +77,50 @@ namespace XCLCMS.Data.Model
             get { return _description; }
         }
 
-		/// <summary>
-		/// 售价
-		/// </summary>
-		public decimal Price
-		{
-			set{ _price=value;}
-			get{return _price;}
-		}
+        /// <summary>
+        /// 售价
+        /// </summary>
+        public decimal Price
+        {
+            set { _price = value; }
+            get { return _price; }
+        }
+
+        /// <summary>
+        /// 销售方式(SaleTypeEnum)
+        /// </summary>
+        public string SaleType
+        {
+            set { _saletype = value; }
+            get { return _saletype; }
+        }
+
+        /// <summary>
+        /// 销售标题
+        /// </summary>
+        public string SaleTitle
+        {
+            set { _saletitle = value; }
+            get { return _saletitle; }
+        }
+
+        /// <summary>
+        /// 购买成功后处理方式(PayedActionTypeEnum)
+        /// </summary>
+        public string PayedActionType
+        {
+            set { _payedactiontype = value; }
+            get { return _payedactiontype; }
+        }
+
+        /// <summary>
+        /// 购买成功后展示内容
+        /// </summary>
+        public string PayedRemark
+        {
+            set { _payedremark = value; }
+            get { return _payedremark; }
+        }
 
         /// <summary>
         /// 备注

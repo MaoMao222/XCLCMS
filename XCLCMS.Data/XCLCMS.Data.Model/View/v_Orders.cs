@@ -24,6 +24,11 @@ namespace XCLCMS.Data.Model.View
         private string _paytype;
         private DateTime? _dealdonetime;
         private int _flowstatus;
+        private string _contactname;
+        private string _email;
+        private string _mobile;
+        private string _othercontact;
+        private string _transactionno;
         private int _version;
         private string _remark;
         private string _recordstate;
@@ -136,6 +141,51 @@ namespace XCLCMS.Data.Model.View
         {
             set { _flowstatus = value; }
             get { return _flowstatus; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string ContactName
+        {
+            set { _contactname = value; }
+            get { return _contactname; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string Email
+        {
+            set { _email = value; }
+            get { return _email; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string Mobile
+        {
+            set { _mobile = value; }
+            get { return _mobile; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string OtherContact
+        {
+            set { _othercontact = value; }
+            get { return _othercontact; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string TransactionNO
+        {
+            set { _transactionno = value; }
+            get { return _transactionno; }
         }
 
         /// <summary>

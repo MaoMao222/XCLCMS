@@ -219,6 +219,10 @@ namespace XCLCMS.Service.WebAPI
             model.UpdaterName = this.ContextInfo.UserName;
             model.UpdateTime = DateTime.Now;
             model.Version = request.Body.Version;
+            model.ContactName = request.Body.ContactName;
+            model.Email = request.Body.Email;
+            model.Mobile = request.Body.Mobile;
+            model.OtherContact = request.Body.OtherContact;
 
             response.IsSuccess = this.bll.Update(model);
             if (response.IsSuccess)

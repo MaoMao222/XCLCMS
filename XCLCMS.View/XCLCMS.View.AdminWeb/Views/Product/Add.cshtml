@@ -38,6 +38,32 @@
                 </tr>
 
                 <tr>
+                    <td class="XCLTitle">销售方式：</td>
+                    <td>
+                        <select name="selSaleType">
+                            @Html.Raw(Model.SaleTypeOptions)
+                        </select>
+                    </td>
+                    <td class="XCLTitle">销售标题：</td>
+                    <td>
+                        <input type="text" name="txtSaleTitle" value="@Model.Product.SaleTitle" />
+                    </td>
+                    <td class="XCLTitle">购买成功后处理方式：</td>
+                    <td>
+                        <select name="selPayedActionType">
+                            @Html.Raw(Model.PayedActionTypeOptions)
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="XCLTitle">购买成功后展示内容：</td>
+                    <td colspan="100">
+                        <textarea name="txtPayedRemark">@Model.Product.PayedRemark</textarea>
+                    </td>
+                </tr>
+
+                <tr>
                     <td class="XCLTitle">描述：</td>
                     <td colspan="100">
                         <textarea name="txtDescription">@Model.Product.Description</textarea>
