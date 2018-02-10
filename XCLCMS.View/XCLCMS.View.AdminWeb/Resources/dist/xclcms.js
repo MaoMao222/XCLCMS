@@ -315,6 +315,7 @@ var UserControl_1 = __webpack_require__(1);
 var UserInfo_1 = __webpack_require__(20);
 var Product_1 = __webpack_require__(21);
 var Orders_1 = __webpack_require__(22);
+var KeyValueInfo_1 = __webpack_require__(23);
 window.xclcms = {
     Ads: Ads_1["default"],
     Article: Article_1["default"],
@@ -337,7 +338,8 @@ window.xclcms = {
     UserControl: UserControl_1["default"],
     UserInfo: UserInfo_1["default"],
     Product: Product_1["default"],
-    Orders: Orders_1["default"]
+    Orders: Orders_1["default"],
+    KeyValueInfo: KeyValueInfo_1["default"]
 };
 
 
@@ -3278,6 +3280,194 @@ var App = (function () {
     function App() {
         this.OrdersAdd = new OrdersAdd();
         this.OrdersList = new OrdersList();
+    }
+    return App;
+}());
+exports["default"] = new App();
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/// <reference path="common.d.ts" />
+exports.__esModule = true;
+var Common_1 = __webpack_require__(0);
+var UserControl_1 = __webpack_require__(1);
+/**
+ * 列表
+ */
+var KeyValueInfoList = (function () {
+    function KeyValueInfoList() {
+    }
+    /**
+     * 初始化
+     */
+    KeyValueInfoList.prototype.Init = function () {
+        var _this = this;
+        $("#btnUpdate").on("click", function () {
+            return _this.Update();
+        });
+        $("#btnDel").on("click", function () {
+            return _this.Del();
+        });
+    };
+    ;
+    /**
+     * 返回已选择的value数组
+     */
+    KeyValueInfoList.prototype.GetSelectValue = function () {
+        var selectVal = $(".XCLTableCheckAll").val();
+        var ids = selectVal.split(',');
+        if (selectVal && selectVal !== "" && ids.length > 0) {
+            return ids;
+        }
+        else {
+            return null;
+        }
+    };
+    ;
+    /**
+     * 打开【修改】页面
+     */
+    KeyValueInfoList.prototype.Update = function () {
+        var $btn = $("#btnUpdate"), ids = this.GetSelectValue();
+        if (ids && ids.length === 1) {
+            var query = {
+                handletype: "update",
+                KeyValueInfoID: ids[0]
+            };
+            var url = XJ.Url.UpdateParam($btn.attr("href"), query);
+            $btn.attr("href", url);
+            return true;
+        }
+        else {
+            art.dialog.tips("请选择一条记录进行修改操作！");
+            return false;
+        }
+    };
+    ;
+    /**
+     * 删除
+     */
+    KeyValueInfoList.prototype.Del = function () {
+        var ids = this.GetSelectValue();
+        if (!ids || ids.length == 0) {
+            art.dialog.tips("请至少选择一条记录进行操作！");
+            return false;
+        }
+        art.dialog.confirm("您确定要删除此信息吗？", function () {
+            $.XGoAjax({
+                target: $("#btnDel")[0],
+                ajax: {
+                    url: XCLCMSPageGlobalConfig.RootURL + "KeyValueInfo/DelByIDSubmit",
+                    data: JSON.stringify(ids),
+                    contentType: "application/json",
+                    type: "POST"
+                }
+            });
+        }, function () {
+        });
+        return false;
+    };
+    return KeyValueInfoList;
+}());
+/**
+ * 添加与修改页
+ */
+var KeyValueInfoAdd = (function () {
+    function KeyValueInfoAdd() {
+        /**
+    * 输入元素
+    */
+        this.Elements = {
+            selKeyValueInfoType: null,
+            Init: function () {
+                this.selKeyValueInfoType = $("#selKeyValueInfoType");
+            }
+        };
+    }
+    /**
+     * 初始化
+     */
+    KeyValueInfoAdd.prototype.Init = function () {
+        var _this = this;
+        _this.Elements.Init();
+        _this.InitValidator();
+        //商户号下拉框初始化
+        UserControl_1["default"].MerchantSelect.Init({
+            merchantIDObj: $("#txtMerchantID"),
+            merchantAppIDObj: $("#txtMerchantAppID")
+        });
+        //分类
+        var initKeyValueInfoTypeTree = function () {
+            var request = XCLCMSWebApi.CreateRequest();
+            request.Body = {};
+            request.Body.MerchantID = $("input[name='txtMerchantID']").val();
+            _this.Elements.selKeyValueInfoType.combotree({
+                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/GetEasyUITreeByCondition",
+                queryParams: request,
+                method: 'get',
+                checkbox: true,
+                onlyLeafCheck: true,
+                loadFilter: function (data) {
+                    if (data) {
+                        return data.Body || [];
+                    }
+                }
+            });
+        };
+        initKeyValueInfoTypeTree();
+        //商户号下拉框初始化
+        UserControl_1["default"].MerchantSelect.Init({
+            merchantIDObj: $("#txtMerchantID"),
+            merchantAppIDObj: $("#txtMerchantAppID"),
+            merchantIDSelectCallback: function () {
+                initKeyValueInfoTypeTree();
+            }
+        });
+    };
+    /**
+ * 表单验证初始化
+ */
+    KeyValueInfoAdd.prototype.InitValidator = function () {
+        var validator = $("form:first").validate({
+            rules: {
+                txtTitle: {
+                    required: true
+                },
+                txtCode: {
+                    required: true,
+                    XCLCustomRemote: function () {
+                        return {
+                            url: XCLCMSPageGlobalConfig.RootURL + "KeyValueInfo/IsExistCodeSubmit",
+                            data: function () {
+                                return {
+                                    Code: $("input[name='txtCode']").val(),
+                                    KeyValueInfoID: $("input[name='KeyValueInfoID']").val()
+                                };
+                            }
+                        };
+                    }
+                },
+                txtEmail: "email"
+            }
+        });
+        Common_1["default"].BindLinkButtonEvent("click", $("#btnSave"), function () {
+            if (!Common_1["default"].CommonFormValid(validator)) {
+                return false;
+            }
+            $.XGoAjax({ target: $("#btnSave")[0] });
+        });
+    };
+    return KeyValueInfoAdd;
+}());
+var App = (function () {
+    function App() {
+        this.KeyValueInfoAdd = new KeyValueInfoAdd();
+        this.KeyValueInfoList = new KeyValueInfoList();
     }
     return App;
 }());

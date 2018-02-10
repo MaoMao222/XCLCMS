@@ -69,6 +69,7 @@
     <Compile Include="FriendLinks.cs" />
     <Compile Include="GenerateID.cs" />
     <Compile Include="KeyValueInfo.cs" />
+    <Compile Include="KeyValueInfoType.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
     <Compile Include="ObjectAttachment.cs" />

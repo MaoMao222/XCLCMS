@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Views/MasterView/Main.cshtml";
+}
+@model XCLCMS.View.AdminWeb.Models.KeyValueInfo.KeyValueInfoShowVM
+
+<div class="XCLAccordion" style="border-top: none;">
+    <div class="XCLAccordionHeader">1、基本信息：</div>
+    <div class="XCLAccordionBody">
+        <table class="XCLTableEdit">
+            <tr>
+                <td class="XCLTitle" style="width:10%">所属商户：</td>
+                <td style="width:40%">
+                    @Model.KeyValueInfo.MerchantName
+                </td>
+                <td class="XCLTitle" style="width:10%">所属应用：</td>
+                <td style="width:40%">
+                    @Model.KeyValueInfo.MerchantAppName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">唯一标识：</td>
+                <td>
+                    @Model.KeyValueInfo.Code
+                </td>
+                <td class="XCLTitle">所属产品：</td>
+                <td>
+                    @Model.KeyValueInfo.ProductName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">分类：</td>
+                <td>
+                    @Model.KeyValueInfo.KeyValueInfoTypeNames
+                </td>
+                <td class="XCLTitle">所属用户：</td>
+                <td>
+                    @Model.KeyValueInfo.UserName
+                </td>
+            </tr>
+            <tr>
+
+                <td class="XCLTitle">备注：</td>
+                <td>
+                    @Model.KeyValueInfo.Remark
+                </td>
+                <td class="XCLTitle">记录状态：</td>
+                <td>
+                    @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), Model.KeyValueInfo.RecordState)
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.KeyValueInfo.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.KeyValueInfo.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.KeyValueInfo.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.KeyValueInfo.UpdaterName
+                </td>
+            </tr>
+            <tr>
+                <td class="XCLTitle">内容：</td>
+                <td colspan="3">
+                    @Model.KeyValueInfo.Contents
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="XCLHandBar">
+        <a href="@XCLCMS.View.AdminWeb.Common.WebCommon.RefferUrl" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>
+    </div>
+</div>

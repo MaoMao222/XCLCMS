@@ -10,7 +10,6 @@ namespace XCLCMS.Data.Model
     {
         private long _keyvalueinfoid;
         private string _code;
-        private string _keyvaluetype;
         private long _fk_productid;
         private long _fk_merchantid = 0;
         private long _fk_merchantappid = 0;
@@ -42,15 +41,6 @@ namespace XCLCMS.Data.Model
         {
             set { _code = value; }
             get { return _code; }
-        }
-
-        /// <summary>
-        /// 分类(KeyValueTypeEnum)
-        /// </summary>
-        public string KeyValueType
-        {
-            set { _keyvaluetype = value; }
-            get { return _keyvaluetype; }
         }
 
         /// <summary>

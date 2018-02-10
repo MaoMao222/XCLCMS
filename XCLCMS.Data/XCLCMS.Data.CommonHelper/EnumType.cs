@@ -545,7 +545,13 @@ namespace XCLCMS.Data.CommonHelper
             /// 订单 Orders
             /// </summary>
             [Description("订单")]
-            ORD
+            ORD,
+
+            /// <summary>
+            /// 自由数据存储 KeyValue
+            /// </summary>
+            [Description("自由数据存储")]
+            KVL
         }
 
         #endregion ID生成

@@ -1,12 +1,13 @@
+
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
 
+
 CREATE PROCEDURE [dbo].[sp_KeyValueInfo_ADD]
 @KeyValueInfoID BIGINT,
 @Code VARCHAR(50),
-@KeyValueType CHAR(3),
 @FK_ProductID BIGINT,
 @FK_MerchantID BIGINT,
 @FK_MerchantAppID BIGINT,
@@ -28,9 +29,9 @@ CREATE PROCEDURE [dbo].[sp_KeyValueInfo_ADD]
  AS 
  BEGIN TRY
 	INSERT INTO [KeyValueInfo](
-	[KeyValueInfoID],[Code],[KeyValueType],[FK_ProductID],[FK_MerchantID],[FK_MerchantAppID],[FK_UserID],[UserName],[Contents],[Remark],[RecordState],[CreateTime],[CreaterID],[CreaterName],[UpdateTime],[UpdaterID],[UpdaterName]
+	[KeyValueInfoID],[Code],[FK_ProductID],[FK_MerchantID],[FK_MerchantAppID],[FK_UserID],[UserName],[Contents],[Remark],[RecordState],[CreateTime],[CreaterID],[CreaterName],[UpdateTime],[UpdaterID],[UpdaterName]
 	)VALUES(
-	@KeyValueInfoID,@Code,@KeyValueType,@FK_ProductID,@FK_MerchantID,@FK_MerchantAppID,@FK_UserID,@UserName,@Contents,@Remark,@RecordState,@CreateTime,@CreaterID,@CreaterName,@UpdateTime,@UpdaterID,@UpdaterName
+	@KeyValueInfoID,@Code,@FK_ProductID,@FK_MerchantID,@FK_MerchantAppID,@FK_UserID,@UserName,@Contents,@Remark,@RecordState,@CreateTime,@CreaterID,@CreaterName,@UpdateTime,@UpdaterID,@UpdaterName
 	)
 	SET @ResultCode=1
 END TRY
@@ -38,4 +39,5 @@ BEGIN CATCH
 	SET @ResultMessage= ERROR_MESSAGE() 
 	SET @ResultCode=0
 END CATCH
+
 GO

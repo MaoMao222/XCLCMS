@@ -12,7 +12,7 @@ namespace XCLCMS.IService.WebAPI
     /// </summary>
     public interface IKeyValueInfoService : IBaseInfoService
     {
-        APIResponseEntity<bool> Add(APIRequestEntity<Data.Model.KeyValueInfo> request);
+        APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request);
 
         APIResponseEntity<bool> Delete(APIRequestEntity<List<long>> request);
 
@@ -24,6 +24,6 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<PageListResponseEntity<v_KeyValueInfo>> PageList(APIRequestEntity<PageListConditionEntity> request);
 
-        APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.KeyValueInfo> request);
+        APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request);
     }
 }

@@ -130,13 +130,13 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpPost]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.KeyValueInfo_Add)]
-        public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
             {
                 #region 限制商户
 
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                if (base.IsOnlyCurrentMerchant && request.Body.KeyValueInfo.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     var response = new APIResponseEntity<bool>();
                     response.IsSuccess = false;
@@ -155,13 +155,13 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpPost]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.KeyValueInfo_Edit)]
-        public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public async Task<APIResponseEntity<bool>> Update([FromBody] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
             return await Task.Run(() =>
             {
                 #region 限制商户
 
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                if (base.IsOnlyCurrentMerchant && request.Body.KeyValueInfo.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
                 {
                     var response = new APIResponseEntity<bool>();
                     response.IsSuccess = false;

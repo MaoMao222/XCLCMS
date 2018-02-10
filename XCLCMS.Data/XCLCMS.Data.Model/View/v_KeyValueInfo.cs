@@ -2,12 +2,19 @@
 
 namespace XCLCMS.Data.Model.View
 {
+    /// <summary>
+    /// v_KeyValueInfo:实体类(属性说明自动提取数据库字段的描述信息)
+    /// </summary>
     [Serializable]
-    public class v_KeyValueInfo
+    public partial class v_KeyValueInfo
     {
+        public v_KeyValueInfo()
+        { }
+
+        #region Model
+
         private long _keyvalueinfoid;
         private string _code;
-        private string _keyvaluetype;
         private long _fk_productid;
         private long _fk_merchantid;
         private long _fk_merchantappid;
@@ -24,6 +31,9 @@ namespace XCLCMS.Data.Model.View
         private string _updatername;
         private string _merchantname;
         private string _merchantappname;
+        private string _productname;
+        private string _keyvalueinfotypeids;
+        private string _keyvalueinfotypenames;
 
         /// <summary>
         ///
@@ -41,15 +51,6 @@ namespace XCLCMS.Data.Model.View
         {
             set { _code = value; }
             get { return _code; }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string KeyValueType
-        {
-            set { _keyvaluetype = value; }
-            get { return _keyvaluetype; }
         }
 
         /// <summary>
@@ -195,5 +196,34 @@ namespace XCLCMS.Data.Model.View
             set { _merchantappname = value; }
             get { return _merchantappname; }
         }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string ProductName
+        {
+            set { _productname = value; }
+            get { return _productname; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string KeyValueInfoTypeIDs
+        {
+            set { _keyvalueinfotypeids = value; }
+            get { return _keyvalueinfotypeids; }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string KeyValueInfoTypeNames
+        {
+            set { _keyvalueinfotypenames = value; }
+            get { return _keyvalueinfotypenames; }
+        }
+
+        #endregion Model
     }
 }

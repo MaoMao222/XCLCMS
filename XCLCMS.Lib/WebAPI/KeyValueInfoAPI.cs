@@ -44,17 +44,17 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 新增信息
         /// </summary>
-        public static APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public static APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
-            return Library.Request<XCLCMS.Data.Model.KeyValueInfo, bool>(request, "KeyValueInfo/Add", false);
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity, bool>(request, "KeyValueInfo/Add", false);
         }
 
         /// <summary>
         /// 修改信息
         /// </summary>
-        public static APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public static APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
-            return Library.Request<XCLCMS.Data.Model.KeyValueInfo, bool>(request, "KeyValueInfo/Update", false);
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity, bool>(request, "KeyValueInfo/Update", false);
         }
 
         /// <summary>

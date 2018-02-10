@@ -157,6 +157,7 @@
     <Compile Include="Controllers\Common\OtherController.cs" />
     <Compile Include="Controllers\FriendLinks\FriendLinksController.cs" />
     <Compile Include="Controllers\Home\DefaultController.cs" />
+    <Compile Include="Controllers\KeyValueInfo\KeyValueInfoController.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Merchant\MerchantAppController.cs" />
     <Compile Include="Controllers\Merchant\MerchantController.cs" />
@@ -185,6 +186,9 @@
     <Compile Include="Models\FriendLinks\FriendLinksAddVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksListVM.cs" />
     <Compile Include="Models\FriendLinks\FriendLinksShowVM.cs" />
+    <Compile Include="Models\KeyValueInfo\KeyValueInfoAddVM.cs" />
+    <Compile Include="Models\KeyValueInfo\KeyValueInfoListVM.cs" />
+    <Compile Include="Models\KeyValueInfo\KeyValueInfoShowVM.cs" />
     <Compile Include="Models\Main\MainVM.cs" />
     <Compile Include="Models\Merchant\MerchantAddVM.cs" />
     <Compile Include="Models\Merchant\MerchantAppAddVM.cs" />
@@ -1079,6 +1083,9 @@
     <Content Include="Views\Orders\Add.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Show.cshtml" />
+    <Content Include="Views\KeyValueInfo\Add.cshtml" />
+    <Content Include="Views\KeyValueInfo\Index.cshtml" />
+    <Content Include="Views\KeyValueInfo\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

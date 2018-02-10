@@ -11,11 +11,11 @@ namespace XCLCMS.Data.DAL.View
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public XCLCMS.Data.Model.View.v_KeyValueInfo GetModel(long KeyValueID)
+        public XCLCMS.Data.Model.View.v_KeyValueInfo GetModel(long keyValueInfoID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from v_KeyValueInfo WITH(NOLOCK)   where KeyValueID=@KeyValueID");
-            db.AddInParameter(dbCommand, "KeyValueID", DbType.Int64, KeyValueID);
+            DbCommand dbCommand = db.GetSqlStringCommand("select * from v_KeyValueInfo WITH(NOLOCK)   where KeyValueInfoID=@KeyValueInfoID");
+            db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, keyValueInfoID);
             using (var dr = db.ExecuteReader(dbCommand))
             {
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.View.v_KeyValueInfo>(dr);

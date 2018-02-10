@@ -16,7 +16,6 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetStoredProcCommand("sp_KeyValueInfo_ADD");
             db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, model.KeyValueInfoID);
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, model.Code);
-            db.AddInParameter(dbCommand, "KeyValueType", DbType.AnsiString, model.KeyValueType);
             db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
@@ -56,7 +55,6 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetStoredProcCommand("sp_KeyValueInfo_Update");
             db.AddInParameter(dbCommand, "KeyValueInfoID", DbType.Int64, model.KeyValueInfoID);
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, model.Code);
-            db.AddInParameter(dbCommand, "KeyValueType", DbType.AnsiString, model.KeyValueType);
             db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, model.FK_ProductID);
             db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
             db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);

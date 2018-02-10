@@ -65,6 +65,7 @@
     <Compile Include="RequestEntity\FileInfo\DiskFileListEntity.cs" />
     <Compile Include="RequestEntity\FileManager\GetDiskFileListEntity.cs" />
     <Compile Include="RequestEntity\FriendLinks\IsExistTitleEntity.cs" />
+    <Compile Include="RequestEntity\KeyValueInfo\AddOrUpdateEntity.cs" />
     <Compile Include="RequestEntity\KeyValueInfo\IsExistCodeEntity.cs" />
     <Compile Include="RequestEntity\MerchantApp\IsExistMerchantAppNameEntity.cs" />
     <Compile Include="RequestEntity\Merchant\IsExistMerchantNameEntity.cs" />

@@ -59,6 +59,7 @@
     <Compile Include="FriendLinks.cs" />
     <Compile Include="GenerateID.cs" />
     <Compile Include="KeyValueInfo.cs" />
+    <Compile Include="KeyValueInfoType.cs" />
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
     <Compile Include="ObjectAttachment.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="Strategy\BaseContext.cs" />
     <Compile Include="Strategy\BaseStrategy.cs" />
     <Compile Include="Strategy\ExecuteStrategy.cs" />
+    <Compile Include="Strategy\KeyValueInfo\KeyValueInfo.cs" />
+    <Compile Include="Strategy\KeyValueInfo\KeyValueInfoContext.cs" />
+    <Compile Include="Strategy\KeyValueInfo\KeyValueInfoType.cs" />
     <Compile Include="Strategy\StrategyLib.cs" />
     <Compile Include="Strategy\SysRole\SysRole.cs" />
     <Compile Include="Strategy\SysRole\SysRoleContext.cs" />

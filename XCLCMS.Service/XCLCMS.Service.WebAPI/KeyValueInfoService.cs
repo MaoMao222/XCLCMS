@@ -15,6 +15,9 @@ namespace XCLCMS.Service.WebAPI
         private readonly XCLCMS.Data.BLL.View.v_KeyValueInfo vKeyValueInfoBLL = new Data.BLL.View.v_KeyValueInfo();
         private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
+        private readonly XCLCMS.Data.BLL.UserInfo userInfoBLL = new Data.BLL.UserInfo();
+        private readonly XCLCMS.Data.BLL.Product productBLL = new Data.BLL.Product();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -111,20 +114,23 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 新增信息
         /// </summary>
-        public APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
+            List<long> tempIdList;
             var response = new APIResponseEntity<bool>();
 
             #region 数据校验
 
-            request.Body.Code = (request.Body.Code ?? string.Empty).Trim();
-            if (string.IsNullOrWhiteSpace(request.Body.Code))
+            request.Body.KeyValueInfo.FK_ProductID = request.Body.KeyValueInfo.FK_ProductID > 0 ? request.Body.KeyValueInfo.FK_ProductID : 0;
+            request.Body.KeyValueInfo.FK_UserID = request.Body.KeyValueInfo.FK_UserID > 0 ? request.Body.KeyValueInfo.FK_UserID : 0;
+            request.Body.KeyValueInfo.Code = (request.Body.KeyValueInfo.Code ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(request.Body.KeyValueInfo.Code))
             {
-                request.Body.Code = request.Body.KeyValueInfoID.ToString();
+                request.Body.KeyValueInfo.Code = request.Body.KeyValueInfo.KeyValueInfoID.ToString();
             }
 
             //商户必须存在
-            var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
+            var merchant = this.merchantBLL.GetModel(request.Body.KeyValueInfo.FK_MerchantID);
             if (null == merchant)
             {
                 response.IsSuccess = false;
@@ -132,38 +138,99 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
-            if (this.KeyValueInfoBLL.IsExistCode(request.Body.Code))
+            if (this.KeyValueInfoBLL.IsExistCode(request.Body.KeyValueInfo.Code))
             {
                 response.IsSuccess = false;
-                response.Message = string.Format("唯一标识【{0}】已存在！", request.Body.Code);
+                response.Message = string.Format("唯一标识【{0}】已存在！", request.Body.KeyValueInfo.Code);
                 return response;
             }
 
             //应用号与商户一致
-            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.KeyValueInfo.FK_MerchantID, request.Body.KeyValueInfo.FK_MerchantAppID))
             {
                 response.IsSuccess = false;
                 response.Message = "商户号与应用号不匹配，请核对后再试！";
                 return response;
             }
 
-            #endregion 数据校验
-
-            request.Body.CreaterID = this.ContextInfo.UserInfoID;
-            request.Body.CreaterName = this.ContextInfo.UserName;
-            request.Body.CreateTime = DateTime.Now;
-            request.Body.UpdaterID = request.Body.CreaterID;
-            request.Body.UpdaterName = request.Body.CreaterName;
-            request.Body.UpdateTime = request.Body.CreateTime;
-            response.IsSuccess = this.KeyValueInfoBLL.Add(request.Body);
-
-            if (response.IsSuccess)
+            //产品检测
+            if (request.Body.KeyValueInfo.FK_ProductID > 0)
             {
-                response.Message = "数据信息添加成功！";
+                var productModel = this.productBLL.GetModel(request.Body.KeyValueInfo.FK_ProductID);
+                if (null == productModel)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "请指定有效的产品信息！";
+                    return response;
+                }
+
+                //产品与商户一致
+                if (productModel.FK_MerchantID != request.Body.KeyValueInfo.FK_MerchantID)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "产品信息所属商户应与该数据所属商户一致！";
+                    return response;
+                }
+            }
+
+            //所属用户校验
+            if (request.Body.KeyValueInfo.FK_UserID > 0)
+            {
+                var uInfo = userInfoBLL.GetModel(request.Body.KeyValueInfo.FK_UserID);
+                if (null == uInfo)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "必须指定有效的所属用户信息！";
+                    return response;
+                }
+                request.Body.KeyValueInfo.UserName = uInfo.UserName;
             }
             else
             {
-                response.Message = "数据信息添加失败！";
+                request.Body.KeyValueInfo.FK_UserID = 0;
+                request.Body.KeyValueInfo.UserName = string.Empty;
+            }
+
+            //过滤非法分类
+            if (request.Body.KeyValueInfoTypeIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.KeyValueInfoTypeIDList.Where(k =>
+                  {
+                      var typeModel = this.sysDicBLL.GetModel(k);
+                      return null != typeModel && typeModel.FK_MerchantID == request.Body.KeyValueInfo.FK_MerchantID;
+                  }).ToList();
+                if (request.Body.KeyValueInfoTypeIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的数据分类信息！";
+                    return response;
+                }
+                request.Body.KeyValueInfoTypeIDList = tempIdList;
+            }
+
+            #endregion 数据校验
+
+            var context = new Data.BLL.Strategy.KeyValueInfo.KeyValueInfoContext();
+            context.ContextInfo = this.ContextInfo;
+            context.KeyValueInfo = request.Body.KeyValueInfo;
+            context.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
+            context.KeyValueInfoTypeIDList = request.Body.KeyValueInfoTypeIDList;
+
+            var strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
+                    new XCLCMS.Data.BLL.Strategy.KeyValueInfo.KeyValueInfo(),
+                    new XCLCMS.Data.BLL.Strategy.KeyValueInfo.KeyValueInfoType()
+                });
+            strategy.Execute(context);
+
+            if (strategy.Result != Data.BLL.Strategy.StrategyLib.ResultEnum.FAIL)
+            {
+                response.Message = "数据信息添加成功！";
+                response.IsSuccess = true;
+            }
+            else
+            {
+                response.Message = strategy.ResultMessage;
+                response.IsSuccess = false;
             }
 
             return response;
@@ -172,13 +239,14 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 修改信息
         /// </summary>
-        public APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.Model.KeyValueInfo> request)
+        public APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.KeyValueInfo.AddOrUpdateEntity> request)
         {
+            List<long> tempIdList;
             var response = new APIResponseEntity<bool>();
 
             #region 数据校验
 
-            var model = KeyValueInfoBLL.GetModel(request.Body.KeyValueInfoID);
+            var model = KeyValueInfoBLL.GetModel(request.Body.KeyValueInfo.KeyValueInfoID);
             if (null == model)
             {
                 response.IsSuccess = false;
@@ -186,14 +254,16 @@ namespace XCLCMS.Service.WebAPI
                 return response;
             }
 
-            request.Body.Code = (request.Body.Code ?? string.Empty).Trim();
-            if (string.IsNullOrWhiteSpace(request.Body.Code))
+            request.Body.KeyValueInfo.FK_ProductID = request.Body.KeyValueInfo.FK_ProductID > 0 ? request.Body.KeyValueInfo.FK_ProductID : 0;
+            request.Body.KeyValueInfo.FK_UserID = request.Body.KeyValueInfo.FK_UserID > 0 ? request.Body.KeyValueInfo.FK_UserID : 0;
+            request.Body.KeyValueInfo.Code = (request.Body.KeyValueInfo.Code ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(request.Body.KeyValueInfo.Code))
             {
-                request.Body.Code = request.Body.KeyValueInfoID.ToString();
+                request.Body.KeyValueInfo.Code = request.Body.KeyValueInfo.KeyValueInfoID.ToString();
             }
 
             //商户必须存在
-            var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
+            var merchant = this.merchantBLL.GetModel(request.Body.KeyValueInfo.FK_MerchantID);
             if (null == merchant)
             {
                 response.IsSuccess = false;
@@ -202,7 +272,7 @@ namespace XCLCMS.Service.WebAPI
             }
 
             //code是否被占用
-            if (!string.IsNullOrEmpty(request.Body.Code) && !string.Equals(model.Code, request.Body.Code, StringComparison.OrdinalIgnoreCase) && this.KeyValueInfoBLL.IsExistCode(request.Body.Code))
+            if (!string.IsNullOrEmpty(request.Body.KeyValueInfo.Code) && !string.Equals(model.Code, request.Body.KeyValueInfo.Code, StringComparison.OrdinalIgnoreCase) && this.KeyValueInfoBLL.IsExistCode(request.Body.KeyValueInfo.Code))
             {
                 response.IsSuccess = false;
                 response.Message = "标识Code被占用，请重新指定！";
@@ -210,34 +280,100 @@ namespace XCLCMS.Service.WebAPI
             }
 
             //应用号与商户一致
-            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.KeyValueInfo.FK_MerchantID, request.Body.KeyValueInfo.FK_MerchantAppID))
             {
                 response.IsSuccess = false;
                 response.Message = "商户号与应用号不匹配，请核对后再试！";
                 return response;
             }
 
-            #endregion 数据校验
-
-            model.Code = request.Body.Code;
-            model.Remark = request.Body.Remark;
-            model.FK_MerchantID = request.Body.FK_MerchantID;
-            model.FK_MerchantAppID = request.Body.FK_MerchantAppID;
-            model.RecordState = request.Body.RecordState;
-            model.UpdaterID = this.ContextInfo.UserInfoID;
-            model.UpdaterName = this.ContextInfo.UserName;
-            model.UpdateTime = DateTime.Now;
-            model.Contents = request.Body.Contents;
-
-            response.IsSuccess = this.KeyValueInfoBLL.Update(model);
-            if (response.IsSuccess)
+            //产品检测
+            if (request.Body.KeyValueInfo.FK_ProductID > 0)
             {
-                response.Message = "数据信息修改成功！";
+                var productModel = this.productBLL.GetModel(request.Body.KeyValueInfo.FK_ProductID);
+                if (null == productModel)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "请指定有效的产品信息！";
+                    return response;
+                }
+
+                //产品与商户一致
+                if (productModel.FK_MerchantID != request.Body.KeyValueInfo.FK_MerchantID)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "产品信息所属商户应与该数据所属商户一致！";
+                    return response;
+                }
+            }
+
+            //所属用户校验
+            if (request.Body.KeyValueInfo.FK_UserID > 0)
+            {
+                var uInfo = userInfoBLL.GetModel(request.Body.KeyValueInfo.FK_UserID);
+                if (null == uInfo)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "必须指定有效的所属用户信息！";
+                    return response;
+                }
+                request.Body.KeyValueInfo.UserName = uInfo.UserName;
             }
             else
             {
-                response.Message = "数据信息修改失败！";
+                request.Body.KeyValueInfo.FK_UserID = 0;
+                request.Body.KeyValueInfo.UserName = string.Empty;
             }
+
+            //过滤非法分类
+            if (request.Body.KeyValueInfoTypeIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.KeyValueInfoTypeIDList.Where(k =>
+                  {
+                      var typeModel = this.sysDicBLL.GetModel(k);
+                      return null != typeModel && typeModel.FK_MerchantID == request.Body.KeyValueInfo.FK_MerchantID;
+                  }).ToList();
+                if (request.Body.KeyValueInfoTypeIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的数据分类信息！";
+                    return response;
+                }
+                request.Body.KeyValueInfoTypeIDList = tempIdList;
+            }
+
+            #endregion 数据校验
+
+            model.Code = request.Body.KeyValueInfo.Code;
+            model.Remark = request.Body.KeyValueInfo.Remark;
+            model.FK_MerchantID = request.Body.KeyValueInfo.FK_MerchantID;
+            model.FK_MerchantAppID = request.Body.KeyValueInfo.FK_MerchantAppID;
+            model.RecordState = request.Body.KeyValueInfo.RecordState;
+            model.Contents = request.Body.KeyValueInfo.Contents;
+
+            var context = new Data.BLL.Strategy.KeyValueInfo.KeyValueInfoContext();
+            context.ContextInfo = this.ContextInfo;
+            context.KeyValueInfo = model;
+            context.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;
+            context.KeyValueInfoTypeIDList = request.Body.KeyValueInfoTypeIDList;
+
+            var strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
+                    new XCLCMS.Data.BLL.Strategy.KeyValueInfo.KeyValueInfo(),
+                    new XCLCMS.Data.BLL.Strategy.KeyValueInfo.KeyValueInfoType()
+                });
+            strategy.Execute(context);
+
+            if (strategy.Result != Data.BLL.Strategy.StrategyLib.ResultEnum.FAIL)
+            {
+                response.Message = "数据信息修改成功！";
+                response.IsSuccess = true;
+            }
+            else
+            {
+                response.Message = strategy.ResultMessage;
+                response.IsSuccess = false;
+            }
+
             return response;
         }
 

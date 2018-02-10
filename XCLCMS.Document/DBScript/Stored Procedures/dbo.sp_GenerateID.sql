@@ -4,28 +4,6 @@ GO
 SET ANSI_NULLS ON
 GO
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE PROC [dbo].[sp_GenerateID](
 	@ResultCode INT OUTPUT,
 	@ResultMessage NVARCHAR(1000) OUTPUT,
@@ -64,6 +42,12 @@ BEGIN
 		BEGIN
 			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
 			SET @IDCode=CAST('103'+CAST(@IDValue AS VARCHAR) AS BIGINT)		
+		END
+		--自由数据存储
+		ELSE IF(@IDType='KVL')
+		BEGIN
+			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
+			SET @IDCode=CAST('104'+CAST(@IDValue AS VARCHAR) AS BIGINT)		
 		END
 		--系统配置ID
 		ELSE IF(@IDType='SET')
@@ -148,6 +132,7 @@ BEGIN
 
 	
 END
+
 
 
 
