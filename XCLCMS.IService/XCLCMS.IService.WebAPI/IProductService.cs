@@ -17,5 +17,7 @@ namespace XCLCMS.IService.WebAPI
         APIResponseEntity<PageListResponseEntity<v_Product>> PageList(APIRequestEntity<PageListConditionEntity> request);
 
         APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.Product> request);
+
+        APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request);
     }
 }

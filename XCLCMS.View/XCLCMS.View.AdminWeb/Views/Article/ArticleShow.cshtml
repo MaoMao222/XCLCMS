@@ -76,17 +76,17 @@
                 <td>
 
                     @if (Model.MainImgList.IsNotNullOrEmpty())
-            {
-                <ul>
-                    @foreach (var m in Model.MainImgList)
-            {
-                <li>
-                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                    （@m.FileSize KB）
-                </li>
-    }
-                </ul>
-    }
+                    {
+                        <ul>
+                            @foreach (var m in Model.MainImgList)
+                            {
+                                <li>
+                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                                    （@m.FileSize KB）
+                                </li>
+                            }
+                        </ul>
+                    }
                 </td>
                 <td class="XCLTitle">发布时间：</td>
                 <td>
@@ -108,9 +108,9 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <strong>置顶：</strong>@(Model.Article.IsTop == "Y" ? "是" : "否")
                     @if (Model.Article.IsTop == "Y")
-            {
-                <span>@string.Format("{0:yyyy-MM-dd hh:mm}~{1:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime, Model.Article.TopEndTime)</span>
-    }
+                    {
+                        <span>@string.Format("{0:yyyy-MM-dd hh:mm}~{1:yyyy-MM-dd hh:mm}", Model.Article.TopBeginTime, Model.Article.TopEndTime)</span>
+                    }
                 </td>
             </tr>
             <tr>
@@ -129,17 +129,17 @@
                 <td class="XCLTitle">附件：</td>
                 <td colspan="5">
                     @if (Model.AttactmentList.IsNotNullOrEmpty())
-            {
-                <ul>
-                    @foreach (var m in Model.AttactmentList)
-            {
-                <li>
-                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
-                    （@m.FileSize KB）
-                </li>
-    }
-                </ul>
-    }
+                    {
+                        <ul>
+                            @foreach (var m in Model.AttactmentList)
+                            {
+                                <li>
+                                    <a href="@(XCLCMS.Lib.Common.Setting.SettingModel.FileManager_OpenAPI_ShowAttachmentURL)/@m.AttachmentID" target="_blank">@m.OriginFileName</a>
+                                    （@m.FileSize KB）
+                                </li>
+                            }
+                        </ul>
+                    }
                 </td>
             </tr>
 
@@ -194,7 +194,21 @@
                     @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Article.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Article.UpdaterName
                 </td>
                 <td class="XCLTitle"></td>
-                <td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td class="XCLTitle">营销产品：</td>
+                <td colspan="5">
+                    @if (Model.ProductList.IsNotNullOrEmpty())
+                    {
+                        foreach (var m in Model.ProductList)
+                        {
+                            <div>
+                                <a href="@Url.Action("Show","Product",new { ProductID=m.ProductID})" target="_blank">@m.ProductName</a>
+                            </div>
+                        }
+                    }
                 </td>
             </tr>
 

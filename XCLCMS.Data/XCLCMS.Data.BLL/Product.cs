@@ -1,4 +1,6 @@
-﻿namespace XCLCMS.Data.BLL
+﻿using System.Collections.Generic;
+
+namespace XCLCMS.Data.BLL
 {
     public class Product
     {
@@ -26,6 +28,14 @@
         public XCLCMS.Data.Model.Product GetModel(long ProductID)
         {
             return dal.GetModel(ProductID);
+        }
+
+        /// <summary>
+        /// 根据id查询信息
+        /// </summary>
+        public List<XCLCMS.Data.Model.Product> GetList(List<long> ids)
+        {
+            return dal.GetList(ids);
         }
     }
 }

@@ -58,5 +58,10 @@ namespace XCLCMS.View.AdminWeb.Models.Article
         /// 文章分类ID
         /// </summary>
         public List<long> ArticleTypeIDList { get; set; }
+
+        /// <summary>
+        /// 产品ID
+        /// </summary>
+        public List<long> ProductIDList { get; set; }
     }
 }

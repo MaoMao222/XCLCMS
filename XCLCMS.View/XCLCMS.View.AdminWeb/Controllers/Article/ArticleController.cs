@@ -125,6 +125,19 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
                         viewModel.AttachmentIDList = attResponse.Body.Select(k => k.AttachmentID).ToList();
                     }
 
+                    //获取营销产品列表
+                    var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity>(base.UserToken);
+                    prdRequest.Body = new Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity()
+                    {
+                        ObjectID = viewModel.Article.ArticleID,
+                        ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString()
+                    };
+                    var prdResponse = XCLCMS.Lib.WebAPI.ProductAPI.GetObjectProductList(prdRequest);
+                    if (null != prdResponse.Body && prdResponse.Body.Count > 0)
+                    {
+                        viewModel.ProductIDList = prdResponse.Body.Select(k => k.ProductID).ToList();
+                    }
+
                     viewModel.FormAction = Url.Action("UpdateSubmit", "Article");
                     break;
             }
@@ -204,6 +217,17 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             };
             var attResponse = XCLCMS.Lib.WebAPI.AttachmentAPI.GetObjectAttachmentList(attRequest);
             viewModel.AttactmentList = attResponse.Body;
+
+            //获取营销产品列表
+            var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity>(base.UserToken);
+            prdRequest.Body = new Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity()
+            {
+                ObjectID = viewModel.Article.ArticleID,
+                ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString()
+            };
+            var prdResponse = XCLCMS.Lib.WebAPI.ProductAPI.GetObjectProductList(prdRequest);
+            viewModel.ProductList = prdResponse.Body;
+
             return View("~/Views/Article/ArticleShow.cshtml", viewModel);
         }
 
@@ -218,6 +242,12 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
 
             viewModel.AttachmentIDList = XCLNetTools.StringHander.FormHelper.GetLongList("txtAttachments");
             viewModel.ArticleTypeIDList = XCLNetTools.StringHander.FormHelper.GetLongList("selArticleType");
+
+            var productIds = XCLNetTools.StringHander.FormHelper.GetString("txtProductIDs");
+            if (!string.IsNullOrWhiteSpace(productIds))
+            {
+                viewModel.ProductIDList = XCLNetTools.Common.DataTypeConvert.GetLongArrayByStringArray(productIds.Split(',')).ToList();
+            }
 
             viewModel.Article = new Data.Model.View.v_Article();
             viewModel.Article.ArticleID = XCLNetTools.StringHander.FormHelper.GetLong("ArticleID");
@@ -329,6 +359,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             request.Body.Article = model;
             request.Body.ArticleAttachmentIDList = viewModel.AttachmentIDList;
             request.Body.ArticleTypeIDList = viewModel.ArticleTypeIDList;
+            request.Body.ArticleProductIDList = viewModel.ProductIDList;
             var response = XCLCMS.Lib.WebAPI.ArticleAPI.Add(request);
 
             return Json(response);
@@ -389,6 +420,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             request.Body.Article = model;
             request.Body.ArticleAttachmentIDList = viewModel.AttachmentIDList;
             request.Body.ArticleTypeIDList = viewModel.ArticleTypeIDList;
+            request.Body.ArticleProductIDList = viewModel.ProductIDList;
             var response = XCLCMS.Lib.WebAPI.ArticleAPI.Update(request);
 
             return Json(response);

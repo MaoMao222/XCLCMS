@@ -13,5 +13,7 @@ namespace XCLCMS.View.AdminWeb.Models.Article
         public List<XCLCMS.Data.Model.Attachment> MainImgList { get; set; }
 
         public List<XCLCMS.Data.Model.Attachment> AttactmentList { get; set; }
+
+        public List<XCLCMS.Data.Model.Product> ProductList { get; set; }
     }
 }

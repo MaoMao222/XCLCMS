@@ -21,5 +21,10 @@ namespace XCLCMS.Data.BLL.Strategy.Article
         /// 文章分类id
         /// </summary>
         public List<long> ArticleTypeIDList { get; set; }
+
+        /// <summary>
+        /// 文章产品id
+        /// </summary>
+        public List<long> ArticleProductIDList { get; set; }
     }
 }

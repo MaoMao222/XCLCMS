@@ -77,8 +77,10 @@
                     <td>
                         <input type="text" id="txtCode" name="txtCode" value="@Model.Article.Code" />
                     </td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
+                    <td class="XCLTitle">营销产品ID：</td>
+                    <td class="easyui-tooltip" title="多个用英文逗号,分隔">
+                        <input type="text" name="txtProductIDs" value="@string.Join(",",Model.ProductIDList??new List<long>())" />
+                    </td>
                     <td class="XCLTitle"></td>
                     <td></td>
                 </tr>
@@ -148,21 +150,21 @@
                     <td class="XCLTitle">主图：</td>
                     <td>
                         @Html.Partial("~/views/UserControl/FileSelect.cshtml", new XCLCMS.View.AdminWeb.Models.UserControl.FileSelectVM()
-                   {
-                       TxtName = "mainImage",
-                       MaxFileCount = 3,
-                       TxtDefaultValue = string.Join(",", new List<long>() { Model.Article.MainImage1.GetValueOrDefault(), Model.Article.MainImage2.GetValueOrDefault(), Model.Article.MainImage3.GetValueOrDefault() })
-                   })
+                        {
+                            TxtName = "mainImage",
+                            MaxFileCount = 3,
+                            TxtDefaultValue = string.Join(",", new List<long>() { Model.Article.MainImage1.GetValueOrDefault(), Model.Article.MainImage2.GetValueOrDefault(), Model.Article.MainImage3.GetValueOrDefault() })
+                        })
                         <span class="XCLNote">最多可选择3个文件！</span>
                     </td>
                     <td class="XCLTitle">附件：</td>
                     <td>
                         @Html.Partial("~/views/UserControl/FileSelect.cshtml", new XCLCMS.View.AdminWeb.Models.UserControl.FileSelectVM()
-                   {
-                       TxtName = "txtAttachments",
-                       MaxFileCount = 100,
-                       TxtDefaultValue = Model.AttachmentIDList.IsNotNullOrEmpty() ? string.Join(",", Model.AttachmentIDList.ToArray()) : ""
-                   })
+                        {
+                            TxtName = "txtAttachments",
+                            MaxFileCount = 100,
+                            TxtDefaultValue = Model.AttachmentIDList.IsNotNullOrEmpty() ? string.Join(",", Model.AttachmentIDList.ToArray()) : ""
+                        })
                     </td>
                     <td class="XCLTitle"></td>
                     <td></td>

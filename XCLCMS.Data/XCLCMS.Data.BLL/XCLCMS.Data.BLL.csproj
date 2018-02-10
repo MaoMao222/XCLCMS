@@ -71,6 +71,7 @@
     <Compile Include="Strategy\Article\ArticleContext.cs" />
     <Compile Include="Strategy\Article\ArticleType.cs" />
     <Compile Include="Strategy\Article\ObjectAttachment.cs" />
+    <Compile Include="Strategy\Article\ObjectProduct.cs" />
     <Compile Include="Strategy\Article\Tags.cs" />
     <Compile Include="Strategy\BaseContext.cs" />
     <Compile Include="Strategy\BaseStrategy.cs" />

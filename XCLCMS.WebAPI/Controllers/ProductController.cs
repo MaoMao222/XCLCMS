@@ -65,6 +65,19 @@ namespace XCLCMS.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 根据产品关系信息查询产品列表
+        /// </summary>
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_View)]
+        public async Task<APIResponseEntity<List<XCLCMS.Data.Model.Product>>> GetObjectProductList([FromUri] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                return this.iProductService.GetObjectProductList(request);
+            });
+        }
+
+        /// <summary>
         /// 查询产品信息分页列表
         /// </summary>
         [HttpGet]

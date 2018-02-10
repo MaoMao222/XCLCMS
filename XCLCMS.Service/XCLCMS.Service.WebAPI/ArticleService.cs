@@ -19,6 +19,8 @@ namespace XCLCMS.Service.WebAPI
         private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
         private readonly XCLCMS.Data.BLL.SysDic sysDicBLL = new Data.BLL.SysDic();
+        private readonly XCLCMS.Data.BLL.Attachment attachmentBLL = new Data.BLL.Attachment();
+        private readonly XCLCMS.Data.BLL.Product productBLL = new Data.BLL.Product();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -136,6 +138,7 @@ namespace XCLCMS.Service.WebAPI
         /// </summary>
         public APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Article.AddOrUpdateEntity> request)
         {
+            List<long> tempIdList;
             var response = new APIResponseEntity<bool>();
 
             #region 数据校验
@@ -194,7 +197,7 @@ namespace XCLCMS.Service.WebAPI
             {
                 request.Body.Article.Title = request.Body.Article.Title.Trim();
             }
-            if (request.Body.Article.PublishTime==DateTime.MinValue)
+            if (request.Body.Article.PublishTime == DateTime.MinValue)
             {
                 request.Body.Article.PublishTime = DateTime.Now;
             }
@@ -243,11 +246,52 @@ namespace XCLCMS.Service.WebAPI
             //过滤非法文章分类
             if (request.Body.ArticleTypeIDList.IsNotNullOrEmpty())
             {
-                request.Body.ArticleTypeIDList = request.Body.ArticleTypeIDList.Where(k =>
+                tempIdList = request.Body.ArticleTypeIDList.Where(k =>
+                  {
+                      var typeModel = this.sysDicBLL.GetModel(k);
+                      return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                  }).ToList();
+                if (request.Body.ArticleTypeIDList.Count != tempIdList.Count)
                 {
-                    var typeModel = this.sysDicBLL.GetModel(k);
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的文章分类信息！";
+                    return response;
+                }
+                request.Body.ArticleTypeIDList = tempIdList;
+            }
+
+            //过滤非法附件
+            if (request.Body.ArticleAttachmentIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.ArticleAttachmentIDList.Where(k =>
+                {
+                    var typeModel = this.attachmentBLL.GetModel(k);
                     return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
                 }).ToList();
+                if (request.Body.ArticleAttachmentIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的附件信息！";
+                    return response;
+                }
+                request.Body.ArticleAttachmentIDList = tempIdList;
+            }
+
+            //过滤非法产品
+            if (request.Body.ArticleProductIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.ArticleProductIDList.Where(k =>
+                {
+                    var typeModel = this.productBLL.GetModel(k);
+                    return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                }).ToList();
+                if (request.Body.ArticleProductIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的营销产品信息！";
+                    return response;
+                }
+                request.Body.ArticleProductIDList = tempIdList;
             }
 
             #endregion 数据校验
@@ -258,12 +302,14 @@ namespace XCLCMS.Service.WebAPI
             articleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.ADD;
             articleContext.ArticleTypeIDList = request.Body.ArticleTypeIDList;
             articleContext.ArticleAttachmentIDList = request.Body.ArticleAttachmentIDList;
+            articleContext.ArticleProductIDList = request.Body.ArticleProductIDList;
 
             XCLCMS.Data.BLL.Strategy.ExecuteStrategy strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
                     new XCLCMS.Data.BLL.Strategy.Article.Article(),
                     new XCLCMS.Data.BLL.Strategy.Article.ObjectAttachment(),
                     new XCLCMS.Data.BLL.Strategy.Article.ArticleType(),
-                    new XCLCMS.Data.BLL.Strategy.Article.Tags()
+                    new XCLCMS.Data.BLL.Strategy.Article.Tags(),
+                    new XCLCMS.Data.BLL.Strategy.Article.ObjectProduct()
                 });
             strategy.Execute(articleContext);
 
@@ -286,6 +332,7 @@ namespace XCLCMS.Service.WebAPI
         /// </summary>
         public APIResponseEntity<bool> Update(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Article.AddOrUpdateEntity> request)
         {
+            List<long> tempIdList;
             var response = new APIResponseEntity<bool>();
 
             #region 数据校验
@@ -344,7 +391,7 @@ namespace XCLCMS.Service.WebAPI
             {
                 request.Body.Article.Title = request.Body.Article.Title.Trim();
             }
-            if (request.Body.Article.PublishTime== DateTime.MinValue)
+            if (request.Body.Article.PublishTime == DateTime.MinValue)
             {
                 request.Body.Article.PublishTime = DateTime.Now;
             }
@@ -401,11 +448,52 @@ namespace XCLCMS.Service.WebAPI
             //过滤非法文章分类
             if (request.Body.ArticleTypeIDList.IsNotNullOrEmpty())
             {
-                request.Body.ArticleTypeIDList = request.Body.ArticleTypeIDList.Where(k =>
+                tempIdList = request.Body.ArticleTypeIDList.Where(k =>
+                  {
+                      var typeModel = this.sysDicBLL.GetModel(k);
+                      return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                  }).ToList();
+                if (request.Body.ArticleTypeIDList.Count != tempIdList.Count)
                 {
-                    var typeModel = this.sysDicBLL.GetModel(k);
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的文章分类信息！";
+                    return response;
+                }
+                request.Body.ArticleTypeIDList = tempIdList;
+            }
+
+            //过滤非法附件
+            if (request.Body.ArticleAttachmentIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.ArticleAttachmentIDList.Where(k =>
+                {
+                    var typeModel = this.attachmentBLL.GetModel(k);
                     return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
                 }).ToList();
+                if (request.Body.ArticleAttachmentIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的附件信息！";
+                    return response;
+                }
+                request.Body.ArticleAttachmentIDList = tempIdList;
+            }
+
+            //过滤非法产品
+            if (request.Body.ArticleProductIDList.IsNotNullOrEmpty())
+            {
+                tempIdList = request.Body.ArticleProductIDList.Where(k =>
+                {
+                    var typeModel = this.productBLL.GetModel(k);
+                    return null != typeModel && typeModel.FK_MerchantID == request.Body.Article.FK_MerchantID;
+                }).ToList();
+                if (request.Body.ArticleProductIDList.Count != tempIdList.Count)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "不能包含无效的营销产品信息！";
+                    return response;
+                }
+                request.Body.ArticleProductIDList = tempIdList;
             }
 
             #endregion 数据校验
@@ -458,12 +546,14 @@ namespace XCLCMS.Service.WebAPI
             articleContext.HandleType = Data.BLL.Strategy.StrategyLib.HandleType.UPDATE;
             articleContext.ArticleTypeIDList = request.Body.ArticleTypeIDList;
             articleContext.ArticleAttachmentIDList = request.Body.ArticleAttachmentIDList;
+            articleContext.ArticleProductIDList = request.Body.ArticleProductIDList;
 
             XCLCMS.Data.BLL.Strategy.ExecuteStrategy strategy = new Data.BLL.Strategy.ExecuteStrategy(new List<Data.BLL.Strategy.BaseStrategy>() {
                 new XCLCMS.Data.BLL.Strategy.Article.Article(),
                 new XCLCMS.Data.BLL.Strategy.Article.ObjectAttachment(),
                 new XCLCMS.Data.BLL.Strategy.Article.ArticleType(),
-                new XCLCMS.Data.BLL.Strategy.Article.Tags()
+                new XCLCMS.Data.BLL.Strategy.Article.Tags(),
+                new XCLCMS.Data.BLL.Strategy.Article.ObjectProduct()
             });
             strategy.Execute(articleContext);
 

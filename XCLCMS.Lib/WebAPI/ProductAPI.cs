@@ -18,6 +18,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 根据产品关系信息查询产品列表
+        /// </summary>
+        public static APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        {
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity, List<XCLCMS.Data.Model.Product>>(request, "Product/GetObjectProductList");
+        }
+
+        /// <summary>
         /// 查询产品信息分页列表
         /// </summary>
         public static APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Product>> PageList(APIRequestEntity<PageListConditionEntity> request)

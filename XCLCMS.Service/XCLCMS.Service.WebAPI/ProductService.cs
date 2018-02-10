@@ -15,6 +15,7 @@ namespace XCLCMS.Service.WebAPI
         private readonly XCLCMS.Data.BLL.View.v_Product vBLL = new Data.BLL.View.v_Product();
         private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
         private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.ObjectProduct objectProductBLL = new Data.BLL.ObjectProduct();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -25,6 +26,23 @@ namespace XCLCMS.Service.WebAPI
         {
             var response = new APIResponseEntity<XCLCMS.Data.Model.View.v_Product>();
             response.Body = vBLL.GetModel(request.Body);
+            response.IsSuccess = true;
+            return response;
+        }
+
+        /// <summary>
+        /// 根据产品关系信息查询产品列表
+        /// </summary>
+        public APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        {
+            var response = new APIResponseEntity<List<XCLCMS.Data.Model.Product>>();
+            var lst = this.objectProductBLL.GetModelList((XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum)Enum.Parse(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), request.Body.ObjectType), request.Body.ObjectID);
+            List<long> ids = new List<long>();
+            if (null != lst && lst.Count > 0)
+            {
+                ids = lst.Select(k => k.FK_ProductID).ToList();
+            }
+            response.Body = this.bll.GetList(ids);
             response.IsSuccess = true;
             return response;
         }
