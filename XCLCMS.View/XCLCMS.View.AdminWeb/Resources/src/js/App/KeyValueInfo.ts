@@ -143,7 +143,6 @@ class KeyValueInfoAdd {
                     required: true
                 },
                 txtCode: {
-                    required: true,
                     XCLCustomRemote: function () {
                         return {
                             url: XCLCMSPageGlobalConfig.RootURL + "KeyValueInfo/IsExistCodeSubmit",
