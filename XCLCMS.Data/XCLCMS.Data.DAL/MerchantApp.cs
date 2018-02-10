@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class MerchantApp : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public MerchantApp()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -133,10 +128,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region Extend Method
-
         /// <summary>
         /// 获取指定商户的所有应用
         /// </summary>
@@ -175,7 +166,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.MerchantApp>(dr);
             }
         }
-
-        #endregion Extend Method
     }
 }

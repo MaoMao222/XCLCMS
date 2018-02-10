@@ -8,8 +8,6 @@ namespace XCLCMS.Data.DAL.View
 {
     public class v_KeyValueInfo : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -43,10 +41,6 @@ namespace XCLCMS.Data.DAL.View
             }
         }
 
-        #endregion Method
-
-        #region Extend Method
-
         /// <summary>
         /// 分页数据列表
         /// </summary>
@@ -55,7 +49,5 @@ namespace XCLCMS.Data.DAL.View
             condition.TableName = "v_KeyValueInfo";
             return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_KeyValueInfo>(pageInfo, condition);
         }
-
-        #endregion Extend Method
     }
 }

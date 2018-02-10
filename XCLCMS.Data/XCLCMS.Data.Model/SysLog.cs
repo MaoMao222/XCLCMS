@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class SysLog
     {
-        public SysLog()
-        { }
-
-        #region Model
-
         private long _syslogid;
         private string _loglevel;
         private string _logtype;
@@ -143,7 +138,5 @@ namespace XCLCMS.Data.Model
             set { _createtime = value; }
             get { return _createtime; }
         }
-
-        #endregion Model
     }
 }

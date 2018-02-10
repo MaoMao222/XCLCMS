@@ -3,13 +3,14 @@
 namespace XCLCMS.Data.Model
 {
     /// <summary>
-    /// 用户角色关系表
+    /// 所有产品关系表
     /// </summary>
     [Serializable]
-    public partial class SysUserRole
+    public partial class ObjectProduct
     {
-        private long _fk_userinfoid;
-        private long _fk_sysroleid;
+        private string _objecttype;
+        private long _fk_objectid;
+        private long _fk_productid;
         private string _recordstate;
         private DateTime _createtime;
         private long _createrid;
@@ -19,21 +20,30 @@ namespace XCLCMS.Data.Model
         private string _updatername;
 
         /// <summary>
-        /// 用户ID
+        /// 产品所属主体类别(ObjectTypeEnum)
         /// </summary>
-        public long FK_UserInfoID
+        public string ObjectType
         {
-            set { _fk_userinfoid = value; }
-            get { return _fk_userinfoid; }
+            set { _objecttype = value; }
+            get { return _objecttype; }
         }
 
         /// <summary>
-        /// 角色ID
+        /// 产品所属主体ID
         /// </summary>
-        public long FK_SysRoleID
+        public long FK_ObjectID
         {
-            set { _fk_sysroleid = value; }
-            get { return _fk_sysroleid; }
+            set { _fk_objectid = value; }
+            get { return _fk_objectid; }
+        }
+
+        /// <summary>
+        /// 产品ID
+        /// </summary>
+        public long FK_ProductID
+        {
+            set { _fk_productid = value; }
+            get { return _fk_productid; }
         }
 
         /// <summary>

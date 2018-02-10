@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class FriendLinks
     {
-        public FriendLinks()
-        { }
-
-        #region Model
-
         private long _friendlinkid;
         private string _title;
         private string _description;
@@ -203,7 +198,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

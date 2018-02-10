@@ -13,11 +13,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class Tags : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public Tags()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -101,10 +96,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Tags>(dr);
             }
         }
-
-        #endregion Method
-
-        #region Extends
 
         /// <summary>
         /// 判断指定标签是否存在
@@ -197,7 +188,5 @@ namespace XCLCMS.Data.DAL
 
             return result;
         }
-
-        #endregion Extends
     }
 }

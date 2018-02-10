@@ -11,11 +11,6 @@ namespace XCLCMS.Data.DAL.View
     /// </summary>
     public partial class v_SysRole : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public v_SysRole()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -50,10 +45,6 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysRole>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 根据parentID返回列表
@@ -109,7 +100,5 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysRole>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

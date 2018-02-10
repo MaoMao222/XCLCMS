@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_SysFunction
     {
-        public v_SysFunction()
-        { }
-
-        #region Model
-
         private long? _sysfunctionid;
         private long? _parentid;
         private string _functionname;
@@ -163,7 +158,5 @@ namespace XCLCMS.Data.Model.View
             set { _isroot = value; }
             get { return _isroot; }
         }
-
-        #endregion Model
     }
 }

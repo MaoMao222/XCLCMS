@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.MerchantApp dal = new XCLCMS.Data.DAL.MerchantApp();
 
-        public MerchantApp()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -45,10 +40,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region Extend Method
 
         /// <summary>
         /// 获取指定商户的所有应用
@@ -90,7 +81,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModel(appKey);
         }
-
-        #endregion Extend Method
     }
 }

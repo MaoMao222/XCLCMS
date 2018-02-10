@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.Article dal = new XCLCMS.Data.DAL.Article();
 
-        public Article()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -46,10 +41,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModelList(strWhere);
         }
 
-        #endregion BasicMethod
-
-        #region ExtensionMethod
-
         /// <summary>
         /// 分页列表
         /// </summary>
@@ -73,7 +64,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetRelationDetail(condition);
         }
-
-        #endregion ExtensionMethod
     }
 }

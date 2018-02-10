@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.ArticleType dal = new XCLCMS.Data.DAL.ArticleType();
 
-        public ArticleType()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -21,10 +16,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.Add(model);
         }
-
-        #endregion BasicMethod
-
-        #region Extend Method
 
         /// <summary>
         /// 批量删除
@@ -49,7 +40,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.Add(articleID, articleTypeIDList, context);
         }
-
-        #endregion Extend Method
     }
 }

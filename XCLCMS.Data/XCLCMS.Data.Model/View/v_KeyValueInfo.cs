@@ -5,8 +5,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public class v_KeyValueInfo
     {
-        #region Model
-
         private long _keyvalueinfoid;
         private string _code;
         private string _keyvaluetype;
@@ -197,7 +195,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantappname = value; }
             get { return _merchantappname; }
         }
-
-        #endregion Model
     }
 }

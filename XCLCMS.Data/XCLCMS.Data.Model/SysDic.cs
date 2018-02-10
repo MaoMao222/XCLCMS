@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class SysDic
     {
-        public SysDic()
-        { }
-
-        #region Model
-
         private long _sysdicid;
         private string _code;
         private long _parentid;
@@ -48,7 +43,6 @@ namespace XCLCMS.Data.Model
             set { _code = value; }
             get { return _code; }
         }
-
 
         /// <summary>
         /// 父ID
@@ -184,7 +178,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

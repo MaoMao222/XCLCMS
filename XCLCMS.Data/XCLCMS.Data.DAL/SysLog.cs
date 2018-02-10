@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysLog : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysLog()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -35,10 +30,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysLog>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 分页数据列表
@@ -80,7 +71,5 @@ namespace XCLCMS.Data.DAL
 
             return db.ExecuteNonQuery(dbCommand) >= 0;
         }
-
-        #endregion MethodEx
     }
 }

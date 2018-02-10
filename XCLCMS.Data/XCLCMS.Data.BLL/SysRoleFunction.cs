@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysRoleFunction dal = new XCLCMS.Data.DAL.SysRoleFunction();
 
-        public SysRoleFunction()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -22,10 +17,6 @@ namespace XCLCMS.Data.BLL
             return dal.Add(model, functionIdList);
         }
 
-        #endregion BasicMethod
-
-        #region Extend Method
-
         /// <summary>
         /// 清理无效的普通商户角色的无效权限
         /// </summary>
@@ -33,7 +24,5 @@ namespace XCLCMS.Data.BLL
         {
             dal.ClearInvalidNormalRoleFunctions();
         }
-
-        #endregion Extend Method
     }
 }

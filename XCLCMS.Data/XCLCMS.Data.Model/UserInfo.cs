@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class UserInfo
     {
-        public UserInfo()
-        { }
-
-        #region Model
-
         private long _userinfoid;
         private string _username;
         private long _fk_merchantid = 0;
@@ -293,7 +288,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

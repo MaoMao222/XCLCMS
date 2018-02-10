@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class KeyValueInfo
     {
-        public KeyValueInfo()
-        { }
-
-        #region Model
-
         private long _keyvalueinfoid;
         private string _code;
         private string _keyvaluetype;
@@ -183,7 +178,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

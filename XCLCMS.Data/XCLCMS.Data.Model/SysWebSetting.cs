@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class SysWebSetting
     {
-        public SysWebSetting()
-        { }
-
-        #region Model
-
         private long _syswebsettingid;
         private string _keyname;
         private string _keyvalue;
@@ -183,7 +178,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

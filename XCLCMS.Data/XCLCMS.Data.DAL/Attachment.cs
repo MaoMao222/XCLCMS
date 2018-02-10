@@ -15,11 +15,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class Attachment : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public Attachment()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -143,10 +138,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Attachment>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 获取指定id的子记录信息
@@ -285,7 +276,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Attachment>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

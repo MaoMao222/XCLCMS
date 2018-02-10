@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysRole dal = new XCLCMS.Data.DAL.SysRole();
 
-        public SysRole()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -45,10 +40,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 获取指定userid的角色
@@ -114,7 +105,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(roleIdList);
         }
-
-        #endregion ExtensionMethod
     }
 }

@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysWebSetting dal = new XCLCMS.Data.DAL.SysWebSetting();
 
-        public SysWebSetting()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -46,10 +41,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModelList(strWhere);
         }
 
-        #endregion BasicMethod
-
-        #region ExtensionMethod
-        
         /// <summary>
         /// 判断指定配置名是否存在
         /// </summary>
@@ -57,7 +48,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.IsExistKeyName(keyName);
         }
-
-        #endregion ExtensionMethod
     }
 }

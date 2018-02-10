@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysRoleFunction : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysRoleFunction()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         ///  注：如果functionIdList为空，则添加model.FK_SysFunctionID，否则，则添加functionIdList
@@ -66,10 +61,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region Extend Method
-
         /// <summary>
         /// 清理无效的普通商户角色的无效权限
         /// </summary>
@@ -79,7 +70,5 @@ namespace XCLCMS.Data.DAL
             DbCommand dbCommand = db.GetStoredProcCommand("sp_ClearInvalidNormalRoleFunctions");
             db.ExecuteNonQuery(dbCommand);
         }
-
-        #endregion Extend Method
     }
 }

@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysWebSetting : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysWebSetting()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -130,10 +125,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 判断指定配置名是否存在
         /// </summary>
@@ -144,7 +135,5 @@ namespace XCLCMS.Data.DAL
             db.AddInParameter(dbCommand, "KeyName", DbType.AnsiString, keyName);
             return db.ExecuteScalar(dbCommand) != null;
         }
-
-        #endregion MethodEx
     }
 }

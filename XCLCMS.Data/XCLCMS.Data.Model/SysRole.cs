@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class SysRole
     {
-        public SysRole()
-        { }
-
-        #region Model
-
         private long _sysroleid;
         private long _parentid;
         private string _rolename;
@@ -163,7 +158,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

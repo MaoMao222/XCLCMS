@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class Ads
     {
-        public Ads()
-        { }
-
-        #region Model
-
         private long _adsid;
         private string _code;
         private string _adstype;
@@ -273,7 +268,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

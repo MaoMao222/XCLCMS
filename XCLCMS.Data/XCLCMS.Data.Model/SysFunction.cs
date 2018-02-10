@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class SysFunction
     {
-        public SysFunction()
-        { }
-
-        #region Model
-
         private long _sysfunctionid;
         private long _parentid;
         private string _functionname;
@@ -133,7 +128,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

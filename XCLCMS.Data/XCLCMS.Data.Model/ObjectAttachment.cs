@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class ObjectAttachment
     {
-        public ObjectAttachment()
-        { }
-
-        #region Model
-
         private string _objecttype;
         private long _fk_objectid;
         private long _fk_attachmentid;
@@ -113,7 +108,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class GenerateID
     {
-        public GenerateID()
-        { }
-
-        #region Model
-
         private string _idtype;
         private long _idvalue;
         private long? _idcode;
@@ -63,7 +58,5 @@ namespace XCLCMS.Data.Model
             set { _remark = value; }
             get { return _remark; }
         }
-
-        #endregion Model
     }
 }

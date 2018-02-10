@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_SysRole
     {
-        public v_SysRole()
-        { }
-
-        #region Model
-
         private long? _sysroleid;
         private long? _parentid;
         private string _rolename;
@@ -213,7 +208,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantsystemtype = value; }
             get { return _merchantsystemtype; }
         }
-
-        #endregion Model
     }
 }

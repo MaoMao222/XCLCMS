@@ -13,11 +13,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysFunction : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysFunction()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -122,10 +117,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysFunction>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 判断功能标识是否存在
@@ -238,7 +229,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysFunction>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

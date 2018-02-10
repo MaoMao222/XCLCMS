@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_Article
     {
-        public v_Article()
-        { }
-
-        #region Model
-
         private long _articleid;
         private string _code;
         private string _title;
@@ -473,7 +468,5 @@ namespace XCLCMS.Data.Model.View
             set { _articletypenames = value; }
             get { return _articletypenames; }
         }
-
-        #endregion Model
     }
 }

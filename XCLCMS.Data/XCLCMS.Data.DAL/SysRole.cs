@@ -13,11 +13,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysRole : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysRole()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -125,10 +120,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 获取指定userid的角色
@@ -263,7 +254,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysRole>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

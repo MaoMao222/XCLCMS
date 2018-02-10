@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysFunction dal = new XCLCMS.Data.DAL.SysFunction();
 
-        public SysFunction()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -45,10 +40,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 判断功能标识是否存在
@@ -99,7 +90,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetChildListByID(sysFunctionID);
         }
-
-        #endregion ExtensionMethod
     }
 }

@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_Attachment
     {
-        public v_Attachment()
-        { }
-
-        #region Model
-
         private long _attachmentid;
         private long _parentid;
         private string _originfilename;
@@ -253,7 +248,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantname = value; }
             get { return _merchantname; }
         }
-
-        #endregion Model
     }
 }

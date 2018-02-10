@@ -14,11 +14,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class Article : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public Article()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -180,10 +175,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 分页数据列表
         /// </summary>
@@ -246,7 +237,5 @@ namespace XCLCMS.Data.DAL
             }
             return result;
         }
-
-        #endregion MethodEx
     }
 }

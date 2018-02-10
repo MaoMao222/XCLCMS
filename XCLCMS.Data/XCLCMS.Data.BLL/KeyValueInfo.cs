@@ -4,11 +4,6 @@
     {
         private readonly XCLCMS.Data.DAL.KeyValueInfo dal = new XCLCMS.Data.DAL.KeyValueInfo();
 
-        public KeyValueInfo()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -33,10 +28,6 @@
             return dal.GetModel(AdsID);
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 判断指定code是否存在
         /// </summary>
@@ -52,7 +43,5 @@
         {
             return dal.GetModel(code);
         }
-
-        #endregion MethodEx
     }
 }

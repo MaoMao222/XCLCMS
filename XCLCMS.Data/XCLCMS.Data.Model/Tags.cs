@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class Tags
     {
-        public Tags()
-        { }
-
-        #region Model
-
         private long _tagsid;
         private string _tagname;
         private string _description;
@@ -133,7 +128,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

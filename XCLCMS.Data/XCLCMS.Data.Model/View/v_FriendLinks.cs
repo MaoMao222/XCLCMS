@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_FriendLinks
     {
-        public v_FriendLinks()
-        { }
-
-        #region Model
-
         private long _friendlinkid;
         private string _title;
         private string _description;
@@ -223,7 +218,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantappname = value; }
             get { return _merchantappname; }
         }
-
-        #endregion Model
     }
 }

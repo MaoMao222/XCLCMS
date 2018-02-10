@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_SysDic
     {
-        public v_SysDic()
-        { }
-
-        #region Model
-
         private long? _sysdicid;
         private string _code;
         private long? _parentid;
@@ -223,7 +218,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantname = value; }
             get { return _merchantname; }
         }
-
-        #endregion Model
     }
 }

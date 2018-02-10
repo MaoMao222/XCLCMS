@@ -7,11 +7,6 @@
     {
         private readonly XCLCMS.Data.DAL.GenerateID dal = new XCLCMS.Data.DAL.GenerateID();
 
-        public GenerateID()
-        { }
-
-        #region ExtensionMethod
-
         /// <summary>
         /// 生成主键
         /// </summary>
@@ -20,7 +15,5 @@
         {
             return dal.GetGenerateID(IDType, remark);
         }
-
-        #endregion ExtensionMethod
     }
 }

@@ -6,8 +6,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.FriendLinks dal = new XCLCMS.Data.DAL.FriendLinks();
 
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -32,10 +30,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModel(ArticleID);
         }
 
-        #endregion BasicMethod
-
-        #region MethodEx
-
         /// <summary>
         /// 判断指定标题是否存在
         /// </summary>
@@ -51,7 +45,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModel(condition);
         }
-
-        #endregion MethodEx
     }
 }

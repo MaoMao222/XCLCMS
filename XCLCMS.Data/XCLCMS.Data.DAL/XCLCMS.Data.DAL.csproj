@@ -76,6 +76,7 @@
     <Compile Include="Merchant.cs" />
     <Compile Include="MerchantApp.cs" />
     <Compile Include="ObjectAttachment.cs" />
+    <Compile Include="ObjectProduct.cs" />
     <Compile Include="ObjectTag.cs" />
     <Compile Include="Orders.cs" />
     <Compile Include="Product.cs" />

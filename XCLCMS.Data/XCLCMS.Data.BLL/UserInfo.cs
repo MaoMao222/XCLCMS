@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.UserInfo dal = new XCLCMS.Data.DAL.UserInfo();
 
-        public UserInfo()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -29,10 +24,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 分页列表
@@ -81,7 +72,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.Update(model);
         }
-
-        #endregion ExtensionMethod
     }
 }

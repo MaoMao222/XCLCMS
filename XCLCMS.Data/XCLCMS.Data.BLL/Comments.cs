@@ -7,8 +7,6 @@
     {
         private readonly XCLCMS.Data.DAL.Comments dal = new XCLCMS.Data.DAL.Comments();
 
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -32,7 +30,5 @@
         {
             return dal.GetModel(CommentsID);
         }
-
-        #endregion Method
     }
 }

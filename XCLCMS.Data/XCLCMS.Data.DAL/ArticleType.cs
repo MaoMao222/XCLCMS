@@ -13,11 +13,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class ArticleType : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public ArticleType()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -49,10 +44,6 @@ namespace XCLCMS.Data.DAL
                 throw new Exception(result.ResultMessage);
             }
         }
-
-        #endregion Method
-
-        #region Extend Method
 
         /// <summary>
         /// 批量删除
@@ -127,7 +118,5 @@ namespace XCLCMS.Data.DAL
 
             return this.Add(lst);
         }
-
-        #endregion Extend Method
     }
 }

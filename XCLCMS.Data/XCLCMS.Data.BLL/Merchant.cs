@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.Merchant dal = new XCLCMS.Data.DAL.Merchant();
 
-        public Merchant()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -46,10 +41,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModelList(strWhere);
         }
 
-        #endregion BasicMethod
-
-        #region ExtensionMethod
-
         /// <summary>
         /// 获取商户类型
         /// </summary>
@@ -73,7 +64,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.Delete(idLst, context);
         }
-
-        #endregion ExtensionMethod
     }
 }

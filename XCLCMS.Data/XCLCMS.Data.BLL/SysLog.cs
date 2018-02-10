@@ -10,11 +10,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysLog dal = new XCLCMS.Data.DAL.SysLog();
 
-        public SysLog()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -22,10 +17,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 分页数据列表
@@ -43,9 +34,7 @@ namespace XCLCMS.Data.BLL
         /// <param name="merchantID">商户号</param>
         public bool ClearListByDateTime(DateTime? startTime, DateTime? endTime, long merchantID)
         {
-            return dal.ClearListByDateTime(startTime, endTime,merchantID);
+            return dal.ClearListByDateTime(startTime, endTime, merchantID);
         }
-
-        #endregion ExtensionMethod
     }
 }

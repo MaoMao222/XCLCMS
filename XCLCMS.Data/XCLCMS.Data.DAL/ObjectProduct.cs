@@ -9,19 +9,15 @@ using System.Text;
 
 namespace XCLCMS.Data.DAL
 {
-    /// <summary>
-    /// 数据访问类:ObjectAttachment
-    /// </summary>
-    public partial class ObjectAttachment : XCLCMS.Data.DAL.Common.BaseDAL
+    public class ObjectProduct : XCLCMS.Data.DAL.Common.BaseDAL
     {
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<XCLCMS.Data.Model.ObjectAttachment> GetModelList(string strWhere)
+        public List<XCLCMS.Data.Model.ObjectProduct> GetModelList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ObjectType,FK_ObjectID,FK_AttachmentID,RecordState,CreateTime,CreaterID,CreaterName,UpdateTime,UpdaterID,UpdaterName ");
-            strSql.Append(" FROM ObjectAttachment  WITH(NOLOCK)  ");
+            strSql.Append("select * FROM ObjectProduct  WITH(NOLOCK)  ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -29,7 +25,7 @@ namespace XCLCMS.Data.DAL
             Database db = base.CreateDatabase();
             using (var dr = db.ExecuteReader(CommandType.Text, strSql.ToString()))
             {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectAttachment>(dr);
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectProduct>(dr);
             }
         }
 
@@ -39,7 +35,7 @@ namespace XCLCMS.Data.DAL
         public bool Delete(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID)
         {
             string sql = @"
-                delete from ObjectAttachment where ObjectType=@ObjectType and FK_ObjectID=@FK_ObjectID
+                delete from ObjectProduct where ObjectType=@ObjectType and FK_ObjectID=@FK_ObjectID
             ";
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
@@ -51,7 +47,7 @@ namespace XCLCMS.Data.DAL
         /// <summary>
         /// 批量添加
         /// </summary>
-        public bool Add(List<XCLCMS.Data.Model.ObjectAttachment> lst)
+        public bool Add(List<XCLCMS.Data.Model.ObjectProduct> lst)
         {
             if (null == lst || lst.Count == 0)
             {
@@ -60,16 +56,16 @@ namespace XCLCMS.Data.DAL
             lst = lst.Distinct().ToList();
 
             string sql = @"
-                insert into ObjectAttachment
-                select * from @TVP_ObjectAttachment as tvp
+                insert into ObjectProduct
+                select * from @TVP_ObjectProduct as tvp
             ";
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
-            dbCommand.Parameters.Add(new SqlParameter("@TVP_ObjectAttachment", SqlDbType.Structured)
+            dbCommand.Parameters.Add(new SqlParameter("@TVP_ObjectProduct", SqlDbType.Structured)
             {
-                TypeName = "TVP_ObjectAttachment",
+                TypeName = "TVP_ObjectProduct",
                 Direction = ParameterDirection.Input,
-                Value = XCLNetTools.DataSource.DataTableHelper.ToDataTable<XCLCMS.Data.Model.ObjectAttachment>(lst)
+                Value = XCLNetTools.DataSource.DataTableHelper.ToDataTable(lst)
             });
             return db.ExecuteNonQuery(dbCommand) >= 0;
         }
@@ -77,13 +73,13 @@ namespace XCLCMS.Data.DAL
         /// <summary>
         /// 批量添加（先删再加）
         /// </summary>
-        public bool Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID, List<long> attachmentIDList, XCLCMS.Data.Model.Custom.ContextModel context = null)
+        public bool Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID, List<long> ProductIDList, XCLCMS.Data.Model.Custom.ContextModel context = null)
         {
-            if (null == attachmentIDList || attachmentIDList.Count == 0)
+            if (null == ProductIDList || ProductIDList.Count == 0)
             {
                 return true;
             }
-            attachmentIDList = attachmentIDList.Distinct().ToList();
+            ProductIDList = ProductIDList.Distinct().ToList();
 
             if (!this.Delete(CommonHelper.EnumType.ObjectTypeEnum.ART, objectID))
             {
@@ -91,11 +87,11 @@ namespace XCLCMS.Data.DAL
             }
 
             DateTime dtNow = DateTime.Now;
-            var lst = new List<XCLCMS.Data.Model.ObjectAttachment>();
+            var lst = new List<XCLCMS.Data.Model.ObjectProduct>();
 
-            attachmentIDList.ForEach(id =>
+            ProductIDList.ForEach(id =>
             {
-                var model = new XCLCMS.Data.Model.ObjectAttachment();
+                var model = new XCLCMS.Data.Model.ObjectProduct();
                 if (null != context)
                 {
                     model.CreaterID = context.UserInfoID;
@@ -105,7 +101,7 @@ namespace XCLCMS.Data.DAL
                 }
                 model.CreateTime = dtNow;
                 model.UpdateTime = dtNow;
-                model.FK_AttachmentID = id;
+                model.FK_ProductID = id;
                 model.FK_ObjectID = objectID;
                 model.ObjectType = objectType.ToString();
                 model.RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString();
@@ -116,12 +112,12 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 返回指定类型的附件列表
+        /// 返回指定类型的数据列表
         /// </summary>
-        public List<XCLCMS.Data.Model.ObjectAttachment> GetModelList(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID)
+        public List<XCLCMS.Data.Model.ObjectProduct> GetModelList(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID)
         {
             string sql = @"
-                select * from ObjectAttachment WITH(NOLOCK)   where ObjectType=@ObjectType and FK_ObjectID=@FK_ObjectID
+                select * from ObjectProduct WITH(NOLOCK)   where ObjectType=@ObjectType and FK_ObjectID=@FK_ObjectID
             ";
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(sql);
@@ -130,7 +126,7 @@ namespace XCLCMS.Data.DAL
 
             using (var dr = db.ExecuteReader(dbCommand))
             {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectAttachment>(dr);
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.ObjectProduct>(dr);
             }
         }
     }

@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class SysDic : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public SysDic()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -49,10 +44,6 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.SysDic>(dr);
             }
         }
-
-        #endregion Method
-
-        #region MethodEx
 
         /// <summary>
         /// 获取指定sysDicID所属的层级list
@@ -247,7 +238,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.SysDic>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

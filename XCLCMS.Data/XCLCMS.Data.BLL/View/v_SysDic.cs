@@ -6,11 +6,6 @@ namespace XCLCMS.Data.BLL.View
     {
         private readonly XCLCMS.Data.DAL.View.v_SysDic dal = new XCLCMS.Data.DAL.View.v_SysDic();
 
-        public v_SysDic()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -26,10 +21,6 @@ namespace XCLCMS.Data.BLL.View
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 根据parentID返回列表
@@ -75,7 +66,5 @@ namespace XCLCMS.Data.BLL.View
             }
             return false;
         }
-
-        #endregion ExtensionMethod
     }
 }

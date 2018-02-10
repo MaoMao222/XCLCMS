@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class ArticleType
     {
-        public ArticleType()
-        { }
-
-        #region Model
-
         private long _fk_articleid;
         private long _fk_typeid;
         private string _recordstate;
@@ -103,7 +98,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

@@ -10,8 +10,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public class Comments : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -113,7 +111,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Comments>(dr);
             }
         }
-
-        #endregion Method
     }
 }

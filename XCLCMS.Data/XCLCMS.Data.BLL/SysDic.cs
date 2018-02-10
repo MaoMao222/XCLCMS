@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.SysDic dal = new XCLCMS.Data.DAL.SysDic();
 
-        public SysDic()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -29,10 +24,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModelList(strWhere);
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 获取当前sysDicID所属的层级list
@@ -152,7 +143,5 @@ namespace XCLCMS.Data.BLL
         {
             return this.GetModelByCode(CommonHelper.SysDicConst.SysDicCodeEnum.Root.ToString());
         }
-
-        #endregion ExtensionMethod
     }
 }

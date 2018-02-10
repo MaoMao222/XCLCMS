@@ -11,8 +11,6 @@ namespace XCLCMS.Data.DAL.View
     /// </summary>
     public class v_Comments : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -46,10 +44,6 @@ namespace XCLCMS.Data.DAL.View
             }
         }
 
-        #endregion Method
-
-        #region Extend Method
-
         /// <summary>
         /// 分页数据列表
         /// </summary>
@@ -58,7 +52,5 @@ namespace XCLCMS.Data.DAL.View
             condition.TableName = "v_Comments";
             return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_Comments>(pageInfo, condition);
         }
-
-        #endregion Extend Method
     }
 }

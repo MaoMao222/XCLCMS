@@ -10,11 +10,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class Ads : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public Ads()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -127,10 +122,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 判断指定code是否存在
         /// </summary>
@@ -155,7 +146,5 @@ namespace XCLCMS.Data.DAL
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToEntity<XCLCMS.Data.Model.Ads>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

@@ -10,11 +10,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.Tags dal = new XCLCMS.Data.DAL.Tags();
 
-        public Tags()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -38,10 +33,6 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetModel(TagsID);
         }
-
-        #endregion BasicMethod
-
-        #region Extends
 
         /// <summary>
         /// 判断指定标签是否存在
@@ -74,7 +65,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.Add(lst);
         }
-
-        #endregion Extends
     }
 }

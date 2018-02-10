@@ -12,11 +12,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class ObjectTag : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public ObjectTag()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -49,10 +44,6 @@ namespace XCLCMS.Data.DAL
                 throw new Exception(result.ResultMessage);
             }
         }
-
-        #endregion Method
-
-        #region Extends
 
         /// <summary>
         /// 批量删除
@@ -107,7 +98,5 @@ namespace XCLCMS.Data.DAL
 
             return true;
         }
-
-        #endregion Extends
     }
 }

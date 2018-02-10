@@ -6,11 +6,6 @@ namespace XCLCMS.Data.BLL.View
     {
         private readonly XCLCMS.Data.DAL.View.v_Article dal = new XCLCMS.Data.DAL.View.v_Article();
 
-        public v_Article()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -27,10 +22,6 @@ namespace XCLCMS.Data.BLL.View
             return dal.GetModelList(strWhere);
         }
 
-        #endregion BasicMethod
-
-        #region Extend Method
-
         /// <summary>
         /// 分页数据列表
         /// </summary>
@@ -46,7 +37,5 @@ namespace XCLCMS.Data.BLL.View
         {
             return dal.GetPageList(pageInfo, condition);
         }
-
-        #endregion Extend Method
     }
 }

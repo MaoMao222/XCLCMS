@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class Merchant
     {
-        public Merchant()
-        { }
-
-        #region Model
-
         private long _merchantid;
         private string _merchantname;
         private long _fk_merchanttype;
@@ -273,7 +268,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

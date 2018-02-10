@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_Ads
     {
-        public v_Ads()
-        { }
-
-        #region Model
-
         private long _adsid;
         private string _code;
         private string _adstype;
@@ -293,7 +288,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantappname = value; }
             get { return _merchantappname; }
         }
-
-        #endregion Model
     }
 }

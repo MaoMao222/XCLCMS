@@ -13,11 +13,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class Merchant : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public Merchant()
-        { }
-
-        #region Method
-
         /// <summary>
         ///  增加一条数据
         /// </summary>
@@ -148,10 +143,6 @@ namespace XCLCMS.Data.DAL
             }
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 判断指定MerchantName是否存在
         /// </summary>
@@ -198,7 +189,5 @@ namespace XCLCMS.Data.DAL
                 throw new Exception(result.ResultMessage);
             }
         }
-
-        #endregion MethodEx
     }
 }

@@ -10,11 +10,6 @@ namespace XCLCMS.Data.DAL
     /// </summary>
     public partial class GenerateID : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public GenerateID()
-        { }
-
-        #region MethodEx
-
         /// <summary>
         /// 生成主键
         /// </summary>
@@ -42,7 +37,5 @@ namespace XCLCMS.Data.DAL
                 throw new Exception(result.ResultMessage);
             }
         }
-
-        #endregion MethodEx
     }
 }

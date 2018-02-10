@@ -2,17 +2,14 @@
 
 namespace XCLCMS.Data.BLL
 {
-    /// <summary>
-    /// 所有附件关系表
-    /// </summary>
-    public partial class ObjectAttachment
+    public class ObjectProduct
     {
-        private readonly XCLCMS.Data.DAL.ObjectAttachment dal = new XCLCMS.Data.DAL.ObjectAttachment();
+        private readonly XCLCMS.Data.DAL.ObjectProduct dal = new XCLCMS.Data.DAL.ObjectProduct();
 
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<XCLCMS.Data.Model.ObjectAttachment> GetModelList(string strWhere)
+        public List<XCLCMS.Data.Model.ObjectProduct> GetModelList(string strWhere)
         {
             return dal.GetModelList(strWhere);
         }
@@ -28,7 +25,7 @@ namespace XCLCMS.Data.BLL
         /// <summary>
         /// 批量添加
         /// </summary>
-        public bool Add(List<XCLCMS.Data.Model.ObjectAttachment> lst)
+        public bool Add(List<XCLCMS.Data.Model.ObjectProduct> lst)
         {
             return dal.Add(lst);
         }
@@ -36,15 +33,15 @@ namespace XCLCMS.Data.BLL
         /// <summary>
         /// 批量添加（先删再加）
         /// </summary>
-        public bool Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID, List<long> attachmentIDList, XCLCMS.Data.Model.Custom.ContextModel context = null)
+        public bool Add(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID, List<long> ProductIDList, XCLCMS.Data.Model.Custom.ContextModel context = null)
         {
-            return dal.Add(objectType, objectID, attachmentIDList, context);
+            return dal.Add(objectType, objectID, ProductIDList, context);
         }
 
         /// <summary>
-        /// 返回指定类型的附件列表
+        /// 返回指定类型的数据列表
         /// </summary>
-        public List<XCLCMS.Data.Model.ObjectAttachment> GetModelList(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID)
+        public List<XCLCMS.Data.Model.ObjectProduct> GetModelList(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum objectType, long objectID)
         {
             return dal.GetModelList(objectType, objectID);
         }

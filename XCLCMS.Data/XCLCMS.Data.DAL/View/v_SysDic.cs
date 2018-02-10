@@ -8,11 +8,6 @@ namespace XCLCMS.Data.DAL.View
 {
     public class v_SysDic : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public v_SysDic()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -48,10 +43,6 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
             }
         }
-
-        #endregion BasicMethod
-
-        #region ExtensionMethod
 
         /// <summary>
         /// 根据parentID返回列表
@@ -109,7 +100,5 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
             }
         }
-
-        #endregion ExtensionMethod
     }
 }

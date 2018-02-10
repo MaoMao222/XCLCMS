@@ -8,11 +8,6 @@ namespace XCLCMS.Data.DAL.View
 {
     public partial class v_Ads : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public v_Ads()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -46,10 +41,6 @@ namespace XCLCMS.Data.DAL.View
             }
         }
 
-        #endregion Method
-
-        #region Extend Method
-
         /// <summary>
         /// 分页数据列表
         /// </summary>
@@ -58,7 +49,5 @@ namespace XCLCMS.Data.DAL.View
             condition.TableName = "v_Ads";
             return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_Ads>(pageInfo, condition);
         }
-
-        #endregion Extend Method
     }
 }

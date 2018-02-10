@@ -11,11 +11,6 @@ namespace XCLCMS.Data.DAL.View
     /// </summary>
     public partial class v_SysFunction : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public v_SysFunction()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -52,10 +47,6 @@ namespace XCLCMS.Data.DAL.View
             }
         }
 
-        #endregion Method
-
-        #region MethodEx
-
         /// <summary>
         /// 根据parentID返回列表
         /// </summary>
@@ -71,7 +62,5 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysFunction>(dr);
             }
         }
-
-        #endregion MethodEx
     }
 }

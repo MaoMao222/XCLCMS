@@ -10,11 +10,6 @@ namespace XCLCMS.Data.DAL.View
 {
     public class v_Article : XCLCMS.Data.DAL.Common.BaseDAL
     {
-        public v_Article()
-        { }
-
-        #region Method
-
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -47,10 +42,6 @@ namespace XCLCMS.Data.DAL.View
                 return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Article>(dr);
             }
         }
-
-        #endregion Method
-
-        #region Extend Method
 
         /// <summary>
         /// 分页数据列表
@@ -173,7 +164,5 @@ namespace XCLCMS.Data.DAL.View
                 return lst;
             }
         }
-
-        #endregion Extend Method
     }
 }

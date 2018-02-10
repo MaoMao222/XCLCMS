@@ -7,11 +7,6 @@ namespace XCLCMS.Data.Model.View
     [Serializable]
     public partial class v_Comments
     {
-        public v_Comments()
-        { }
-
-        #region Model
-
         private long _commentsid;
         private string _objecttype;
         private long? _fk_objectid;
@@ -242,7 +237,5 @@ namespace XCLCMS.Data.Model.View
             set { _merchantappname = value; }
             get { return _merchantappname; }
         }
-
-        #endregion Model
     }
 }

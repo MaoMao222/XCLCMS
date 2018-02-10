@@ -9,11 +9,6 @@ namespace XCLCMS.Data.BLL
     {
         private readonly XCLCMS.Data.DAL.Attachment dal = new XCLCMS.Data.DAL.Attachment();
 
-        public Attachment()
-        { }
-
-        #region BasicMethod
-
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -46,10 +41,6 @@ namespace XCLCMS.Data.BLL
             return dal.GetModelList(strWhere);
         }
 
-        #endregion BasicMethod
-
-        #region ExtensionMethod
-
         /// <summary>
         /// 获取指定id的子记录信息
         /// </summary>
@@ -81,7 +72,5 @@ namespace XCLCMS.Data.BLL
         {
             return dal.GetList(ids);
         }
-
-        #endregion ExtensionMethod
     }
 }

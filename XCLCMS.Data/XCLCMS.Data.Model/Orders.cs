@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class Orders
     {
-        public Orders()
-        { }
-
-        #region Model
-
         private long _orderid;
         private long _fk_productid;
         private long _fk_merchantid = 0;
@@ -263,7 +258,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }

@@ -8,11 +8,6 @@ namespace XCLCMS.Data.Model
     [Serializable]
     public partial class Comments
     {
-        public Comments()
-        { }
-
-        #region Model
-
         private long _commentsid;
         private string _objecttype;
         private long? _fk_objectid;
@@ -223,7 +218,5 @@ namespace XCLCMS.Data.Model
             set { _updatername = value; }
             get { return _updatername; }
         }
-
-        #endregion Model
     }
 }
