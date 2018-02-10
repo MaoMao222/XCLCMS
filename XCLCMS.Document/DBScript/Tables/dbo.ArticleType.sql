@@ -11,6 +11,11 @@ CREATE TABLE [dbo].[ArticleType]
 [UpdaterName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL
 ) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[ArticleType] ADD CONSTRAINT [AK_KEY_1_ARTICLET] UNIQUE NONCLUSTERED  ([FK_ArticleID], [FK_TypeID]) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_ArticleID] ON [dbo].[ArticleType] ([FK_ArticleID]) ON [PRIMARY]
+
+GO
 EXEC sp_addextendedproperty N'MS_Description', '文章类别关系表', 'SCHEMA', N'dbo', 'TABLE', N'ArticleType', NULL, NULL
 GO
 EXEC sp_addextendedproperty N'MS_Description', '创建者ID', 'SCHEMA', N'dbo', 'TABLE', N'ArticleType', 'COLUMN', N'CreaterID'

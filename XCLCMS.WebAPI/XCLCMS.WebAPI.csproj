@@ -172,6 +172,7 @@
     <Compile Include="Controllers\FileInfoController.cs" />
     <Compile Include="Controllers\FriendLinksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeyValueInfoController.cs" />
     <Compile Include="Controllers\MerchantAppController.cs" />
     <Compile Include="Controllers\MerchantController.cs" />
     <Compile Include="Controllers\OpenController.cs" />

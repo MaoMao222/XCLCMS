@@ -11,6 +11,11 @@ CREATE TABLE [dbo].[SysUserRole]
 [UpdaterName] [nvarchar] (50) COLLATE Chinese_PRC_CI_AS NULL
 ) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[SysUserRole] ADD CONSTRAINT [AK_KEY_1_SYSUSERR] UNIQUE NONCLUSTERED  ([FK_UserInfoID], [FK_SysRoleID]) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_UserInfoID] ON [dbo].[SysUserRole] ([FK_UserInfoID]) ON [PRIMARY]
+
+GO
 EXEC sp_addextendedproperty N'MS_Description', '用户角色关系表', 'SCHEMA', N'dbo', 'TABLE', N'SysUserRole', NULL, NULL
 GO
 EXEC sp_addextendedproperty N'MS_Description', '创建者ID', 'SCHEMA', N'dbo', 'TABLE', N'SysUserRole', 'COLUMN', N'CreaterID'

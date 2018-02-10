@@ -432,6 +432,30 @@ namespace XCLCMS.Data.CommonHelper
             /// </summary>
             [Description("订单管理-订单修改")]
             Orders_Edit = 400220,
+
+            /// <summary>
+            ///自由数据存储管理-自由数据存储查看
+            /// </summary>
+            [Description("自由数据存储管理-自由数据存储查看")]
+            KeyValueInfo_View = 400222,
+
+            /// <summary>
+            ///自由数据存储管理-自由数据存储删除
+            /// </summary>
+            [Description("自由数据存储管理-自由数据存储删除")]
+            KeyValueInfo_Del = 400223,
+
+            /// <summary>
+            ///自由数据存储管理-自由数据存储添加
+            /// </summary>
+            [Description("自由数据存储管理-自由数据存储添加")]
+            KeyValueInfo_Add = 400224,
+
+            /// <summary>
+            ///自由数据存储管理-自由数据存储修改
+            /// </summary>
+            [Description("自由数据存储管理-自由数据存储修改")]
+            KeyValueInfo_Edit = 400225,
         }
 
         /// <summary>

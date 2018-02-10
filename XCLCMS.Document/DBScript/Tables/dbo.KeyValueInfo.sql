@@ -2,7 +2,6 @@ CREATE TABLE [dbo].[KeyValueInfo]
 (
 [KeyValueInfoID] [bigint] NOT NULL,
 [Code] [varchar] (50) COLLATE Chinese_PRC_CI_AS NULL,
-[KeyValueType] [char] (3) COLLATE Chinese_PRC_CI_AS NULL,
 [FK_ProductID] [bigint] NOT NULL,
 [FK_MerchantID] [bigint] NOT NULL CONSTRAINT [DF__KeyValueI__FK_Me__26EFBBC6] DEFAULT ((0)),
 [FK_MerchantAppID] [bigint] NOT NULL CONSTRAINT [DF__KeyValueI__FK_Me__27E3DFFF] DEFAULT ((0)),
@@ -49,8 +48,7 @@ EXEC sp_addextendedproperty N'MS_Description', '所属用户', 'SCHEMA', N'dbo',
 GO
 EXEC sp_addextendedproperty N'MS_Description', 'KeyValueInfoID', 'SCHEMA', N'dbo', 'TABLE', N'KeyValueInfo', 'COLUMN', N'KeyValueInfoID'
 GO
-EXEC sp_addextendedproperty N'MS_Description', '分类(KeyValueTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'KeyValueInfo', 'COLUMN', N'KeyValueType'
-GO
+
 EXEC sp_addextendedproperty N'MS_Description', '记录状态(RecordStateEnum)', 'SCHEMA', N'dbo', 'TABLE', N'KeyValueInfo', 'COLUMN', N'RecordState'
 GO
 EXEC sp_addextendedproperty N'MS_Description', '备注', 'SCHEMA', N'dbo', 'TABLE', N'KeyValueInfo', 'COLUMN', N'Remark'

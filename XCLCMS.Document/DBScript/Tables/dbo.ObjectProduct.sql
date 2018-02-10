@@ -24,12 +24,16 @@ EXEC sp_addextendedproperty N'MS_Description', '创建者名', 'SCHEMA', N'dbo',
 GO
 EXEC sp_addextendedproperty N'MS_Description', '创建时间', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'CreateTime'
 GO
-EXEC sp_addextendedproperty N'MS_Description', '附件所属主体ID', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'FK_ObjectID'
+
+EXEC sp_addextendedproperty N'MS_Description', '产品所属主体ID', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'FK_ObjectID'
 GO
-EXEC sp_addextendedproperty N'MS_Description', '附件ID', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'FK_ProductID'
+
+EXEC sp_addextendedproperty N'MS_Description', '产品ID', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'FK_ProductID'
 GO
-EXEC sp_addextendedproperty N'MS_Description', '附件所属主体类别(ObjectTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'ObjectType'
+
+EXEC sp_addextendedproperty N'MS_Description', '产品所属主体类别(ObjectTypeEnum)', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'ObjectType'
 GO
+
 EXEC sp_addextendedproperty N'MS_Description', '记录状态(RecordStateEnum)', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'RecordState'
 GO
 EXEC sp_addextendedproperty N'MS_Description', '更新人ID', 'SCHEMA', N'dbo', 'TABLE', N'ObjectProduct', 'COLUMN', N'UpdaterID'
