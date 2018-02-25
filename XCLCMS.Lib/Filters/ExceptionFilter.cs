@@ -33,6 +33,10 @@ namespace XCLCMS.Lib.Filters
             {
                 msgModel.ErrorCode = Convert.ToString(httpExp.GetHttpCode());
             }
+            if (string.IsNullOrWhiteSpace(msgModel.ErrorCode))
+            {
+                msgModel.ErrorCode = "500";
+            }
 
             //写入日志
             XCLNetLogger.Model.LogModel logModel = new XCLNetLogger.Model.LogModel();
@@ -64,6 +68,7 @@ namespace XCLCMS.Lib.Filters
             }
 
             filterContext.ExceptionHandled = true;
+            filterContext.HttpContext.Response.StatusCode = 500;
         }
     }
 }
