@@ -33,16 +33,10 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 根据产品关系信息查询产品列表
         /// </summary>
-        public APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        public APIResponseEntity<List<Data.Model.Product>> GetObjectProductList(APIRequestEntity<Product_ObjectProductCondition> request)
         {
             var response = new APIResponseEntity<List<XCLCMS.Data.Model.Product>>();
-            var lst = this.objectProductBLL.GetModelList((XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum)Enum.Parse(typeof(XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum), request.Body.ObjectType), request.Body.ObjectID);
-            List<long> ids = new List<long>();
-            if (null != lst && lst.Count > 0)
-            {
-                ids = lst.Select(k => k.FK_ProductID).ToList();
-            }
-            response.Body = this.bll.GetList(ids);
+            response.Body = this.bll.GetModelListByObject(request.Body);
             response.IsSuccess = true;
             return response;
         }

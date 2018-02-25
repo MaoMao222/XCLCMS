@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 
@@ -69,10 +70,19 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Product_View)]
-        public async Task<APIResponseEntity<List<XCLCMS.Data.Model.Product>>> GetObjectProductList([FromUri] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        public async Task<APIResponseEntity<List<Data.Model.Product>>> GetObjectProductList([FromUri] APIRequestEntity<Product_ObjectProductCondition> request)
         {
             return await Task.Run(() =>
             {
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant)
+                {
+                    request.Body.FK_MerchantID = base.CurrentUserModel.FK_MerchantID;
+                }
+
+                #endregion 限制商户
+
                 return this.iProductService.GetObjectProductList(request);
             });
         }

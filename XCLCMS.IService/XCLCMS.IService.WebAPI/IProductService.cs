@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.Model.View;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
@@ -18,6 +19,6 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.Product> request);
 
-        APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request);
+        APIResponseEntity<List<Data.Model.Product>> GetObjectProductList(APIRequestEntity<Product_ObjectProductCondition> request);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 
@@ -20,9 +21,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 根据产品关系信息查询产品列表
         /// </summary>
-        public static APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity> request)
+        public static APIResponseEntity<List<XCLCMS.Data.Model.Product>> GetObjectProductList(APIRequestEntity<Product_ObjectProductCondition> request)
         {
-            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity, List<XCLCMS.Data.Model.Product>>(request, "Product/GetObjectProductList");
+            return Library.Request<Product_ObjectProductCondition, List<XCLCMS.Data.Model.Product>>(request, "Product/GetObjectProductList");
         }
 
         /// <summary>

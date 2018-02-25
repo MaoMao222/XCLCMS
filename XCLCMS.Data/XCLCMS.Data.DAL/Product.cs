@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.Data.DAL
 {
@@ -110,33 +111,25 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 根据id查询信息
+        /// 查询指定对象的所有产品列表
         /// </summary>
-        public List<XCLCMS.Data.Model.Product> GetList(List<long> ids)
+        public List<XCLCMS.Data.Model.Product> GetModelListByObject(Product_ObjectProductCondition condition)
         {
-            if (null == ids || ids.Count == 0)
-            {
-                return new List<Model.Product>();
-            }
-            ids = ids.Distinct().ToList();
-
-            string sql = @"
-                select a.* from Product as a WITH(NOLOCK)
-                inner join @TVP_ID as b on a.ProductID=b.ID
-            ";
-
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand(sql);
-            dbCommand.Parameters.Add(new SqlParameter("@TVP_ID", SqlDbType.Structured)
-            {
-                TypeName = "TVP_IDTable",
-                Direction = ParameterDirection.Input,
-                Value = XCLNetTools.DataSource.DataTableHelper.ToSingleColumnDataTable<long, long>(ids)
-            });
-            using (var dr = db.ExecuteReader(dbCommand))
-            {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.Product>(dr);
-            }
+            DbCommand dbCommand = db.GetSqlStringCommand(@"
+                                                                                                            SELECT
+                                                                                                            b.*
+                                                                                                            FROM dbo.ObjectProduct AS a WITH(NOLOCK)
+                                                                                                            INNER JOIN dbo.Product AS b WITH(NOLOCK) ON a.FK_ProductID=b.ProductID
+                                                                                                            WHERE a.ObjectType=@ObjectType AND a.FK_ObjectID=@FK_ObjectID AND b.FK_MerchantID=@FK_MerchantID AND b.FK_MerchantAppID=@FK_MerchantAppID AND b.RecordState=@RecordState
+                                                                                                        ");
+            db.AddInParameter(dbCommand, "ObjectType", DbType.String, condition.ObjectType);
+            db.AddInParameter(dbCommand, "FK_ObjectID", DbType.Int64, condition.ObjectID);
+            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, condition.FK_MerchantID);
+            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, condition.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "RecordState", DbType.String, condition.RecordState);
+            var ds = db.ExecuteDataSet(dbCommand);
+            return XCLNetTools.Generic.ListHelper.DataSetToList<XCLCMS.Data.Model.Product>(ds).ToList();
         }
     }
 }

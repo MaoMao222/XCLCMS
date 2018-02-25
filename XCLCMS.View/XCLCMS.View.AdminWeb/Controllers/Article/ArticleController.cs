@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.View.AdminWeb.Controllers.Article
 {
@@ -126,11 +127,13 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
                     }
 
                     //获取营销产品列表
-                    var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity>(base.UserToken);
-                    prdRequest.Body = new Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity()
+                    var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<Product_ObjectProductCondition>(base.UserToken);
+                    prdRequest.Body = new Product_ObjectProductCondition()
                     {
                         ObjectID = viewModel.Article.ArticleID,
-                        ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString()
+                        ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString(),
+                        FK_MerchantID = viewModel.Article.FK_MerchantID,
+                        FK_MerchantAppID = viewModel.Article.FK_MerchantAppID
                     };
                     var prdResponse = XCLCMS.Lib.WebAPI.ProductAPI.GetObjectProductList(prdRequest);
                     if (null != prdResponse.Body && prdResponse.Body.Count > 0)
@@ -219,11 +222,13 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
             viewModel.AttactmentList = attResponse.Body;
 
             //获取营销产品列表
-            var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity>(base.UserToken);
-            prdRequest.Body = new Data.WebAPIEntity.RequestEntity.Product.GetObjectProductListEntity()
+            var prdRequest = XCLCMS.Lib.WebAPI.Library.CreateRequest<Product_ObjectProductCondition>(base.UserToken);
+            prdRequest.Body = new Product_ObjectProductCondition()
             {
                 ObjectID = viewModel.Article.ArticleID,
-                ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString()
+                ObjectType = XCLCMS.Data.CommonHelper.EnumType.ObjectTypeEnum.ART.ToString(),
+                FK_MerchantID = viewModel.Article.FK_MerchantID,
+                FK_MerchantAppID = viewModel.Article.FK_MerchantAppID
             };
             var prdResponse = XCLCMS.Lib.WebAPI.ProductAPI.GetObjectProductList(prdRequest);
             viewModel.ProductList = prdResponse.Body;

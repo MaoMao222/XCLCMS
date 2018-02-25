@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.Data.BLL
 {
@@ -31,11 +32,11 @@ namespace XCLCMS.Data.BLL
         }
 
         /// <summary>
-        /// 根据id查询信息
+        /// 查询指定对象的所有产品列表
         /// </summary>
-        public List<XCLCMS.Data.Model.Product> GetList(List<long> ids)
+        public List<XCLCMS.Data.Model.Product> GetModelListByObject(Product_ObjectProductCondition condition)
         {
-            return dal.GetList(ids);
+            return dal.GetModelListByObject(condition);
         }
     }
 }
