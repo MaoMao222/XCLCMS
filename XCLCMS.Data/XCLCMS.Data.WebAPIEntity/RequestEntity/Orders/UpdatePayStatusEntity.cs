@@ -10,9 +10,7 @@ namespace XCLCMS.Data.WebAPIEntity.RequestEntity.Orders
         [DataMember]
         public long OrderID { get; set; }
 
-        /// <summary>
-        /// 所属商户号
-        /// </summary>
+        [DataMember]
         public long FK_MerchantID { get; set; }
 
         [DataMember]
