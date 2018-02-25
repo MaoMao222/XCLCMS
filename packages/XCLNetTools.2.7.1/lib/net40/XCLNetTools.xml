@@ -62,7 +62,12 @@
         </member>
         <member name="F:XCLNetTools.Common.Consts.RegPhone">
             <summary>
-            电话号码正则
+            电话号码正则（如：010-85849685）
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.Consts.RegMobile">
+            <summary>
+            手机号码正则
             </summary>
         </member>
         <member name="F:XCLNetTools.Common.Consts.RegNumber">
@@ -92,7 +97,12 @@
         </member>
         <member name="F:XCLNetTools.Common.Consts.RegCHZN">
             <summary>
-            中文正则
+            包含中文的正则
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.Consts.RegCHZNAll">
+            <summary>
+            全部为中文的正则
             </summary>
         </member>
         <member name="F:XCLNetTools.Common.Consts.RegURL">
@@ -103,6 +113,21 @@
         <member name="F:XCLNetTools.Common.Consts.RegMD5_32Uppercase">
             <summary>
             md5正则（32位大写）
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.Consts.RegIDCard">
+            <summary>
+            国内居民身份证号码
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.Consts.RegPostcode">
+            <summary>
+            国内邮政编码
+            </summary>
+        </member>
+        <member name="F:XCLNetTools.Common.Consts.RegBase64">
+            <summary>
+            base64编码
             </summary>
         </member>
         <member name="F:XCLNetTools.Common.Consts.WeekName">
@@ -6247,6 +6272,12 @@
             <param name="httpType">http类型，默认为http://</param>
             <returns>处理后的url</returns>
         </member>
+        <member name="M:XCLNetTools.StringHander.Common.GetRootUri2">
+            <summary>
+            增强GetRootUri方法，从当前url中判断是http还是https
+            </summary>
+            <returns>处理后的url</returns>
+        </member>
         <member name="M:XCLNetTools.StringHander.Common.ToHttpUrl(System.String,XCLNetTools.Enum.CommonEnum.HttpTypeEnum)">
             <summary>
             将http开头协议不规则的url字符串转化为指定的http://或https://形式的url
@@ -6255,14 +6286,29 @@
             <param name="httpType">http类型，默认为http://</param>
             <returns>转换后的url</returns>
         </member>
+        <member name="M:XCLNetTools.StringHander.Common.ToHttpUrl(XCLNetTools.Enum.CommonEnum.HttpTypeEnum)">
+            <summary>
+            重载ToHttpUrl，默认url：Request.Url.AbsoluteUri
+            </summary>
+        </member>
         <member name="M:XCLNetTools.StringHander.Common.IsHttp(System.String)">
             <summary>
             判断url字符串是否为"http://"开头（不区分大小写）
             </summary>
         </member>
+        <member name="M:XCLNetTools.StringHander.Common.IsHttp">
+            <summary>
+            重载IsHttp，默认url：Request.Url.AbsoluteUri
+            </summary>
+        </member>
         <member name="M:XCLNetTools.StringHander.Common.IsHttps(System.String)">
             <summary>
             判断url字符串是否为"https://"开头（不区分大小写）
+            </summary>
+        </member>
+        <member name="M:XCLNetTools.StringHander.Common.IsHttps">
+            <summary>
+            重载IsHttps，默认url：Request.Url.AbsoluteUri
             </summary>
         </member>
         <member name="M:XCLNetTools.StringHander.Common.GetStartEndNum(System.Int32,System.Int32,System.Int32[])">
@@ -6287,6 +6333,13 @@
             <typeparam name="T">是否可以转换为此类型</typeparam>
             <param name="val">需要判断的值</param>
             <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.Common.ConvertUrlNameValueStringToDic(System.String)">
+            <summary>
+            将url的name value参数形式的字符串转换为字典
+            </summary>
+            <param name="val">要转换的字符串，如：a=b&amp;c=d&amp;c=x</param>
+            <returns>处理后的结果</returns>
         </member>
         <member name="T:XCLNetTools.StringHander.DateHelper">
             <summary>
@@ -6897,13 +6950,13 @@
             <summary>
             获取QueryString的参数序列化字符串（也就是a=b&amp;c=d的形式）
             </summary>
-            <returns>参数序列化的结值</returns>
+            <returns>参数序列化的值</returns>
         </member>
         <member name="M:XCLNetTools.StringHander.FormHelper.GetFromSerializeString">
             <summary>
             获取Form的参数序列化字符串（也就是a=b&amp;c=d的形式）
             </summary>
-            <returns>参数序列化的结值</returns>
+            <returns>参数序列化的值</returns>
         </member>
         <member name="M:XCLNetTools.StringHander.FormHelper.GetQueryFromSerializeString">
             <summary>
@@ -6911,70 +6964,105 @@
             </summary>
             <returns>参数序列化的结值</returns>
         </member>
-        <member name="T:XCLNetTools.StringHander.PageValid">
+        <member name="T:XCLNetTools.StringHander.DataCheck">
             <summary>
             页面数据校验类
             </summary>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsPhone(System.String)">
-            <summary>
-            是否为手机号
-            </summary>
-            <param name="inputData">待判断的值</param>
-            <returns>判断结果</returns>
-        </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsNumber(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsNumber(System.String)">
             <summary>
             是否为纯数字（不带正负号）
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsNumberSign(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsNumberSign(System.String)">
             <summary>
             是否数字（可带正负号）
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsDecimal(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsDecimal(System.String)">
             <summary>
             是否是浮点数（不带正负）
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsDecimalSign(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsDecimalSign(System.String)">
             <summary>
             是否是浮点数（可带正负号）
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsHasCHZN(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsHasCHZN(System.String)">
             <summary>
             检测是否有中文字符
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsEmail(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsHasCHZNAll(System.String)">
+            <summary>
+            检测是否有全部是中文字符
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsEmail(System.String)">
             <summary>
             是否是email
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsDateTime(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsDateTime(System.String)">
             <summary>
             日期格式字符串判断
             </summary>
             <param name="str">待判断的值</param>
             <returns>判断结果</returns>
         </member>
-        <member name="M:XCLNetTools.StringHander.PageValid.IsURL(System.String)">
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsURL(System.String)">
             <summary>
             是否为URL地址
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsIDCard(System.String)">
+            <summary>
+            是否为国内居民身份证号码
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsBase64(System.String)">
+            <summary>
+            是否为Base64编码
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsPhone(System.String)">
+            <summary>
+            是否为国内座机号码
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsMobile(System.String)">
+            <summary>
+            是否为国内手机号码
+            </summary>
+            <param name="inputData">待判断的值</param>
+            <returns>判断结果</returns>
+        </member>
+        <member name="M:XCLNetTools.StringHander.DataCheck.IsPostcode(System.String)">
+            <summary>
+            是否为国内邮政编码
             </summary>
             <param name="inputData">待判断的值</param>
             <returns>判断结果</returns>

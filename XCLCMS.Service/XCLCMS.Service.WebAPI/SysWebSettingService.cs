@@ -136,10 +136,10 @@ namespace XCLCMS.Service.WebAPI
             }
             else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.NUM.ToString())
             {
-                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.KeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.TestKeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.UATKeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.PrdKeyValue)))
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.PrdKeyValue)))
                 {
                     response.IsSuccess = false;
                     response.Message = "配置值必须为数字类型！";
@@ -259,10 +259,10 @@ namespace XCLCMS.Service.WebAPI
             }
             else if (request.Body.ValueType == XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum.NUM.ToString())
             {
-                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.KeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.TestKeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.UATKeyValue)) ||
-                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.PageValid.IsDecimalSign(request.Body.PrdKeyValue)))
+                if ((!string.IsNullOrWhiteSpace(request.Body.KeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.KeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.TestKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.TestKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.UATKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.UATKeyValue)) ||
+                    (!string.IsNullOrWhiteSpace(request.Body.PrdKeyValue) && !XCLNetTools.StringHander.DataCheck.IsDecimalSign(request.Body.PrdKeyValue)))
                 {
                     response.IsSuccess = false;
                     response.Message = "配置值必须为数字类型！";
