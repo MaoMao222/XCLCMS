@@ -31,10 +31,8 @@
                     <td>
                         <input type="text" class="easyui-numberbox" precision="2" style="height:25px;" name="txtPrice" value="@Model.Product.Price" />
                     </td>
-                    <td class="XCLTitle">备注：</td>
-                    <td>
-                        <textarea name="txtRemark">@Model.Product.Remark</textarea>
-                    </td>
+                    <td class="XCLTitle"></td>
+                    <td></td>
                 </tr>
 
                 <tr>
@@ -48,7 +46,7 @@
                     <td>
                         <input type="text" name="txtSaleTitle" value="@Model.Product.SaleTitle" />
                     </td>
-                    <td class="XCLTitle">购买成功后处理方式：</td>
+                    <td class="XCLTitle">成交后的处理方式：</td>
                     <td>
                         <select name="selPayedActionType">
                             @Html.Raw(Model.PayedActionTypeOptions)
@@ -57,7 +55,7 @@
                 </tr>
 
                 <tr>
-                    <td class="XCLTitle">购买成功后展示内容：</td>
+                    <td class="XCLTitle">成交后的处理内容：</td>
                     <td colspan="100">
                         <textarea name="txtPayedRemark">@Model.Product.PayedRemark</textarea>
                     </td>
@@ -71,14 +69,14 @@
                 </tr>
 
                 <tr>
+                    <td class="XCLTitle">备注：</td>
+                    <td><textarea name="txtRemark">@Model.Product.Remark</textarea></td>
                     <td class="XCLTitle">记录状态：</td>
                     <td>
                         <select name="selRecordState">
                             @Html.Raw(Model.RecordStateOptions)
                         </select>
                     </td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
                     <td class="XCLTitle"></td>
                     <td></td>
                 </tr>

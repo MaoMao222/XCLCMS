@@ -108,6 +108,8 @@ namespace XCLCMS.View.AdminWeb.Controllers.Product
                 DefaultValue = viewModel.Product.PayedActionType
             });
 
+            ViewBag.IsNeedCKEditor = true;
+
             return View(viewModel);
         }
 

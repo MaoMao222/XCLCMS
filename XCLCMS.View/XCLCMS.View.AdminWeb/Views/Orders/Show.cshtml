@@ -84,6 +84,19 @@
                 <td class="XCLTitle"></td>
                 <td></td>
             </tr>
+
+            <tr>
+                <td class="XCLTitle">创建时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Orders.CreateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Orders.CreaterName
+                </td>
+                <td class="XCLTitle">更新时间：</td>
+                <td>
+                    @string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Orders.UpdateTime)&nbsp;&nbsp;&nbsp;&nbsp;@Model.Orders.UpdaterName
+                </td>
+                <td class="XCLTitle"></td>
+                <td></td>
+            </tr>
         </table>
     </div>
 

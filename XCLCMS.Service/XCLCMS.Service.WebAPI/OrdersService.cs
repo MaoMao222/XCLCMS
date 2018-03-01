@@ -243,6 +243,7 @@ namespace XCLCMS.Service.WebAPI
         public APIResponseEntity<bool> UpdatePayStatus(APIRequestEntity<UpdatePayStatusEntity> request)
         {
             var response = new APIResponseEntity<bool>();
+            var dtNow = DateTime.Now;
 
             #region 数据校验
 
@@ -265,9 +266,18 @@ namespace XCLCMS.Service.WebAPI
 
             model.UpdaterID = this.ContextInfo.UserInfoID;
             model.UpdaterName = this.ContextInfo.UserName;
-            model.UpdateTime = DateTime.Now;
+            model.UpdateTime = dtNow;
             model.Version = request.Body.Version;
             model.PayStatus = request.Body.PayStatus;
+
+            if (model.PayStatus == XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum.DON.ToString())
+            {
+                model.DealDoneTime = dtNow;
+            }
+            else
+            {
+                model.DealDoneTime = null;
+            }
 
             response.IsSuccess = this.bll.Update(model);
             if (response.IsSuccess)

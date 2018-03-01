@@ -84,11 +84,14 @@ class ProductList {
  * 产品添加与修改页
  */
 class ProductAdd {
+    private ckPayedRemarkObj: any = null;
     /**
     * 输入元素
     */
     Elements: any = {
+        selPayedActionTypeObj: null,
         Init: function () {
+            this.selPayedActionTypeObj = $("[name='selPayedActionType']");
         }
     }
     /**
@@ -99,11 +102,29 @@ class ProductAdd {
         _this.Elements.Init();
         _this.InitValidator();
 
+        //初始化编辑器
+        CKEDITOR.replace('txtDescription');
+
         //商户号下拉框初始化
         userControl.MerchantSelect.Init({
             merchantIDObj: $("#txtMerchantID"),
             merchantAppIDObj: $("#txtMerchantAppID")
         });
+
+        //成交后的处理内容切换
+        let changePayedRemarkType = () => {
+            let val = _this.Elements.selPayedActionTypeObj.val();
+            if (val === 'TIP') {
+                _this.ckPayedRemarkObj = CKEDITOR.replace('txtPayedRemark');
+            } else if (_this.ckPayedRemarkObj) {
+                _this.ckPayedRemarkObj.destroy();
+                _this.ckPayedRemarkObj = null;
+            }
+        };
+        _this.Elements.selPayedActionTypeObj.on("change", () => {
+            changePayedRemarkType();
+        });
+        changePayedRemarkType();
     }
     /**
      * 表单验证初始化
