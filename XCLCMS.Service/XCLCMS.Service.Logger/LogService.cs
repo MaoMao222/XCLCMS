@@ -9,11 +9,7 @@ namespace XCLCMS.Service.Logger
     /// </summary>
     public class LogService : ILogService
     {
-        static LogService()
-        {
-            //XCLNetLogger配置信息
-            XCLNetLogger.Config.LogConfig.SetConfig(HttpContext.Current.Server.MapPath("~/Config/XCLNetLogger.config"));
-        }
+        public readonly XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
 
         public void WriteLog(LogModel model)
         {
@@ -30,6 +26,14 @@ namespace XCLCMS.Service.Logger
                 Title = model.Title,
                 Url = model.Url
             });
+
+            var m = new XCLCMS.Data.Model.SysLog();
+            m.ClientIP = model.ClientIP;
+            m.Code = model.Code;
+            m.Contents = model.Contents;
+            m.CreateTime = model.CreateTime;
+            m.LogLevel = model.LogLevel.ToString();
+            m.
         }
 
         public void WriteLog(Exception ex, string remark = null)

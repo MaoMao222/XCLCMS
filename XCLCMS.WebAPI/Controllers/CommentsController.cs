@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
+
 namespace XCLCMS.WebAPI.Controllers
 {
     /// <summary>
@@ -32,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public CommentsController(XCLCMS.IService.WebAPI.ICommentsService commentsService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public CommentsController(XCLCMS.IService.WebAPI.ICommentsService commentsService)
         {
             this.iCommentsService = commentsService;
         }
@@ -87,7 +88,6 @@ namespace XCLCMS.WebAPI.Controllers
                 return this.iCommentsService.PageList(request);
             });
         }
-        
 
         /// <summary>
         /// 新增评论信息

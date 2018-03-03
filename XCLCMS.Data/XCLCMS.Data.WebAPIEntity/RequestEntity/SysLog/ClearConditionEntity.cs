@@ -12,5 +12,8 @@ namespace XCLCMS.Data.WebAPIEntity.RequestEntity.SysLog
 
         [DataMember]
         public DateTime? EndTime { get; set; }
+
+        [DataMember]
+        public long MerchantID { get; set; }
     }
 }

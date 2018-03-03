@@ -33,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public FriendLinksController(XCLCMS.IService.WebAPI.IFriendLinksService friendLinksService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public FriendLinksController(XCLCMS.IService.WebAPI.IFriendLinksService friendLinksService)
         {
             this.iFriendLinksService = friendLinksService;
         }
@@ -173,7 +173,7 @@ namespace XCLCMS.WebAPI.Controllers
                 {
                     request.Body = request.Body.Where(k =>
                     {
-                        var model = this.iFriendLinksService.Detail(new APIRequestEntity<long>() { Body=k }).Body;
+                        var model = this.iFriendLinksService.Detail(new APIRequestEntity<long>() { Body = k }).Body;
 
                         if (null == model)
                         {

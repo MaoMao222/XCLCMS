@@ -78,9 +78,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
-    </Reference>
     <Reference Include="XCLNetSearch, Version=1.0.2.35476, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XCLNetSearch.1.0.2\lib\net40\XCLNetSearch.dll</HintPath>
     </Reference>
@@ -301,15 +298,9 @@
     <Content Include="Config\AppSettings.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Common\ShowImg.cshtml" />
     <Content Include="Views\LogicFile\List.cshtml" />
     <Content Include="Views\Upload\Index.cshtml" />
-    <Content Include="Config\XCLNetLogger.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Common\Error.cshtml" />
     <Content Include="Views\UserControl\XCLPager.cshtml" />
     <Content Include="Views\LogicFile\Show.cshtml" />
@@ -322,8 +313,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\AppSettings.config.tpl" />
-    <Content Include="Config\ConnectionStrings.config.tpl" />
-    <Content Include="Config\XCLNetLogger.config.tpl" />
     <Content Include="Views\LogicFile\Select.cshtml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Resources\src\js\bootstrap\css\bootstrap-theme.css.map" />

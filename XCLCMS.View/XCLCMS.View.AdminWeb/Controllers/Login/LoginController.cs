@@ -65,13 +65,13 @@ namespace XCLCMS.View.AdminWeb.Controllers.Login
                 XCLCMS.Lib.Common.LoginHelper.SetLogInfo(XCLNetTools.Enum.CommonEnum.LoginTypeEnum.ON, response.Body.Token);
             }
 
-            XCLNetLogger.Log.WriteLog(new XCLNetLogger.Model.LogModel()
+            XCLCMS.Lib.Common.Log.WriteLog(new XCLCMS.Data.Model.SysLog()
             {
-                ClientIP = request.ClientIP,
-                Url = request.Url,
-                RefferUrl = request.Reffer,
+                ClientIP = request.ClientIP ?? string.Empty,
+                Url = request.Url ?? string.Empty,
+                RefferUrl = request.Reffer ?? string.Empty,
                 LogType = XCLCMS.Data.CommonHelper.EnumType.LogTypeEnum.LOGIN.ToString(),
-                LogLevel = XCLNetLogger.Config.LogConfig.LogLevel.INFO,
+                LogLevel = XCLCMS.Data.CommonHelper.EnumType.LogLevelEnum.INFO.ToString(),
                 Title = string.Format("用户{0}，尝试登录系统{1}", request.Body.UserName, response.IsSuccess ? "成功" : "失败")
             });
 

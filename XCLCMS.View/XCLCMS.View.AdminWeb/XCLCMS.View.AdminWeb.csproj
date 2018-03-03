@@ -135,9 +135,6 @@
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
-    </Reference>
     <Reference Include="XCLNetSearch, Version=1.0.2.35476, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XCLNetSearch.1.0.2\lib\net40\XCLNetSearch.dll</HintPath>
     </Reference>
@@ -1018,9 +1015,6 @@
     <Content Include="Views\SysWebSetting\SysWebSettingAdd.cshtml" />
     <Content Include="Views\SysFunction\SysFunctionList.cshtml" />
     <Content Include="Views\SysFunction\SysFunctionAdd.cshtml" />
-    <Content Include="Config\XCLNetLogger.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\SysLog\SysLogList.cshtml" />
     <Content Include="Views\Common\Error.cshtml" />
     <Content Include="Views\Article\ArticleList.cshtml" />
@@ -1048,7 +1042,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\XConfigGen.bat" />
-    <Content Include="Config\XCLNetLogger.config.tpl" />
     <Content Include="Views\UserInfo\UserCenterIndex.cshtml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\Comments\Add.cshtml" />

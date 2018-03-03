@@ -17,6 +17,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 添加日志信息
+        /// </summary>
+        public static APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.Model.SysLog> request)
+        {
+            return Library.Request<XCLCMS.Data.Model.SysLog, bool>(request, "SysLog/Add", false);
+        }
+
+        /// <summary>
         /// 删除日志信息
         /// </summary>
         public static APIResponseEntity<bool> Delete(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysLog.ClearConditionEntity> request)

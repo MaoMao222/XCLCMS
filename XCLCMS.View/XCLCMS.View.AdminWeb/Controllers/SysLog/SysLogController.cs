@@ -62,7 +62,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysLog
         [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogDel)]
         public ActionResult ClearSubmit()
         {
-            XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum dateType = XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum.SevenDay;
+            XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum dateType;
             Enum.TryParse<XCLNetTools.Enum.CommonEnum.BeforeDateTypeEnum>(XCLNetTools.StringHander.FormHelper.GetString("dateType"), out dateType);
 
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysLog.ClearConditionEntity>(base.UserToken);

@@ -62,6 +62,12 @@ namespace XCLCMS.Data.CommonHelper
             SysFun_Set_SysLogDel = 400141,
 
             /// <summary>
+            ///系统日志-系统日志添加
+            /// </summary>
+            [Description("系统日志-系统日志添加")]
+            SysFun_Set_SysLogAdd = 400226,
+
+            /// <summary>
             ///系统字典-系统字典添加
             /// </summary>
             [Description("系统字典-系统字典添加")]
@@ -434,27 +440,27 @@ namespace XCLCMS.Data.CommonHelper
             Orders_Edit = 400220,
 
             /// <summary>
-            ///自由数据存储管理-自由数据存储查看
+            ///自定义结构数据存储管理-自定义结构数据存储查看
             /// </summary>
-            [Description("自由数据存储管理-自由数据存储查看")]
+            [Description("自定义结构数据存储管理-自定义结构数据存储查看")]
             KeyValueInfo_View = 400222,
 
             /// <summary>
-            ///自由数据存储管理-自由数据存储删除
+            ///自定义结构数据存储管理-自定义结构数据存储删除
             /// </summary>
-            [Description("自由数据存储管理-自由数据存储删除")]
+            [Description("自定义结构数据存储管理-自定义结构数据存储删除")]
             KeyValueInfo_Del = 400223,
 
             /// <summary>
-            ///自由数据存储管理-自由数据存储添加
+            ///自定义结构数据存储管理-自定义结构数据存储添加
             /// </summary>
-            [Description("自由数据存储管理-自由数据存储添加")]
+            [Description("自定义结构数据存储管理-自定义结构数据存储添加")]
             KeyValueInfo_Add = 400224,
 
             /// <summary>
-            ///自由数据存储管理-自由数据存储修改
+            ///自定义结构数据存储管理-自定义结构数据存储修改
             /// </summary>
-            [Description("自由数据存储管理-自由数据存储修改")]
+            [Description("自定义结构数据存储管理-自定义结构数据存储修改")]
             KeyValueInfo_Edit = 400225,
         }
 

@@ -8,7 +8,7 @@ using XCLCMS.Data.WebAPIEntity.ResponseEntity;
 namespace XCLCMS.IService.WebAPI
 {
     /// <summary>
-    /// 自由数据存储服务
+    /// 自定义结构数据存储服务
     /// </summary>
     public interface IKeyValueInfoService : IBaseInfoService
     {

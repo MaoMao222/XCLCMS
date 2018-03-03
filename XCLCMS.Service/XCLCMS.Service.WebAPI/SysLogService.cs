@@ -1,4 +1,5 @@
-﻿using XCLCMS.Data.Model.Custom;
+﻿using System;
+using XCLCMS.Data.Model.Custom;
 using XCLCMS.Data.WebAPIEntity;
 using XCLCMS.Data.WebAPIEntity.RequestEntity;
 using XCLCMS.IService.WebAPI;
@@ -10,7 +11,9 @@ namespace XCLCMS.Service.WebAPI
     /// </summary>
     public class SysLogService : ISysLogService
     {
-        public readonly XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
+        private readonly XCLCMS.Data.BLL.SysLog sysLogBLL = new Data.BLL.SysLog();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
         public ContextModel ContextInfo { get; set; }
 
@@ -34,12 +37,67 @@ namespace XCLCMS.Service.WebAPI
         }
 
         /// <summary>
-        /// 批量删除系统日志信息
+        /// 新增系统日志
         /// </summary>
-        public APIResponseEntity<bool> Delete(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysLog.ClearConditionEntity> request, long merchantID = 0)
+        public APIResponseEntity<bool> Add(APIRequestEntity<XCLCMS.Data.Model.SysLog> request)
         {
             var response = new APIResponseEntity<bool>();
-            if (this.sysLogBLL.ClearListByDateTime(request.Body.StartTime, request.Body.EndTime, merchantID))
+
+            #region 数据校验
+
+            request.Body.Title = (request.Body.Title ?? "").Trim();
+            request.Body.Code = (request.Body.Code ?? string.Empty).Trim();
+            request.Body.Contents = request.Body.Contents?.Trim();
+            request.Body.Remark = request.Body.Remark?.Trim();
+
+            //商户必须存在
+            var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
+            if (null == merchant)
+            {
+                response.IsSuccess = false;
+                response.Message = "无效的商户号！";
+                return response;
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Body.Title))
+            {
+                response.IsSuccess = false;
+                response.Message = "请提供日志标题！";
+                return response;
+            }
+
+            //应用号与商户一致
+            if (!this.merchantAppBLL.IsTheSameMerchantInfoID(request.Body.FK_MerchantID, request.Body.FK_MerchantAppID))
+            {
+                response.IsSuccess = false;
+                response.Message = "商户号与应用号不匹配，请核对后再试！";
+                return response;
+            }
+
+            #endregion 数据校验
+
+            request.Body.CreateTime = DateTime.Now;
+            response.IsSuccess = this.sysLogBLL.Add(request.Body);
+
+            if (response.IsSuccess)
+            {
+                response.Message = "日志信息添加成功！";
+            }
+            else
+            {
+                response.Message = "日志信息添加失败！";
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 批量删除系统日志信息
+        /// </summary>
+        public APIResponseEntity<bool> Delete(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysLog.ClearConditionEntity> request)
+        {
+            var response = new APIResponseEntity<bool>();
+            if (this.sysLogBLL.ClearListByDateTime(request.Body.StartTime, request.Body.EndTime, request.Body.MerchantID))
             {
                 response.IsSuccess = true;
                 response.IsRefresh = true;

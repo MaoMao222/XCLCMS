@@ -78,22 +78,9 @@ namespace XCLCMS.Lib.WebAPI
                     throw new Exception(string.Format("{0}{1}{1}{2}", response.Message, Environment.NewLine, response.MessageMore));
                 }
             }
-            catch (AggregateException ex)
+            catch (AggregateException)
             {
-                if (null != ex.InnerExceptions && ex.InnerExceptions.Count > 0)
-                {
-                    var errorSB = new StringBuilder();
-                    foreach (var m in ex.InnerExceptions)
-                    {
-                        errorSB.Append(m.Message + Environment.NewLine);
-                    }
-                    XCLNetLogger.Log.WriteLog(XCLNetLogger.Config.LogConfig.LogLevel.ERROR, "webapi请求出错", errorSB.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                XCLNetLogger.Log.WriteLog(ex);
-                throw;
+                //
             }
             return response;
         }

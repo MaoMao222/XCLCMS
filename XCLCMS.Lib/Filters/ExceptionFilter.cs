@@ -23,11 +23,11 @@ namespace XCLCMS.Lib.Filters
             msgModel.IsSuccess = false;
             msgModel.Date = DateTime.Now;
             msgModel.ErrorCode = "";
-            msgModel.FromUrl = Convert.ToString(request.UrlReferrer);
+            msgModel.FromUrl = request.UrlReferrer?.AbsoluteUri;
             msgModel.Message = ex.Message;
             msgModel.MessageMore = ex.StackTrace;
             msgModel.Title = "系统出错了";
-            msgModel.Url = Convert.ToString(request.Url);
+            msgModel.Url = request.Url?.AbsoluteUri;
             var httpExp = ex as HttpException;
             if (null != httpExp)
             {
@@ -39,14 +39,14 @@ namespace XCLCMS.Lib.Filters
             }
 
             //写入日志
-            XCLNetLogger.Model.LogModel logModel = new XCLNetLogger.Model.LogModel();
+            var logModel = new XCLCMS.Data.Model.SysLog();
             logModel.Contents = string.Format("{0}——{1}", msgModel.Message, msgModel.MessageMore);
-            logModel.LogLevel = XCLNetLogger.Config.LogConfig.LogLevel.ERROR;
-            logModel.RefferUrl = msgModel.FromUrl;
+            logModel.LogLevel = XCLCMS.Data.CommonHelper.EnumType.LogLevelEnum.ERROR.ToString();
+            logModel.RefferUrl = msgModel.FromUrl ?? string.Empty;
             logModel.Title = msgModel.Title;
-            logModel.Url = msgModel.Url;
+            logModel.Url = msgModel.Url ?? string.Empty;
             logModel.Code = msgModel.ErrorCode;
-            XCLNetLogger.Log.WriteLog(logModel);
+            XCLCMS.Lib.Common.Log.WriteLog(logModel);
 
             //输出异常
             //msgModel.MessageMore = null;

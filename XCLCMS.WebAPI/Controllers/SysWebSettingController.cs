@@ -33,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public SysWebSettingController(XCLCMS.IService.WebAPI.ISysWebSettingService sysWebSettingService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public SysWebSettingController(XCLCMS.IService.WebAPI.ISysWebSettingService sysWebSettingService)
         {
             this.iSysWebSettingService = sysWebSettingService;
         }

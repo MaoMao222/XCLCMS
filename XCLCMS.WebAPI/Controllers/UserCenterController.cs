@@ -30,7 +30,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public UserCenterController(XCLCMS.IService.WebAPI.IUserCenterService userCenterService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public UserCenterController(XCLCMS.IService.WebAPI.IUserCenterService userCenterService)
         {
             this.iUserCenterService = userCenterService;
         }

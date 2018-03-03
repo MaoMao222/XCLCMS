@@ -32,7 +32,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public FileInfoController(XCLCMS.IService.WebAPI.IFileInfoService fileInfoService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public FileInfoController(XCLCMS.IService.WebAPI.IFileInfoService fileInfoService)
         {
             this.iFileInfoService = fileInfoService;
         }

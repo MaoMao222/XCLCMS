@@ -12787,13 +12787,13 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o63">
 <a:ObjectID>CF9B908B-3C03-4DC1-AACA-EE11B5A5F089</a:ObjectID>
-<a:Name>自由数据存储表</a:Name>
+<a:Name>自定义结构数据存储表</a:Name>
 <a:Code>KeyValueInfo</a:Code>
 <a:CreationDate>1414193972</a:CreationDate>
 <a:Creator>XCL</a:Creator>
 <a:ModificationDate>1518246587</a:ModificationDate>
 <a:Modifier>XCL</a:Modifier>
-<a:Comment>自由数据存储表</a:Comment>
+<a:Comment>自定义结构数据存储表</a:Comment>
 <a:PhysicalOptions>on &quot;PRIMARY&quot;</a:PhysicalOptions>
 <a:TotalSavingCurrency/>
 <c:Columns>
@@ -13348,13 +13348,13 @@ LABL 0 新宋体,8,N</a:FontList>
 </o:Table>
 <o:Table Id="o67">
 <a:ObjectID>B2BDFF5A-9819-449F-A03F-91E01F481996</a:ObjectID>
-<a:Name>自由数据存储类别关系表</a:Name>
+<a:Name>自定义结构数据存储类别关系表</a:Name>
 <a:Code>KeyValueInfoType</a:Code>
 <a:CreationDate>1414289526</a:CreationDate>
 <a:Creator>XCL</a:Creator>
 <a:ModificationDate>1518247070</a:ModificationDate>
 <a:Modifier>XCL</a:Modifier>
-<a:Comment>自由数据存储类别关系表</a:Comment>
+<a:Comment>自定义结构数据存储类别关系表</a:Comment>
 <a:TotalSavingCurrency/>
 <c:Columns>
 <o:Column Id="o622">

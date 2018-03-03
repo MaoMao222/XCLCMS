@@ -34,7 +34,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public OrdersController(XCLCMS.IService.WebAPI.IOrdersService iOrdersService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public OrdersController(XCLCMS.IService.WebAPI.IOrdersService iOrdersService)
         {
             this.iOrdersService = iOrdersService;
         }

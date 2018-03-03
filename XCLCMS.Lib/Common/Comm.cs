@@ -9,7 +9,7 @@ namespace XCLCMS.Lib.Common
     /// <summary>
     /// 公共操作
     /// </summary>
-    public class Comm
+    public static class Comm
     {
         #region 缓存相关
 

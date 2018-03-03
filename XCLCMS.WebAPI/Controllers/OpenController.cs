@@ -9,13 +9,9 @@ namespace XCLCMS.WebAPI.Controllers
     /// </summary>
     public class OpenController : BaseAPIController
     {
-        private XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
-        private XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
-
-        public OpenController(XCLCMS.IService.Logger.ILogService logService) : base(logService)
-        {
-        }
+        private readonly XCLCMS.Data.BLL.UserInfo userInfoBLL = new XCLCMS.Data.BLL.UserInfo();
+        private readonly XCLCMS.Data.BLL.Merchant merchantBLL = new XCLCMS.Data.BLL.Merchant();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new XCLCMS.Data.BLL.MerchantApp();
 
         /// <summary>
         /// 登录
@@ -41,7 +37,7 @@ namespace XCLCMS.WebAPI.Controllers
 
                 if (null == userModel)
                 {
-                    response.Message = string.Format("用户名或密码不正确！", request.Body.UserName);
+                    response.Message = "用户名或密码不正确！";
                     response.IsSuccess = false;
                 }
                 else if (!string.Equals(userModel.UserState, XCLCMS.Data.CommonHelper.EnumType.UserStateEnum.N.ToString()))

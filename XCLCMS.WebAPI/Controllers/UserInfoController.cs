@@ -33,7 +33,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public UserInfoController(XCLCMS.IService.WebAPI.IUserInfoService userInfoService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public UserInfoController(XCLCMS.IService.WebAPI.IUserInfoService userInfoService)
         {
             this.iUserInfoService = userInfoService;
         }

@@ -34,7 +34,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public ProductController(XCLCMS.IService.WebAPI.IProductService iProductService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public ProductController(XCLCMS.IService.WebAPI.IProductService iProductService)
         {
             this.iProductService = iProductService;
         }

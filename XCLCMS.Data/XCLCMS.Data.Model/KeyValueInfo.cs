@@ -3,7 +3,7 @@
 namespace XCLCMS.Data.Model
 {
     /// <summary>
-    /// 自由数据存储表
+    /// 自定义结构数据存储表
     /// </summary>
     [Serializable]
     public partial class KeyValueInfo

@@ -105,9 +105,6 @@
       <HintPath>..\XCLCMS.View\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
-    </Reference>
     <Reference Include="XCLNetTools, Version=2.7.1.35722, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XCLNetTools.2.7.1\lib\net40\XCLNetTools.dll</HintPath>
     </Reference>
@@ -116,12 +113,14 @@
     <Compile Include="Base\AbstractBaseController.cs" />
     <Compile Include="Common\Comm.cs" />
     <Compile Include="Common\FastAPI.cs" />
+    <Compile Include="Common\Log.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\FunctionFilter.cs" />
     <Compile Include="Filters\PermissionFilter.cs" />
     <Compile Include="Common\LoginHelper.cs" />
     <Compile Include="Model\ActionContextInfoEntity.cs" />
     <Compile Include="Model\CommonModel.cs" />
+    <Compile Include="Model\LogContext.cs" />
     <Compile Include="Model\PageGlobalConfig.cs" />
     <Compile Include="Permission\PerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using XCLCMS.Data.WebAPIEntity.RequestEntity;
 namespace XCLCMS.Lib.WebAPI
 {
     /// <summary>
-    /// 自由数据存储管理 API
+    /// 自定义结构数据存储管理 API
     /// </summary>
     public static class KeyValueInfoAPI
     {

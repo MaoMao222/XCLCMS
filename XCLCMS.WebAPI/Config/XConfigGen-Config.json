@@ -35,27 +35,6 @@
           "dbConnectionString": "Data Source=127.0.0.1;Initial Catalog=XCLCMS;Integrated Security=True;"
         }
       }
-    },
-    "XCLNetLogger": {
-      "name": "XCLNetLogger日志记录组件配置信息",
-      "cfg": [
-        {
-          "source": "${ROOT_PATH}XCLNetLogger.config.tpl",
-          "target": "${ROOT_PATH}XCLNetLogger.config"
-        }
-      ],
-      "val": {
-        "DEV": {
-          "MerchantID": 600104,
-          "MerchantAppID": 900120,
-          "dbConnectionString": "Server=XCL-PC\\\\SQL2012;Database=XCLCMS;User Id=sa;Password=sa1989;"
-        },
-        "PRD": {
-          "MerchantID": 600104,
-          "MerchantAppID": 900120,
-          "dbConnectionString": "Data Source=127.0.0.1;Initial Catalog=XCLCMS;Integrated Security=True;"
-        }
-      }
     }
   }
 }

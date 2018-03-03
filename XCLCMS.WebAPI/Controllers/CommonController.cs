@@ -30,7 +30,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public CommonController(XCLCMS.IService.WebAPI.ICommonService commonService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public CommonController(XCLCMS.IService.WebAPI.ICommonService commonService)
         {
             this.iCommonService = commonService;
         }

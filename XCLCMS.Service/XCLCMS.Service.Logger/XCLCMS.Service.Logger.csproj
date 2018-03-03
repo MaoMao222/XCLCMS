@@ -39,22 +39,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="XCLNetLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XCLNetLogger.1.0.0\lib\net40\XCLNetLogger.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.BLL\XCLCMS.Data.BLL.csproj">
+      <Project>{054ca0f2-19e8-4121-ab61-e89bb52c0b7c}</Project>
+      <Name>XCLCMS.Data.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XCLCMS.Data\XCLCMS.Data.Model\XCLCMS.Data.Model.csproj">
+      <Project>{1c3a4834-de9b-4b4f-8378-084f83c58e90}</Project>
+      <Name>XCLCMS.Data.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\XCLCMS.IService\XCLCMS.IService.Logger\XCLCMS.IService.Logger.csproj">
       <Project>{64ad7c94-7c7d-4674-98fd-c1a19418bcce}</Project>
       <Name>XCLCMS.IService.Logger</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

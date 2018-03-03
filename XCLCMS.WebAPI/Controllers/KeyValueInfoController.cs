@@ -30,7 +30,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// <summary>
         /// 构造
         /// </summary>
-        public KeyValueInfoController(XCLCMS.IService.WebAPI.IKeyValueInfoService KeyValueInfoService, XCLCMS.IService.Logger.ILogService logService) : base(logService)
+        public KeyValueInfoController(XCLCMS.IService.WebAPI.IKeyValueInfoService KeyValueInfoService)
         {
             this.iKeyValueInfoService = KeyValueInfoService;
         }

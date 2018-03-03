@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace XCLCMS.Data.BLL.Strategy.KeyValueInfo
 {
     /// <summary>
-    /// 保存自由数据存储分类关系信息
+    /// 保存自定义结构数据存储分类关系信息
     /// </summary>
     public class KeyValueInfoType : BaseStrategy
     {
@@ -16,7 +16,7 @@ namespace XCLCMS.Data.BLL.Strategy.KeyValueInfo
         /// </summary>
         public KeyValueInfoType()
         {
-            this.Name = "保存自由数据存储分类关系信息";
+            this.Name = "保存自定义结构数据存储分类关系信息";
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace XCLCMS.Data.BLL.Strategy.KeyValueInfo
             else
             {
                 this.Result = StrategyLib.ResultEnum.FAIL;
-                this.ResultMessage = string.Format("保存自由数据存储分类关系信息失败！{0}", this.ResultMessage);
+                this.ResultMessage = string.Format("保存自定义结构数据存储分类关系信息失败！{0}", this.ResultMessage);
             }
         }
     }

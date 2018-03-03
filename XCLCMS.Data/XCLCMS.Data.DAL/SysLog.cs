@@ -13,6 +13,42 @@ namespace XCLCMS.Data.DAL
     public partial class SysLog : XCLCMS.Data.DAL.Common.BaseDAL
     {
         /// <summary>
+        ///  增加一条数据
+        /// </summary>
+        public bool Add(XCLCMS.Data.Model.SysLog model)
+        {
+            Database db = base.CreateDatabase();
+            DbCommand dbCommand = db.GetStoredProcCommand("sp_SysLog_ADD");
+            db.AddOutParameter(dbCommand, "SysLogID", DbType.Int64, 8);
+            db.AddInParameter(dbCommand, "LogLevel", DbType.AnsiString, model.LogLevel);
+            db.AddInParameter(dbCommand, "LogType", DbType.AnsiString, model.LogType);
+            db.AddInParameter(dbCommand, "RefferUrl", DbType.AnsiString, model.RefferUrl);
+            db.AddInParameter(dbCommand, "Url", DbType.AnsiString, model.Url);
+            db.AddInParameter(dbCommand, "Code", DbType.AnsiString, model.Code);
+            db.AddInParameter(dbCommand, "Title", DbType.AnsiString, model.Title);
+            db.AddInParameter(dbCommand, "Contents", DbType.AnsiString, model.Contents);
+            db.AddInParameter(dbCommand, "ClientIP", DbType.AnsiString, model.ClientIP);
+            db.AddInParameter(dbCommand, "Remark", DbType.AnsiString, model.Remark);
+            db.AddInParameter(dbCommand, "FK_MerchantID", DbType.Int64, model.FK_MerchantID);
+            db.AddInParameter(dbCommand, "FK_MerchantAppID", DbType.Int64, model.FK_MerchantAppID);
+            db.AddInParameter(dbCommand, "CreateTime", DbType.DateTime, model.CreateTime);
+
+            db.AddOutParameter(dbCommand, "ResultCode", DbType.Int32, 4);
+            db.AddOutParameter(dbCommand, "ResultMessage", DbType.String, 1000);
+            db.ExecuteNonQuery(dbCommand);
+
+            var result = XCLCMS.Data.DAL.Common.Common.GetProcedureResult(dbCommand.Parameters);
+            if (result.IsSuccess)
+            {
+                return true;
+            }
+            else
+            {
+                throw new Exception(result.ResultMessage);
+            }
+        }
+
+        /// <summary>
         /// 获得数据列表
         /// </summary>
         public List<XCLCMS.Data.Model.SysLog> GetModelList(string strWhere)

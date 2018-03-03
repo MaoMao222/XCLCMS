@@ -380,6 +380,36 @@ namespace XCLCMS.Data.CommonHelper
             OTHER
         }
 
+        /// <summary>
+        /// 日志级别  (该类型varchar(50))
+        /// </summary>
+        public enum LogLevelEnum
+        {
+            /// <summary>
+            /// 一般信息
+            /// </summary>
+            [Description("一般信息")]
+            INFO,
+
+            /// <summary>
+            /// 警告
+            /// </summary>
+            [Description("警告")]
+            WARN,
+
+            /// <summary>
+            /// 异常
+            /// </summary>
+            [Description("异常")]
+            ERROR,
+
+            /// <summary>
+            /// 调试信息
+            /// </summary>
+            [Description("调试信息")]
+            DEBUG
+        }
+
         #endregion 日志
 
         #region 广告
@@ -548,9 +578,9 @@ namespace XCLCMS.Data.CommonHelper
             ORD,
 
             /// <summary>
-            /// 自由数据存储 KeyValue
+            /// 自定义结构数据存储 KeyValue
             /// </summary>
-            [Description("自由数据存储")]
+            [Description("自定义结构数据存储")]
             KVL
         }
 

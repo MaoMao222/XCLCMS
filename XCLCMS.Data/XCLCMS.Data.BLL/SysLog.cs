@@ -11,6 +11,14 @@ namespace XCLCMS.Data.BLL
         private readonly XCLCMS.Data.DAL.SysLog dal = new XCLCMS.Data.DAL.SysLog();
 
         /// <summary>
+        ///  增加一条数据
+        /// </summary>
+        public bool Add(XCLCMS.Data.Model.SysLog model)
+        {
+            return dal.Add(model);
+        }
+
+        /// <summary>
         /// 获得数据列表
         /// </summary>
         public List<XCLCMS.Data.Model.SysLog> GetModelList(string strWhere)

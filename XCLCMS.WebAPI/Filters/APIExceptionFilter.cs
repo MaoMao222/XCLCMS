@@ -13,8 +13,6 @@ namespace XCLCMS.WebAPI.Filters
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class APIExceptionFilter : FilterAttribute, IExceptionFilter
     {
-        public XCLCMS.IService.Logger.ILogService iLogService { get; set; }
-
         /// <summary>
         /// 异常处理
         /// </summary>
@@ -22,7 +20,7 @@ namespace XCLCMS.WebAPI.Filters
         {
             return Task.Run(() =>
             {
-                this.iLogService.WriteLog(actionExecutedContext.Exception);
+                XCLCMS.WebAPI.Library.Log.WriteLog(actionExecutedContext.Exception, "Web API发生错误");
                 actionExecutedContext.Response = new System.Net.Http.HttpResponseMessage()
                 {
                     Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new APIResponseEntity<object>()

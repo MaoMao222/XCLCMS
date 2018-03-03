@@ -43,7 +43,7 @@ BEGIN
 			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
 			SET @IDCode=CAST('103'+CAST(@IDValue AS VARCHAR) AS BIGINT)		
 		END
-		--自由数据存储
+		--自定义结构数据存储
 		ELSE IF(@IDType='KVL')
 		BEGIN
 			SELECT @IDValue=ISNULL(MAX(IDValue),100)+1 FROM dbo.GenerateID WHERE IDType=@IDType
