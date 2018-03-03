@@ -62,12 +62,6 @@ namespace XCLCMS.Data.CommonHelper
             SysFun_Set_SysLogDel = 400141,
 
             /// <summary>
-            ///系统日志-系统日志添加
-            /// </summary>
-            [Description("系统日志-系统日志添加")]
-            SysFun_Set_SysLogAdd = 400226,
-
-            /// <summary>
             ///系统字典-系统字典添加
             /// </summary>
             [Description("系统字典-系统字典添加")]

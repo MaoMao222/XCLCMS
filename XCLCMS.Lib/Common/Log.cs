@@ -15,11 +15,6 @@ namespace XCLCMS.Lib.Common
             var app = XCLCMS.Lib.Common.Comm.GetCurrentApplicationMerchantApp();
             context.MerchantID = (app?.FK_MerchantID).Value;
             context.MerchantAppID = (app?.MerchantAppID).Value;
-            context.UserToken = XCLCMS.Lib.Common.Comm.GetCurrentApplicationMerchantMainUserToken();
-            if (string.IsNullOrWhiteSpace(context.UserToken))
-            {
-                context.UserToken = XCLCMS.Lib.Common.LoginHelper.GetUserInfoFromLoginInfo()?.Token;
-            }
             context.ClientIP = XCLNetTools.Common.IPHelper.GetClientIP();
             return context;
         }
@@ -46,7 +41,7 @@ namespace XCLCMS.Lib.Common
                 {
                     model.Url = HttpContext.Current?.Request?.Url?.AbsoluteUri;
                 }
-                var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.SysLog>(context.UserToken);
+                var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.SysLog>();
                 request.Body = model;
                 XCLCMS.Lib.WebAPI.SysLogAPI.Add(request);
             }

@@ -50,12 +50,28 @@ namespace XCLCMS.Service.WebAPI
             request.Body.Contents = request.Body.Contents?.Trim();
             request.Body.Remark = request.Body.Remark?.Trim();
 
+            //必须提供有效的AppKey
+            var app = this.merchantAppBLL.GetModel(request.AppKey);
+            if (null == app)
+            {
+                response.IsSuccess = false;
+                response.Message = "无效的商户Key！";
+                return response;
+            }
+
             //商户必须存在
             var merchant = this.merchantBLL.GetModel(request.Body.FK_MerchantID);
             if (null == merchant)
             {
                 response.IsSuccess = false;
                 response.Message = "无效的商户号！";
+                return response;
+            }
+
+            if (app.FK_MerchantID != merchant.MerchantID)
+            {
+                response.IsSuccess = false;
+                response.Message = "商户标识不匹配！";
                 return response;
             }
 

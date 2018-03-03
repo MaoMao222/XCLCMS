@@ -66,23 +66,11 @@ namespace XCLCMS.WebAPI.Controllers
         /// 新增
         /// </summary>
         [HttpPost]
-        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogAdd)]
+        [XCLCMS.WebAPI.Filters.APIOpenPermissionFilter]
         public async Task<APIResponseEntity<bool>> Add([FromBody] APIRequestEntity<XCLCMS.Data.Model.SysLog> request)
         {
             return await Task.Run(() =>
             {
-                #region 限制商户
-
-                if (base.IsOnlyCurrentMerchant && request.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
-                {
-                    var response = new APIResponseEntity<bool>();
-                    response.IsSuccess = false;
-                    response.Message = "只能操作属于自己商户下的数据信息！";
-                    return response;
-                }
-
-                #endregion 限制商户
-
                 return this.iSysLogService.Add(request);
             });
         }
