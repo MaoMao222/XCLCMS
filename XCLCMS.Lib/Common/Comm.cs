@@ -240,6 +240,23 @@ namespace XCLCMS.Lib.Common
             return model;
         }
 
+        /// <summary>
+        /// 获取当前应用程序的商户主账号token
+        /// </summary>
+        public static string GetCurrentApplicationMerchantMainUserToken()
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Open.LogonCheckEntity>(null);
+            request.Body = new XCLCMS.Data.WebAPIEntity.RequestEntity.Open.LogonCheckEntity();
+            request.Body.UserName = XCLNetTools.XML.ConfigClass.GetConfigString("MainUserName");
+            request.Body.Pwd = XCLNetTools.XML.ConfigClass.GetConfigString("MainPwd");
+            if (string.IsNullOrWhiteSpace(request.Body.UserName) || string.IsNullOrWhiteSpace(request.Body.Pwd))
+            {
+                return string.Empty;
+            }
+            var response = XCLCMS.Lib.WebAPI.OpenAPI.LogonCheck(request);
+            return response?.Body?.Token;
+        }
+
         #endregion 其它
     }
 }

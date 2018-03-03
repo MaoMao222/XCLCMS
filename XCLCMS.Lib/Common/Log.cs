@@ -15,7 +15,11 @@ namespace XCLCMS.Lib.Common
             var app = XCLCMS.Lib.Common.Comm.GetCurrentApplicationMerchantApp();
             context.MerchantID = (app?.FK_MerchantID).Value;
             context.MerchantAppID = (app?.MerchantAppID).Value;
-            context.UserToken = XCLCMS.Lib.Common.LoginHelper.GetUserInfoFromLoginInfo()?.Token;
+            context.UserToken = XCLCMS.Lib.Common.Comm.GetCurrentApplicationMerchantMainUserToken();
+            if (string.IsNullOrWhiteSpace(context.UserToken))
+            {
+                context.UserToken = XCLCMS.Lib.Common.LoginHelper.GetUserInfoFromLoginInfo()?.Token;
+            }
             context.ClientIP = XCLNetTools.Common.IPHelper.GetClientIP();
             return context;
         }
@@ -25,24 +29,31 @@ namespace XCLCMS.Lib.Common
         /// </summary>
         public static void WriteLog(XCLCMS.Data.Model.SysLog model)
         {
-            var context = Log.GetContext();
-            if (null == model.ClientIP)
+            try
             {
-                model.ClientIP = context.ClientIP;
+                var context = Log.GetContext();
+                if (null == model.ClientIP)
+                {
+                    model.ClientIP = context.ClientIP;
+                }
+                model.FK_MerchantID = context.MerchantID;
+                model.FK_MerchantAppID = context.MerchantAppID;
+                if (null == model.RefferUrl)
+                {
+                    model.RefferUrl = HttpContext.Current?.Request?.UrlReferrer?.AbsoluteUri;
+                }
+                if (null == model.Url)
+                {
+                    model.Url = HttpContext.Current?.Request?.Url?.AbsoluteUri;
+                }
+                var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.SysLog>(context.UserToken);
+                request.Body = model;
+                XCLCMS.Lib.WebAPI.SysLogAPI.Add(request);
             }
-            model.FK_MerchantID = context.MerchantID;
-            model.FK_MerchantAppID = context.MerchantAppID;
-            if (null == model.RefferUrl)
+            catch
             {
-                model.RefferUrl = HttpContext.Current?.Request?.UrlReferrer?.AbsoluteUri;
+                //
             }
-            if (null == model.Url)
-            {
-                model.Url = HttpContext.Current?.Request?.Url?.AbsoluteUri;
-            }
-            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.Model.SysLog>(context.UserToken);
-            request.Body = model;
-            XCLCMS.Lib.WebAPI.SysLogAPI.Add(request);
         }
 
         /// <summary>
