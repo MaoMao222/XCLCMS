@@ -6,29 +6,48 @@ GO
 
 
 
+
+
+
 CREATE PROCEDURE [dbo].[sp_SysLog_ADD]
-@SysLogID bigint output,
-@LogLevel varchar(50),
-@LogType varchar(50),
-@RefferUrl varchar(1000),
-@Url varchar(1000),
-@Code varchar(50),
-@Title varchar(500),
-@Contents varchar(4000),
-@ClientIP varchar(50),
-@Remark varchar(2000),
-@FK_MerchantID bigint,
-@FK_MerchantAppID bigint,
-@CreateTime datetime
+@SysLogID BIGINT OUTPUT,
+@LogLevel VARCHAR(50),
+@LogType VARCHAR(50),
+@RefferUrl VARCHAR(1000),
+@Url VARCHAR(1000),
+@Code VARCHAR(50),
+@Title VARCHAR(500),
+@Contents VARCHAR(4000),
+@ClientIP VARCHAR(50),
+@Remark VARCHAR(2000),
+@FK_MerchantID BIGINT,
+@FK_MerchantAppID BIGINT,
+@CreateTime DATETIME,
+
+@ResultCode INT OUTPUT,
+@ResultMessage NVARCHAR(1000) OUTPUT
 
  AS 
- 
-	INSERT INTO [SysLog](
-	[LogLevel],[LogType],[RefferUrl],[Url],[Code],[Title],[Contents],[ClientIP],[Remark],[FK_MerchantID],[FK_MerchantAppID],[CreateTime]
-	)VALUES(
-	@LogLevel,@LogType,@RefferUrl,@Url,@Code,@Title,@Contents,@ClientIP,@Remark,@FK_MerchantID,@FK_MerchantAppID,@CreateTime
-	)
-	SET @SysLogID = @@IDENTITY
+ 	BEGIN
+		BEGIN TRY 
+			INSERT INTO [SysLog](
+			[LogLevel],[LogType],[RefferUrl],[Url],[Code],[Title],[Contents],[ClientIP],[Remark],[FK_MerchantID],[FK_MerchantAppID],[CreateTime]
+			)VALUES(
+			@LogLevel,@LogType,@RefferUrl,@Url,@Code,@Title,@Contents,@ClientIP,@Remark,@FK_MerchantID,@FK_MerchantAppID,@CreateTime
+			)
+			SET @ResultCode=1
+			SET @SysLogID=SCOPE_IDENTITY()
+		END TRY
+		BEGIN CATCH
+			SET @ResultMessage= ERROR_MESSAGE() 
+			SET @ResultCode=0		
+		END CATCH
+	END
+
+
+
+
+
 
 
 GO

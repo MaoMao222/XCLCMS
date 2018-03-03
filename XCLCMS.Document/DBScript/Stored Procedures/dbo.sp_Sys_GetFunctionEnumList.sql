@@ -8,6 +8,7 @@ GO
 
 
 
+
 CREATE PROC [dbo].[sp_Sys_GetFunctionEnumList] AS 
 --生成模块功能的c# 枚举
 BEGIN
@@ -27,9 +28,10 @@ SELECT
 @str=@str+('/// <summary>'+@br+'///'+ (ISNULL(ParentName,'')+'-'+ISNULL(FunctionName,''))+@br+'/// </summary>'+@br+'[Description("'+(ISNULL(ParentName,'')+'-'+ISNULL(FunctionName,''))+'")]'+@br+ISNULL(code,'') +'=' +CAST(SysFunctionID AS VARCHAR)+',')+@br
 FROM FuncInfo ORDER BY ParentID ASC
 
-PRINT @str
+SELECT @str
 
 END
+
 
 
 
