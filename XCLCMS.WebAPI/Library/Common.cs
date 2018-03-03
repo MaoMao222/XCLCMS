@@ -37,7 +37,7 @@ namespace XCLCMS.WebAPI.Library
             XCLCMS.Lib.Model.ActionContextInfoEntity model = null;
 
             //header
-            if (null!= actionContext.Request.Headers && actionContext.Request.Headers.Contains("XCLCMSHeaders"))
+            if (null != actionContext.Request.Headers && actionContext.Request.Headers.Contains("XCLCMSHeaders"))
             {
                 var extendHeaders = actionContext.Request.Headers.GetValues("XCLCMSHeaders")?.FirstOrDefault();
                 if (!string.IsNullOrWhiteSpace(extendHeaders))
@@ -47,6 +47,18 @@ namespace XCLCMS.WebAPI.Library
                     {
                         return model;
                     }
+                }
+            }
+
+            //get参数
+            if (actionContext.Request.Method == HttpMethod.Get)
+            {
+                var queryString = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
+                if (null != queryString)
+                {
+                    model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
+                    model.AppKey = queryString["AppKey"];
+                    model.UserToken = queryString["UserToken"];
                 }
             }
 
@@ -68,18 +80,6 @@ namespace XCLCMS.WebAPI.Library
                 if (jobj.TryGetValue("UserToken", out jtoken))
                 {
                     model.UserToken = Convert.ToString(jtoken);
-                }
-            }
-
-            //get参数
-            if (actionContext.Request.Method == HttpMethod.Get)
-            {
-                var queryString = HttpUtility.ParseQueryString(actionContext.Request.RequestUri.Query);
-                if (null != queryString)
-                {
-                    model = new XCLCMS.Lib.Model.ActionContextInfoEntity();
-                    model.AppKey = queryString["AppKey"];
-                    model.UserToken = queryString["UserToken"];
                 }
             }
 

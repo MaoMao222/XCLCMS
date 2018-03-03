@@ -11,9 +11,9 @@ namespace XCLCMS.WebAPI.Filters
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class APIPermissionFilter : System.Web.Http.AuthorizeAttribute
     {
-        private XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
+        private readonly XCLCMS.Data.BLL.MerchantApp merchantAppBLL = new Data.BLL.MerchantApp();
 
-        private XCLCMS.Data.WebAPIEntity.APIResponseEntity<object> unauthorizedResponse = new XCLCMS.Data.WebAPIEntity.APIResponseEntity<object>()
+        private readonly XCLCMS.Data.WebAPIEntity.APIResponseEntity<object> unauthorizedResponse = new XCLCMS.Data.WebAPIEntity.APIResponseEntity<object>()
         {
             ErrorCode = "403",
             IsException = true,
@@ -31,17 +31,6 @@ namespace XCLCMS.WebAPI.Filters
         /// </summary>
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            #region 无需校验
-
-            //判断是否允许完全公开访问，而不需要校验任何权限信息
-            var openFlagAttrs = actionContext.ActionDescriptor.GetCustomAttributes<XCLCMS.WebAPI.Filters.APIOpenPermissionFilter>();
-            if (null != openFlagAttrs && openFlagAttrs.Count > 0)
-            {
-                return true;
-            }
-
-            #endregion 无需校验
-
             #region 获取参数信息
 
             var bodyModel = XCLCMS.WebAPI.Library.Common.GetInfoFromActionContext(actionContext);
@@ -68,6 +57,16 @@ namespace XCLCMS.WebAPI.Filters
             }
 
             #endregion 应用AppKey校验
+
+            #region 无需校验
+
+            var openFlagAttrs = actionContext.ActionDescriptor.GetCustomAttributes<XCLCMS.WebAPI.Filters.APIOpenPermissionFilter>();
+            if (null != openFlagAttrs && openFlagAttrs.Count > 0)
+            {
+                return true;
+            }
+
+            #endregion 无需校验
 
             #region 当前登录用户权限校验
 
