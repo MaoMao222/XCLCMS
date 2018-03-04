@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Text;
+using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.Data.DAL.View
 {
@@ -48,6 +49,37 @@ namespace XCLCMS.Data.DAL.View
         {
             condition.TableName = "v_Orders";
             return XCLCMS.Data.DAL.Common.Common.GetPageList<XCLCMS.Data.Model.View.v_Orders>(pageInfo, condition);
+        }
+
+        /// <summary>
+        /// 根据指定用户的指定产品返回所有订单信息
+        /// </summary>
+        public List<XCLCMS.Data.Model.View.v_Orders> GetUserProductOrderModelList(Order_UserProductCondition condition)
+        {
+            Database db = base.CreateDatabase();
+            string topStr = " * ";
+            if (condition.Top > 0)
+            {
+                topStr = string.Format(" TOP {0} * ", condition.Top);
+            }
+            DbCommand dbCommand = db.GetSqlStringCommand("SELECT " + topStr + " FROM dbo.v_Orders WITH(NOLOCK) WHERE FK_ProductID=@FK_ProductID AND FK_UserID=@FK_UserID AND UserName=@UserName ");
+            db.AddInParameter(dbCommand, "FK_ProductID", DbType.Int64, condition.ProductID);
+            db.AddInParameter(dbCommand, "FK_UserID", DbType.Int64, condition.UserID);
+            db.AddInParameter(dbCommand, "UserName", DbType.String, condition.UserName);
+            if (!string.IsNullOrWhiteSpace(condition.PayStatus))
+            {
+                dbCommand.CommandText += " AND PayStatus=@PayStatus ";
+                db.AddInParameter(dbCommand, "PayStatus", DbType.AnsiString, condition.PayStatus);
+            }
+            if (!string.IsNullOrWhiteSpace(condition.RecordState))
+            {
+                dbCommand.CommandText += " AND RecordState=@RecordState ";
+                db.AddInParameter(dbCommand, "RecordState", DbType.AnsiString, condition.RecordState);
+            }
+            using (var dr = db.ExecuteReader(dbCommand))
+            {
+                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_Orders>(dr);
+            }
         }
     }
 }

@@ -33,6 +33,53 @@ namespace XCLCMS.Service.WebAPI
         }
 
         /// <summary>
+        /// 获取指定用户已购买成功过指定产品的订单信息
+        /// </summary>
+        public APIResponseEntity<Data.Model.View.v_Orders> GetUserProductPayedOrder(APIRequestEntity<UserProductOrderQueryEntity> request)
+        {
+            var response = new APIResponseEntity<Data.Model.View.v_Orders>();
+
+            if (request.Body.ProductID <= 0)
+            {
+                response.IsSuccess = false;
+                response.Message = "请指定产品ID！";
+                return response;
+            }
+
+            if (request.Body.UserID <= 0 && string.IsNullOrWhiteSpace(request.Body.UserName))
+            {
+                response.IsSuccess = false;
+                response.Message = "请指定用户信息！";
+                return response;
+            }
+
+            if (request.Body.UserID > 0)
+            {
+                var uInfo = this.userInfoBLL.GetModel(request.Body.UserID);
+                if (null == uInfo)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "请指定有效的用户信息！";
+                    return response;
+                }
+                request.Body.UserName = uInfo.UserName;
+            }
+
+            var lst = vBLL.GetUserProductOrderModelList(new Order_UserProductCondition()
+            {
+                PayStatus = XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum.DON.ToString(),
+                ProductID = request.Body.ProductID,
+                Top = 1,
+                UserID = request.Body.UserID,
+                UserName = request.Body.UserName,
+                RecordState = XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum.N.ToString()
+            });
+            response.Body = lst?.FirstOrDefault();
+            response.IsSuccess = true;
+            return response;
+        }
+
+        /// <summary>
         /// 查询订单信息分页列表
         /// </summary>
         public APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Orders>> PageList(APIRequestEntity<PageListConditionEntity> request)
@@ -108,7 +155,6 @@ namespace XCLCMS.Service.WebAPI
             else
             {
                 request.Body.FK_UserID = 0;
-                request.Body.UserName = string.Empty;
             }
 
             #endregion 数据校验
@@ -203,7 +249,6 @@ namespace XCLCMS.Service.WebAPI
             else
             {
                 request.Body.FK_UserID = 0;
-                request.Body.UserName = string.Empty;
             }
 
             #endregion 数据校验

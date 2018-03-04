@@ -19,6 +19,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 获取指定用户已购买成功过指定产品的订单信息
+        /// </summary>
+        public static APIResponseEntity<Data.Model.View.v_Orders> GetUserProductPayedOrder(APIRequestEntity<UserProductOrderQueryEntity> request)
+        {
+            return Library.Request<UserProductOrderQueryEntity, Data.Model.View.v_Orders>(request, "Orders/GetUserProductPayedOrder");
+        }
+
+        /// <summary>
         /// 查询订单信息分页列表
         /// </summary>
         public static APIResponseEntity<XCLCMS.Data.WebAPIEntity.ResponseEntity.PageListResponseEntity<XCLCMS.Data.Model.View.v_Orders>> PageList(APIRequestEntity<PageListConditionEntity> request)

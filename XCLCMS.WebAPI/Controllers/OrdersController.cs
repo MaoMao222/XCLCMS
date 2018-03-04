@@ -66,6 +66,32 @@ namespace XCLCMS.WebAPI.Controllers
         }
 
         /// <summary>
+        /// 获取指定用户已购买成功过指定产品的订单信息
+        /// </summary>
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Orders_View)]
+        public async Task<APIResponseEntity<Data.Model.View.v_Orders>> GetUserProductPayedOrder([FromUri]  APIRequestEntity<UserProductOrderQueryEntity> request)
+        {
+            return await Task.Run(() =>
+            {
+                var response = this.iOrdersService.GetUserProductPayedOrder(request);
+
+                #region 限制商户
+
+                if (base.IsOnlyCurrentMerchant && null != response.Body && response.Body.FK_MerchantID != base.CurrentUserModel.FK_MerchantID)
+                {
+                    response.Body = null;
+                    response.IsSuccess = false;
+                    response.Message = "只能操作属于自己商户下的数据信息！";
+                }
+
+                #endregion 限制商户
+
+                return response;
+            });
+        }
+
+        /// <summary>
         /// 查询订单信息分页列表
         /// </summary>
         [HttpGet]

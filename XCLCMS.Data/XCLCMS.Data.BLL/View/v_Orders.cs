@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCLCMS.Data.Model.Custom;
 
 namespace XCLCMS.Data.BLL.View
 {
@@ -28,6 +29,14 @@ namespace XCLCMS.Data.BLL.View
         public List<XCLCMS.Data.Model.View.v_Orders> GetPageList(XCLNetTools.Entity.PagerInfo pageInfo, XCLNetTools.Entity.SqlPagerConditionEntity condition)
         {
             return dal.GetPageList(pageInfo, condition);
+        }
+
+        /// <summary>
+        /// 根据指定用户的指定产品返回所有订单信息
+        /// </summary>
+        public List<XCLCMS.Data.Model.View.v_Orders> GetUserProductOrderModelList(Order_UserProductCondition condition)
+        {
+            return dal.GetUserProductOrderModelList(condition);
         }
     }
 }

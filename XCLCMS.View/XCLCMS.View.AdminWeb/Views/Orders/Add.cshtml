@@ -42,8 +42,10 @@
                     <td>
                         <input type="text" name="txtFK_UserID" value="@Model.Orders.FK_UserID" />
                     </td>
-                    <td class="XCLTitle"></td>
-                    <td></td>
+                    <td class="XCLTitle">所属用户名：</td>
+                    <td>
+                        <input type="text" name="txtUserName" value="@Model.Orders.UserName" />
+                    </td>
                 </tr>
 
                 <tr>
@@ -127,6 +129,9 @@
         操作说明：
     </div>
     <div class="XCLPanelBody">
+        <ul>
+            <li>1、若有指定【所属用户ID】，则【所属用户名】无需填写；若未指定【所属用户ID】，则您指定的【所属用户名】相当于是临时用户，不属于系统中有记录的用户。</li>
+        </ul>
     </div>
 </div>
 

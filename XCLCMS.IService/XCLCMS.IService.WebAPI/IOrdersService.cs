@@ -15,6 +15,8 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<Data.Model.View.v_Orders> Detail(APIRequestEntity<long> request);
 
+        APIResponseEntity<Data.Model.View.v_Orders> GetUserProductPayedOrder(APIRequestEntity<UserProductOrderQueryEntity> request);
+
         APIResponseEntity<PageListResponseEntity<v_Orders>> PageList(APIRequestEntity<PageListConditionEntity> request);
 
         APIResponseEntity<bool> Update(APIRequestEntity<Data.Model.Orders> request);
