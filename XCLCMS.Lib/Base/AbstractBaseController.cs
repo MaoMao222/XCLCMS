@@ -300,7 +300,6 @@ namespace XCLCMS.Lib.Base
                 pageConfig.UserName = commonModel.CurrentUserModel.UserName;
             }
             pageConfig.RootURL = XCLNetTools.StringHander.Common.RootUri;
-            pageConfig.UserToken = this.UserToken;
             pageConfig.FileManagerFileListURL = XCLCMS.Lib.Common.Setting.SettingModel.FileManager_FileListURL;
             pageConfig.FileManagerLogicFileListURL = XCLCMS.Lib.Common.Setting.SettingModel.FileManager_LogicFileListURL;
             pageConfig.WebAPIServiceURL = XCLCMS.Lib.Common.Comm.WebAPIServiceURL;

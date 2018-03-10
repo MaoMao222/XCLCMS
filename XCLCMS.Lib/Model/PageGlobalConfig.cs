@@ -19,11 +19,6 @@ namespace XCLCMS.Lib.Model
         public string UserName { get; set; }
 
         /// <summary>
-        /// 用户token
-        /// </summary>
-        public string UserToken { get; set; }
-
-        /// <summary>
         /// 当前用户是否已登录
         /// </summary>
         public bool IsLogOn { get; set; }
