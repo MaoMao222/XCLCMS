@@ -138,6 +138,9 @@ class ProductAdd {
             if (!common.CommonFormValid(validator)) {
                 return false;
             }
+            for (var instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }            
             $.XGoAjax({ target: $("#btnSave")[0] });
         });
     }
