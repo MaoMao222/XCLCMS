@@ -15,7 +15,7 @@
         },
         "PRD": {
           "AppKey": "2D15542BFB2548B841DDB3D8C03B5090",
-          "WebAPIServiceURL": "http://cms.wodeabc.com/api/v1/"
+          "WebAPIServiceURL": "http://127.0.0.1:1989/api/v1/"
         }
       }
     }
