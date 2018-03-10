@@ -11,12 +11,10 @@
       "val": {
         "DEV": {
           "AppKey": "2D15542BFB2548B841DDB3D8C03B5090",
-          "WebAPIJsUrl": "http://localhost/XCLCMS.WebAPI/Resources/Js/XCLCMSWebApi.js",
           "WebAPIServiceURL": "http://localhost/XCLCMS.WebAPI/v1/"
         },
         "PRD": {
           "AppKey": "2D15542BFB2548B841DDB3D8C03B5090",
-          "WebAPIJsUrl": "http://cms.wodeabc.com/api/Resources/Js/XCLCMSWebApi.js",
           "WebAPIServiceURL": "http://cms.wodeabc.com/api/v1/"
         }
       }

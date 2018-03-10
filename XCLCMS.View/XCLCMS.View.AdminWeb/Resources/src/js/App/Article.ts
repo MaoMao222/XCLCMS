@@ -59,15 +59,12 @@ app.ArticleList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Article/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Article/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -124,12 +121,11 @@ app.ArticleAdd = {
 
         //文章分类
         var initArticleTypeTree = function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = {};
-            request.Body.MerchantID = $("input[name='txtMerchantID']").val();
             _this.Elements.selArticleType.combotree({
-                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/GetEasyUITreeByCondition",
-                queryParams: request,
+                url: XCLCMSPageGlobalConfig.RootURL + "SysDic/GetEasyUITreeByCondition",
+                queryParams: {
+                    MerchantID: $("input[name='txtMerchantID']").val()
+                },
                 method: 'get',
                 checkbox: true,
                 onlyLeafCheck: true,
@@ -169,13 +165,12 @@ app.ArticleAdd = {
             rules: {
                 txtCode: {
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.Code = $("#txtCode").val();
-                        request.Body.ArticleID = $("#ArticleID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Article/IsExistCode",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "Article/IsExistCode",
+                            data: {
+                                Code: $("#txtCode").val(),
+                                ArticleID: $("#ArticleID").val()
+                            }
                         };
                     },
                 },

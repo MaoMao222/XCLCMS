@@ -61,15 +61,12 @@ class OrdersList {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            let request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Orders/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -124,20 +121,17 @@ class OrdersAdd {
         });
         common.BindLinkButtonEvent("click", $("#btnPayed"), function () {
             art.dialog.confirm("您确定要将此订单设置为已支付吗？", function () {
-                let request = XCLCMSWebApi.CreateRequest();
-                request.Body = {
-                    OrderID: $("#OrderID").val(),
-                    FK_MerchantID: $("#txtFK_MerchantID").val(),
-                    PayStatus: 'DON',
-                    Version: $("#txtOrderVersion").val()
-                };
-
                 $.XGoAjax({
                     target: $("#btnPayed")[0],
                     ajax: {
-                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/UpdatePayStatus",
+                        url: XCLCMSPageGlobalConfig.RootURL + "Orders/UpdatePayStatus",
                         contentType: "application/json",
-                        data: JSON.stringify(request),
+                        data: JSON.stringify({
+                            OrderID: $("#OrderID").val(),
+                            FK_MerchantID: $("#txtFK_MerchantID").val(),
+                            PayStatus: 'DON',
+                            Version: $("#txtOrderVersion").val()
+                        }),
                         type: "POST"
                     }
                 });
@@ -146,20 +140,17 @@ class OrdersAdd {
         });
         common.BindLinkButtonEvent("click", $("#btnCancel"), function () {
             art.dialog.confirm("您确定要取消此订单吗？", function () {
-                let request = XCLCMSWebApi.CreateRequest();
-                request.Body = {
-                    OrderID: $("#OrderID").val(),
-                    FK_MerchantID: $("#txtFK_MerchantID").val(),
-                    PayStatus: 'CEL',
-                    Version: $("#txtOrderVersion").val()
-                };
-
                 $.XGoAjax({
                     target: $("#btnCancel")[0],
                     ajax: {
-                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Orders/UpdatePayStatus",
+                        url: XCLCMSPageGlobalConfig.RootURL + "Orders/UpdatePayStatus",
                         contentType: "application/json",
-                        data: JSON.stringify(request),
+                        data: JSON.stringify({
+                            OrderID: $("#OrderID").val(),
+                            FK_MerchantID: $("#txtFK_MerchantID").val(),
+                            PayStatus: 'CEL',
+                            Version: $("#txtOrderVersion").val()
+                        }),
                         type: "POST"
                     }
                 });

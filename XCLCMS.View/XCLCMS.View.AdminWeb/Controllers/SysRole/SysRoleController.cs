@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using XCLNetTools.Generic;
@@ -131,6 +132,58 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
             var response = XCLCMS.Lib.WebAPI.SysRoleAPI.Update(request);
 
             return Json(response);
+        }
+
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleView)]
+        public ActionResult GetList(long id = 0)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = id;
+            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.GetList(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_SysRoleDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistRoleNameInSameLevel([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.IsExistRoleNameInSameLevelEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.IsExistRoleNameInSameLevelEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.IsExistRoleNameInSameLevel(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistCode([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.IsExistCodeEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.IsExistCodeEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.IsExistCode(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetAllJsonForEasyUITree([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.GetAllJsonForEasyUITreeEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.GetAllJsonForEasyUITreeEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysRoleAPI.GetAllJsonForEasyUITree(request);
+            return new ContentResult()
+            {
+                Content = XCLNetTools.Serialize.JSON.Serialize(response, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft),
+                ContentEncoding = System.Text.Encoding.UTF8,
+                ContentType = "application/json"
+            };
         }
     }
 }

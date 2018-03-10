@@ -206,5 +206,33 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantAppDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.MerchantAppAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistMerchantAppName([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.MerchantApp.IsExistMerchantAppNameEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.MerchantApp.IsExistMerchantAppNameEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.MerchantAppAPI.IsExistMerchantAppName(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult AllTextValueList(long id = 0)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = id;
+            var response = XCLCMS.Lib.WebAPI.MerchantAppAPI.AllTextValueList(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

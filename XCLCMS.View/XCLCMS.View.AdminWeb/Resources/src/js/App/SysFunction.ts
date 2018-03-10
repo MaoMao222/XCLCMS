@@ -43,17 +43,13 @@ app.SysFunctionList = {
 
         _this.TreeObj = $('#tableSysFunctionList');
         //加载列表树
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = 0;
         _this.TreeObj.treegrid({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetList',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysFunction/GetList',
+            queryParams: {},
             onBeforeExpand: function (node: any) {
-                _this.TreeObj.treegrid('options').queryParams = (function () {
-                    var request = XCLCMSWebApi.CreateRequest();
-                    request.Body = node.SysFunctionID;
-                    return request;
-                })();
+                _this.TreeObj.treegrid('options').queryParams = {
+                    id: node.SysFunctionID
+                };
             },
             method: 'get',
             idField: 'SysFunctionID',
@@ -184,13 +180,11 @@ app.SysFunctionList = {
         var _this = this;
         var ids = _this.GetSelectedIds();
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysFunction/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "SysFunction/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 },
                 postSuccess: function (ops: any, data: IAnyPropObject) {
@@ -210,13 +204,11 @@ app.SysFunctionList = {
         var _this = this;
         var ids = _this.GetSelectedIds();
         art.dialog.confirm("您确定要清空此节点的所有子节点吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids[0];
             $.XGoAjax({
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysFunction/DelChild",
+                    url: XCLCMSPageGlobalConfig.RootURL + "SysFunction/DelChild",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids[0]),
                     type: "POST"
                 },
                 postSuccess: function () {
@@ -257,26 +249,24 @@ app.SysFunctionAdd = {
                 txtFunctionName: {
                     required: true,
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.FunctionName = $("#txtFunctionName").val();
-                        request.Body.ParentID = $("#ParentID").val();
-                        request.Body.SysFunctionID = $("#SysFunctionID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysFunction/IsExistFunctionNameInSameLevel",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "SysFunction/IsExistFunctionNameInSameLevel",
+                            data: {
+                                FunctionName: $("#txtFunctionName").val(),
+                                ParentID: $("#ParentID").val(),
+                                SysFunctionID: $("#SysFunctionID").val()
+                            }
                         };
                     }
                 },
                 txtCode: {
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.Code = $("#txtCode").val();
-                        request.Body.SysFunctionID = $("#SysFunctionID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysFunction/IsExistCode",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "SysFunction/IsExistCode",
+                            data: {
+                                Code: $("#txtCode").val(),
+                                SysFunctionID: $("#SysFunctionID").val()
+                            }
                         };
                     }
                 }

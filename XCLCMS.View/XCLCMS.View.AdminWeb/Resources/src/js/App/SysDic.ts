@@ -47,17 +47,13 @@ app.SysDicList = {
 
         _this.TreeObj = $('#tableSysDicList');
         //加载列表树
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = 0;
         _this.TreeObj.treegrid({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysDic/GetList',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysDic/GetList',
+            queryParams: {},
             onBeforeExpand: function (node: any) {
-                _this.TreeObj.treegrid('options').queryParams = (function () {
-                    var request = XCLCMSWebApi.CreateRequest();
-                    request.Body = node.SysDicID;
-                    return request;
-                })();
+                _this.TreeObj.treegrid('options').queryParams = {
+                    id: node.SysDicID
+                };
             },
             method: 'get',
             idField: 'SysDicID',
@@ -187,13 +183,11 @@ app.SysDicList = {
         var _this = this;
         var ids = _this.GetSelectedIds();
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "SysDic/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 },
                 postSuccess: function (ops: any, data: IAnyPropObject) {
@@ -254,13 +248,11 @@ app.SysDicAdd = {
         }
         var isTxtFunctionID = ($obj == _this.Elements.txtFunctionID);
 
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = {};
-        request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-
         $obj.combotree({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysFunction/GetAllJsonForEasyUITree',
+            queryParams: {
+                MerchantID: $("input[name='txtMerchantID']").val()
+            },
             method: 'get',
             checkbox: true,
             lines: true,
@@ -285,27 +277,25 @@ app.SysDicAdd = {
             rules: {
                 txtDicName: {
                     required: true,
-                    XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.SysDicName = $("#txtDicName").val();
-                        request.Body.ParentID = $("#ParentID").val();
-                        request.Body.SysDicID = $("#SysDicID").val();
-                        return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/IsExistSysDicNameInSameLevel",
-                            data: request
-                        };
+                    XCLCustomRemote: {
+                        url: XCLCMSPageGlobalConfig.RootURL + "SysDic/IsExistSysDicNameInSameLevel",
+                        data: function () {
+                            return {
+                                SysDicName: $("#txtDicName").val(),
+                                ParentID: $("#ParentID").val(),
+                                SysDicID: $("#SysDicID").val()
+                            }
+                        }
                     }
                 },
                 txtCode: {
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.Code = $("#txtCode").val();
-                        request.Body.SysDicID = $("#SysDicID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/IsExistSysDicCode",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "SysDic/IsExistSysDicCode",
+                            data: {
+                                Code: $("#txtCode").val(),
+                                SysDicID: $("#SysDicID").val()
+                            }
                         }
                     }
                 }

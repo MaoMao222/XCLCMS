@@ -34,6 +34,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 查询所有商户应用键值形式的列表
+        /// </summary>
+        public static APIResponseEntity<List<XCLNetTools.Entity.TextValue>> AllTextValueList(APIRequestEntity<long> request)
+        {
+            return Library.Request<long, List<XCLNetTools.Entity.TextValue>>(request, "MerchantApp/AllTextValueList");
+        }
+
+        /// <summary>
         /// 判断商户应用名是否存在
         /// </summary>
         public static APIResponseEntity<bool> IsExistMerchantAppName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.MerchantApp.IsExistMerchantAppNameEntity> request)

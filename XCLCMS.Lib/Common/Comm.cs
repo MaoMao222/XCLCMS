@@ -60,22 +60,6 @@ namespace XCLCMS.Lib.Common
         }
 
         /// <summary>
-        /// 获取当前应用WebAPIJsUrl
-        /// </summary>
-        public static string WebAPIJsUrl
-        {
-            get
-            {
-                var str = XCLNetTools.XML.ConfigClass.GetConfigString("WebAPIJsUrl");
-                if (string.IsNullOrWhiteSpace(str))
-                {
-                    throw new ArgumentNullException("WebAPIJsUrl", "请在配置文件中配置有效的WebAPIJsUrl！");
-                }
-                return str;
-            }
-        }
-
-        /// <summary>
         /// 获取当前应用WebAPIServiceURL
         /// </summary>
         public static string WebAPIServiceURL

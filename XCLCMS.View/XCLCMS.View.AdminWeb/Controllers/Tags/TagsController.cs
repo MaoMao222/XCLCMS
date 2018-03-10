@@ -162,5 +162,24 @@ namespace XCLCMS.View.AdminWeb.Controllers.Tags
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Tags_Del)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.TagsAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistTagName([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.Tags.IsExistTagNameEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Tags.IsExistTagNameEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.TagsAPI.IsExistTagName(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

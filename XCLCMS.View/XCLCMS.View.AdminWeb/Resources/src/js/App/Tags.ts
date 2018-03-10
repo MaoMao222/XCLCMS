@@ -65,15 +65,12 @@ app.TagsList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Tags/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -116,15 +113,14 @@ app.TagsAdd = {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Tags/IsExistTagName",
+                            url: XCLCMSPageGlobalConfig.RootURL + "Tags/IsExistTagName",
                             data: function () {
-                                var request = XCLCMSWebApi.CreateRequest();
-                                request.Body = {};
-                                request.Body.TagName = $("input[name='txtTagName']").val();
-                                request.Body.TagsID = $("input[name='TagsID']").val();
-                                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-                                request.Body.MerchantAppID = $("input[name='txtMerchantAppID']").val();
-                                return request;
+                                return {
+                                    TagName: $("input[name='txtTagName']").val(),
+                                    TagsID: $("input[name='TagsID']").val(),
+                                    MerchantID: $("input[name='txtMerchantID']").val(),
+                                    MerchantAppID: $("input[name='txtMerchantAppID']").val()
+                                };
                             }
                         };
                     }

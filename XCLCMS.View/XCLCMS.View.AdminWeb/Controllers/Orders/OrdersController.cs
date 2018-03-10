@@ -219,5 +219,25 @@ namespace XCLCMS.View.AdminWeb.Controllers.Orders
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Orders_Del)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.OrdersAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Orders_Edit)]
+        public ActionResult UpdatePayStatus(Data.WebAPIEntity.RequestEntity.Orders.UpdatePayStatusEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<Data.WebAPIEntity.RequestEntity.Orders.UpdatePayStatusEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.OrdersAPI.UpdatePayStatus(request);
+            return Json(response);
+        }
     }
 }

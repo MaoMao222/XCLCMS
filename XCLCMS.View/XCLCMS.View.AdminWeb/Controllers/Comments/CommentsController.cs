@@ -226,5 +226,17 @@ namespace XCLCMS.View.AdminWeb.Controllers.Comments
 
             return Json(response);
         }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.Comments_Del)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.CommentsAPI.Delete(request);
+            return Json(response);
+        }
     }
 }

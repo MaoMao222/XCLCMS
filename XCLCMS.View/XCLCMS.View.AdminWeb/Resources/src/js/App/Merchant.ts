@@ -65,14 +65,12 @@ app.MerchantList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Merchant/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Merchant/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -90,7 +88,7 @@ app.MerchantAdd = {
     Init: function () {
         var _this = this;
         _this.InitValidator();
-        
+
         $("#txtRegisterTime").on("click", function () {
             WdatePicker({ dateFmt: 'yyyy-MM-dd' });
             return false;
@@ -105,13 +103,12 @@ app.MerchantAdd = {
                 txtMerchantName: {
                     required: true,
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.MerchantName = $("#txtMerchantName").val();
-                        request.Body.MerchantID = $("#MerchantID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Merchant/IsExistMerchantName",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "Merchant/IsExistMerchantName",
+                            data: {
+                                MerchantName: $("#txtMerchantName").val(),
+                                MerchantID: $("#MerchantID").val()
+                            }
                         };
                     }
                 },
@@ -183,14 +180,12 @@ app.MerchantAppList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "MerchantApp/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "MerchantApp/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -219,13 +214,12 @@ app.MerchantAppAdd = {
                 txtMerchantAppName: {
                     required: true,
                     XCLCustomRemote: function () {
-                        var request = XCLCMSWebApi.CreateRequest();
-                        request.Body = {};
-                        request.Body.MerchantAppName = $("#txtMerchantAppName").val();
-                        request.Body.MerchantAppID = $("#MerchantAppID").val();
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "MerchantApp/IsExistMerchantAppName",
-                            data: request
+                            url: XCLCMSPageGlobalConfig.RootURL + "MerchantApp/IsExistMerchantAppName",
+                            data: {
+                                MerchantAppName: $("#txtMerchantAppName").val(),
+                                MerchantAppID: $("#MerchantAppID").val()
+                            }
                         };
                     }
                 },

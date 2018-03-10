@@ -61,15 +61,12 @@ class ProductList {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            let request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Product/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "Product/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });

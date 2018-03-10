@@ -430,5 +430,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.Article
 
             return Json(response);
         }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_ArticleDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.ArticleAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public JsonResult IsExistCode([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.Article.IsExistCodeEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Article.IsExistCodeEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.ArticleAPI.IsExistCode(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

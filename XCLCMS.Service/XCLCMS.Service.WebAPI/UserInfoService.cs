@@ -54,15 +54,15 @@ namespace XCLCMS.Service.WebAPI
         /// <summary>
         /// 判断用户名是否存在
         /// </summary>
-        public APIResponseEntity<bool> IsExistUserName(APIRequestEntity<string> request)
+        public APIResponseEntity<bool> IsExistUserName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity> request)
         {
             var response = new APIResponseEntity<bool>();
             response.IsSuccess = true;
             response.Message = "该用户名可以使用！";
 
-            request.Body = (request.Body ?? "").Trim();
+            request.Body.UserName = (request.Body.UserName ?? "").Trim();
 
-            if (this.userInfoBLL.IsExistUserName(request.Body))
+            if (this.userInfoBLL.IsExistUserName(request.Body.UserName))
             {
                 response.IsSuccess = false;
                 response.Message = "该用户名已存在！";

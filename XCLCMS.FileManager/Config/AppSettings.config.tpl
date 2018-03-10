@@ -6,7 +6,6 @@
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
     <!--应用号-->
     <add key="AppKey" value="${config.AppKey}" />
-    <add key="WebAPIJsUrl" value="${config.WebAPIJsUrl}" />
     <add key="WebAPIServiceURL" value="${config.WebAPIServiceURL}" />
 
     <!--当前系统所在环境（XCLCMS.Lib.Common.Comm.SysEnvironmentEnum）-->

@@ -106,7 +106,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询所有商户应用键值形式的列表
         /// </summary>
         [HttpGet]
-        public async Task<APIResponseEntity<List<XCLNetTools.Entity.TextValue>>> AllTextValueList([FromUri] APIRequestEntity<XCLCMS.Data.Model.MerchantApp> request)
+        public async Task<APIResponseEntity<List<XCLNetTools.Entity.TextValue>>> AllTextValueList([FromUri] APIRequestEntity<long> request)
         {
             return await Task.Run(() =>
             {
@@ -125,11 +125,11 @@ namespace XCLCMS.WebAPI.Controllers
 
                 #endregion 限制商户
 
-                if (request.Body?.FK_MerchantID > 0)
+                if (request.Body > 0)
                 {
                     req.Body.Where = XCLNetTools.DataBase.SQLLibrary.JoinWithAnd(new List<string>() {
                         req.Body.Where,
-                        string.Format("FK_MerchantID={0}",request.Body?.FK_MerchantID)
+                        string.Format("FK_MerchantID={0}",request.Body)
                     });
                 }
 

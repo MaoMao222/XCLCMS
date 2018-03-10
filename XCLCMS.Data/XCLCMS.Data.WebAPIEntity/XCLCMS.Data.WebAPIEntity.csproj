@@ -95,6 +95,7 @@
     <Compile Include="RequestEntity\UserCenter\PasswordEntity.cs" />
     <Compile Include="RequestEntity\UserCenter\UserBaseInfoEntity.cs" />
     <Compile Include="RequestEntity\UserInfo\AddOrUpdateEntity.cs" />
+    <Compile Include="RequestEntity\UserInfo\IsExistUserNameEntity.cs" />
     <Compile Include="ResponseEntity\PageListResponseEntity.cs" />
   </ItemGroup>
   <ItemGroup>

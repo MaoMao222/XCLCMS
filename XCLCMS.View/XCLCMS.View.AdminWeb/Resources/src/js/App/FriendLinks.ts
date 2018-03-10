@@ -65,15 +65,12 @@ app.FriendLinksList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "FriendLinks/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "FriendLinks/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -116,15 +113,14 @@ app.FriendLinksAdd = {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "FriendLinks/IsExistTitle",
+                            url: XCLCMSPageGlobalConfig.RootURL + "FriendLinks/IsExistTitle",
                             data: function () {
-                                var request = XCLCMSWebApi.CreateRequest();
-                                request.Body = {};
-                                request.Body.Title = $("input[name='txtTitle']").val();
-                                request.Body.FriendLinkID = $("input[name='FriendLinkID']").val();
-                                request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-                                request.Body.MerchantAppID = $("input[name='txtMerchantAppID']").val();
-                                return request;
+                                return {
+                                    Title: $("input[name='txtTitle']").val(),
+                                    FriendLinkID: $("input[name='FriendLinkID']").val(),
+                                    MerchantID: $("input[name='txtMerchantID']").val(),
+                                    MerchantAppID: $("input[name='txtMerchantAppID']").val()
+                                };
                             }
                         };
                     }

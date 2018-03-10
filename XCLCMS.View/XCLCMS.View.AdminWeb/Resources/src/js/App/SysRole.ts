@@ -41,17 +41,13 @@ app.SysRoleList = {
 
         _this.TreeObj = $('#tableSysRoleList');
         //加载列表树
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = 0;
         _this.TreeObj.treegrid({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysRole/GetList',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysRole/GetList',
+            queryParams: {},
             onBeforeExpand: function (node: any) {
-                _this.TreeObj.treegrid('options').queryParams = (function () {
-                    var request = XCLCMSWebApi.CreateRequest();
-                    request.Body = node.SysRoleID;
-                    return request;
-                })();
+                _this.TreeObj.treegrid('options').queryParams = {
+                    id: node.SysRoleID
+                };
             },
             method: 'get',
             idField: 'SysRoleID',
@@ -186,13 +182,11 @@ app.SysRoleList = {
         var _this = this;
         var ids = _this.GetSelectedIds();
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
             $.XGoAjax({
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "SysRole/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 },
                 postSuccess: function (ops: any, data: IAnyPropObject) {
@@ -249,13 +243,11 @@ app.SysRoleAdd = {
             return;
         }
 
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = {};
-        request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-
         $obj.combotree({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysFunction/GetAllJsonForEasyUITree',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysFunction/GetAllJsonForEasyUITree',
+            queryParams: {
+                MerchantID: $("input[name='txtMerchantID']").val()
+            },
             method: 'get',
             checkbox: true,
             lines: true,
@@ -278,26 +270,24 @@ app.SysRoleAdd = {
                 txtRoleName: {
                     required: true,
                     XCLCustomRemote: {
-                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/IsExistRoleNameInSameLevel",
+                        url: XCLCMSPageGlobalConfig.RootURL + "SysRole/IsExistRoleNameInSameLevel",
                         data: function () {
-                            var request = XCLCMSWebApi.CreateRequest();
-                            request.Body = {};
-                            request.Body.RoleName = $("#txtRoleName").val();
-                            request.Body.ParentID = $("#ParentID").val();
-                            request.Body.SysRoleID = $("#SysRoleID").val();
-                            return request;
+                            return {
+                                RoleName: $("#txtRoleName").val(),
+                                ParentID: $("#ParentID").val(),
+                                SysRoleID: $("#SysRoleID").val()
+                            };
                         }
                     }
                 },
                 txtCode: {
                     XCLCustomRemote: {
-                        url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysRole/IsExistCode",
+                        url: XCLCMSPageGlobalConfig.RootURL + "SysRole/IsExistCode",
                         data: function () {
-                            var request = XCLCMSWebApi.CreateRequest();
-                            request.Body = {};
-                            request.Body.Code = $("#txtCode").val();
-                            request.Body.SysRoleID = $("#SysRoleID").val();
-                            return request;
+                            return {
+                                Code: $("#txtCode").val(),
+                                SysRoleID: $("#SysRoleID").val()
+                            };
                         }
                     }
                 },

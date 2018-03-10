@@ -94,7 +94,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// </summary>
         [HttpGet]
         [XCLCMS.WebAPI.Filters.APIOpenPermissionFilter]
-        public async Task<APIResponseEntity<bool>> IsExistUserName([FromUri] APIRequestEntity<string> request)
+        public async Task<APIResponseEntity<bool>> IsExistUserName([FromUri] APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity> request)
         {
             return await Task.Run(() =>
             {

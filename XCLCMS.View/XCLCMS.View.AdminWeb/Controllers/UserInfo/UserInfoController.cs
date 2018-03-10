@@ -246,5 +246,24 @@ namespace XCLCMS.View.AdminWeb.Controllers.UserInfo
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_UserDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.UserInfoAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistUserName([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.UserInfoAPI.IsExistUserName(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
@@ -113,6 +114,68 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysFunction
             var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.Update(request);
 
             return Json(response);
+        }
+
+        [HttpGet]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionView)]
+        public ActionResult GetList(long id = 0)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = id;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.GetList(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetAllJsonForEasyUITree([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.GetAllJsonForEasyUITreeEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.GetAllJsonForEasyUITreeEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.GetAllJsonForEasyUITree(request);
+            return new ContentResult()
+            {
+                Content = XCLNetTools.Serialize.JSON.Serialize(response, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft),
+                ContentEncoding = System.Text.Encoding.UTF8,
+                ContentType = "application/json"
+            };
+        }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysFunctionDel)]
+        public ActionResult DelChild(long id)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
+            request.Body = id;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.DelChild(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistFunctionNameInSameLevel([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.IsExistFunctionNameInSameLevelEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.IsExistFunctionNameInSameLevelEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.IsExistFunctionNameInSameLevel(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistCode([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.IsExistCodeEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.IsExistCodeEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysFunctionAPI.IsExistCode(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

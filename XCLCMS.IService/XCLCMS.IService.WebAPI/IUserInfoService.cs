@@ -19,7 +19,7 @@ namespace XCLCMS.IService.WebAPI
 
         APIResponseEntity<Data.Model.View.v_UserInfo> Detail(APIRequestEntity<long> request);
 
-        APIResponseEntity<bool> IsExistUserName(APIRequestEntity<string> request);
+        APIResponseEntity<bool> IsExistUserName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity> request);
 
         APIResponseEntity<PageListResponseEntity<v_UserInfo>> PageList(APIRequestEntity<PageListConditionEntity> request);
 

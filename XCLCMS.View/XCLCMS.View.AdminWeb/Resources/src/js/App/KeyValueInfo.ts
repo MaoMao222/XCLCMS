@@ -106,12 +106,11 @@ class KeyValueInfoAdd {
 
         //分类
         var initKeyValueInfoTypeTree = function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = {};
-            request.Body.MerchantID = $("input[name='txtMerchantID']").val();
             _this.Elements.selKeyValueInfoType.combotree({
-                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "SysDic/GetEasyUITreeByCondition",
-                queryParams: request,
+                url: XCLCMSPageGlobalConfig.RootURL + "SysDic/GetEasyUITreeByCondition",
+                queryParams: {
+                    MerchantID: $("input[name='txtMerchantID']").val()
+                },
                 method: 'get',
                 checkbox: true,
                 onlyLeafCheck: true,

@@ -43,9 +43,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 获取easyui tree格式的所有功能json
         /// </summary>
-        public static APIResponseEntity<List<XCLNetTools.Entity.EasyUI.TreeItem>> GetAllJsonForEasyUITree(APIRequestEntity<object> request)
+        public static APIResponseEntity<List<XCLNetTools.Entity.EasyUI.TreeItem>> GetAllJsonForEasyUITree(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.GetAllJsonForEasyUITreeEntity> request)
         {
-            return Library.Request<object, List<XCLNetTools.Entity.EasyUI.TreeItem>>(request, "SysFunction/GetAllJsonForEasyUITree");
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.SysFunction.GetAllJsonForEasyUITreeEntity, List<XCLNetTools.Entity.EasyUI.TreeItem>>(request, "SysFunction/GetAllJsonForEasyUITree");
         }
 
         /// <summary>

@@ -93,7 +93,7 @@ namespace XCLCMS.WebAPI.Controllers
         /// 查询所有商户键值形式的列表
         /// </summary>
         [HttpGet]
-        public async Task<APIResponseEntity<List<XCLNetTools.Entity.TextValue>>> AllTextValueList([FromUri] APIRequestEntity<XCLCMS.Data.Model.Merchant> request)
+        public async Task<APIResponseEntity<List<XCLNetTools.Entity.TextValue>>> AllTextValueList([FromUri] APIRequestEntity<object> request)
         {
             return await Task.Run(() =>
             {

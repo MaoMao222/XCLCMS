@@ -28,9 +28,9 @@ namespace XCLCMS.Lib.WebAPI
         /// <summary>
         /// 判断用户名是否存在
         /// </summary>
-        public static APIResponseEntity<bool> IsExistUserName(APIRequestEntity<object> request)
+        public static APIResponseEntity<bool> IsExistUserName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity> request)
         {
-            return Library.Request<object, bool>(request, "UserInfo/IsExistUserName");
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.UserInfo.IsExistUserNameEntity, bool>(request, "UserInfo/IsExistUserName");
         }
 
         /// <summary>

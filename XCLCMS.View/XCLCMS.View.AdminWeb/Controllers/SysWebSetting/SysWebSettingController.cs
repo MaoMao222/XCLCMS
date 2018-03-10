@@ -165,5 +165,24 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysWebSetting
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysWebSettingDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.SysWebSettingAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistKeyName([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.SysWebSetting.IsExistKeyNameEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysWebSetting.IsExistKeyNameEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.SysWebSettingAPI.IsExistKeyName(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

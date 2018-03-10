@@ -266,5 +266,33 @@ namespace XCLCMS.View.AdminWeb.Controllers.Merchant
 
             return Json(response);
         }
+
+        [HttpPost]
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_UserAdmin_MerchantDel)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.MerchantAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistMerchantName([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.Merchant.IsExistMerchantNameEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.Merchant.IsExistMerchantNameEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.MerchantAPI.IsExistMerchantName(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult AllTextValueList()
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<object>(base.UserToken);
+            request.Body = new object();
+            var response = XCLCMS.Lib.WebAPI.MerchantAPI.AllTextValueList(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

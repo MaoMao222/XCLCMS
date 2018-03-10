@@ -64,15 +64,12 @@ app.UserInfoList = {
         }
 
         art.dialog.confirm("您确定要删除此信息吗？", function () {
-            var request = XCLCMSWebApi.CreateRequest();
-            request.Body = ids;
-
             $.XGoAjax({
                 target: $("#btnDel")[0],
                 ajax: {
-                    url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "UserInfo/Delete",
+                    url: XCLCMSPageGlobalConfig.RootURL + "UserInfo/DelByIDSubmit",
                     contentType: "application/json",
-                    data: JSON.stringify(request),
+                    data: JSON.stringify(ids),
                     type: "POST"
                 }
             });
@@ -101,7 +98,7 @@ app.UserAdd = {
         var _this = this;
         _this.Elements.Init();
         _this.InitValidator();
-        
+
         //初始化角色选择框
         _this.CreateSysRoleTree(_this.Elements.txtUserRoleIDs);
 
@@ -123,13 +120,11 @@ app.UserAdd = {
             return;
         }
 
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = {};
-        request.Body.MerchantID = $("input[name='txtMerchantID']").val();
-
         $obj.combotree({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + 'SysRole/GetAllJsonForEasyUITree',
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + 'SysRole/GetAllJsonForEasyUITree',
+            queryParams: {
+                MerchantID: $("input[name='txtMerchantID']").val()
+            },
             method: 'get',
             checkbox: true,
             onlyLeafCheck: true,
@@ -154,11 +149,11 @@ app.UserAdd = {
                     required: true,
                     XCLCustomRemote: function () {
                         return {
-                            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "UserInfo/IsExistUserName",
+                            url: XCLCMSPageGlobalConfig.RootURL + "UserInfo/IsExistUserName",
                             data: function () {
-                                var request = XCLCMSWebApi.CreateRequest();
-                                request.Body = $("#txtUserName").val();
-                                return request;
+                                return {
+                                    UserName: $("#txtUserName").val()
+                                };
                             }
                         };
                     },

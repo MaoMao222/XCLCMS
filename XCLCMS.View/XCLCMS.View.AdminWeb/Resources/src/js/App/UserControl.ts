@@ -22,13 +22,11 @@ app.MerchantSelect = {
             if (!ops.merchantAppIDObj || ops.merchantAppIDObj.length == 0) {
                 return;
             }
-            var req = XCLCMSWebApi.CreateRequest();
-            req.Body = {
-                FK_MerchantID: $("input[name='" + ops.merchantIDObj.attr("id") + "']").val()
-            };
             ops.merchantAppIDObj.combobox({
-                url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "MerchantApp/AllTextValueList",
-                queryParams: req,
+                url: XCLCMSPageGlobalConfig.RootURL + "MerchantApp/AllTextValueList",
+                queryParams: {
+                    id: $("input[name='" + ops.merchantIDObj.attr("id") + "']").val()
+                },
                 valueField: 'Value',
                 textField: 'Text',
                 editable: false,
@@ -41,11 +39,9 @@ app.MerchantSelect = {
         initMerchantAppSelect();
 
         //查询商户
-        var request = XCLCMSWebApi.CreateRequest();
-        request.Body = {};
         ops.merchantIDObj.combobox({
-            url: XCLCMSPageGlobalConfig.WebAPIServiceURL + "Merchant/AllTextValueList",
-            queryParams: request,
+            url: XCLCMSPageGlobalConfig.RootURL + "Merchant/AllTextValueList",
+            queryParams: {},
             valueField: 'Value',
             textField: 'Text',
             editable: false,

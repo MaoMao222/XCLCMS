@@ -26,6 +26,14 @@ namespace XCLCMS.Lib.WebAPI
         }
 
         /// <summary>
+        /// 查询所有商户键值形式的列表
+        /// </summary>
+        public static APIResponseEntity<List<XCLNetTools.Entity.TextValue>> AllTextValueList(APIRequestEntity<object> request)
+        {
+            return Library.Request<object, List<XCLNetTools.Entity.TextValue>>(request, "Merchant/AllTextValueList");
+        }
+
+        /// <summary>
         /// 获取商户类型
         /// </summary>
         public static APIResponseEntity<Dictionary<string, long>> GetMerchantTypeDic(APIRequestEntity<object> request)
@@ -38,7 +46,7 @@ namespace XCLCMS.Lib.WebAPI
         /// </summary>
         public static APIResponseEntity<bool> IsExistMerchantName(APIRequestEntity<XCLCMS.Data.WebAPIEntity.RequestEntity.Merchant.IsExistMerchantNameEntity> request)
         {
-            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.Merchant.IsExistMerchantNameEntity, bool>(request, "Merchant/IsExistMerchantName", false);
+            return Library.Request<XCLCMS.Data.WebAPIEntity.RequestEntity.Merchant.IsExistMerchantNameEntity, bool>(request, "Merchant/IsExistMerchantName");
         }
 
         /// <summary>

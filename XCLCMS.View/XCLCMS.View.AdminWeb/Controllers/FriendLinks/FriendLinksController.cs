@@ -204,5 +204,26 @@ namespace XCLCMS.View.AdminWeb.Controllers.FriendLinks
 
             return Json(response);
         }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        [XCLCMS.Lib.Filters.FunctionFilter(Function = XCLCMS.Data.CommonHelper.Function.FunctionEnum.FriendLinks_Del)]
+        public override ActionResult DelByIDSubmit(List<long> ids)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<List<long>>(base.UserToken);
+            request.Body = ids;
+            var response = XCLCMS.Lib.WebAPI.FriendLinksAPI.Delete(request);
+            return Json(response);
+        }
+
+        [HttpGet]
+        public ActionResult IsExistTitle([System.Web.Http.FromUri] XCLCMS.Data.WebAPIEntity.RequestEntity.FriendLinks.IsExistTitleEntity condition)
+        {
+            var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.FriendLinks.IsExistTitleEntity>(base.UserToken);
+            request.Body = condition;
+            var response = XCLCMS.Lib.WebAPI.FriendLinksAPI.IsExistTitle(request);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -24,7 +24,6 @@ interface HTMLElement {
 }
 
 declare var XJ: IAnyPropObject;
-declare var XCLCMSWebApi: IAnyPropObject;
 declare var XCLCMSPageGlobalConfig: IAnyPropObject;
 declare var art: IAnyPropObject;
 declare var CKEDITOR: IAnyPropObject;
