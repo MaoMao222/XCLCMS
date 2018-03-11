@@ -141,7 +141,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<long>(base.UserToken);
             request.Body = id;
             var response = XCLCMS.Lib.WebAPI.SysRoleAPI.GetList(request);
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return XCLCMS.Lib.Common.Comm.XCLJsonResult(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -178,12 +178,7 @@ namespace XCLCMS.View.AdminWeb.Controllers.SysRole
             var request = XCLCMS.Lib.WebAPI.Library.CreateRequest<XCLCMS.Data.WebAPIEntity.RequestEntity.SysRole.GetAllJsonForEasyUITreeEntity>(base.UserToken);
             request.Body = condition;
             var response = XCLCMS.Lib.WebAPI.SysRoleAPI.GetAllJsonForEasyUITree(request);
-            return new ContentResult()
-            {
-                Content = XCLNetTools.Serialize.JSON.Serialize(response, XCLNetTools.Serialize.JSON.JsonProviderEnum.Newtonsoft),
-                ContentEncoding = System.Text.Encoding.UTF8,
-                ContentType = "application/json"
-            };
+            return XCLCMS.Lib.Common.Comm.XCLJsonResult(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

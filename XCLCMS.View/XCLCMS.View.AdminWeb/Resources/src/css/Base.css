@@ -278,6 +278,7 @@ a {
     .XCLPanel .XCLPanelBody {
         padding: 5px 10px 5px 10px;
         border-top: solid 1px #95b8e7;
+        overflow-x: auto;
     }
 
 .XCLNote {
