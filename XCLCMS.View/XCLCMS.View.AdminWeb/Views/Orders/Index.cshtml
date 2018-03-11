@@ -35,14 +35,11 @@
                     <td>所属应用</td>
                     <td>产品名称</td>
                     <td>产品售价</td>
-                    <td>产品描述</td>
                     <td>所属用户名</td>
                     <td>订单价格</td>
                     <td>支付状态</td>
                     <td>支付方式</td>
-                    <td>流水状态</td>
                     <td>成交时间</td>
-                    <td>备注</td>
                     <td>记录状态</td>
                     <td>创建时间</td>
                     <td>更新时间</td>
@@ -65,16 +62,13 @@
                                     @m.MerchantName
                                 </td>
                                 <td>@m.MerchantAppName</td>
-                                <td><a href="@Url.Action("Show","Product",new { ProductID=m.FK_ProductID})" target="_blank">@m.ProductName</a></td>
+                                <td><a href="@Url.Action("Show","Product",new { ProductID=m.FK_ProductID})" target="_blank" title="@m.ProductName">@XCLNetTools.StringHander.Common.GetSubString(m.ProductName, 20, "...")</a></td>
                                 <td align="center">@m.ProductPrice</td>
-                                <td>@XCLNetTools.StringHander.Common.GetSubString(m.ProductDesc, 20, "...")</td>
                                 <td align="center">@m.UserName</td>
                                 <td align="center">@m.Price</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayStatusEnum), m.PayStatus)</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayTypeEnum), m.PayType)</td>
-                                <td align="center">@m.FlowStatus</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.DealDoneTime)</td>
-                                <td>@XCLNetTools.StringHander.Common.GetSubString(m.Remark, 20, "...")</td>
                                 <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.UpdateTime)</td>
