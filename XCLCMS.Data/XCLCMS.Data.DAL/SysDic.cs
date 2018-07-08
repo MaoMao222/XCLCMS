@@ -46,12 +46,20 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 获取指定sysDicID所属的层级list
+        /// 获取指定sysDicID所属的层级list，如:根目录/子目录/文件
         /// </summary>
         public List<XCLCMS.Data.Model.Custom.SysDicSimple> GetLayerListBySysDicID(long sysDicID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand(string.Format("select * from fun_SysDic_GetLayerListByID({0})", sysDicID));
+            DbCommand dbCommand = db.GetSqlStringCommand(string.Format(@"
+                                                                                                                            WITH Info1 AS (
+	                                                                                                                            SELECT SysDicID, ParentID,DicName FROM dbo.SysDic  WITH(NOLOCK) WHERE SysDicID={0}
+	                                                                                                                            UNION ALL
+	                                                                                                                            SELECT a.SysDicID, a.ParentID,a.DicName FROM dbo.SysDic AS a  WITH(NOLOCK)
+	                                                                                                                            INNER JOIN Info1 AS b ON a.SysDicID=b.ParentID
+                                                                                                                            )
+                                                                                                                            SELECT SysDicID, ParentID,DicName FROM Info1
+                                                                                                   ", sysDicID));
             List<XCLCMS.Data.Model.Custom.SysDicSimple> lst = null;
             using (var dr = db.ExecuteReader(dbCommand))
             {

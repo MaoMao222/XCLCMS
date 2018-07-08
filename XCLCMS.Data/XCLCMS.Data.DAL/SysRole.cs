@@ -151,11 +151,19 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 获取指定SysRoleID所属的层级list
+        /// 获取指定SysRoleID所属的层级list，如:根目录/子目录/文件
         /// </summary>
         public List<XCLCMS.Data.Model.Custom.SysRoleSimple> GetLayerListBySysRoleID(long sysRoleID)
         {
-            string str = string.Format("select * from fun_SysRole_GetLayerListByID({0})", sysRoleID);
+            string str = string.Format(@"
+                                                        WITH Info1 AS (
+	                                                        SELECT SysRoleID, ParentID, RoleName FROM dbo.SysRole  WITH(NOLOCK) WHERE SysRoleID={0}
+	                                                        UNION ALL
+	                                                        SELECT a.SysRoleID, a.ParentID,a.RoleName FROM dbo.SysRole AS a  WITH(NOLOCK)
+	                                                        INNER JOIN Info1 AS b ON a.SysRoleID=b.ParentID
+                                                        )
+                                                        SELECT SysRoleID, ParentID,RoleName FROM Info1
+                              ", sysRoleID);
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(str.ToString());
             List<XCLCMS.Data.Model.Custom.SysRoleSimple> lst = null;

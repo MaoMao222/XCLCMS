@@ -174,11 +174,19 @@ namespace XCLCMS.Data.DAL
         }
 
         /// <summary>
-        /// 获取指定SysFunctionID所属的层级list
+        /// 获取指定SysFunctionID所属的层级list，如:根目录/子目录/文件
         /// </summary>
         public List<XCLCMS.Data.Model.Custom.SysFunctionSimple> GetLayerListBySysFunctionID(long sysFunctionID)
         {
-            string str = string.Format("select * from fun_SysFunction_GetLayerListByID({0})", sysFunctionID);
+            string str = string.Format(@"
+                                                        WITH Info1 AS (
+	                                                        SELECT SysFunctionID, ParentID, FunctionName FROM dbo.SysFunction  WITH(NOLOCK) WHERE SysFunctionID={0}
+	                                                        UNION ALL
+	                                                        SELECT a.SysFunctionID, a.ParentID,a.FunctionName FROM dbo.SysFunction AS a  WITH(NOLOCK)
+	                                                        INNER JOIN Info1 AS b ON a.SysFunctionID=b.ParentID
+                                                        )
+                                                        SELECT SysFunctionID, ParentID,FunctionName FROM Info1
+                              ", sysFunctionID);
             Database db = base.CreateDatabase();
             DbCommand dbCommand = db.GetSqlStringCommand(str.ToString());
             List<XCLCMS.Data.Model.Custom.SysFunctionSimple> lst = null;

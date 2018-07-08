@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 
 namespace XCLCMS.Data.DAL.View
@@ -64,7 +65,20 @@ namespace XCLCMS.Data.DAL.View
         public List<XCLCMS.Data.Model.View.v_SysDic> GetAllUnderListByCode(string code)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from fun_SysDic_GetAllUnderListByCode(@Code)");
+            DbCommand dbCommand = db.GetSqlStringCommand(@"
+                                                                                                        --递归获取指定code下的所有列表（不包含该code的记录）
+                                                                                                        WITH Info1 AS (
+	                                                                                                        SELECT * FROM dbo.v_SysDic WITH(NOLOCK)  WHERE RecordState='N' AND ParentID=(
+		                                                                                                        SELECT SysDicID FROM dbo.SysDic  WITH(NOLOCK) WHERE Code=@Code
+	                                                                                                        )
+                                                                                                        ),Info2 AS (
+	                                                                                                        SELECT * FROM Info1
+	                                                                                                        UNION ALL
+	                                                                                                        SELECT a.* FROM dbo.v_SysDic AS a WITH(NOLOCK)
+	                                                                                                        INNER JOIN Info2 AS b ON a.ParentID=b.SysDicID AND a.RecordState='N'
+                                                                                                        )
+                                                                                                        SELECT * FROM Info2
+                                                                                                    ");
             db.AddInParameter(dbCommand, "Code", DbType.AnsiString, code);
             using (var dr = db.ExecuteReader(dbCommand))
             {
@@ -78,7 +92,20 @@ namespace XCLCMS.Data.DAL.View
         public List<XCLCMS.Data.Model.View.v_SysDic> GetAllUnderListByID(long sysDicID)
         {
             Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand("select * from fun_SysDic_GetAllUnderListByID(@sysDicID)");
+            DbCommand dbCommand = db.GetSqlStringCommand(@"
+                                                                                                        --递归获取指定SysDicID下的所有列表（不包含该SysDicID的记录）
+                                                                                                        WITH Info1 AS (
+	                                                                                                        SELECT * FROM dbo.v_SysDic  WITH(NOLOCK) WHERE RecordState='N' AND ParentID=(
+		                                                                                                        SELECT SysDicID FROM dbo.SysDic  WITH(NOLOCK) WHERE SysDicID=@sysDicID
+	                                                                                                        )
+                                                                                                        ),Info2 AS (
+	                                                                                                        SELECT * FROM Info1
+	                                                                                                        UNION ALL
+	                                                                                                        SELECT a.* FROM dbo.v_SysDic AS a WITH(NOLOCK)
+	                                                                                                        INNER JOIN Info2 AS b ON a.ParentID=b.SysDicID AND a.RecordState='N'
+                                                                                                        )
+                                                                                                        SELECT * FROM Info2
+                                                                                                   ");
             db.AddInParameter(dbCommand, "sysDicID", DbType.AnsiString, sysDicID);
             using (var dr = db.ExecuteReader(dbCommand))
             {
@@ -91,14 +118,7 @@ namespace XCLCMS.Data.DAL.View
         /// </summary>
         public List<XCLCMS.Data.Model.View.v_SysDic> GetSystemMenuModelList()
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append(@"SELECT * FROM dbo.fun_SysDic_GetAllUnderListByCode('SysMenu') order by sort asc");
-            Database db = base.CreateDatabase();
-            DbCommand dbCommand = db.GetSqlStringCommand(strSql.ToString());
-            using (var dr = db.ExecuteReader(dbCommand))
-            {
-                return XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<XCLCMS.Data.Model.View.v_SysDic>(dr);
-            }
+            return this.GetAllUnderListByCode("SysMenu").OrderBy(k => k.Sort).ToList();
         }
     }
 }
