@@ -6,24 +6,24 @@
 XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**，使用asp.net mvc开发，提供简单易用的web api 接口，支持单个商户对应多个应用，您可以免费使用它构建属于自己的博客、分类信息、企业展示等网站或其它App应用。
 
 ## 特点
-- 一个后台，多个前台应用界面（根据应用号来区分，每个商户下可拥有多个应用，如：使用本系统来管理多个博客或企业站的内容）
+- 一个后台，多个前台应用界面（根据应用号来区分，每个商户下可拥有多个应用，如：使用本系统来同时管理多个博客或企业站的内容）
 - 提供轻量级的Web Api，快速接入新的应用
 - 对新功能的扩展无太多技术要求
 - 简单实用，适用于个人与中小企业（适合自己的，才是最好的）
-- 本系统为后台管理系统，各个前台应用需要自己根据Web API来实现
+- 本系统为后台管理系统，各个前台应用需要自己根据Web Api来实现
 
 ## 适用场景
 
 - 已有一个移动端App，但无后台管理，想通过一个管理系统来实现App数据的更新
 - 想快速搭建一个博客或企业站的前台数据展示页面
-- 想搭建多个博客、企业站、APP，但只想使用一个后台来维护所有数据
+- 想搭建多个博客、企业站、App，但只想使用一个后台来维护所有数据
 - 只想纯粹使用该后台系统，然后扩展一些业务模块
 
 ## 软件架构
 1. 使用C# & ASP.NET MVC 5 构建（.Net Framework 4.6）
 2. 数据库使用MSSQL2012
 3. 界面框架使用jQuery easyUI
-4. 前台脚本：jQuery,Javascript,TypeScript
+4. 前台脚本：jQuery,Javascript,TypeScript,AngularJs
 
 ## 项目结构
 1. XCLCMS.Data.BLL：数据业务层
@@ -32,7 +32,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 4. XCLCMS.Data.Model：数据实体层
 5. XCLCMS.Data.WebAPIEntity：Web Api数据实体层
 6. XCLCMS.Document：项目文档相关
-7. XCLCMS.FileManager：文件管理与上传web站点
+7. XCLCMS.FileManager：文件管理与上传web站点（**文件管理后台站点入口**）
 8. XCLCMS.Lib：前台公共处理库
 9. XCLCMS.View.AdminWeb：后台管理系统web站点（**管理后台站点入口**） 
 10. XCLCMS.IService.WebAPI：Web Api服务定义层
@@ -60,9 +60,10 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 
 ![](https://raw.githubusercontent.com/xucongli1989/XCLCMS/master/XCLCMS.Document/Img/%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91%E5%9B%BE.jpg)
 
-## 部署说明
+## 文档说明
 
-[请参见部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
+- [部署说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2.md)
+- [静态资源说明文档](https://github.com/xucongli1989/XCLCMS/blob/master/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AF%B4%E6%98%8E.md)
 
 ## Web API文档
 
@@ -74,7 +75,7 @@ XCLCMS是一个**轻量级**的CMS（内容管理系统）**后台管理系统**
 
 ## 进度
 - 开始编码于：2014年10月
-- V2.0版本已完成：85%
+- V2.0版本已完成：90%
 - [当前计划安排](https://github.com/xucongli1989/XCLCMS/projects/1)
 
 > 1、由于v1.0版本号已申请著作权，故正式版的版本号为V2.0
