@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +26,7 @@ namespace XCLCMS.Data.DAL.Common
                 ps.Add("@TotalCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 using (var dr = db.ExecuteReader(strSql, ps))
                 {
-                    var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<T>(dr) as List<T>;
+                    var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<T>(dr);
                     pageInfo.RecordCount = ps.Get<int>("@TotalCount");
                     return lst;
                 }
@@ -39,9 +38,10 @@ namespace XCLCMS.Data.DAL.Common
         /// </summary>
         public static void ClearRubbishData()
         {
-            Database db = new XCLCMS.Data.DAL.Common.BaseDAL().CreateDatabase();
-            DbCommand dbCommand = db.GetStoredProcCommand("sp_ClearRubbishData");
-            db.ExecuteNonQuery(dbCommand);
+            using (var db = new XCLCMS.Data.DAL.Common.BaseDAL().CreateSqlConnection())
+            {
+                db.Execute("sp_ClearRubbishData", commandType: CommandType.StoredProcedure);
+            }
         }
 
         /// <summary>
