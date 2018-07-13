@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Data;
+﻿using Dapper;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,16 +20,17 @@ namespace XCLCMS.Data.DAL.Common
             condition.PageIndex = pageInfo.PageIndex;
             condition.PageSize = pageInfo.PageSize;
 
-            var db = new XCLCMS.Data.DAL.Common.BaseDAL().CreateDatabase();
             string strSql = XCLNetTools.DataBase.SQLLibrary.CreatePagerQuerySqlString(condition);
-            var dbCommand = db.GetSqlStringCommand(strSql);
-            db.AddOutParameter(dbCommand, "TotalCount", DbType.Int32, 4);
-
-            using (var dr = db.ExecuteReader(dbCommand))
+            using (var db = new XCLCMS.Data.DAL.Common.BaseDAL().CreateSqlConnection())
             {
-                var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<T>(dr) as List<T>;
-                pageInfo.RecordCount = XCLNetTools.Common.DataTypeConvert.ToInt(dbCommand.Parameters["@TotalCount"].Value);
-                return lst;
+                var ps = new DynamicParameters();
+                ps.Add("@TotalCount", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                using (var dr = db.ExecuteReader(strSql, ps))
+                {
+                    var lst = XCLNetTools.DataSource.DataReaderHelper.DataReaderToList<T>(dr) as List<T>;
+                    pageInfo.RecordCount = ps.Get<int>("@TotalCount");
+                    return lst;
+                }
             }
         }
 
