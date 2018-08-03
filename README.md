@@ -5,7 +5,7 @@
 
 ## **Introduction**
 
-XCLCMS is a **lightweight ** CMS (content management system) **background management system**, Developed using asp.net MVC, it provides a simple and easy-to-use web API interface and supports multiple applications for a single merchant.
+XCLCMS is a **lightweight** CMS (content management system) **background management system**, Developed using asp.net MVC, it provides a simple and easy-to-use web API interface and supports multiple applications for a single merchant.
 
 ## Features
 - One background, multiple front-end application interfaces (each business can have multiple applications according to the application number, such as using this system to manage the content of multiple blogs or enterprise sites at the same time)
@@ -96,7 +96,7 @@ If you find any serious bugs in software use, or if you have good comments or su
 [LICENSE](LICENSE)
 
 ## To Donate
-**(Personal: 499 yuan;Enterprises: 4,999 yuan) ** friends, in legitimate commercial activities, based on the original license to freely use this software.
+**(Personal: 499 yuan;Enterprises: 4,999 yuan)** friends, in legitimate commercial activities, based on the original license to freely use this software.
 > Notice: Donation is voluntary, it is your recognition and encouragement to software workers, and it does not represent relevant employment behaviors such as technical support and requirement customization.
 >
 All questions concerning this project may be addressed by email or issue.
