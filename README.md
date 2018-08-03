@@ -78,14 +78,14 @@ XCLCMS is a **lightweight** CMS (content management system) **background managem
 
 - V2.0 version completed: 90%
 
-- [The plan](https://github.com/xucongli1989/XCLCMS/projects/1)
+- [The plan](projects/1)
 
   > 1.The official version number is V2.0 because the copyright of v1.0 has been applied
   >
   > 2.The official version has not been developed yet, some of the existing modules may have a big change, if you don't mind, it can be developed directly under the legal license agreement. 
 
 ## Milestone
-- Dec. 16, 2016 -- Applied for copyright (soft copy no. 1554794)
+- 2016-12-16 -- Applied for copyright (soft copy no. 1554794)
 - 2015-03-21 -- Open source on GitHub
 - 2014-10-01 -- Project approval, and start coding
 
