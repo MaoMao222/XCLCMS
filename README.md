@@ -78,7 +78,7 @@ XCLCMS is a **lightweight** CMS (content management system) **background managem
 
 - V2.0 version completed: 90%
 
-- [The plan](projects/1)
+- [The plan](../../projects/1)
 
   > 1.The official version number is V2.0 because the copyright of v1.0 has been applied
   >
