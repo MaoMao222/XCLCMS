@@ -331,7 +331,6 @@
     <Content Include="Resources\dist\app.js.map" />
     <Content Include="Resources\dist\main.js.map" />
     <Content Include="Resources\dist\plugins.js.map" />
-    <Content Include="Resources\说明.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
