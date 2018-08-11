@@ -56,7 +56,7 @@
                                 <td align="center">
                                     @m.MerchantName
                                 </td>
-                                <td>@m.MerchantAppName</td>
+                                <td align="center">@m.MerchantAppName</td>
                                 <td>@m.TagName</td>
                                 <td>@m.Description</td>
                                 <td align="center" class="@(XCLCMS.View.AdminWeb.Common.WebCommon.GetRecordStateClass(m.RecordState))">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.RecordStateEnum), m.RecordState)</td>
@@ -93,7 +93,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Tags.TagsList.Init();
-        });
+    $(function () {
+        window.xclcms.Tags.TagsList.Init();
+    });
 </script>

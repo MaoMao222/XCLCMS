@@ -56,8 +56,8 @@
                                     @(Model.PagerModel.StartIndex + i)
                                 </td>
                                 <td align="center" class="XCLNoWrap">@m.SysWebSettingID</td>
-                                <td>@m.MerchantName</td>
-                                <td>@m.MerchantAppName</td>
+                                <td align="center">@m.MerchantName</td>
+                                <td align="center">@m.MerchantAppName</td>
                                 <td>@m.KeyName</td>
                                 <td>@m.Remark</td>
                                 <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), m.ValueType)</td>
@@ -121,7 +121,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.SysWebSetting.SysWebSettingList.Init();
-        });
+    $(function () {
+        window.xclcms.SysWebSetting.SysWebSettingList.Init();
+    });
 </script>

@@ -43,16 +43,18 @@
                 <td>
                     @XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.PayedActionTypeEnum), Model.Product.PayedActionType)
                 </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
                 <td class="XCLTitle">购买成功后展示内容：</td>
-                <td>
-                    @Model.Product.PayedRemark
+                <td colspan="100">
+                    @Html.Raw(Model.Product.PayedRemark)
                 </td>
             </tr>
-
-
             <tr>
                 <td class="XCLTitle">描述：</td>
-                <td>
+                <td colspan="100">
                     @Html.Raw(Model.Product.Description)
                 </td>
             </tr>

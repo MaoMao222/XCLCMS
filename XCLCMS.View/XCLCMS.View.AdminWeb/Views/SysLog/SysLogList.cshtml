@@ -6,80 +6,82 @@
 
 <form>
 
-<div class="XCLPanel" style="margin-top:5px;">
-    <div class="XCLPanelHeader">
-        @if(XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogDel)){
-            <a href="javascript:void(0)" id="btnClearLog" class="easyui-menubutton" data-options="menu:'#clearLogMenu',iconCls:'icon-clear'">清空日志</a>
-            <div id="clearLogMenu">
-                @foreach (var m in Model.ClearLogDateTypeList) {
-                    <div xcl-data='{"val":"@m.Text","txt":"@m.Description"}' class="clearLogMenuItem">@(m.Description)</div>
-                }
-            </div>
-        }
-    </div>
-    <div class="XCLPanelBody">
-        <div>
-            @Html.Raw(Model.Search.XCLNetSearchHTML())
-        </div>
-        <table class="XCLTableList">
-            <tr class="XCLTableHeader XCLTableNoHover">
-                <td>
-                    <input type="checkbox" class="XCLTableCheckAll" value="" />
-                </td>
-                <td>序号</td>
-                <td>日志ID</td>
-                <td>所属商户号</td>
-                <td>所属应用号</td>
-                <td>日志级别</td>
-                <td>日志类别</td>
-                <td>创建时间</td>
-                <td>日志信息</td>
-            </tr>
-            @{
-                if (Model.SysLogList.IsNotNullOrEmpty())
-                {
-                    for (int i = 0; i < Model.SysLogList.Count; i++)
+    <div class="XCLPanel" style="margin-top:5px;">
+        <div class="XCLPanelHeader">
+            @if (XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, XCLCMS.Data.CommonHelper.Function.FunctionEnum.SysFun_Set_SysLogDel))
+            {
+                <a href="javascript:void(0)" id="btnClearLog" class="easyui-menubutton" data-options="menu:'#clearLogMenu',iconCls:'icon-clear'">清空日志</a>
+                <div id="clearLogMenu">
+                    @foreach (var m in Model.ClearLogDateTypeList)
                     {
-                        var m = Model.SysLogList[i];
+                        <div xcl-data='{"val":"@m.Text","txt":"@m.Description"}' class="clearLogMenuItem">@(m.Description)</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="XCLPanelBody">
+            <div>
+                @Html.Raw(Model.Search.XCLNetSearchHTML())
+            </div>
+            <table class="XCLTableList">
+                <tr class="XCLTableHeader XCLTableNoHover">
+                    <td>
+                        <input type="checkbox" class="XCLTableCheckAll" value="" />
+                    </td>
+                    <td>序号</td>
+                    <td>日志ID</td>
+                    <td>所属商户号</td>
+                    <td>所属应用号</td>
+                    <td>日志级别</td>
+                    <td>日志类别</td>
+                    <td>创建时间</td>
+                    <td>日志信息</td>
+                </tr>
+                @{
+                    if (Model.SysLogList.IsNotNullOrEmpty())
+                    {
+                        for (int i = 0; i < Model.SysLogList.Count; i++)
+                        {
+                            var m = Model.SysLogList[i];
+                            <tr>
+                                <td align="center"><input type="checkbox" class="XCLTableCheckItem" value="@m.SysLogID" /></td>
+                                <td align="center">
+                                    @(Model.PagerModel.StartIndex + i)
+                                </td>
+                                <td align="center">@m.SysLogID</td>
+                                <td align="center">@m.FK_MerchantID</td>
+                                <td align="center">@m.FK_MerchantAppID</td>
+                                <td align="center">@m.LogLevel</td>
+                                <td align="center">@m.LogType</td>
+                                <td align="center" style="white-space:nowrap;">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
+                                <td>
+                                    <div class="XCLCMSOverFlow">
+                                        <span class="XCLRed">IP：</span>@m.ClientIP
+                                        <span class="XCLRed">来源URL：</span><a href="@m.RefferUrl" target="_blank">@m.RefferUrl</a>
+                                        <span class="XCLRed">Url：</span><a href="@m.Url" target="_blank">@m.Url</a>
+                                        <span class="XCLRed">日志代码：</span>@m.Code
+                                        <span class="XCLRed">标题：</span>@m.Title
+                                        <span class="XCLRed">内容：</span>@m.Contents
+                                        <span class="XCLRed">备注：</span>@m.Remark
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
                         <tr>
-                            <td align="center"><input type="checkbox" class="XCLTableCheckItem" value="@m.SysLogID" /></td>
-                            <td align="center">
-                                @(Model.PagerModel.StartIndex+i)
-                            </td>
-                            <td align="center">@m.SysLogID</td>
-                            <td align="center">@m.FK_MerchantID</td>
-                            <td align="center">@m.FK_MerchantAppID</td>
-                            <td>@m.LogLevel</td>
-                            <td>@m.LogType</td>
-                            <td style="white-space:nowrap;">@string.Format("{0:yyyy-MM-dd HH:mm:ss}", m.CreateTime)</td>
-                            <td>
-                                <div class="XCLCMSOverFlow">
-                                    <span class="XCLRed">IP：</span>@m.ClientIP
-                                    <span class="XCLRed">来源URL：</span><a href="@m.RefferUrl" target="_blank">@m.RefferUrl</a>
-                                    <span class="XCLRed">Url：</span><a href="@m.Url" target="_blank">@m.Url</a>
-                                    <span class="XCLRed">日志代码：</span>@m.Code
-                                    <span class="XCLRed">标题：</span>@m.Title
-                                    <span class="XCLRed">内容：</span>@m.Contents
-                                    <span class="XCLRed">备注：</span>@m.Remark
-                                </div>
+                            <td colspan="100" align="center">
+                                暂无数据！
                             </td>
                         </tr>
                     }
                 }
-                else
-                {
-                    <tr>
-                        <td colspan="100" align="center">
-                            暂无数据！
-                        </td>
-                    </tr>
-                }
-            }
-        </table>
+            </table>
 
-        @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+            @Html.Partial("~/Views/UserControl/XCLPager.cshtml", Model.PagerModel)
+        </div>
     </div>
-</div>
 </form>
 
 <div class="XCLPanel" style="margin-top: 5px;">
@@ -94,7 +96,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.SysLog.SysLogList.Init();
-        });
+    $(function () {
+        window.xclcms.SysLog.SysLogList.Init();
+    });
 </script>

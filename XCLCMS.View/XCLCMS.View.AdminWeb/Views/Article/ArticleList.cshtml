@@ -58,11 +58,11 @@
                                 <td align="center" class="XCLNoWrap">
                                     <a href="@Url.Action("Show","Article",new { ArticleID=m.ArticleID})" target="_blank">@m.ArticleID</a>
                                 </td>
-                                <td>@m.MerchantName</td>
-                                <td>@m.MerchantAppName</td>
-                                <td><a href="@Url.Action("Show","Article",new { ArticleID=m.ArticleID})" target="_blank"  title="@(m.Title)">@XCLNetTools.StringHander.Common.GetSubString(m.Title, 20, "...")</a></td>
+                                <td align="center">@m.MerchantName</td>
+                                <td align="center">@m.MerchantAppName</td>
+                                <td><a href="@Url.Action("Show","Article",new { ArticleID=m.ArticleID})" target="_blank" title="@(m.Title)">@XCLNetTools.StringHander.Common.GetSubString(m.Title, 20, "...")</a></td>
                                 <td align="center">@m.AuthorName</td>
-                                <td title="@(m.ArticleTypeNames)">@XCLNetTools.StringHander.Common.GetSubString(m.ArticleTypeNames,20,"...")</td>
+                                <td title="@(m.ArticleTypeNames)" align="center">@XCLNetTools.StringHander.Common.GetSubString(m.ArticleTypeNames, 20, "...")</td>
                                 <td align="center">@m.FromInfo</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleContentTypeEnum), m.ArticleContentType)</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.ArticleStateEnum), m.ArticleState)</td>
@@ -100,7 +100,7 @@
 </div>
 
 <script type="text/javascript">
-        $(function () {
-            window.xclcms.Article.ArticleList.Init();
-        });
+    $(function () {
+        window.xclcms.Article.ArticleList.Init();
+    });
 </script>

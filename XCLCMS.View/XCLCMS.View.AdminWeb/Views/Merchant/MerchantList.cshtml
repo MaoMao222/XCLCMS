@@ -56,7 +56,7 @@
                                 <td>
                                     <a href="@Url.Action("Show","Merchant",new { MerchantID=m.MerchantID})" target="_blank">@m.MerchantID</a>
                                 </td>
-                                <td  class="XCLNoWrap"><a href="@Url.Action("Show","Merchant",new { MerchantID=m.MerchantID})" target="_blank">@m.MerchantName</a></td>
+                                <td class="XCLNoWrap" align="center"><a href="@Url.Action("Show","Merchant",new { MerchantID=m.MerchantID})" target="_blank">@m.MerchantName</a></td>
                                 <td align="center">@m.MerchantTypeName</td>
                                 <td align="center" class="XCLNoWrap">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.MerchantSystemTypeEnum), m.MerchantSystemType)</td>
                                 <td>@m.ContactName</td>
