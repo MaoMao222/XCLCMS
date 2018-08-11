@@ -1041,7 +1041,6 @@
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Resources\tsconfig.json" />
     <Content Include="Resources\package.json" />
-    <Content Include="Resources\说明.md" />
     <Content Include="Resources\src\js\ckeditor\CHANGES.md" />
     <Content Include="Resources\src\js\ckeditor\LICENSE.md" />
     <Content Include="Resources\src\js\ckeditor\plugins\codesnippet\lib\highlight\CHANGES.md" />
