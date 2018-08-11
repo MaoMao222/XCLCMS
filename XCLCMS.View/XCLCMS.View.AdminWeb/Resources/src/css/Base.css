@@ -229,6 +229,7 @@ textarea {
     height: 80px;
     color: #006363;
     margin: 3px;
+    overflow: hidden;
 }
 
 a {

@@ -1,20 +1,23 @@
 ﻿@{
-        XCLCMS.View.AdminWeb.Models.Main.MainVM mainViewModel = null;
-        if(null != ViewBag.MainViewModel){
-            mainViewModel = ViewBag.MainViewModel as XCLCMS.View.AdminWeb.Models.Main.MainVM;
-        }
-        XCLCMS.Data.Model.UserInfo CurrentUserModel = null;
-        if (null != ViewBag.CommonModel)
-        {
-            CurrentUserModel = ViewBag.CommonModel.CurrentUserModel as XCLCMS.Data.Model.UserInfo;
-        }
+    XCLCMS.View.AdminWeb.Models.Main.MainVM mainViewModel = null;
+    if (null != ViewBag.MainViewModel)
+    {
+        mainViewModel = ViewBag.MainViewModel as XCLCMS.View.AdminWeb.Models.Main.MainVM;
+    }
+    XCLCMS.Data.Model.UserInfo CurrentUserModel = null;
+    if (null != ViewBag.CommonModel)
+    {
+        CurrentUserModel = ViewBag.CommonModel.CurrentUserModel as XCLCMS.Data.Model.UserInfo;
+    }
 }
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     @Html.Partial("~/Views/MasterView/Header.cshtml")
     <style type="text/css">
-        body {min-width:1000px;}
+        body {
+            min-width: 1000px;
+        }
     </style>
     @RenderSection("CustomHeader", false)
 </head>
@@ -28,11 +31,13 @@
 
         <div class="XCLPanel" style="border-bottom:none;">
             <div class="XCLPanelHeader">
-                @if(null!=CurrentUserModel){
-                    @:您好，@(string.Format("{0}（{1}）",CurrentUserModel.UserName,CurrentUserModel.RoleName))  <a href="@XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOutURL">安全退出</a>
+                @if (null != CurrentUserModel)
+                {
+                    @:您好，@(string.Format("{0}（{1}）", CurrentUserModel.UserName, CurrentUserModel.RoleName))  <a href="@XCLCMS.Lib.Common.Setting.SettingModel.Admin_LogOutURL">安全退出</a>
                     @:&nbsp;&nbsp;&nbsp;
                 }
-                @if (null != ViewBag.CurrentUserMerchant) {
+                @if (null != ViewBag.CurrentUserMerchant)
+                {
                     @:所属商户名称：@ViewBag.CurrentUserMerchant.MerchantName
                     @:，所属商户号：@ViewBag.CurrentUserMerchant.MerchantID
                     if (null != ViewBag.CurrentUserMerchantApp)
@@ -51,27 +56,27 @@
                 {
                     foreach (var m in mainViewModel.MenuList)
                     {
-                    <div title="@m.DicName" xcl-sysdiccode="@m.Code" xcl-tabTitle="@m.DicName" style="padding:10px">
-                        <div>
-                            @{
-                                List<XCLCMS.Data.Model.SysDic> childMenu = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetChildListByID(Convert.ToString(ViewBag.UserToken),m.SysDicID.Value);
-                                if (childMenu.IsNotNullOrEmpty())
-                                {
-                                    childMenu=childMenu.Where(ch=>ch.FK_FunctionID==null || XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID,(XCLCMS.Data.CommonHelper.Function.FunctionEnum)ch.FK_FunctionID)).ToList();
-                                    foreach(var child in childMenu)
+                        <div title="@m.DicName" xcl-sysdiccode="@m.Code" xcl-tabTitle="@m.DicName" style="padding:10px">
+                            <div>
+                                @{
+                                    List<XCLCMS.Data.Model.SysDic> childMenu = XCLCMS.Lib.Common.FastAPI.SysDicAPI_GetChildListByID(Convert.ToString(ViewBag.UserToken), m.SysDicID.Value);
+                                    if (childMenu.IsNotNullOrEmpty())
                                     {
-                                        var linkUrl=(child.DicValue??"").Trim();
-                                        linkUrl=linkUrl.Replace("~/",XCLNetTools.StringHander.Common.RootUri);
-                                        if(string.IsNullOrEmpty(linkUrl))
+                                        childMenu = childMenu.Where(ch => ch.FK_FunctionID == null || XCLCMS.Lib.Permission.PerHelper.HasPermission(ViewBag.UserID, (XCLCMS.Data.CommonHelper.Function.FunctionEnum)ch.FK_FunctionID)).ToList();
+                                        foreach (var child in childMenu)
                                         {
-                                            linkUrl = "javascript:void(0);";
-                                        }
+                                            var linkUrl = (child.DicValue ?? "").Trim();
+                                            linkUrl = linkUrl.Replace("~/", XCLNetTools.StringHander.Common.RootUri);
+                                            if (string.IsNullOrEmpty(linkUrl))
+                                            {
+                                                linkUrl = "javascript:void(0);";
+                                            }
                                             <a href="@linkUrl" class="easyui-linkbutton" style="width:auto;padding-left:10px;padding-right:10px;" xcl-sysdiccode="@child.Code" xcl-remark='@Html.Raw(child.Remark)'>@child.DicName</a>
                                         }
                                     }
                                 }
-                       </div>
-                    </div>
+                            </div>
+                        </div>
                     }
                 }
             }
@@ -86,15 +91,15 @@
         @RenderBody()
     </div>
 
-    <div data-options="region:'south'" style="height: 30px;text-align:center;padding-top:5px;">
+    <div data-options="region:'south'" style="height: 30px;text-align:center;padding-top:5px;overflow:hidden;">
         @Html.Raw(ViewBag.CurrentApplicationMerchantApp.CopyRight)
         @Html.Partial("~/Views/MasterView/Footer.cshtml")
     </div>
 
     <script type="text/javascript">
-            $(function () {
-                window.xclcms.MainMaster.Init();
-            });
+        $(function () {
+            window.xclcms.MainMaster.Init();
+        });
     </script>
 
     @RenderSection("CustomFooter", false)
