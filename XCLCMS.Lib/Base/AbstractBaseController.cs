@@ -238,25 +238,6 @@ namespace XCLCMS.Lib.Base
             return null;
         }
 
-        /// <summary>
-        /// 导入
-        /// </summary>
-        [ValidateInput(false)]
-        [HttpPost]
-        public virtual ActionResult InputSubmit(FormCollection fm)
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 导出
-        /// </summary>
-        [HttpPost]
-        public virtual ActionResult OutputSubmit(FormCollection fm)
-        {
-            return null;
-        }
-
         #endregion 页面操作相关
 
         #region 拦截器

@@ -58,9 +58,9 @@
                                 <td align="center" class="XCLNoWrap">@m.SysWebSettingID</td>
                                 <td align="center">@m.MerchantName</td>
                                 <td align="center">@m.MerchantAppName</td>
-                                <td>@m.KeyName</td>
+                                <td align="center">@m.KeyName</td>
                                 <td>@m.Remark</td>
-                                <td>@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), m.ValueType)</td>
+                                <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.SysWebSettingValueTypeEnum), m.ValueType)</td>
                                 <td>
                                     @if (m.KeyValue == m.PrdKeyValue && m.KeyValue == m.TestKeyValue && m.KeyValue == m.UATKeyValue)
                                     {
