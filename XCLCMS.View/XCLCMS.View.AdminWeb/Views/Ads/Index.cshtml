@@ -63,10 +63,10 @@
                                     @m.MerchantName
                                 </td>
                                 <td align="center">@m.MerchantAppName</td>
-                                <td>@m.Code</td>
+                                <td align="center">@m.Code</td>
                                 <td align="center">@XCLNetTools.Enum.EnumHelper.GetEnumDescriptionByText(typeof(XCLCMS.Data.CommonHelper.EnumType.AdsTypeEnum), m.AdsType)</td>
                                 <td><a href="@Url.Action("Show","Ads",new { AdsID=m.AdsID})" target="_blank">@m.Title</a></td>
-                                <td><a href="@m.URL" target="_blank">@m.URL</a></td>
+                                <td align="center"><a href="@m.URL" target="_blank">@m.URL</a></td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd}", m.StartTime)</td>
                                 <td align="center">@string.Format("{0:yyyy-MM-dd}", m.EndTime)</td>
                                 <td align="center">@m.Email</td>
