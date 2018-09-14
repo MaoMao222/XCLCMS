@@ -4,8 +4,8 @@
   "description": "resources for XCLCMS",
   "main": "index.js",
   "scripts": {
-    "test": "index.js",
-    "release": "gulp"
+    "dev": "webpack & gulp mincss",
+    "dist": "webpack && gulp mincss && gulp"
   },
   "author": "https://github.com/xucongli1989",
   "license": "https://github.com/xucongli1989/XCLCMS/blob/master/LICENSE",
@@ -20,6 +20,7 @@
     "gulp-uglifycss": "^1.0.8",
     "pump": "^1.0.2",
     "style-loader": "^0.19.0",
+    "webpack": "^3.0.0",
     "webpack-raw-bundler": "^1.3.6"
   }
 }
